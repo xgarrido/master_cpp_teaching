@@ -1,0 +1,183 @@
+#+TITLE:  Compilation & Directives de Préprocesseur
+#+AUTHOR: Xavier Garrido
+#+DATE:   11/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Mécanismes de compilation
+
+1. *Précompilation :* consiste à traiter, à /parser/ les fichiers sources
+   avant compilation (résolution des directives de préprocesseur
+   /i.e./ remplacement de macros, suppression de texte, inclusion de
+   fichiers...)
+
+   #+BEGIN_PROMPT
+   g++ -E fichier_source.cc
+   #+END_PROMPT
+
+* Mécanismes de compilation
+
+1. *Précompilation*
+2. *Compilation séparée :* traduction du code (C, \Cpp...) en langage machine.
+   #+BEGIN_PROMPT
+   g++ -c fichier_source.cc
+   #+END_PROMPT
+   Cette opération conduit à la création d'un *fichier objet* d'extension =.o=
+   (ici =fichier_source.o=).
+
+* Mécanismes de compilation
+
+1. *Précompilation*
+2. *Compilation séparée*
+3. *Édition de liens :* consiste à régrouper la totalité des données de même que
+   les fichiers objets et les bibliothèques (fonctions de la bibliothèque
+   standard et des autres bibliothèques externes) ainsi qu'à résoudre les
+   références inter-fichiers.
+   #+BEGIN_PROMPT
+   g++ fichier_source1.o fichier_source2.o... -o\nbsp{}fichier_executable
+   #+END_PROMPT
+
+* Mécanismes de compilation
+
+- Les trois précédentes étapes peuvent être réalisées en une seule opération via
+  la commande
+
+  #+BEGIN_CBOX
+  #+BEGIN_PROMPT
+  g++ fichier_source1.cc fichier_source2.cc... -o\nbsp{}fichier_executable
+  #+END_PROMPT
+  #+END_CBOX
+
+- Le binaire ainsi généré =fichier_executable= peut être alors exécuté depuis le
+  répertoire local
+
+  #+BEGIN_CBOX
+  #+BEGIN_PROMPT
+  ./fichier_executable
+  #+END_PROMPT
+  #+END_CBOX
+
+* Options de compilation
+
+- *l'option =-Ichemin=* indique au compilateur où sont localisés les fichiers
+  d'entêtes nécessaires à la compilation séparée du programme. Par défaut, le
+  compilateur recherche ces fichiers localement et dans le répertoire
+  =/usr/include=,
+
+- *l'option =-W=* permet l'activation des messages de mise en garde. Différents
+  niveaux sont accessibles, le plus complet étant =-Wextra=,
+
+- *l'option =-Didentificateur=* permet la définition d'identificateur à fournir
+  lors du processus de précompilation. L'activation des directives de
+  préprocesseur peut se faire par ce biais.
+
+* Démystifier la command =ccc=
+
+#+BEGIN_SRC latex
+  \centering
+  \begin{animateinline}[step]{1}
+    %%, controls, buttonsize=1em, buttonfg=0.6:0.6:0.6
+    \clearbuf\scroll{0.9\linewidth}{8}{\noexpand\$\;which ccc}
+    \newframe
+    \scroll{0.9\linewidth}{8}{%
+      \noexpand\color{orange}/home\noexpand\_arc/melusine/bin/ccc}
+    \newframe
+    \scroll{0.9\linewidth}{8}{%
+      \noexpand\$\;more /home\noexpand\_arc/melusine/bin/ccc}
+    \newframe
+    \scroll{0.9\linewidth}{8}{\noexpand\color{orange}
+      g++ -lm -Wall -I/home\noexpand\_arc/melusine/bibli\noexpand\_fonctions \noexpand\color{green}\$1 \textbackslash §§
+      \noexpand\color{orange}\hskip +15pt/home\noexpand\_arc/melusine/biblifonctions.ar \noexpand\&\& a.out §§
+      \noexpand\color{orange}rm a.out
+    }
+  \end{animateinline}
+#+END_SRC
+
+* Directives de préprocesseur
+
+Le préprocesseur recherche des directives de compilation repérées en début de
+ligne par le symbole =#= et se terminant avec la fin de la ligne.
+
+#+BEGIN_SRC c++
+  #directive [paramètre]
+#+END_SRC
+
+Par exemple,
+
+#+BEGIN_SRC c++
+  #include <iostream>
+  #define PI 3.141592
+#+END_SRC
+
+* Utilisation de directives de condition
+
+Il est possible de contrôler ce qui sera compilé effectivement ou non, avec les
+clauses de condition :
+
+#+BEGIN_SRC c++
+  #if condition
+  ...
+  #endif
+#+END_SRC
+
+Si la condition est non nulle, la clause =#if= est ignorée et le code compris
+dans la séquence =#if= -- =#endif= est considéré par le compilateur.
+
+* Exemple (1/2)
+
+- *=test_debug.cc=*
+  #+BEGIN_SRC c++
+    #include <iostream>
+    using namespace std;
+
+    int main ()
+    {
+      #if (DEBUG == 1)
+      cout << "DEBUG: "
+           << "Mode debug du programme" << endl;
+      #else
+      cout << "NOTICE: "
+           << "Mode normal du programme" << endl;
+      #endif
+    }
+  #+END_SRC
+
+Utilisation :
+#+BEGIN_PROMPT
+g++ -DDEBUG=1 test_debug.cc -o test_debug
+#+END_PROMPT
+
+* Exemple (2/2)
+:PROPERTIES:
+:BEAMER_ACT: [<+->]
+:END:
+
+- *=dummy.h=*
+  #+BEGIN_SRC c++
+    #ifndef __dummy_h
+    #define __dummy_h 1
+    void dummy ();
+    #endif
+  #+END_SRC
+
+- *=dummy.cc=*
+  #+BEGIN_SRC c++
+    #include "dummy.h"
+    void dummy () {}
+  #+END_SRC
+
+- *=test_dummy.cc=*
+  #+BEGIN_SRC c++
+    #include "dummy.h"
+    int main ()
+    {
+      dummy ();
+    }
+  #+END_SRC
+
+Utilisation :
+#+BEGIN_PROMPT
+g++ dummy.cc test_dummy.cc -o test_dummy
+#+END_PROMPT
