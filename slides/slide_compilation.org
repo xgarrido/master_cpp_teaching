@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_CLASS_OPTIONS: [cpp_teaching]
 
 * Mécanismes de compilation
 
@@ -20,7 +20,7 @@
 * Mécanismes de compilation
 
 1. *Précompilation*
-2. *Compilation séparée :* traduction du code (C, \Cpp...) en langage machine.
+2. *Compilation séparée :* traduction du code en langage machine.
    #+BEGIN_PROMPT
    g++ -c fichier_source.cc
    #+END_PROMPT

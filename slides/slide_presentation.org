@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_CLASS_OPTIONS: [cpp_teaching]
 
 * Déroulement de l'année
 
@@ -25,15 +25,15 @@
 
 - Notions de structures et de classes (POO[fn:1])
 
-- Encapsulation des données (POO[fn:1])
+- Encapsulation des données (POO)
 
-- Notions de constructeur et de destructeur (POO[fn:1])
+- Notions de constructeur et de destructeur (POO)
 
-- Amitié & surcharge d'opérateur (POO[fn:1])
+- Amitié & surcharge d'opérateur (POO)
 
-- Héritage (POO[fn:1])
+- Héritage (POO)
 
-- Notions de patrons de fonctions et de classes (POO[fn:1])
+- Notions de patrons de fonctions et de classes (POO)
 
 - Introduction à la librairie standard STL
 

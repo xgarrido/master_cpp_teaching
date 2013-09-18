@@ -1,0 +1,166 @@
+#+TITLE:  Spécificités du C++ (indépendante de la POO)
+#+AUTHOR: Xavier Garrido
+#+DATE:   18/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching]
+
+* Librairies standards & Déclaration de variables
+
+- Les librairies du C ont été optimisées aux besoins du \Cpp
+
+** Inclusion en C
+:PROPERTIES:
+:BEAMER_COL: 0.3
+:END:
+#+BEGIN_SRC c++
+  // Inclusion en C
+  #include <math.h>
+  #include <time.h>
+#+END_SRC
+
+** Inclusion en C++
+:PROPERTIES:
+:BEAMER_COL: 0.4
+:END:
+#+BEGIN_SRC c++
+  // Inclusion en C++
+  #include <cmath>
+  #include <ctime>
+ #+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+#+BEAMER: \vskip +10pt
+- Possibilité de déclarer les variables quelque soit l'endroit
+#+BEGIN_SRC c++
+  for (unsigned int i = 0 ; i < 10 ; i++)
+    {...}
+#+END_SRC
+
+* Arguments par défaut de fonctions
+
+\Cpp autorise l'utilisation de valeurs par défaut dans *les prototypes de
+  fonction*
+
+#+BEGIN_SRC c++
+  int main ()
+  {
+    // Prototype de fonction
+    void initialize (const double abs, const double ord = 0.0);
+    initialize (1.0);
+  }
+
+  void initialize (const double abs, const double ord)
+  { ... }
+#+END_SRC
+
+- En l'absence de second argument, le compilateur assigne la valeur 1.0 à la
+  variable =ord=
+
+- Les arguments concernés doivent *obligatoirement* être les *derniers* dans la
+  liste.
+
+* Surdéfinition (surcharge) de fonctions
+
+En \Cpp deux fonctions peuvent porter le même nom dès lors qu'elles n'ont pas
+les mêmes types d'argument
+
+#+BEGIN_SRC c++
+  void dummy (int i, double a, char c);
+  void dummy (int i, int a, char c);
+  void dummy (int i);
+#+END_SRC
+
+#+BEAMER: \pause
+Le compilateur se charge d'appeler la "bonne" fonction par rapport au contexte
+/i.e./ au vue de la liste d'arguments donnée lors de l'appel.
+
+#+BEGIN_SRC c++
+  int main ()
+  {
+    dummy (1, 1.0, 'a');
+    dummy (1, 1, 'a');
+    dummy (1);
+  }
+#+END_SRC
+
+* Fonction =inline=
+
+*Les fonctions en ligne* remplacent (avantageusement) les macros utilisées en C
+tout en conservant un temps d'exécution plus court
+
+#+BEAMER: \vskip +10pt
+On remplacera ainsi la déclaration en C
+#+BEGIN_SRC c++
+  // Macro en C
+  #define CARRE(x) x*x
+#+END_SRC
+par
+#+BEGIN_SRC c++
+  // Fonction en ligne en C++
+  inline double carre(const double x) { return x*x; }
+#+END_SRC
+
+* Le type =bool=
+
+Ce nouveau type est naturellement formé de deux valeurs notées =true= et =false=
+
+#+BEGIN_SRC c++
+  bool is_ok = true;
+  if (is_ok)
+    {
+      ...
+    }
+
+  bool is_java_idiom = false;
+  bool is_c_idiom = is_ok && !is_java_idiom;
+#+END_SRC
+
+* Les espaces de noms
+
+Les espaces de noms sont des zones de déclaration qui permettent de délimiter la
+recherche des noms des identificateurs par le compilateur.
+
+#+BEGIN_SRC c++
+  #include <iostream>
+  using namespace std;
+  ...
+  cout << "Standard output" << endl;
+  ...
+#+END_SRC
+
+Leur but est principalement d'éviter les conflits de noms entre plusieurs
+parties d'un projet.
+
+* Les espaces de noms
+
+#+BEGIN_SRC c++
+  namespace utl
+  {
+    void dump () { cout << "utl::dump" << endl; }
+  }
+  namespace io
+  {
+    void dump () { cout << "io::dump" << endl; }
+  }
+#+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  // Utilisation de l'espace de nom io
+  using namespace io;
+
+  int main ()
+  {
+    // Par défaut, io::dump ()
+    dump ();
+
+    // Précision de l'espace de nom
+    utl::dump ();
+    io::dump ();
+  }
+#+END_SRC
