@@ -1,0 +1,47 @@
+#+TITLE:  TD 3 : Structure/Classe
+#+AUTHOR: Xavier Garrido
+#+DATE:   18/09/2013
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_classes]
+#+LATEX_HEADER: \setcounter{chapter}{2}
+
+* Déclaration et utilisation de classe en C++
+
+Dans l'ensemble des exercices suivants, on priviligiera une déclaration et une
+définition des classes dans des fichiers distincts. En outre, on fournira un
+programme principal de test.
+
+** Classe =Point=
+
+Créer une classe =Point= composée de deux coordonnées réelles puis déclarer et
+définir une méthode pour initialiser ces valeurs ainsi qu'une méthode affichant
+les deux coordonnées.
+
+** Tableau de classe
+
+Déclarer un tableau contenant cinq objets de type =Point=. Initialiser chacune
+des entrées du tableau puis créer une fonction affichant les coordonnées du plus
+grand segment.
+
+** Classe =Polygone=
+
+Créer une classe =Polygone= possédant :
+
+- un nom de 10 caractères maximum,
+- un entier non signé correspondant à l'ordre du polygone /i.e./ au nombre de
+  sommets,
+- un tableau de =Point= contenant les coordonnées de chacun des sommets (10
+  sommets maximum soit un décagone)[fn:1].
+
+En définissant une méthode permettant l'initialisation de la classe =Polygone=,
+faire un programme test remplissant cette classe. Définissez une méthode qui
+calculera le périmètre d'un polygone.
+
+Déclarer par la suite un tableau de trois éléments de type =Polygone=. Remplir
+chacune des trois instances puis faire une fonction qui renverra le nom de celui
+ayant le plus grand périmètre.
+
+[fn:1] pour les plus téméraires, substituer le tableau par un pointeur de classe
+=Point= dont le nombre d'entrées sera indexé sur l'ordre du polygone. On
+rajoutera une méthode permettant la destruction du pointeur en fin de programme.
