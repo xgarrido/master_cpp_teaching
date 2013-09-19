@@ -1,0 +1,80 @@
+#+TITLE:  TD 2 : Spécificités du C++
+#+AUTHOR: Xavier Garrido
+#+DATE:   18/09/2013
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_classes]
+#+LATEX_HEADER: \setcounter{chapter}{1}
+
+* Suite de Fibonacci : le calcul numérique appliqué à la procréation des lapins
+
+La suite de Fibonacci est une suite d'entiers devant son nom au mathématicien
+italien du XIII^{ème} siècle, Leonardo Fibonacci, qui, dans un problème
+récréatif posé dans un de ses ouvrages, le Liber Abaci, décrit la croissance
+d'une population de lapins en ces termes
+
+#+BEGIN_QUOTE
+/Un homme met un couple de lapins dans un lieu isolé de tous les côtés par un/
+/mur. Combien de couples obtient-on en un an si chaque couple engendre tous les/
+/mois un nouveau couple à compter du troisième mois de son existence ?/
+#+END_QUOTE
+
+Ce problème est à l'origine de la suite dont le \(n\)^ième terme
+correspond au nombre de paires de lapins au \(n\)^ième mois. En
+notant $\mathcal{F}_n$ le nombre de couples de lapin au début du mois
+$n$ et en posant $\mathcal{F}_1=\mathcal{F}_2=1$, Fibonacci déduit
+ainsi la relation de récurrence suivante :
+#+BEGIN_SRC latex
+  \begin{align*}
+  \mathcal{F}_1 &= 1 \\
+  \mathcal{F}_2 &= 1 \\
+  ...\\
+  \mathcal{F}_n &= \mathcal{F}_{n-2}+\mathcal{F}_{n-1}
+  \end{align*}
+#+END_SRC
+à savoir que le nombre de couples de lapin au mois $n$ est égal à la
+somme des couples de lapins lors des deux moins précédents.
+
+- Écrire une fonction calculant le nombre de Fibonacci au \(n\)^ième terme. Par
+  défaut, cette fonction fournira le nombre de Fibonacci pour $n=10$. En outre,
+  vous déclarerez deux fonctions =fibonacci= prenant comme argument
+  respectivement un entier court non signé =unsigned short= et un entier non
+  signé =unsigned int=. Tester l'appel de chacune des fonctions suivant le type
+  d'argument fourni.
+
+- Au sein du programme principal, réaliser $N\gg1$ fois le calcul de la fonction
+  de Fibonacci et estimer le temps d'exécution nécessaire au programme /via/ la
+  commande unix =time ./nom_executable=.
+
+- Modifier les précédentes fonctions afin de les rendre "en ligne". Comparer et
+  commenter le temps d'exécution dans ce mode par rapport aux précédentes
+  déclarations.
+
+# - Compiler le programme en optimisant son exécution afin de tirer profit des
+#   quatre CPU de l'ordinateur.
+
+- Concevoir et implémenter une fonction =rfibonacci= proposant une solution
+  récursive au calcul de la suite de Fibonacci. À partir de cette fonction,
+  déduire une macro équivalente, l'implémenter et expliquer le résultat de la
+  compilation. Rendre la fonction =rfibonacci= "en ligne", compiler et, sachant
+  que la notion de fonction en ligne est équivalente à la définition de macro du
+  point de vue du remplacement littérale des expressions, interpréter le fait
+  que le compilateur permette l'exécution du programme.
+
+- Insérer la fonction récursive =rfibonacci=, renommée en =fibonacci=, dans deux
+  fichiers distincts : un premier fichier d'en-tête nommé =fibonacci.h=
+  comprenant la déclaration (prototype) de la fonction et un second,
+  =fibonacci.cc=, définissant cette fonction. Modifier le programme principal
+  afin d'utiliser cette fonction (on commentera provisoirement la précédente
+  fonction =fibonacci=), compiler et tester l'exécution.
+
+- Observer le résultat de la précompilation /via/ la commande =g++ -E ...= et
+  modifier en conséquence, le fichier d'en-tête afin de minimiser la taille de
+  l'exécutable. On s'aidera pour cela des directives de préprocesseur =#define=
+  et =#ifndef=.
+
+- Finalement, décommenter la version "locale" de =fibonacci= /i.e./ celle
+  contenue dans le programme principal et définie au début de cette
+  exercice. Chercher à résoudre l'erreur de compilation en utilisant un espace
+  de nom =local= et tester le programme en forçant le choix de fonction à
+  utiliser /via/ l'opérateur de portée =local::=.

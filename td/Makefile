@@ -9,8 +9,7 @@ all: $(files_pdf)
 
 %.pdf: %.org
 	@echo "NOTICE: Exporting $< to pdf..."
-	@$(BATCH) --visit "$<" --funcall org-latex-export-to-pdf
-#> /dev/null 2>&1
+	@$(BATCH) --visit "$<" --funcall org-latex-export-to-pdf > /dev/null 2>&1
 
 clean:
 	@rm -rf $(files_org:.org=.tex) $(files_org:.org=.pyg) \

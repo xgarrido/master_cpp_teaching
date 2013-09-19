@@ -1,9 +1,10 @@
-#+TITLE:  Exercice 1 : Compilation, pointeur & références
+#+TITLE:  TD 1 : Compilation, pointeur & références
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+LATEX_CLASS: lecture
 #+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_classes]
+#+LATEX_HEADER: \setcounter{chapter}{0}
 
 * Compilation conditionnelle
 Compiler le code suivant, sans puis avec les options de "warnings"
