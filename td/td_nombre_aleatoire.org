@@ -1,0 +1,95 @@
+#+TITLE:  TD 4 : Classe générée aléatoirement
+#+AUTHOR: Xavier Garrido
+#+DATE:   18/09/2013
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,cpp_teaching_classes]
+#+LATEX_HEADER: \setcounter{chapter}{4}
+
+* Constructeur de la classe =Complexe=
+
+- Reprendre l'exercice précédent sur la classe =Complexe= en remplaçant la
+  méthode =Initialise= par un constructeur.
+
+- Déclarer un second constructeur qui initialisera, non plus la partie réelle et
+  imaginaire, mais le module et l'argument d'un nombre complexe. Quelle
+  alternative pourra-t-on proposer afin de résoudre le problème de surdéfinition
+  du constructeur dans ce cas précis ?
+
+* Jeux de hasard et loi de probabilité
+
+** Déclaration de la classe =Hasard=
+
+- Écrire une classe =Hasard= possédant les membres suivants :
+
+  - deux entiers constants non signés, l'un définissant un nombre maximal de
+    valeurs à tirer aléatoirement, l'autre la valeur maximale pouvant être
+    générée aléatoirement (/cf. [[Addendum 1][Addendum 1]]/ relatif aux générateurs aléatoires),
+
+  - un pointeur de valeurs entières non signés qui sauvegardera les résultats
+    des tirages aléatoires successifs.
+
+- Déclarer un constructeur qui initialisera les membres de la classe en
+  attachant une attention particulière à allouer correctement l'espace mémoire
+  nécessaire.
+
+- Déclarer un destructeur de classe qui restituera l'espace mémoire alloué
+  dynamiquement.
+
+- Surdéfinir une méthode permettant d'afficher soit l'ensemble des tirages
+  aléatoires soit le \(i\)^ème tirage.
+
+- Définir une méthode de comparaison de deux instances de =Hasard= dont la
+  valeur de retour sera un booléen.
+
+Exécuter plusieurs fois le programme en affichant l'ensemble des valeurs
+générées. Proposer une solution visant à générer, pour chaque exécution, une
+nouvelle série de valeurs aléatoires.
+
+** Décompte du nombre d'instanciation de la classe =Hasard=
+
+En utilisant un membre statique (/cf. [[Addendum 2][Addendum 2]]/), déterminer le nombre
+d'objets créés au cours de l'exécution du programme.
+
+De la même manière, utiliser un membre statique afin d'estimer le nombre total
+d'occurence de la valeur 0.
+
+*** Addendum 1
+
+La librairie standard =cstdlib= du \Cpp fournit un générateur de nombre
+pseudo-aléatoire =rand()= retournant une valeur entière comprise entre 0 et
+=RAND_MAX=. Suivant les architectures, =RAND_MAX= peut varier d'une machine à
+l'autre. Par ailleurs, comme un générateur de nombres aléatoires est exécuté sur
+un ordinateur par nature déterministe, il devient /de facto/ un algorithme
+déterministe. Ses sorties sont inévitablement entachées d'une caractéristique
+absente d'une vraie suite aléatoire : la périodicité. Avec des ressources
+limitées (mémoire, nombre de registres, ...), le générateur retrouvera le même
+état interne. Un générateur non périodique n'est pas impossible, mais nécessite
+une mémoire croissante pour ne pas se retrouver dans le même état. Pour
+contourner cet obstacle théorique, le générateur peut commencer dans un état
+quelconque (la "graine", /seed/ en anglais). L'initialisation se fait par
+l'intermédiaire de la méthode =srand(int seed)= qui prend pour argument la
+graine. Il produira toutefois la même séquence de nombre aléatoire si la graine
+reste identique.
+
+*** Addendum 2
+
+Les différentes instances d'une classe ont toutes les mêmes méthodes. Mais
+chaque instance à ses propres membres. Un membre statique est, par définition,
+un *membre qui est le même*, /i.e./ situé dans le même espace mémoire, pour
+toutes les instances de la classe. La syntaxe est la suivante
+
+#+BEGIN_SRC c++
+  class nom_classe {
+    ...
+    static type nom_variable_statique;
+    ...
+  };
+#+END_SRC
+
+Un membre statique doit être initialisé explicitement à l'extérieur de
+la déclaration de la classe soit
+
+#+BEGIN_SRC c++
+  type nom_classe::nom_variable_statique = valeur_initiale;
+#+END_SRC
