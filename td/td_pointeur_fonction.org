@@ -1,4 +1,4 @@
-#+TITLE:  Spécificités du C++ (indépendante de la POO)
+#+TITLE:  Exercice 1 : Compilation, pointeur & références
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}

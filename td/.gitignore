@@ -1,0 +1,5 @@
+*.pdf
+*.tex
+*~
+latex.d/
+tikz.d/
