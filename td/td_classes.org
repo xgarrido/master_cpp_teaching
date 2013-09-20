@@ -18,11 +18,11 @@ Créer une classe =Point= composée de deux coordonnées réelles puis déclarer
 définir une méthode pour initialiser ces valeurs ainsi qu'une méthode affichant
 les deux coordonnées.
 
-** Tableau de classe
+** Tableau d'objets
 
 Déclarer un tableau contenant cinq objets de type =Point=. Initialiser chacune
-des entrées du tableau puis créer une fonction affichant les coordonnées du plus
-grand segment.
+des entrées du tableau puis créer une fonction affichant les coordonnées du
+point le plus éloigné de l'origine.
 
 ** Classe =Polygone=
 
@@ -42,6 +42,7 @@ Déclarer par la suite un tableau de trois éléments de type =Polygone=. Rempli
 chacune des trois instances puis faire une fonction qui renverra le nom de celui
 ayant le plus grand périmètre.
 
-[fn:1] pour les plus téméraires, substituer le tableau par un pointeur de classe
-=Point= dont le nombre d'entrées sera indexé sur l'ordre du polygone. On
-rajoutera une méthode permettant la destruction du pointeur en fin de programme.
+[fn:1] pour les plus téméraires, substituer au tableau statique un tableau
+dynamique (pointeur de classe =Point= alloué avec =new=) dont le nombre
+d'entrées sera indexé sur l'ordre du polygone. On rajoutera une méthode
+permettant la destruction du tableau en fin de programme.
