@@ -65,6 +65,9 @@ variables
 - Toute référence doit se référer à un identificateur : =int & ref_i;= ne
   compilera pas. Il est nécessaire *d'initialiser* une référence.
 
+- Une référence pointe toujours vers le même objet, on ne peut pas changer sa
+  destination.
+
 * Références en tant qu'arguments de fonctions
 
 ** Transmission par adresse
