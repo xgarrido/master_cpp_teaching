@@ -31,7 +31,7 @@
 
 1. *Précompilation*
 2. *Compilation séparée*
-3. *Édition de liens :* consiste à régrouper la totalité des données de même que
+3. *Édition de liens :* consiste à regrouper la totalité des données de même que
    les fichiers objets et les bibliothèques (fonctions de la bibliothèque
    standard et des autres bibliothèques externes) ainsi qu'à résoudre les
    références inter-fichiers.
@@ -50,8 +50,8 @@
   #+END_PROMPT
   #+END_CBOX
 
-- Le binaire ainsi généré =fichier_executable= peut être alors exécuté depuis le
-  répertoire local
+- Le binaire ainsi généré =fichier_executable= peut être alors être exécuté
+  depuis le répertoire local
 
   #+BEGIN_CBOX
   #+BEGIN_PROMPT
@@ -62,7 +62,7 @@
 * Options de compilation
 
 - *l'option =-Ichemin=* indique au compilateur où sont localisés les fichiers
-  d'entêtes nécessaires à la compilation séparée du programme. Par défaut, le
+  d'en-têtes nécessaires à la compilation séparée du programme. Par défaut, le
   compilateur recherche ces fichiers localement et dans le répertoire
   =/usr/include=,
 

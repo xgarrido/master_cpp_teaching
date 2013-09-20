@@ -36,7 +36,7 @@
 :END:
 
 #+BEAMER: \vskip +10pt
-- Possibilité de déclarer les variables quelque soit l'endroit
+- Possibilité de déclarer les variables locales quel que soit l'endroit
 #+BEGIN_SRC c++
   for (unsigned int i = 0 ; i < 10 ; i++)
     {...}
@@ -79,7 +79,7 @@ les mêmes types d'argument
 
 #+BEAMER: \pause
 Le compilateur se charge d'appeler la "bonne" fonction par rapport au contexte
-/i.e./ au vue de la liste d'arguments donnée lors de l'appel.
+/i.e./ au vu de la liste d'arguments donnée lors de l'appel.
 
 #+BEGIN_SRC c++
   int main ()

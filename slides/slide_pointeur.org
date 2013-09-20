@@ -16,7 +16,7 @@
 - *L'adresse* est l'endroit où se trouve la variable en mémoire. Elle s'obtient
   via la syntaxe suivante : =&NomDeLaVariable=
 
-- L'adresse étant ni plus ni moins qu'une valeur, on peut donc stocké cette
+- L'adresse n'étant ni plus ni moins qu'une valeur, on peut donc stocker cette
   valeur dans une variable : *un pointeur* est ainsi un conteneur d'adresse
 
 - Déclaration d'un pointeur :
@@ -140,7 +140,7 @@ mémoire nécessaire à l'allocation.
       double * tableau = new double[n];
     #+END_SRC
 
-  - =delete= libére l'espace mémoire :
+  - =delete[]= libère l'espace mémoire :
     #+BEGIN_SRC c++
       delete[] tableau;
     #+END_SRC
