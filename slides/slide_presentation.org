@@ -48,19 +48,19 @@
 #+BEGIN_CBOX
 - Cours de C : [[http://hebergement.u-psud.fr/naulin]]
 - Programmer en langage \Cpp, Claude Delannoy, éd. Eyrolles
-- Le langage \Cpp, [[http://www.stroustrup.com/][Bjarne Strousup]], Addison Wesley, Pearson Education
+- Le langage \Cpp, [[http://www.stroustrup.com/][Bjarne Stroustrup]], Addison Wesley, Pearson Education
 - Effective & More effective \Cpp, [[http://www.aristeia.com/][Scott Meyers]], Addison Wesley
 #+END_CBOX
 
-* Bjarne Strousup & Scott Meyers
+* Bjarne Stroustrup & Scott Meyers
 
-** Bjarne Strousup
+** Bjarne Stroustrup
 :PROPERTIES:
 :BEAMER_COL: 0.45
 :END:
 
 #+ATTR_LATEX: :height 0.7\textheight :width 5cm
-[[file:figures/bjarne_strousup.jpg]]
+[[file:figures/bjarne_stroustrup.jpg]]
 
 ** Scott Meyers
 :PROPERTIES:
@@ -79,7 +79,7 @@
 #+BEGIN_CBOX
 - Cours de C : [[http://hebergement.u-psud.fr/naulin]]
 - Programmer en langage \Cpp, Claude Delannoy, éd. Eyrolles
-- Le langage \Cpp, [[http://www.stroustrup.com/][Bjarne Strousup]], Addison Wesley, Pearson Education
+- Le langage \Cpp, [[http://www.stroustrup.com/][Bjarne Stroustrup]], Addison Wesley, Pearson Education
 - Effective & More effective \Cpp, [[http://www.aristeia.com/][Scott Meyers]], Addison Wesley
 #+END_CBOX
 
