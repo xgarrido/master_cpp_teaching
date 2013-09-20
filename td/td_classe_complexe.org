@@ -19,7 +19,6 @@
 
 - Et les méthodes suivantes :
 
-  - Conversion de représentation cartésienne vers polaire
   - Addition, Soustraction
   - Multiplication
   - Division

@@ -28,7 +28,6 @@ point le plus éloigné de l'origine.
 
 Créer une classe =Polygone= possédant :
 
-- un nom de 10 caractères maximum,
 - un entier non signé correspondant à l'ordre du polygone /i.e./ au nombre de
   sommets,
 - un tableau de =Point= contenant les coordonnées de chacun des sommets (10
