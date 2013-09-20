@@ -26,7 +26,7 @@
     valeurs à tirer aléatoirement, l'autre la valeur maximale pouvant être
     générée aléatoirement (/cf. [[Addendum 1][Addendum 1]]/ relatif aux générateurs aléatoires),
 
-  - un tableau dynamique de valeurs entières non signés qui sauvegardera les
+  - un tableau dynamique de valeurs entières non signées qui sauvegardera les
     résultats des tirages aléatoires successifs.
 
 - Déclarer un constructeur qui initialisera les membres de la classe en
@@ -37,7 +37,7 @@
   dynamiquement.
 
 - Surdéfinir une méthode permettant d'afficher soit l'ensemble des tirages
-  aléatoires soit le \(i\)^ème tirage.
+  aléatoires soit le \(i\)^e tirage.
 
 - Définir une méthode de comparaison de deux instances de =Hasard= dont la
   valeur de retour sera un booléen.
@@ -52,7 +52,7 @@ En utilisant un membre statique (/cf. [[Addendum 2][Addendum 2]]/), déterminer 
 d'objets créés au cours de l'exécution du programme.
 
 De la même manière, utiliser un membre statique afin d'estimer le nombre total
-d'occurence de la valeur 0.
+d'occurences de la valeur 0.
 
 *** Addendum 1
 
@@ -69,13 +69,13 @@ une mémoire croissante pour ne pas se retrouver dans le même état. Pour
 contourner cet obstacle théorique, le générateur peut commencer dans un état
 quelconque (la "graine", /seed/ en anglais). L'initialisation se fait par
 l'intermédiaire de la méthode =srand(int seed)= qui prend pour argument la
-graine. Il produira toutefois la même séquence de nombre aléatoire si la graine
+graine. Il produira toutefois la même séquence de nombres aléatoires si la graine
 reste identique.
 
 *** Addendum 2
 
 Les différentes instances d'une classe ont toutes les mêmes méthodes. Mais
-chaque instance à ses propres membres. Un membre statique est, par définition,
+chaque instance a ses propres membres. Un membre statique est, par définition,
 un *membre qui est le même*, /i.e./ situé dans le même espace mémoire, pour
 toutes les instances de la classe. La syntaxe de sa déclaration est la suivante:
 
