@@ -122,8 +122,8 @@ clauses de condition :
   #endif
 #+END_SRC
 
-Si la condition est non nulle, la clause =#if= est ignorée et le code compris
-dans la séquence =#if= -- =#endif= est considéré par le compilateur.
+Le code compris dans la séquence =#if= -- =#endif= est considéré par le
+compilateur seulement si la condition est vraie (non nulle).
 
 * Exemple (1/2)
 
