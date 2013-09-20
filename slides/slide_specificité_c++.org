@@ -48,10 +48,11 @@
   fonction*
 
 #+BEGIN_SRC c++
+  // Prototype de fonction
+  void initialize (const double abs, const double ord = 0.0);
+
   int main ()
   {
-    // Prototype de fonction
-    void initialize (const double abs, const double ord = 0.0);
     initialize (1.0);
   }
 
@@ -98,7 +99,7 @@ tout en conservant un temps d'exécution plus court
 On remplacera ainsi la déclaration en C
 #+BEGIN_SRC c++
   // Macro en C
-  #define CARRE(x) x*x
+  #define CARRE(x) ((x) * (x))
 #+END_SRC
 par
 #+BEGIN_SRC c++
