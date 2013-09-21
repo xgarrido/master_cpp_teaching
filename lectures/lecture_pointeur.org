@@ -97,8 +97,8 @@ mémoire.
 
 Les références servent rarement directement. Le principal intérêt de la notion
 de référence est qu'elle permet de laisser le compilateur mettre en œuvre les
-instructions adéquates pour le transfert par adresse (/cf./
-Fiche~"\nameref{fiche::fonction}").
+instructions adéquates pour le transfert par adresse (/cf./ [[file:lecture_fonction.pdf]["Rappels sur les
+fonctions"]]).
 
 #+BEGIN_SRC c++
   int i = 0;
