@@ -82,6 +82,7 @@
 - Programmer en langage \Cpp, Claude Delannoy, éd. Eyrolles
 - Le langage \Cpp, [[http://www.stroustrup.com/][Bjarne Stroustrup]], Addison Wesley, Pearson Education
 - Effective & More effective \Cpp, [[http://www.aristeia.com/][Scott Meyers]], Addison Wesley
+- \Cpp Annotations, Frank B. Brokken, [[http://www.icce.rug.nl/documents/cplusplus/]]
 #+END_CBOX
 
 #+ATTR_LATEX: :options [\linewidth](\bf\large Contacts)

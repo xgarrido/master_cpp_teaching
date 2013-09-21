@@ -50,8 +50,8 @@
   #+END_PROMPT
   #+END_CBOX
 
-- Le binaire ainsi généré =fichier_executable= peut être alors être exécuté
-  depuis le répertoire local
+- Le binaire ainsi généré =fichier_executable= peut alors être exécuté depuis le
+  répertoire local
 
   #+BEGIN_CBOX
   #+BEGIN_PROMPT
