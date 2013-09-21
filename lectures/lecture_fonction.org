@@ -1,0 +1,160 @@
+#+TITLE:  Rappels sur les fonctions
+#+AUTHOR: Xavier Garrido
+#+DATE:   21/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{1}
+
+* Syntaxe
+
+#+BEGIN_SRC c++
+  type_retourné nom_fonction (..., type_argument nom_argument, ...)
+  {
+    // Opérations avec les arguments
+    return variable_retournée;
+  }
+#+END_SRC
+
+Exemple :
+#+BEGIN_SRC c++
+  double norme (const double a, const double b)
+  {
+    const double resultat = std::sqrt (a*a +b*b);
+    return resultat;  // ou directement return std::sqrt (a*a + b*b);
+  }
+#+END_SRC
+
+* Prototype de fonction
+
+Le prototype indique au compilateur que la fonction prototypée existe, mais que
+sa définition interviendra après son appel.
+
+#+BEGIN_SRC c++
+  type_retourné nom_fonction (..., type_argument nom_argument, ...);
+#+END_SRC
+
+Exemple:
+#+BEGIN_SRC c++
+  double norme (const double a, const double b); // NB attention au point virgule
+
+  int main ()
+  {
+    const double x = 2.5, y = 3.4;
+    cout << norme (x,y) << endl;
+  }
+
+  double norme (const double a, const double b)
+  {
+    const double resultat = std::sqrt (a*a +b*b);
+    return resultat;
+  }
+#+END_SRC
+
+* Modification de variables via l'utilisation d'une fonction
+
+Une fonction en C/\Cpp, dans son utilisation la plus commune /i.e./ argument
+transmis par valeur comme dans l'exemple précédent, *ne modifie aucune variable
+en argument*. La fonction utilise ses arguments pour créer, par exemple, une
+*nouvelle valeur* qu'elle retourne (la valeur =resultat= dans notre
+exemple). Plus précisément, lors de l'appel d'une fonction, par exemple =norme
+(4, 5)=, =Norme= crée deux variables locales =a= et =b= et réalise les
+opérations de recopie suivantes: =a = 4= et =b = 5=. De même, en déclarant deux
+variables =double x = 4.1;= et =double y = 5.6;=, l'appel à la fonction =norme
+(x, y)= entrainera la création de deux nouvelles variables locales =a= et =b= en
+assignant leurs valeurs =a = x= et =b = y=. La fonction ne possède que *les
+valeurs* de x et y; ainsi utilisée, elle ne pourra jamais modifier =x= et =y=.
+
+** Argument transmis par adresse
+
+Imaginons qu'au lieu de transmettre des valeurs à la fonction, on transmette des
+adresses ou des pointeurs qui contiennent une adresse. La fonction crée toujours
+deux variables =a= et =b= au moment de son appel et copie dans ces deux
+variables les adresses utilisées lors de l'appel de la fonction. La fonction
+=norme= se réécrit ainsi
+
+#+BEGIN_SRC c++
+  double norme (const double *a, const double *b)
+  {
+    double resultat = std::sqrt ((*a)*(*a) + (*b)*(*b));
+    return resultat;
+  }
+#+END_SRC
+
+que l'on appelera au sein du programme principal /via/ l'instruction suivante
+
+#+BEGIN_SRC c++
+  int main ()
+  {
+    const double x = 2.5, y = 3.4;
+    cout << norme (&x, &y) << endl;
+  }
+#+END_SRC
+
+On ne travaille plus avec les valeurs de =x= et =y= qui sont ponctuellement
+=4.1= et =5.6= mais avec les données de =x= et =y= /i.e./ les 01001... qui
+composent =x= et =y=. On peut donc modifier ces données au sein de la fonction,
+car on travaille directement avec elles et non avec leurs simples valeurs
+recopiées.
+
+La solution proposée présente néanmoins quelques inconvénients
+
+- d'une part, la syntaxe est lourde en raison de l'emploi de l'opérateur =*=
+  devant les paramètres,
+
+- d'autre part, la syntaxe est dangereuse lors de l'appel de la fonction,
+  puisqu'il faut systématiquement penser à utiliser l'opérateur =&= devant les
+  paramètres. Un oubli devant une variable de type entier et la valeur de
+  l'entier est utilisée à la place de son adresse dans la fonction appelée.
+
+Le \Cpp permet de résoudre ces problèmes à l'aide des références
+
+** Argument transmis par référence
+
+Comme nous venons de le rappeler, en langage C, les arguments et la valeur de
+retour d'une fonction sont transmis par valeur y compris lors de la transmission
+par adresse puisque les valeurs de pointeurs sont recopiées. Le \Cpp peut
+entièrement prendre en charge la transmission par adresse à travers
+l'utilisation des références. Le principal intérêt de la notion de référence est
+qu'elle laisse le compilateur mettre en œuvre "les mécanismes" adaptés au
+transfert par adresse. Il n'est plus alors nécessaire de passer par des
+pointeurs. L'utilisateur de la fonction (qui n'est pas nécessairement celui qui
+l'a écrite) n'a, dès lors, plus à connaitre la nature des arguments à
+transmettre (une variable ou son adresse).
+
+L'exemple précédent devient
+
+#+BEGIN_SRC c++
+  double norme (const double &a, const double &b)
+  {
+    const double resultat = std::sqrt (a*a + b*b);
+    return resultat;
+  }
+
+  int main ()
+  {
+    const double x = 2.5, y = 3.4;
+    cout << norme (x,y) << endl;
+  }
+#+END_SRC
+
+Dans l'instruction
+
+#+BEGIN_SRC c++
+double norme (const double &a, const double &b);
+#+END_SRC
+
+la notation =double &a= signifie que =a= est une information de type =double=
+transmise par référence. On notera que, dans la fonction =norme=, est utilisé le
+symbole =a= pour désigner cette variable et non l'opérateur d'indirection =*=.
+
+Cette amélioration est extrêmement importante du point de vue des
+performances. Il est ainsi fortement recommandé de passer par référence tous les
+paramètres dont la copie peut prendre beaucoup de temps tels que les tableaux et
+plus encore les instances de classe (en pratique, seuls les types de base du
+langage pourront être passés par valeur). Le gain en temps du fait de ne plus
+créer de copie d'objet, devient non négligeable /a fortiori/, lors d'appels
+successifs de la fonction.
+
+# On soulignera enfin, l'importance d'utiliser des références constantes afin
+# d'éviter les modifications accidentelles de variable au sein de la fonction.

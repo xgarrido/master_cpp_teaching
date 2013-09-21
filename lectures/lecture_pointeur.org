@@ -1,0 +1,112 @@
+#+TITLE:  Pointeurs, références & allocation dynamique de mémoire
+#+AUTHOR: Xavier Garrido
+#+DATE:   21/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{0}
+
+* Rappels sur les adresses et les pointeurs
+
+Une variable prend de l'espace en mémoire. Par exemple, un entier =i= occupe 4
+octets. L'endroit où se trouve la variable =i= en mémoire est *l'adresse* de
+=i=. Inversement, l'adresse en notation héxadécimale =0x22ff74A= correpond aux 4
+octets soit 32 bits =01001001001001010010101010010101010= de l'entier
+=i=. L'adresse d'une variable est donnée par =&nom_de_la_variable=.
+
+De même qu'une variable peut contenir des valeurs, un pointeur est un conteneur
+d'adresse. Au cours de sa brève vie, une variable peut valoir 12 puis 222 puis
+-27 alors qu'*un pointeur* désignera l'adresse en mémoire soit, successivement,
+=0x21fd740= puis =0x22ff74A= puis =0x22aa23B=.
+
+Un pointeur possède lui aussi un "type", à savoir que l'adresse se réfère à un
+type de données. En outre, un pointeur occupe lui aussi de l'espace mémoire. Il
+prend 2 octets qui servent à conserver l'adresse. On peut donc créer des
+pointeurs sur des pointeurs...
+
+La déclaration d'un pointeur se présente de la façon suivante
+#+BEGIN_SRC c++
+  // Déclaration
+  type_du_pointeur *nom_pointeur;
+#+END_SRC
+tandis que son affectation s'écrira
+#+BEGIN_SRC c++
+  // Affectation
+  nom_pointeur = adresse_de_la_variable;
+#+END_SRC
+
+Exemple:
+#+BEGIN_SRC c++
+  int i;
+  int *pt_i;
+  pt_i = &i;
+#+END_SRC
+
+* Allocation dynamique de mémoire /via/ les opérateurs =new= et =delete=
+
+La dimension d'un tableau statique, doit être connue du compilateur au moment
+même de la compilation. Une déclaration telle que =int n; double tableau[n];=
+sera rejeté du fait que le compilateur ne connaît pas, au préalable, l'espace
+mémoire nécessaire à l'allocation.
+
+Dans l'hypothèse où la taille d'un objet n'est connue que lors de l'exécution du
+programme, il est alors inévitable *d'allouer dynamiquement de la mémoire*,
+c'est-à-dire de réserver de la mémoire *alors que le programme* est en cours
+d'exécution.
+
+En langage C, la gestion dynamique de mémoire fait appel aux fonctions =malloc=
+et =free=. Si comme toutes fonctions standards leur implémentation est possible
+en \Cpp, leur utilisation demeure lourde et non adaptée à la programmation
+orientée objet. Le \Cpp propose deux nouveaux opérateurs =new= et =delete= pour
+gérer l'allocation dynamique de mémoire.
+
+** Utilisation de l'opérateur =new=
+
+De même que =malloc= le faisait en C, =new= alloue une certaine quantité de
+mémoire pour notre tableau et renvoie un pointeur sur le début du tableau. La
+syntaxe est la suivante
+#+BEGIN_SRC c++
+  type * pt_tableau = new type[nbr_element];
+#+END_SRC
+Exemple
+#+BEGIN_SRC c++
+  int *pt_tableau;
+  unsigned int n_dimension_tableau = 666;
+  pt_tableau = new int[n_dimension_tableau];
+#+END_SRC
+
+** Utilisation de l'opérateur =delete[]=
+
+De même que =free= libérait l'espace alloué par =malloc= en C, =delete[]= libère
+l'espace mémoire alloué par l'opérateur =new=. Ainsi,
+#+BEGIN_SRC c++
+delete[] pt_tableau;
+#+END_SRC
+restaurera l'espace mémoire précédemment alloué pour 666 valeurs entières.
+
+De manière générale, l'utilisation de l'opérateur =new= implique nécessairement
+l'utilisation de sa contrepartie =delete=. Dans le cas contraire, des fuites de
+mémoire, /i.e./ de la perte de mémoire libre au profit d'objet qui n'existent
+plus, sont à craindre et peuvent, sous certaines conditions, rendrent le système
+totalement inutilisable.
+
+* Référence
+
+Une référence permet de donner deux noms différents pour une seule et même case
+mémoire.
+
+Les références servent rarement directement. Le principal intérêt de la notion
+de référence est qu'elle permet de laisser le compilateur mettre en œuvre les
+instructions adéquates pour le transfert par adresse (/cf./
+Fiche~"\nameref{fiche::fonction}").
+
+#+BEGIN_SRC c++
+  int i = 0;
+  // j est une référence de i
+  int &j = i;
+  // j et i représentent alors la même case mémoire
+#+END_SRC
+
+Une référence nécessite obligatoirement une initialisation vers une variable
+qu'elle va référencer. En outre, une référence pointe toujours vers le même
+objet; on ne pourra donc changer sa destination.
