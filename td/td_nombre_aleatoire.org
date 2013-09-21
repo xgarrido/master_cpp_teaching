@@ -37,7 +37,7 @@
   dynamiquement.
 
 - Surdéfinir une méthode permettant d'afficher soit l'ensemble des tirages
-  aléatoires soit le \(i\)^e tirage.
+  aléatoires soit le \(i\)^ème tirage.
 
 - Définir une méthode de comparaison de deux instances de =Hasard= dont la
   valeur de retour sera un booléen.

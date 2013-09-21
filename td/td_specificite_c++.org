@@ -9,7 +9,7 @@
 * Suite de Fibonacci : le calcul numérique appliqué à la procréation des lapins
 
 La suite de Fibonacci est une suite d'entiers devant son nom au mathématicien
-italien du XIII^{e} siècle Leonardo Fibonacci qui, dans un problème
+italien du XIII^{ème} siècle Leonardo Fibonacci qui, dans un problème
 récréatif posé dans un de ses ouvrages, le /Liber Abaci/, décrit la croissance
 d'une population de lapins en ces termes
 
@@ -19,8 +19,8 @@ d'une population de lapins en ces termes
 /mois un nouveau couple à compter du troisième mois de son existence ?/
 #+END_QUOTE
 
-Ce problème est à l'origine de la suite dont le \(n\)^e terme
-correspond au nombre de paires de lapins au \(n\)^e mois. En
+Ce problème est à l'origine de la suite dont le \(n\)^ième terme
+correspond au nombre de paires de lapins au \(n\)^ième mois. En
 notant $\mathcal{F}_n$ le nombre de couples de lapin au début du mois
 $n$ et en posant $\mathcal{F}_1=\mathcal{F}_2=1$, Fibonacci déduit
 ainsi la relation de récurrence suivante :
@@ -35,7 +35,7 @@ ainsi la relation de récurrence suivante :
 à savoir que le nombre de couples de lapin au mois $n$ est égal à la
 somme des couples de lapins lors des deux moins précédents.
 
-- Écrire une fonction calculant le nombre de Fibonacci au \(n\)^e terme. Par
+- Écrire une fonction calculant le nombre de Fibonacci au \(n\)^ième terme. Par
   défaut, cette fonction fournira le nombre de Fibonacci pour $n=10$. En outre,
   vous déclarerez deux fonctions =fibonacci= prenant comme argument
   respectivement un entier court non signé =unsigned short= et un entier non
