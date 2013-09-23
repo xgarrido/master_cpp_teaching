@@ -1,6 +1,8 @@
 # -*- mode: makefile; -*-
 EMACS=emacs
-BATCH=$(EMACS) --batch --eval '(require (quote org))' --eval '(setq starter-kit-dir "~/.emacs.d")' --load ~/.emacs.d/starter-kit-org.el
+BATCH=$(EMACS) --batch --no-init-file \
+		--eval '(require (quote org))' \
+		--eval '(org-babel-load-file "../README.org")'
 
 files_org = $(wildcard *.org)
 files_pdf = $(files_org:.org=.pdf)
