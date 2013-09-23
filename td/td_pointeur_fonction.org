@@ -49,7 +49,7 @@ instructions C suivantes :
 #+BEGIN_SRC c++
   double * pt_tabular;
   int n_value;
-  printf ("Combien de valeurs souhaitez vous allouer en mémoire ? ");
+  printf ("Combien de valeurs souhaitez vous allouer en mémoire ?");
   scanf ("%d", &n_value);
   pt_tabular = (double *) malloc (sizeof (double) * n_value);
   free (pt_tabular);
