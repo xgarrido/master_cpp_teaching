@@ -1,17 +1,20 @@
 # -*- mode: makefile; -*-
 EMACS=emacs
-BATCH=$(EMACS) --batch --eval '(require (quote org))' --eval '(setq starter-kit-dir "~/.emacs.d")' --load ~/.emacs.d/starter-kit-org.el
+BATCH=$(EMACS) --batch --no-init-file \
+		--eval '(require (quote org))' \
+		--eval '(org-babel-load-file "../README.org")'
 
 files_org = $(wildcard *.org)
-files_pdf = $(files_org:.org=.pdf)
 
-all: $(files_pdf)
+all: pdf
 
-%.pdf: %.org
-	@echo "NOTICE: Exporting $< to pdf..."
-	@$(BATCH) --visit "$<" --funcall org-latex-export-to-pdf > /dev/null 2>&1
+pdf:
+	@for f in $(files_org); do \
+	echo "NOTICE: Exporting $$f to pdf..."; \
+	$(BATCH) --visit "$$f" --funcall org-latex-export-to-pdf > /dev/null 2>&1;\
+	done
 
 clean:
-	@rm -rf $(files_org:.org=.tex) $(files_org:.org=.pyg) \
-	$(files_pdf) $(img_pdf) tikz.d latex.d \
-	*.nav *.out *.toc *.snm *.fdb* *.fls *.aux *.log *.auxlock *.vrb *~
+clean:
+	@rm -rf	tikz.d latex.d \
+	*.tex *.pdf *~
