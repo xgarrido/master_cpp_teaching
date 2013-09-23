@@ -1,0 +1,192 @@
+#+TITLE:  Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet
+#+AUTHOR: Xavier Garrido
+#+DATE:   23/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{2}
+
+* Utlisation des librairies standards
+
+La grande majorité des librairies utilisées dans le langage~C est présente et
+utilisable en \Cpp. Toutefois, leur définition a été optimisée pour les besoins
+du \Cpp. Dans la pratique, l'inclusion des librairies =math.h=, =time.h=... sera
+remplacée par les librairies =cmath=, =ctime=. En règle générale, tous fichiers
+d'en-tête issus de la librarie standard abandonnent l'extension =.h=.
+
+* Déclaration de variables
+
+En C, il fallait d'abord déclarer les variables, puis ensuite les
+instructions. En \Cpp, il est possible de déclarer les variables quelque soit
+l'endroit. À titre d'exemple
+#+BEGIN_SRC c++
+  for (unsigned int i = 0; i < 10; i++) {...}
+#+END_SRC
+est maintenant possible en \Cpp.
+
+* Argument par défaut
+
+\Cpp permet d'inclure des valeurs par défauts dans les *prototypes* de
+fonctions. Le prototype s'écrit alors :
+
+#+BEGIN_SRC c++
+  type nom_fonction (..., type argument = valeur_par_défaut);
+#+END_SRC
+Soit
+#+BEGIN_SRC c++
+  void initialisation (double abs, double ord = 5.6)
+#+END_SRC
+que l'on appelera de la façon suivante
+#+BEGIN_SRC c++
+  initialisation (4); // valeur 5.6 par défaut pour ord
+#+END_SRC
+
+*En l'absence de second argument*, le compilateur assigne la valeur 5.6 à la
+variable =ord=.
+
+Lorsqu'une déclaration prévoit des valeurs par défauts, les arguments concernés
+doivent *obligatoirement* être les *derniers* dans la liste.
+
+* Surdéfinition de fonction
+
+En \Cpp deux fonctions peuvent porter le même nom[fn:1] à condition qu'elles
+n'aient pas les mêmes arguments. Le compilateur se charge d'appeler la "bonne"
+fonction suivant le contexte c'est-à-dire au vu de la liste d'arguments donnée
+lors de l'appel. Ainsi
+#+BEGIN_SRC c++
+  double fonction_lambda (int , double , char);
+#+END_SRC
+et
+#+BEGIN_SRC c++
+  double fonction_lambda (double);
+#+END_SRC
+seront deux fonctions différentes grâce aux différents types d'arguments
+déclarés.
+
+[fn:1] de façon générale, on parle de surdéfinition ou surcharge lorsqu'un même
+symbole peut avoir deux significations différentes en fonction du contexte.
+
+* Fonction =inline=
+
+Généralement en C, l'emploi d'une fonction "courte" pour laquelle le temps
+d'exécution est primordial, amène à définir une macro (malgré les inconvénients
+que cela implique). En \Cpp, il existe dans ce cas une solution plus
+satisfaisante : utiliser une fonction "en ligne". Sans rentrer dans les
+détails[fn:2], la fonction en ligne permet une économie d'exécution mais fait
+perdre de l'espace en mémoire par rapport à une fonction conventionnelle.
+
+La syntaxe dans l'*en-tête* de la fonction est la suivante
+#+BEGIN_SRC c++
+  inline <Déclaration standard de fonction>
+#+END_SRC
+Exemple
+#+BEGIN_SRC c++
+  inline double carre (const double x) { return x*x; }
+#+END_SRC
+
+#+BEGIN_REMARK
+Lorsqu'une méthode est déclarée dans le corps de la classe elle est, par défaut,
+"en ligne"
+#+END_REMARK
+
+[fn:2] en réalité, la fonction en ligne est très proche d'une macro, elle ne
+fait que "recopier" le code de la fonction à l'endroit de l'appel de la fonction.
+
+* Les espaces de noms
+
+Les espaces de noms sont des zones de déclaration qui permettent de délimiter la
+recherche des noms des identificateurs par le compilateur. Leur but est
+essentiellement de regrouper les identificateurs et d'éviter les conflits de
+noms entre plusieurs parties d'un même projet. À titre d'exemple, lorsque l'on
+doit utiliser plusieurs bibliothèque dans programme, on peut être confronté au
+problème dit de "pollution de l'espace des noms", à savoir qu'un même
+identificateur peut très bien avoir été utilisé par plusieurs bibliothèques. Ce
+type de conflit provient du fait que le \Cpp ne fournit qu'un seul espace de
+noms de portée globale. Grâce aux espaces de noms non globaux, ce type de
+problème peut être évité. Il s'agit donc de donner un nom à un "espace" de
+déclarations, en procédant ainsi
+
+#+BEGIN_SRC c++
+  namespace nom_bibli { // Déclaration usuelles de fonctions, variables ...  }
+#+END_SRC
+Pour se référer aux identificateurs définis dans cet espace de noms, on utilise
+l'instruction =using=
+
+#+BEGIN_SRC c++
+  using namespace nom_bibli;
+#+END_SRC
+que l'on place à un niveau global, /i.e./ entre l'inclusion des fichiers
+d'entête et le corps du programme.
+
+Les identificateurs de la librairie standard (les opérateurs d'entrée/sortie de
+flux =cout, cin= notamment) sont ainsi définis dans l'espace de noms
+=std=. Ainsi, chaque programme principal débutera généralement par
+
+#+BEGIN_SRC c++
+  #include <iostream> // librairie standard de gestion
+                      // des flux d'entrées/sortie ...
+  using namespace std;
+
+  int main () { // corps du programme principal }
+#+END_SRC
+
+#+BEGIN_REMARK
+Dans le cas où plusieurs espaces de noms sont utilisés, certains comportant des
+identificateurs identiques, on pourra lever l'ambiguïté en utilisant l'opérateur
+de portée /=::=/ en remplaçant, par exemple, /=cout=/ par /=std::cout=/
+#+END_REMARK
+
+* Le type =bool=
+
+Ce type est tout naturellement formé de deux valeurs notées =true= et
+=false=. Les résultats des comparaisons ou des combinaisons logiques doivent
+être de ce type. Par ailleurs, il existe des conversions implicites:
+
+- de =bool= en numérique /i.e./ =true= devenant 1 et =false= devenant 0,
+
+- de numérique (y compris flottant) vers =bool= à savoir que toute valeur non
+  nulle devient =true= et zéro est équivalent à =false=.
+
+Dans la pratique, le type =bool= appporte une plus grande clarté et une
+meilleure lisibilité aux programmes, ce qui, en règle générale, fait défaut au
+C.
+
+* Les nouveaux opérateurs de cast
+
+En \Cpp comme en C, il est possible de réaliser des conversions explicites à
+l'aide d'un opérateur de "cast". Les conversions acceptées comportent
+naturellement les conversions implicites (voir, entre autres, le paragraphe
+précédent), auxquelles s'ajoutent des conversions "dégradantes" ou dépendantes
+de l'implémentation.
+
+La norme ANSI de \Cpp propose de nouveaux opérateurs de cast, plus évocateurs,
+de la nature de la conversion mise en œuvre. Ils sont formés comme les
+opérateurs classiques à l'aide du type souhaité, complété d'un mot clé précisant
+le type de conversion:
+
+- =const_cast= permet d'ajouter ou de supprimer le modificateur =const=, les
+  types de départ et d'arrivée devant être identiques,
+
+- =reinterpret_cast= permet les conversions dont le résultat dépend de
+  l'implémentation; typiquement, des conversions d'entier vers pointeur et de
+  pointeur vers entier,
+
+- =static_cast= permet les conversions indépendantes de l'implémentation
+  (d'entier vers entier mais également de pointeur vers pointeur malgré les
+  différences qui peuvent apparaître en raison des contraintes d'alignement
+  propres à chaque implémentation).
+
+Le programme suivant propose quelques utilisations de ces nouveaux opérateurs
+
+#+BEGIN_SRC c++
+  int n = 12;
+  const int * ad1 = &n;
+  int * ad2;
+  ad2 = (int *) ad1;           // ancienne forme en C
+  ad2 = const_cast<int *> ad1; // nouvelle forme conseillée
+
+  long l = 4;
+  int p;
+  p = (int) l;                 // ancienne forme en C
+  p = static_cast<int> (l);    // nouvelle forme conseillée
+#+END_SRC
