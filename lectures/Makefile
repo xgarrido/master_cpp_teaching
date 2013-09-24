@@ -11,10 +11,9 @@ all: pdf
 pdf:
 	@for f in $(files_org); do \
 	echo "NOTICE: Exporting $$f to pdf..."; \
-	$(BATCH) --visit "$$f" --funcall org-latex-export-to-pdf > /dev/null 2>&1;\
+	$(BATCH) --visit "$$f" --funcall org-latex-export-to-pdf > /dev/null 2>&1; \
 	done
 
 clean:
-clean:
-	@rm -rf	tikz.d latex.d \
-	*.tex *.pdf *~
+	@rm -rf	latex.d \
+	*.tex *.pdf *.fdb* *~

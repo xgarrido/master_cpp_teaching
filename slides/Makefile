@@ -15,5 +15,5 @@ pdf:
 	done
 
 clean:
-	@rm -rf	tikz.d latex.d \
-	*.tex *.pdf *~
+	@rm -rf	latex.d \
+	*.tex *.pdf *.fdb* *~
