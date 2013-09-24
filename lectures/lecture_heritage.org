@@ -195,7 +195,7 @@ considérons la situation suivante
       linet/.style={very thick,draw=blue!75,
         shorten >=0pt, shorten <=0pt, ->},
       punkt/.style={rectangle, rounded corners, shade, top color=white,
-        bottom color=blue!50!black!20, draw=red!75, very
+        bottom color=blue!50!black!20, draw=blue!75, very
         thick, text centered, text width=5.5em}
     ]
     \ttfamily\color{blue}
