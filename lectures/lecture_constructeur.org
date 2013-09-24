@@ -54,7 +54,7 @@ au membre =m_X=, respectivement =m_Y=, mais le prototype s'écrit
 #+BEGIN_REMARK
 Lors de la construction d'un objet, il est recommandé *d'initialiser* les
 membres au travers du constructeur plutôt que *d'assigner* leurs
-valeurs. Autrement dit, à l'assignation /=m_X = abs; m_Y = ord=/, on préférera
+valeurs. Autrement dit, à l'assignation =m_X = abs; m_Y = ord=, on préférera
 l'initialisation suivante
 #+BEGIN_SRC c++
   point::point (int abs, int ord) : m_X(abs), m_Y(ord) {}
