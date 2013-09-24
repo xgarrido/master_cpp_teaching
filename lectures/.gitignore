@@ -1,5 +1,6 @@
 *.pdf
 *.tex
+*.fdb*
 *~
 latex.d/
 tikz.d/
