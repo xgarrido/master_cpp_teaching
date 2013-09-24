@@ -14,7 +14,7 @@ To use these materials you will need to install some dedicated LaTeX templates
 independantly developed https://github.com/xgarrido/latex-templates. See the
 README inside this github repository to know how to install them.
 
-We will also need to install the proper Pygments style to match University of
+You will also need to install the proper Pygments style to match University of
 Paris Sud colors. The repository address is
 https://github.com/xgarrido/pygments-styles with the installation commands.
 
