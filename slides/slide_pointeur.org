@@ -234,66 +234,17 @@ Fuite de mémoire garantie
   {
     int * pb = pointeur_dix();
     cout << *pb << endl;
+    delete pb;
     return 0;
   }
 #+END_SRC
 
-#+ATTR_LATEX: :options [5][lrtuc][\centering][2][13]
+#+ATTR_LATEX: :options [5][lrtuc][\centering][1.5][13]
 #+BEGIN_CBOX
 Le pointeur retourné contient une adresse obsolète
 #+END_CBOX
 
 #+BEAMER: \pause
-
-** Allocation sur le tas (“heap”)
-:PROPERTIES:
-:BEAMER_COL: 0.6
-:BEAMER_ENV: cbox
-:BEAMER_OPT: [][lwuc][\footnotesize]
-:END:
-#+BEGIN_SRC c++
-  int * pointeur_dix()
-  {
-    int * pa = new int(10);
-    return pa;
-  }
-
-  int main()
-  {
-    int * pb = pointeur_dix();
-    cout << *pb << endl;
-
-    return 0;
-  }
-#+END_SRC
-
-* Portée & Durée de vie des variables
-
-** Allocation sur la pile (“stack”)
-:PROPERTIES:
-:BEAMER_COL: 0.6
-:BEAMER_ENV: cbox
-:BEAMER_OPT: [][lwuc][\footnotesize]
-:END:
-#+BEGIN_SRC c++
-  int * pointeur_dix()
-  {
-    int a = 10;
-    return &a;  // incorrect !
-  }
-
-  int main()
-  {
-    int * pb = pointeur_dix();
-    cout << *pb << endl;
-    return 0;
-  }
-#+END_SRC
-
-#+ATTR_LATEX: :options [5][lrtuc][\centering][2][13]
-#+BEGIN_CBOX
-Le pointeur retourné contient une adresse obsolète
-#+END_CBOX
 
 ** Allocation sur le tas (“heap”)
 :PROPERTIES:
