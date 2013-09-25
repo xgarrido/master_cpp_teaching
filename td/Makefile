@@ -5,15 +5,13 @@ BATCH=$(EMACS) --batch --no-init-file \
 		--eval '(org-babel-load-file "../README.org")'
 
 files_org = $(wildcard *.org)
+files_pdf = $(files_org:.org=.pdf)
 
-all: pdf
+all: $(files_pdf)
 
-pdf:
-	@for f in $(files_org); do \
-	echo "NOTICE: Exporting $$f to pdf..."; \
-	$(BATCH) --visit "$$f" --funcall org-latex-export-to-pdf > /dev/null 2>&1;\
-	done
+%.pdf: %.org
+	@echo "NOTICE: Exporting $< to pdf...";
+	@$(BATCH) --visit "$<" --funcall org-latex-export-to-pdf > /dev/null 2>&1;
 
 clean:
-	@rm -rf	latex.d \
-	*.tex *.pdf *.fdb* *~
+	@rm -rf	latex.d *.tex *.pdf *.fdb* *~
