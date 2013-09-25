@@ -234,7 +234,7 @@ Fuite de mémoire garantie
   {
     int * pb = pointeur_dix();
     cout << *pb << endl;
-    delete pb;
+
     return 0;
   }
 #+END_SRC
