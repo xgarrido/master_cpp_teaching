@@ -123,7 +123,7 @@ déclaration
 #+END_SRC
 
 est rejetée du fait que le compilateur ne connait pas, au préalable, l'espace
-mémoire nécessaire à l'allocation.
+mémoire nécessaire à l'allocation (statique).
 
 * Utilisation des opérateurs =new= et =delete=
 
