@@ -1,0 +1,154 @@
+#+TITLE:  Résumé sur les classes
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Principales notions
+
+- Structure de données : la classe est *une extension de la notion de type*
+
+- Encapsulation des données : *forme de protection des données* vis-à-vis des
+  objets extérieurs à la classe
+
+- Le constructeur et le destructeur sont deux *méthodes /i.e./ fonctions
+  membres* particulières utilisées respectivement à l'initialisation et à "la
+  destruction" de l'objet
+
+* Classe =particule=
+
+** Fichier =particule.h=
+#+BEGIN_SRC c++
+  #ifndef __particule_h__
+  #define __particule_h__ 1
+  class particule
+  {
+  };
+  #endif
+#+END_SRC
+
+* Déclaration des membres...
+
+** Fichier =particuler.h=
+#+BEGIN_SRC c++
+  #ifndef __particule_h__
+  #define __particule_h__ 1
+  class particule
+  {
+    // Encapsulation
+  private:
+    double m_masse;
+    double m_charge;
+  };
+  #endif
+#+END_SRC
+
+* ... et des méthodes associées
+
+** Fichier =particule.h=
+#+BEGIN_SRC c++
+  #ifndef __particule_h__
+  #define __particule_h__ 1
+  class particule
+  {
+    // Non encapsulé
+  public:
+    double get_masse  () const;
+    double get_charge () const;
+
+    void set_masse  (const double masse_);
+    void set_charge (const double charge_);
+
+  private:
+    double m_masse;
+    double m_charge;
+  };
+  #endif
+#+END_SRC
+
+* Déclaration des constructeurs/destructeur
+
+** Fichier =particule.h=
+#+BEGIN_SRC c++
+  #ifndef __particule_h__
+  #define __particule_h__ 1
+  class particule
+  {
+    // Non encapsulé
+  public:
+    particule  ();
+    particule  (const double masse_, const double charge_);
+    ~particule ();
+
+    ...
+
+    private:
+    double m_masse;
+    double m_charge;
+  };
+  #endif
+#+END_SRC
+
+* Définition de la classe (1/2)
+
+** Fichier =particule.cc=
+#+BEGIN_SRC c++
+  #include "particule.h"
+
+  // Constructeur par défaut
+  particule::particule () : m_masse  (0.0),
+                            m_charge (0.0)
+  {
+  }
+
+  // Surdéfinition du constructeur
+  particule::particule (const double masse_, const double charge_)
+    : m_masse (masse_), m_charge (charge_)
+  {
+  }
+
+  // Destructeur
+  particule::~particule ()
+  {
+  }
+#+END_SRC
+
+* Définition de la classe (2/2)
+
+** Fichier =particule.cc=
+#+BEGIN_SRC c++
+  double particule::get_masse () const
+  {
+    return m_masse;
+  }
+
+  double particule::get_charge () const
+  {
+    return m_charge;
+  }
+
+  void particule::set_masse (const double masse_)
+  {
+    m_masse = masse_;
+  }
+
+  void particule::set_charge (const double charge_)
+  {
+    m_charge = charge_;
+  }
+#+END_SRC
+
+* Programme test de la classe
+
+** Fichier =test_particule.cc=
+#+BEGIN_SRC c++
+  #include "particule.h"
+
+  int main ()
+  {
+    particule my_particule1 (0.511, 1.6e-19);
+    particule my_particule2;
+  }
+#+END_SRC
