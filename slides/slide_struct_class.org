@@ -73,7 +73,7 @@
       double m_charge;
 
       // Déclaration des méthodes
-      void initialise (const double masse, const double charge);
+      void initialise (const double masse_, const double charge_);
       void affiche () const;
     };
   #+END_SRC
@@ -92,14 +92,14 @@
       double m_charge;
 
       // Déclaration des méthodes
-      void initialise (const double masse, const double charge);
+      void initialise (const double masse_, const double charge_);
       void affiche () const;
     };
 
-    void particule::initialise (const double masse, const double charge)
+    void particule::initialise (const double masse_, const double charge_)
     {
-      m_masse  = masse;
-      m_charge = charge;
+      m_masse  = masse_;
+      m_charge = charge_;
     }
     ...
   #+END_SRC
