@@ -1,0 +1,171 @@
+#+TITLE:  Structure & Classes
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Notions de classes en POO
+
+- Langage objet : analyse du problème en termes *de nature et de structure des
+  données* \neq programmation impérative (en C ou fortran) qui relève plus de
+  l'aglorithmie
+
+- Une classe est
+
+  1. *une généralisation de la notion de type (=int=, =double=,...)*
+
+  2. *une association de données membres et d'opérations s'y rapportant
+     (méthodes ou fonctions membres)*
+
+* Déclaration de classe
+
+- Classe *\rightarrow généralisation de la notion de type* (=int=, =double=,...)
+
+  #+BEGIN_SRC c++
+    class particule
+    {
+      // Déclaration de membres
+      char * m_nom;
+      double m_mass;
+      double m_charge;
+      ...
+    };
+  #+END_SRC
+
+#+BEAMER: \pause
+
+#+ATTR_LATEX: :options [][][\centering]
+#+BEGIN_CBOX
+\ding{42} Ne pas oublier le point virgule à la fin de la déclaration
+#+END_CBOX
+
+* Déclaration de classe
+
+- Classe *\rightarrow généralisation de la notion de type* (=int=, =double=,...)
+
+  #+BEGIN_SRC c++
+    class particule
+    {
+      // Déclaration de membres
+      char * m_nom;
+      double m_masse;
+      double m_charge;
+      ...
+    };
+    ...
+    // Instanciation d'objets de type particle
+    particule particule1, particule2;
+  #+END_SRC
+
+* Accès aux membres de la classe en \Cpp
+
+- Classe *\rightarrow association de données membres et de méthodes (fonctions
+  membres)*
+
+  #+BEGIN_SRC c++
+    class particule
+    {
+      // Déclaration de membres
+      char * m_nom;
+      double m_masse;
+      double m_charge;
+
+      // Déclaration des méthodes
+      void initialise (const double masse, const double charge);
+      void affiche () const;
+    };
+  #+END_SRC
+
+* Définition de méthodes de classes
+
+- Identique à la définition d'une fonction mais préfixée du nom de la classe et
+  de l'opérateur de portée =::=
+
+  #+BEGIN_SRC c++
+    class particule
+    {
+      // Déclaration de membres
+      char * m_nom;
+      double m_masse;
+      double m_charge;
+
+      // Déclaration des méthodes
+      void initialise (const double masse, const double charge);
+      void affiche () const;
+    };
+
+    void particule::initialise (const double masse, const double charge)
+    {
+      m_masse  = masse;
+      m_charge = charge;
+    }
+    ...
+  #+END_SRC
+
+* Exemple d'utilisation de la classe =particle=
+
+#+BEGIN_SRC c++
+  #include "particle.h"
+  int main ()
+  {
+    // Instanciation d'objets de type particle
+    particule particule1, particule2;
+
+    // Accès aux membres
+    particule1.initialise (0.511, -1.6e-19);
+    particule2.initialise (938.0, +1.6e-19);
+  }
+#+END_SRC
+
+* Exemple d'utilisation de la classe =particle=
+
+#+BEGIN_SRC c++
+  #include "particle.h"
+  int main ()
+  {
+    // Instanciation d'objets de type particle
+    particule * particule1 = new particule;
+    particule * particule2 = new particule;
+
+    // Accès aux membres
+    particule1->initialise (0.511, -1.6e-19);
+    particule2->initialise (938.0, +1.6e-19);
+
+    ...
+    delete particule1;
+    delete particule2;
+  }
+#+END_SRC
+
+* Annexes
+:PROPERTIES:
+:BEAMER_OPT: plain
+:BEAMER_ENV: fullframe
+:END:
+
+#+BEAMER: \partpage
+
+* Accès aux membres d'une structure
+
+- L'accès aux membres se fait par l'intermédiaire de l'opérateur point =.=
+
+  #+BEGIN_SRC c++
+    struct particule
+    {
+      // Déclaration de membres
+      char * m_nom;
+      double m_masse;
+      double m_charge;
+      ...
+    };
+
+    // Instanciation d'objet de type particle
+    particule particule1, particule2;
+
+    // Accès aux membres
+    particule1.m_masse  = 0.511;
+    particule1.m_charge = -1.6e-19;
+
+  #+END_SRC
