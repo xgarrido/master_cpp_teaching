@@ -55,7 +55,7 @@
       ...
     };
     ...
-    // Instanciation d'objets de type particle
+    // Instanciation d'objets de type particule
     particule particule1, particule2;
   #+END_SRC
 
@@ -104,13 +104,13 @@
     ...
   #+END_SRC
 
-* Exemple d'utilisation de la classe =particle=
+* Exemple d'utilisation de la classe =particule=
 
 #+BEGIN_SRC c++
-  #include "particle.h"
+  #include "particule.h"
   int main ()
   {
-    // Instanciation d'objets de type particle
+    // Instanciation d'objets de type particule
     particule particule1, particule2;
 
     // Accès aux membres
@@ -119,13 +119,13 @@
   }
 #+END_SRC
 
-* Exemple d'utilisation de la classe =particle=
+* Exemple d'utilisation de la classe =particule=
 
 #+BEGIN_SRC c++
-  #include "particle.h"
+  #include "particule.h"
   int main ()
   {
-    // Instanciation d'objets de type particle
+    // Instanciation d'objets de type particule
     particule * particule1 = new particule;
     particule * particule2 = new particule;
 
@@ -161,7 +161,7 @@
       ...
     };
 
-    // Instanciation d'objet de type particle
+    // Instanciation d'objet de type particule
     particule particule1, particule2;
 
     // Accès aux membres
