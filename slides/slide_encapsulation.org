@@ -1,0 +1,166 @@
+#+TITLE:  Encapsulation des données
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Définition
+
+L'encapsulation consiste à interdire l'accès de certains membres d'une classe à
+toutes fonctions extérieures à la classe
+
+- il n'est plus possible d'agir *directement* sur les données d'un objet
+
+- la modification des membres de l'objet se fait par *l'intermédiaire de
+  méthodes associées*
+
+*Syntaxe :* les mots clés sont *=private=* et *=public=*
+
+* Exemple
+
+#+BEGIN_SRC c++
+  class particule
+  {
+  private:
+    // Déclaration de membres
+    double m_masse;
+    double m_charge;
+  };
+#+END_SRC
+
+*Conséquence :*
+
+#+BEGIN_SRC c++
+  particule electron;
+  electron.m_masse = 0.511; // erreur de compilation
+#+END_SRC
+
+* Exemple complet (1/2)
+
+#+BEGIN_SRC c++
+  class particule
+  {
+  public:
+    // Déclaration des getters et setters
+    double get_masse  () const;
+    double get_charge () const;
+
+    void set_masse  (const double masse_);
+    void set_charge (const double charge_);
+
+  private:
+    // Déclaration de membres
+    double m_masse;
+    double m_charge;
+  };
+#+END_SRC
+
+* Exemple complet (2/2)
+
+#+BEGIN_SRC c++
+  // Définition des méthodes
+  double particle::get_masse () const
+  {
+    return m_masse;
+  }
+
+  void particle::set_masse (const double masse_)
+  {
+    m_masse = masse_;
+  }
+  ...
+  particle electron;
+  electron.set_masse (0.511);
+  const double electron_masse = electron.get_masse ();
+#+END_SRC
+
+* Intérêts de L'encapsulation
+
+- Lors de la programmation et surtout de la réutilisation d'un objet dans un
+  autre programme, l'encapsulation empêche la modification non voulu des données
+  membres,
+
+- L'objet, vu de l'extérieur, *n'est caractérisé que par ses méthodes* :
+
+  #+ATTR_BEAMER: :overlay +-
+  1. l'objet est plus facile à utiliser pour quelqu'un d'extérieur : il lui
+     suffit d'utiliser les méthodes.
+  2. la maintenance et l'amélioration de l'objet sont grandement
+     facilitées. Tant que la finalité des méthodes ne change pas, on peut
+     modifier les rouages sans perturber pour autant les utilisateurs de la
+     classe.
+  3. l'objet est facilement réutilisable.
+
+* Inconvénients de l'encapsulation
+
+De prime abord, peut paraître inutile et lourd à employer
+
+* Quelques règles élémentaires
+
+La création de chaque nouvelle classe =exemple_classe= se décompose en trois
+étapes :
+
+1. création d'un fichier =exemple_classe.h= qui contient *la déclaration* de la
+   classe,
+
+2. création d'un fichier =exemple_classe.cc= qui contient *les définitions* des
+   méthodes de la classe,
+
+3. création d'un programme test =test_exemple_classe.cc= qui contient *le
+   programme principal* /i.e/ le bloc d'appel =main=.
+
+* Déclaration de la classe
+
+** Fichier =exemple_classe.h=
+#+BEGIN_SRC c++
+  #ifndef __exemple_classe_h__
+  #define __exemple_classe_h__ 1
+  class exemple_classe
+  {
+  public:
+    void   set_dummy (const double dummy_);
+    double get_dummy () const;
+  private:
+    double m_dummy;
+  };
+  #endif
+#+END_SRC
+
+* Définition de la classe
+
+** Fichier =exemple_classe.cc=
+#+BEGIN_SRC c++
+  #include "exemple_classe.h"
+
+  void exemple_classe::set_dummy (const double dummy_)
+  {
+    m_dummy = dummy_;
+  }
+
+  double exemple_class::get_dummy () const
+  {
+    return m_dummy;
+  }
+#+END_SRC
+
+* Utilisation de la classe
+
+** Fichier =text_exemple_classe.cc=
+#+BEGIN_SRC c++
+  #include "exemple_classe.h"
+
+  int main ()
+  {
+    exemple_classe my_exemple_classe;
+    my_exemple_classe.set_dummy (666);
+    const double my_dummy = my_example_class.get_dummy ();
+  }
+#+END_SRC
+
+#+BEAMER: \pause
+** Compilation
+#+BEGIN_CENTER
+=$ g++ exemple_class.cc test_exemple_classe.cc= \\ =-o test_exemple_classe.exe=
+#+END_CENTER
