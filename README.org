@@ -136,12 +136,13 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
         '(;;("frame" "lines")
           ("fontsize" "\\footnotesize")
           ("samepage" "")
+          ("mathescape" "")
           ("xrightmargin" "0.5cm")
           ("xleftmargin"  "0.5cm")
           ))
 #+END_SRC
 
-** Set LaTeX command
+*** Set LaTeX command
 #+BEGIN_SRC emacs-lisp
    (defun sk-latexmk-cmd (backend)
      "When exporting from .org with latex, automatically run latex,
