@@ -84,10 +84,10 @@
 #+END_SRC
 
 #+BEAMER: \pause
-- La relation d'héritage est matérialisée par l'usage de la directive =public
-  polygone=
+- La relation d'héritage est matérialisée par l'usage de la directive *=public
+  polygone=*
 #+BEAMER: \pause
-- Le mot-clé =protected= autorise la classe dérivée (ici =rectangle=) à accéder
+- Le mot-clé *=protected=* autorise la classe dérivée (ici =rectangle=) à accéder
   aux membres de la classe de base (ici =polygone=)
 
 * Statut des membres et méthodes de classe
