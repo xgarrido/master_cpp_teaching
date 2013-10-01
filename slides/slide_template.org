@@ -1,0 +1,88 @@
+#+TITLE:  Les patrons de fonctions et de classes
+#+AUTHOR: Xavier Garrido
+#+DATE:   01/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Notions de patrons ou =template=
+
+- *la surdéfinition de fonctions* permet de donner un nom unique à plusieurs
+  fonctions dont le contexte d'appel c'est-à-dire les arguments de la fonction,
+  diffère,
+
+- *la redéfinition* intervient entre classes héritées et permet de spécialiser
+  une fonction membre suivant les buts de la classe dérivée,
+
+- *les patrons ou =template= de fonction* permettent d'écrire une seule fois la
+  définition d'une fonction afin que le compilateur puisse l'adapter au type des
+  arguments d'entrée ou de valeur de retour.
+
+* Illustration de l'utilisation de fonction patron
+
+#+BEGIN_SRC c++
+  int min (const int a_, const int b_)
+  {
+    return a_ < b_ ? a_ : b_;
+  }
+
+  float min (const float a_, const float b_)
+  {
+    return a_ < b_ ? a_ : b_;
+  }
+
+  char min (const char a_, const char b_)
+  {
+    return a_ < b_ ? a_ : b_;
+  }
+#+END_SRC
+
+* Illustration de l'utilisation de fonction patron
+
+#+BEGIN_SRC c++
+  template<class T> T min (const T a_, const T b_)
+  {
+    return a_ < b_ ? a_ : b_;
+  }
+#+END_SRC
+
+- lors de la compilation, suivant le type des arguments fournis, le compilateur
+  *enregistre* c'est-à-dire implémente le mécanisme adéquat
+
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  int main ()
+  {
+    int i1 = 2, i2 = 7;
+    float f1 = 3.4, f2 = 5.6;
+    char c1 = 'd', c2 = 'z';
+
+    cout << "min(i1,i2)   = " << min (i1,i2) << endl;
+    cout << "min(f1,f2)   = " << min (f1,f2) << endl;
+    cout << "min(c1,c2)   = " << min (c1,c2) << endl;
+    cout << "min(&c1,&c2) = " << min (&c1, &c2) << endl;
+  }
+
+#+END_SRC
+* Utilisation de patron de classe
+
+La classe n'étant qu'une généralisation de la notion de type, il est par
+conséquent possible de définir des patrons de classe
+
+#+BEGIN_SRC c++
+  template<class T> class point
+  {
+  public:
+    point (T abs_ = 0, T ord_ = 0) : m_X (abs_), m_Y (ord_) {}
+  private:
+    T m_X;
+    T m_Y;
+  };
+
+  int main ()
+  {
+    point<double> my_point1 (5.0, 3.0);
+    point<char>   my_point2 ('a', 'b');
+  }
+#+END_SRC
