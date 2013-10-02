@@ -1,0 +1,290 @@
+#+TITLE:  Notions de patrons de fonctions et de classes
+#+AUTHOR: Xavier Garrido
+#+DATE:   02/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{9}
+
+Nous avons vu que la surdéfinition de fonctions permettait de donner un nom
+unique à plusieurs fonctions réalisant un travail différent. La notion de
+"patron" de fonction (/template/ en anglais) est à la fois plus puissante et
+plus restrictive; plus puissante car il suffit d'écrire une seule fois la
+définition d'une fonction pour que le compilateur puisse automatiquement
+l'adapter à n'importe quel type; plus restrictive car cela suppose alors que
+l'ensemble des fonctions ainsi définies corresponde à la même définition, donc
+au même algorithme. Dans ce cadre, les notions de surdéfinition de fonction et
+de patron de fonctions répondent chacune à un besoin différent.
+
+* Les patrons de fonction
+
+Pour tenter d'illustrer l'intérêt des patrons de fonctions et leurs différences
+vis-à-vis de la surdéfinition de fonction, considérons le cas scolaire de la
+recherche du minimum de deux valeurs. Du point de vue de la surdéfinition de
+fonction, il s'agit d'écrire une fonction =min= pour chaque type de variable
+rencontrée, soit
+
+#+BEGIN_SRC c++
+  int min (const int a, const int b)
+  {
+    return a < b ? a : b;
+  }
+
+  float min (const float a, const float b)
+  {
+    return a < b ? a : b;
+  }
+
+  char min (const char a, const char b)
+  {
+    return a < b ? a : b;
+  }
+#+END_SRC
+
+Selon le contexte c'est-à-dire suivant le type d'argument fourni lors de l'appel
+de la fonction =min=, le compilateur se chargera d'utiliser la fonction
+adéquat. Toutefois, l'ensemble de ces définitions réalise la même opération et
+d'autre part, il devient nécessaire à l'auteur de la fonction, de considérer
+l'ensemble des types possibles et imaginables. Pour simplifer considérablement
+les choses, le \Cpp permet l'utilisation de *patrons de fonctions* afin de
+généraliser la définition de fonctions. Ainsi, l'ensemble des cas susceptibles
+d'être rencontrés par la surdéfinition de fonctions peut se résumer à la
+déclaration suivante
+
+#+BEGIN_SRC c++
+  template<class T> T min (const T a, const T b)
+  {
+    return a < b ? a : b;
+  }
+#+END_SRC
+
+Seul l'entête a changé, le corps de la fonction étant nécessairement indépendant
+du type de paramètres[fn:1] fournis. Ainsi la précédente déclaration précise que
+l'on est en présence d'un patron (=template=) dans lequel apparaît un
+"paramètre" de type désigné par la lettre =T=. En d'autres termes, dans la
+définition de la fonction =min=, =T= représente un type quelconque à la fois
+type de retour de la fonction mais également argument de cette dernière.
+
+Pour utiliser le patron =min= précédemment crée, il suffit d'utiliser la
+fonction =min= dans des conditions appropriées (dans notre cas, en fournissant
+deux arguments de même type). Le code suivant illustre quelques appels de cette
+fonction
+
+#+BEGIN_SRC c++
+  int main ()
+  {
+    const int i1 = 2, i2 = 7;
+    const float f1 = 3.4, f2 = 5.6;
+    const char c1 = 'd', c2 = 'z';
+
+    cout << "min(" << i1 << "," << i2 << ") = " << min (i1,i2) << endl;
+    cout << "min(" << f1 << "," << f2 << ") = " << min (f1,f2) << endl;
+    cout << "min(" << c1 << "," << c2 << ") = " << min (c1,c2) << endl;
+    cout << "min(&c1,&c2) = " << min (&c1,&c2) << endl;
+  }
+#+END_SRC
+
+Dans le premier cas où les arguments sont de type =int=, le compilateur
+"enregistrera" /i.e./ fabriquera automatiquement la fonction =min= dite fonction
+patron correspondant à des arguments de type entier. De même, pour des arguments
+de type =float= ou un caractère.
+
+S'il n'est plus nécessaire de définir une implémentation par type de données, le
+compilateur doit cependant disposer de la définition du patron afin de
+déterminer quelle fonction enregistrer. Aussi, la définition doit nécessairement
+intervenir avant une quelconque utilisation de la fonction. D'autre part, cette
+généralisation dans l'écriture de fonctions s'applique également aux classes
+moyennant la surcharge des opérateurs mis en jeu (ici, l'opérateur =<=). Il est
+parfaitement envisageable d'appeler la fonction =min= avec comme argument la
+désormais célèbre classe =Point=, sous réserve que l'opérateur d'infériorité =<=
+soit surchargé. Ainsi, le programme suivant demeure valable
+
+#+BEGIN_SRC c++
+  class Point
+  {
+  public:
+    Point(const unsigned int abs = 0,
+          const unsigned int ord = 0) : m_X(abs), m_Y(ord) {}
+
+    unsigned int GetNorme() const { return m_X*m_X+m_Y*m_Y; }
+    friend bool operator<(const Point& p1, const Point& p2);
+  private:
+    unsigned int m_X;
+    unsigned int m_Y;
+  };
+
+  bool operator<(const Point& p1, const Point& p2)
+  {
+    return p1.GetNorme() < p2.GetNorme();
+  }
+
+  int main()
+  {
+    Point myPoint1(3,4), myPoint2(5,2);
+    Point myPoint3 = min(myPoint1,myPoint2);
+  }
+#+END_SRC
+
+Le couplage entre patron de fonctions et surcharge d'opérateur constitue donc un
+outil puissant qui permet d'obtenir une forme "d'abstraction" en
+s'affranchissant des problèmes de type.
+
+*** Remarques
+
+- Le mécanisme même des patrons fait que ces instructions sont utilisées par le
+  compilateur pour enregistrer chaque fois qu'il est nécessaire, les
+  instructions correspondant à la fonction requise. La définition de patron ne
+  peut donc intervenir dans un module objet (fichiers =.cc,.cpp=,...)
+  indépendant de l'utilisation qui en sera faite. Dans la pratique, les
+  définitions de patrons se situent donc dans un fichier d'entête de telle sorte
+  à être "en ligne"[fn:2]
+
+- Un patron de fonctions peut comporter un ou
+  plusieurs paramètres de type, chacun devant être précédé du mot clé
+  =class= :
+  #+BEGIN_SRC c++
+    template<class T, class U...> void fct(T t, U u, ...)
+  #+END_SRC
+  Dans tous les cas, il est nécessaire que chaque paramètre de type
+  apparaisse au moins une fois dans l'entête du patron.
+
+- Dans l'hypothèse où la fonction =min= est appelée avec des arguments de type
+  différents (=char= et =int=, par exemple), il y aura une erreur de compilation
+  du fait que le \Cpp impose une correspondance absolue des types. Il est
+  cependant possible d'intervenir sur ce mécanisme d'identification de type, en
+  imposant le type des arguments lors de l'appel de la fonction. Ainsi, les
+  instructions suivantes sont toutes valables
+  #+BEGIN_SRC c++
+    unsigned int i1 = 2;
+    int i2 = 3;
+    char c1 = 'c';
+    // Force l'utilisation de min<int> en imposant la conversion
+    // de c en int, le résultat étant une valeur entière
+    cout << "min(" << c1 << "," << i2 << ") = "
+         << min<int>(c1, i2) << endl;
+
+    // Force l'utilisation de min<int> en imposant la conversion
+    // de i1 en int, le résultat étant une valeur entière
+    cout << "min(" << i1 << "," << i2 << ") = "
+         << min<int>(i1, i2) << endl;
+
+    // Force l'utilisation de min<char> en imposant la conversion
+    // de i1 et i2 en char, le résultat étant un caractère
+    cout << "min(" << i1 << "," << i2 << ") = "
+         << min<char>(i1,i2) << endl;
+  #+END_SRC
+
+* Les patrons de classe
+
+Le précédent paragraphe a montré comment \Cpp permettait, grâce à la notion de
+patron de fonction, de définir une famille de fonctions paramétrées par un ou
+plusieurs types. D'une manière comparable, \Cpp permet de définir des "patrons
+de classe" afin de définir une seule et unique fois la classe pour que le
+compilateur puisse automatiquement l'adapter à différents types. Ce mécanisme
+évite ainsi de définir plusieurs classes similaires pour décrire un même concept
+appliqué à plusieurs types de données différents. Cette notion est largement
+utilisée pour définir tous les types de "containers" (comme les listes, les
+tables, les piles, etc.), mais également d'algorithmes génériques tels que ceux
+de la bibliothèque standard.
+
+La syntaxe permettant de définir un patron de classe est similaire à celle qui
+permet de définir des patrons de fonctions. Un exemple de classe template,
+portant sur la structure =Point= pour laquelle la précision de représentation
+(entiers, entiers non signés, réels,...) est le paramètre type de la classe, est
+
+#+BEGIN_SRC c++
+  template<class T> class Point
+  {
+  public:
+    Point(T abs = 0, T ord = 0) : m_X(abs), m_Y(ord) {}
+    void Affiche();
+  private:
+    T m_X;
+    T m_Y;
+  };
+#+END_SRC
+
+Pour complèter la définition de notre patron de classe, il convient de définir
+les méthodes. Selon que l'on souhaite définir la méthode en ligne (/i.e./ à
+l'intérieur de la définition du patron de classe) ou non, la démarche est
+sensiblement différente. Dans le cas de la définition en ligne telle le
+constructeur =Point(T abs = 0, T ord = 0)=, l'utilisation demeure naturelle, la
+seule contrainte tenant à l'emploi du paramètre de type =T=. En revanche,
+lorsque la méthode est définie en dehors, il est impératif de rappeler au
+compilateur :
+
+- que, dans la définition de cette fonction, vont apparaître des paramètres de
+  type. On fournit donc la liste de paramètre sous la forme =template<class T>=,
+
+- le nom du patron concerné. Par exemple, si nous définissons la méthode
+  =Affiche=, son nom sera =Point<T>::Affiche()=.
+
+Ainsi, la méthode =Affiche= serait définie de la façon suivante
+#+BEGIN_SRC c++
+  template<class T> void Point<T>::Affiche()
+  {
+    cout << "Coordonnées : " << m_X << " " << m_Y << endl;
+  }
+#+END_SRC
+
+L'utilisation de patron de classe est similaire à celle des patrons de fonctions
+à ceci près qu'il est nécessaire d'imposer le paramètre de type lors de
+l'instanciation de la classe. Aussi après avoir crée le patron de classe
+=Point=, la déclaration d'instances de =Point= est
+#+BEGIN_SRC c++
+  Point<int> myPointWithInteger;
+  Point<double> myPointWithDouble(3.2,4.5);
+#+END_SRC
+
+Les contraintes d'utilisation de patron de classe sont du même ordre que celles
+inhérentes à l'utilisation des patrons de fonctions : les recommendations issues
+du premier paragraphe de cette fiche sont donc également applicables aux patrons
+de classe. La principale d'entre elles tient à la définition de la classe et de
+ses méthodes qui est indispensable au compilateur pour enregistrer chaque fois
+que nécessaire les instructions requises. En pratique, on placera donc les
+définitions de patron dans un fichier d'entête approprié.
+
+Il est également envisageable de fournir un nombre quelconque de paramètre de
+type dans la définition du patron de classe de même que des paramètres
+expressions. L'exemple ci-dessous illustre ces cas
+#+BEGIN_SRC c++
+  template<class T, class U, unsigned int n> class Tableau
+  {
+    T m_Tab[n];
+    U m_Mean;
+
+  public:
+    Tableau() {}
+    T& operator[](const unsigned int i) const { return m_Tab[i]; }
+    U GetMean() const { return m_Mean; }
+  };
+
+  int main()
+  {
+    Tableau<int, float, 5> myTableau1;
+    Tableau<float, float, 10> myTableau2;
+    Tableau<Point<int>, Point<float>, 6> myTableau3;
+  }
+#+END_SRC
+
+Par ailleurs, il n'est pas possible de surdéfinir un patron de classe
+c'est-à-dire de créer plusieurs patrons de même nom mais comportant une liste de
+paramètres (de type ou d'expression) différent et ce contrairement aux patrons
+de fonctions. En conséquence, les ambiguïtés évoquées lors de l'instanciation
+d'une classe fonction ne peuvent plus se poser dans le cas de l'instanciation
+d'une classe patron.
+
+
+* Footnotes
+
+[fn:1] dans le cadre des patrons de fonctions et de classes, on parle
+communément de paramètres et non d'argument. D'autre part, le \Cpp a décidé
+d'employer le mot clé =class= pour préciser que =T= est un paramètre de
+type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
+clé =typename= qui peut se substituer au mot clé =class=. Cependant, son
+utilisation est peu répandue.
+
+[fn:2] les compilateurs récents permettent l'usage du mot clé =export= lors de
+la définition d'un patron =export template<class T> T min(T a, T b) {...}=. On
+peut alors utiliser ce patron depuis un autre fichier source, en se contentant
+de mentionner sa "déclaration".}.
