@@ -152,33 +152,32 @@ chaînes de caractères C). L'exemple suivant présente quelques unes des
 possibilités offertes par cette classe
 
 #+BEGIN_SRC c++
-#include <string>
-#include <iostream>
+  #include <string>
+  #include <iostream>
 
-int main ()
-{
-// Assignation/copie de strings
-std::string myString1 = "abcd";
-std::string myString2 = myString1;
-// Initialisation de strings
-std::string myString3 (myString2);
+  int main ()
+  {
+    // Assignation/copie de strings
+    std::string myString1 = "abcd";
+    std::string myString2 = myString1;
+    // Initialisation de strings
+    std::string myString3 (myString2);
 
-// Concaténation
-myString2 += "abcd";
-std::string myString4 = myString1 + "toto";
+    // Concaténation
+    myString2 += "abcd";
+    std::string myString4 = myString1 + "toto";
 
-// Comparaison
-const bool myBoolean = (myString1 == myString2);
-if (myBoolean)
-std::cout << myString1 << " est identique à "
-<< myString2 << std::endl;
+    // Comparaison
+    const bool myBoolean = (myString1 == myString2);
+    if (myBoolean)
+      std::cout << myString1 << " est identique à " << myString2 << std::endl;
 
-// Longueur d'un string
-unsigned int size = myString1.size ();
+    // Longueur d'un string
+    unsigned int size = myString1.size ();
 
-// Recherche dans un string
-unsigned int pos = myString1.find ("bc");
-}
+    // Recherche dans un string
+    unsigned int pos = myString1.find ("bc");
+  }
 #+END_SRC
 
 On reconnaît entre autre la méthode =size= qui précise la taille /i.e./ le
