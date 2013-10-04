@@ -14,7 +14,7 @@ certaines actions (initialisation des membres, appel de méthodes...) qui doiven
 avoir lieu lors de la création d'un objet puis lors de sa destruction. À titre
 d'exemple, si l'objet contient des variables allouées dynamiquement, il faut
 leur réserver de la mémoire à la création de l'objet ou, à défaut, mettre les
-pointeurs correspondants à 0 (ou =NULL=). À la destruction de l'objet, il convient
+pointeurs correspondants à =0= (ou =NULL=). À la destruction de l'objet, il convient
 de restituer la mémoire éventuellement allouée.
 
 * Définition des constructeurs et des destructeurs
