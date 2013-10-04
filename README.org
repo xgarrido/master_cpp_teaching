@@ -160,29 +160,34 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+END_SRC
 *** Building html preamble
 #+TBLNAME: lecture_list :results none
-|-----------------------------+-----------------------------------------------|
-| lecture_pointeur            | Pointeurs, références & allocation dynamique  |
-| lecture_fonction            | Rappels sur les fonctions                     |
-| lecture_specificite_c++     | Les spécificités du C++                       |
-| lecture_struct_class        | Structures et classes                         |
-| lecture_encapsulation       | Encapsulation des données                     |
-| lecture_constructeur        | Notions de constructeur et de destructeur     |
-| lecture_amitie              | Fonctions et classes amies                    |
-| lecture_surcharge_operateur | Surdéfinition d'opérateur                     |
-| lecture_heritage            | Héritage                                      |
-| lecture_template            | Notions de patrons de fonctions et de classes |
-| lecture_librairie_standard  | Introduction à la librairie standard STL      |
-|-----------------------------+-----------------------------------------------|
+|----------------------------+-----------------------------------------------|
+| lecture_pointeur           | Pointeurs, références & allocation dynamique  |
+| lecture_fonction           | Rappels sur les fonctions                     |
+| lecture_specificite_c++    | Les spécificités du C++                       |
+| lecture_struct_class       | Structures et classes                         |
+| lecture_encapsulation      | Encapsulation des données                     |
+| lecture_constructeur       | Notions de constructeur et de destructeur     |
+| lecture_amitie             | Fonctions et classes amies                    |
+| lecture_surcharge          | Surcharge d'opérateur                         |
+| lecture_heritage           | Héritage                                      |
+| lecture_template           | Notions de patrons de fonctions et de classes |
+| lecture_librairie_standard | Introduction à la librairie standard STL      |
+| annexe_compilation         | A. Compilation et directives de préprocesseur |
+|----------------------------+-----------------------------------------------|
 
 #+NAME: html-preamble
 #+HEADERS: :var list=""
 #+BEGIN_SRC sh :tangle no :results output
+  i=1
   for f in $list
   do
       if [[ $f == *lecture_* ]]; then
-          if [ "$preamble" != "" ]; then
+          if [ $i -ne 1 ]; then
               preamble+='</a></span>'
           fi
+          preamble+='<span><a href=\"'$f'.html\">'$i'. '
+          let i=i+1
+      elif [[ $f == *annexe_* ]]; then
           preamble+='<span><a href=\"'$f'.html\">'
       else
           preamble+=$f' '
@@ -224,6 +229,10 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
     (when (eq backend 'html)
       (replace-regexp-in-string ".pdf" ".html" contents)))
   (add-to-list 'org-export-filter-link-functions 'cpp-filter-link)
+  (defun cpp-filter-headline (contents backend info)
+    (when (eq backend 'html)
+      (replace-regexp-in-string "</h1>" "</h1><hr/>" contents)))
+  (add-to-list 'org-export-filter-final-output-functions 'cpp-filter-headline)
 #+END_SRC
 *** Publish =cpp= project
 #+BEGIN_SRC emacs-lisp
@@ -275,9 +284,8 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   h1 {
-      text-shadow: 0 0 1px #fff;
       /*font-family:Lobster;*/
-      font-size:48px;
+      font-size:28px;
   }
 
   h2 {
@@ -309,14 +317,14 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
       color:#777;
   }
 
-  blockquote {
+  blockquote, .remark {
       border-left:1px solid #e5e5e5;
       margin:0;
       padding:0 0 0 20px;
       font-style:italic;
   }
 
-  code, pre {
+  code, pre, .prompt {
       font-family:Inconsolata, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
       color:#777;
       font-size:12px;
@@ -328,6 +336,24 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
       border-radius:5px;
       border:1px solid #e5e5e5;
       overflow-x: auto;
+  }
+
+  .prompt {
+      margin-bottom:15px;
+      padding:8px 15px;
+      background: #777;
+      color:#e5e5e5;
+      border-radius:5px;
+      border:1px solid #e5e5e5;
+      overflow-x: auto;
+  }
+
+  .prompt p {
+      margin:0;
+  }
+
+  .prompt p:before {
+      content: "$";
   }
 
   table {
@@ -443,7 +469,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   #content {
-      width:700px;
+      width:600px;
       float:right;
       padding-bottom:50px;
       /* border:1px solid #e5e5e5; */
@@ -474,8 +500,8 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
       font-size:0.9em;
       text-transform:uppercase;
       float:left;
-      margin-left:-6em;
-      width:15em;
+      margin-left:-3em;
+      width:20em;
       text-align:right;
       position:fixed;
   }
