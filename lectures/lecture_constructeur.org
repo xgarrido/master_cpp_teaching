@@ -359,4 +359,4 @@ code suivant fournit un exemple d'implémentation de constructeur de recopie
   par défaut semblable (copie superficielle), la prise en compte d'une copie
   profonde passe par des mécanismes différents : définition d'un constructeur de
   recopie pour l'initialisation, surdéfinition de l'opérateur === pour
-  l'affectation (/cf./ Chapitre [[file:lecture_surcharge_operateur.pdf]["Surcharge d'opérateur"]]).
+  l'affectation (/cf./ Chapitre [[file:lecture_surcharge.pdf]["Surcharge d'opérateur"]]).
