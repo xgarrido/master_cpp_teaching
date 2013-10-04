@@ -83,6 +83,9 @@ Utilisation de la classe =string= en \Cpp
 #+END_SRC
 
 * La classe =vector=
+:PROPERTIES:
+:REVEAL_BACKGROUND: #123456
+:END:
 
 - La classe =vector= est proche par son utilisation du tableau défini en C,
 

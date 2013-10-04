@@ -30,12 +30,13 @@ do =make= within the courses directories.
 :TANGLE: README.el
 :END:
 
-** Requirements
+** Settings for =org= to =pdf= conversion
+*** Requirements
 #+BEGIN_SRC emacs-lisp
   (require 'ox-latex)
   (require 'ox-beamer)
 #+END_SRC
-** Code blocks
+*** Code blocks
 This activates a number of widely used languages, you are encouraged to activate
 more languages using the customize interface for the =org-babel-load-languages=
 variable, or with an elisp form like the one below.  The customize interface of
@@ -54,7 +55,7 @@ although it is not added by default as a security precaution.
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
-** Default list of LaTeX packages
+*** Default list of LaTeX packages
 Only include one default package and remove all the crapppy stuff included by
 =org= \rightarrow =latex= translation.
 
@@ -62,14 +63,14 @@ Only include one default package and remove all the crapppy stuff included by
   (add-to-list 'org-latex-packages-alist '("" "org-preamble"))
 #+END_SRC
 
-** Defining =org-latex-classes=
+*** Defining =org-latex-classes=
 
 #+BEGIN_SRC emacs-lisp
   (unless (boundp 'org-latex-classes)
     (setq org-latex-classes nil))
 #+END_SRC
 
-*** Beamer template
+**** Beamer template
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-latex-classes
                '("beamer"
@@ -112,7 +113,7 @@ We define a new environment for "colored" box
                '("cbox" "c" "\\begin{cbox}%o(%h)" "\\end{cbox}"))
 #+END_SRC
 
-*** Lecture template
+**** Lecture template
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
                '("lecture"
@@ -127,7 +128,7 @@ We define a new environment for "colored" box
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 
-** =Minted= setup
+*** =minted= setup
 Code fragments are syntax highlighted using [[https://code.google.com/p/minted/][minted]] LaTeX package
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -152,4 +153,421 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
        (setq texcmd "jobname=$(basename %f | sed 's/\.tex//');latexmk -xelatex -shell-escape -quiet %f && mkdir -p latex.d && mv ${jobname}.* latex.d/. && mv latex.d/${jobname}.{org,tex,pdf,fdb_latexmk} .")
        (setq org-latex-pdf-process (list texcmd))))
   (org-add-hook 'org-export-before-processing-hook 'sk-latexmk-cmd)
+#+END_SRC
+** Settings for =org= to =html= conversion
+*** Requirements
+#+BEGIN_SRC emacs-lisp
+  (require 'ox-html)
+#+END_SRC
+*** Define =org-project=
+#+BEGIN_SRC emacs-lisp
+    (unless (boundp 'org-publish-project-alist)
+      (setq org-publish-project-alist nil))
+
+    (setq org-html-style-default "")
+    (setq org-html-htmlize-output-type 'css)
+
+    (let* ((this-dir (file-name-directory (or load-file-name buffer-file-name))))
+      (add-to-list
+       'org-publish-project-alist
+       `("cpp"
+         :base-directory ,this-dir
+         :recursive t
+         :exclude "README.org"
+         :html-extension "html"
+         :base-extension "org"
+         :publishing-directory ,(expand-file-name "doc" this-dir)
+         :publishing-function org-html-publish-to-html
+         :section-numbers nil
+         :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
+                     <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
+         :html-preamble nil
+         :html-postamble nil)))
+
+  (defun cpp-filter-latex-fragment (contents backend info)
+    (when (eq backend 'html)
+      (replace-regexp-in-string "\\\\Cpp" "C++" contents)))
+  (add-to-list 'org-export-filter-latex-fragment-functions 'cpp-filter-latex-fragment)
+  (defun cpp-filter-link (contents backend info)
+    (when (eq backend 'html)
+      (replace-regexp-in-string ".pdf" ".html" contents)))
+  (add-to-list 'org-export-filter-link-functions 'cpp-filter-link)
+#+END_SRC
+*** Publish =cpp= project
+#+BEGIN_SRC emacs-lisp
+  (defun org-publish-cpp ()
+    (progn
+      (org-publish-project "cpp" 'force)
+      ))
+#+END_SRC
+
+*** Define a =by-backend= macro to deal with
+#+BEGIN_SRC emacs-lisp
+  (setq org-babel-latex-htlatex "htlatex")
+  (defmacro by-backend (&rest body)
+    `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
+#+END_SRC
+*** CSS stylesheets
+**** Main stylesheets
+:PROPERTIES:
+:TANGLE: doc/stylesheets/styles.css
+:END:
+***** Google fonts
+#+BEGIN_SRC css
+  @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+  @import url(https://fonts.googleapis.com/css?family=Inconsolata);
+  @import url(https://fonts.googleapis.com/css?family=Lobster);
+#+END_SRC
+
+***** Other stuff
+#+BEGIN_SRC css
+  body {
+      width:860px;
+      margin:0 auto;
+      padding:50px;
+      font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color:#777;
+      font-weight:300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      color:#222;
+      margin:0 0 20px;
+  }
+
+  p, ul, ol, table, pre, dl {
+      margin:0 0 20px;
+  }
+
+  h1, h2, h3 {
+      line-height:1.1;
+  }
+
+  h1 {
+      text-shadow: 0 0 1px #fff;
+      /*font-family:Lobster;*/
+      font-size:48px;
+  }
+
+  h2 {
+      color:#393939;
+  }
+
+  h3, h4, h5, h6 {
+      color:#494949;
+  }
+
+  a {
+      color:#39c;
+      font-weight:400;
+      text-decoration:none;
+  }
+
+  a:hover {
+      color:#069;
+  }
+
+  a small {
+      font-size:11px;
+      color:#777;
+      margin-top:-0.6em;
+      display:block;
+  }
+
+  a:hover small {
+      color:#777;
+  }
+
+  blockquote {
+      border-left:1px solid #e5e5e5;
+      margin:0;
+      padding:0 0 0 20px;
+      font-style:italic;
+  }
+
+  code, pre {
+      font-family:Inconsolata, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+      color:#777;
+      font-size:12px;
+  }
+
+  pre {
+      padding:8px 15px;
+      background: #f8f8f8;
+      border-radius:5px;
+      border:1px solid #e5e5e5;
+      overflow-x: auto;
+  }
+
+  table {
+      width:100%;
+      border-collapse:collapse;
+  }
+
+  th, td {
+      text-align:left;
+      padding:5px 10px;
+      border-bottom:1px solid #e5e5e5;
+  }
+
+  dt {
+      color:#444;
+      font-weight:700;
+  }
+
+  th {
+      color:#444;
+  }
+
+  img {
+      max-width:100%;
+  }
+
+  header {
+      width:270px;
+      float:left;
+      position:fixed;
+  }
+
+  header ul {
+      list-style:none;
+      height:40px;
+
+      padding:0;
+
+      background: #eee;
+      background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
+      background: -webkit-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+      background: -o-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+      background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+      background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+
+      border-radius:5px;
+      border:1px solid #d2d2d2;
+      box-shadow:inset #fff 0 1px 0, inset rgba(0,0,0,0.03) 0 -1px 0;
+      width:270px;
+  }
+
+  header li {
+      width:89px;
+      float:left;
+      border-right:1px solid #d2d2d2;
+      height:40px;
+  }
+
+  header li:first-child a {
+      border-radius:5px 0 0 5px;
+  }
+
+  header li:last-child a {
+      border-radius:0 5px 5px 0;
+  }
+
+  header ul a {
+      line-height:1;
+      font-size:11px;
+      color:#999;
+      display:block;
+      text-align:center;
+      padding-top:6px;
+      height:34px;
+  }
+
+  header ul a:hover {
+      color:#999;
+      background: -moz-linear-gradient(top, #fff 0%, #ddd 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#ddd));
+      background: -webkit-linear-gradient(top, #fff 0%,#ddd 100%);
+      background: -o-linear-gradient(top, #fff 0%,#ddd 100%);
+      background: -ms-linear-gradient(top, #fff 0%,#ddd 100%);
+      background: linear-gradient(top, #fff 0%,#ddd 100%);
+  }
+
+  header ul a:active {
+      -webkit-box-shadow: inset 0px 2px 2px 0px #ddd;
+      -moz-box-shadow: inset 0px 2px 2px 0px #ddd;
+      box-shadow: inset 0px 2px 2px 0px #ddd;
+  }
+
+  strong {
+      color:#222;
+      font-weight:700;
+  }
+
+  header ul li + li {
+      width:88px;
+      border-left:1px solid #fff;
+  }
+
+  header ul li + li + li {
+      border-right:none;
+      width:89px;
+  }
+
+  header ul a strong {
+      font-size:14px;
+      display:block;
+      color:#222;
+  }
+
+  #content {
+      width:700px;
+      float:right;
+      padding-bottom:50px;
+      /* border:1px solid #e5e5e5; */
+      /* border-width:1px 0;       */
+      /* padding:20px 0;           */
+      /* margin:0 0 20px;          */
+  }
+
+  small {
+      font-size:11px;
+  }
+
+  hr {
+      border:0;
+      background:#e5e5e5;
+      height:1px;
+      margin:0 0 20px;
+  }
+
+  footer {
+      width:270px;
+      float:left;
+      position:fixed;
+      bottom:50px;
+  }
+
+  #preamble {
+      /* font-size:1.1em; */
+      text-transform:uppercase;
+      float:left;
+      /* margin-left:-12em; */
+      width:9em;
+      text-align:right;
+      position:fixed;
+  }
+
+  #preamble a {
+      display:block;
+      padding:0.2em 1em;
+      color:#39c;
+  }
+
+  #preamble a:hover {
+      background-color:#39c;
+      text-decoration:none;
+      color:#f9f9f9;
+      -webkit-transition:color .2s linear;
+  }
+
+  .center {
+      text-align : center;
+  }
+
+  .footpara {
+      display: inline;
+  }
+
+  @media print, screen and (max-width: 960px) {
+
+      body {
+          width:auto;
+          margin:0;
+      }
+
+      header, content, footer {
+          float:none;
+          position:static;
+          width:auto;
+      }
+
+      header {
+          padding-right:320px;
+      }
+
+      header a small {
+          display:inline;
+      }
+
+      header ul {
+          position:absolute;
+          right:50px;
+          top:52px;
+      }
+  }
+
+  @media print, screen and (max-width: 720px) {
+      body {
+          word-wrap:break-word;
+      }
+
+      header {
+          padding:0;
+      }
+
+      header ul, header p.view {
+          position:static;
+      }
+
+      pre, code {
+          word-wrap:normal;
+      }
+  }
+
+  @media print, screen and (max-width: 480px) {
+      body {
+          padding:15px;
+      }
+
+      header ul {
+          display:none;
+      }
+  }
+
+  @media print {
+      body {
+          padding:0.4in;
+          font-size:12pt;
+          color:#444;
+      }
+  }
+#+END_SRC
+
+**** Org source code styles
+:PROPERTIES:
+:TANGLE:   doc/stylesheets/org-pygments.css
+:END:
+
+#+BEGIN_SRC css
+  .org-preprocessor {
+      color: #84B818;
+  }
+
+  .org-string,
+  .org-type {
+      color: #DEB542;
+  }
+
+  .org-builtin,
+  .org-variable-name,
+  .org-constant,
+  .org-function-name {
+      color: #69B7F0;
+  }
+
+  .org-comment,
+  .org-comment-delimiter,
+  .org-doc {
+      color: #93a1a1;
+  }
+
+  .org-keyword {
+      color: #D33682;
+  }
+
+  pre {
+      color: #777777;
+  }
 #+END_SRC

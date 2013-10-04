@@ -44,7 +44,7 @@ l'introduction à la notion même de classe. Ce n'est qu'au travers du prochain
 chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]] qu'appa\-raîtont les différences
 conceptuelles entre les types structure et classe.
 
-*  Les structures en C++
+* Les structures en C++
 
 ** Rappel : les structures en C
 
@@ -209,7 +209,7 @@ méthode quelle est la structure sur laquelle opérer.
   compiler le type =point= indépendamment de son utilisation faite dans le
   programme principal; c'est ainsi que l'on pourra "réutiliser" un composant logiciel.
 
-*  Notion de classe
+* Notion de classe
 
 En \Cpp, la structure est un cas particulier de la classe. Comme nous le verrons
 au prochain chapitre, une classe est une structure dans laquelle seulement
