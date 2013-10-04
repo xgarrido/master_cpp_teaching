@@ -7,7 +7,7 @@
 #+LATEX_HEADER: \setcounter{chapter}{3}
 
 Ce chapitre aborde véritablement les possibilités offertes par la programmation
-orientée objet grâce à l'implé\-mentation des classes. Une classe est la
+orientée objet grâce à l'implémentation des classes. Une classe est la
 généralisation de la notion de type défini par l'utilisateur, dans lequel se
 trouvent associées aussi bien *des données (membres données)* que *des méthodes*
 (fonctions membres). En règle générale, il existe une nette distinction entre
@@ -41,7 +41,7 @@ présenterons la version étendue du type structure introduite par le \Cpp. Ce
 nouveau type permettra, dans un premier temps, de nous limiter à la façon de
 mettre en œuvre l'association des données et des méthodes et facilitera
 l'introduction à la notion même de classe. Ce n'est qu'au travers du prochain
-chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]] qu'appa\-raîtont les différences
+chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]] qu'apparaîtont les différences
 conceptuelles entre les types structure et classe.
 
 * Les structures en C++

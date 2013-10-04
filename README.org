@@ -29,7 +29,6 @@ do =make= within the courses directories.
 :PROPERTIES:
 :TANGLE: README.el
 :END:
-
 ** Settings for =org= to =pdf= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp
@@ -159,8 +158,41 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+BEGIN_SRC emacs-lisp
   (require 'ox-html)
 #+END_SRC
+*** Building html preamble
+#+TBLNAME: lecture_list :results none
+|-----------------------------+-----------------------------------------------|
+| lecture_pointeur            | Pointeurs, références & allocation dynamique  |
+| lecture_fonction            | Rappels sur les fonctions                     |
+| lecture_specificite_c++     | Les spécificités du C++                       |
+| lecture_struct_class        | Structures et classes                         |
+| lecture_encapsulation       | Encapsulation des données                     |
+| lecture_constructeur        | Notions de constructeur et de destructeur     |
+| lecture_amitie              | Fonctions et classes amies                    |
+| lecture_surcharge_operateur | Surdéfinition d'opérateur                     |
+| lecture_heritage            | Héritage                                      |
+| lecture_template            | Notions de patrons de fonctions et de classes |
+| lecture_librairie_standard  | Introduction à la librairie standard STL      |
+|-----------------------------+-----------------------------------------------|
+
+#+NAME: html-preamble
+#+HEADERS: :var list=""
+#+BEGIN_SRC sh :tangle no :results output
+  for f in $list
+  do
+      if [[ $f == *lecture_* ]]; then
+          if [ "$preamble" != "" ]; then
+              preamble+='</a></span>'
+          fi
+          preamble+='<span><a href=\"'$f'.html\">'
+      else
+          preamble+=$f' '
+      fi
+  done
+  preamble+='</a></span>'
+  echo -ne $preamble
+#+END_SRC
 *** Define =org-project=
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :noweb yes
     (unless (boundp 'org-publish-project-alist)
       (setq org-publish-project-alist nil))
 
@@ -181,7 +213,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
          :section-numbers nil
          :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
                      <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
-         :html-preamble nil
+         :html-preamble "<<html-preamble(lecture_list)>>"
          :html-postamble nil)))
 
   (defun cpp-filter-latex-fragment (contents backend info)
@@ -197,11 +229,10 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+BEGIN_SRC emacs-lisp
   (defun org-publish-cpp ()
     (progn
-      (org-publish-project "cpp" 'force)
-      ))
+      (org-publish-project "cpp" 'force)))
 #+END_SRC
 
-*** Define a =by-backend= macro to deal with
+*** Define a =by-backend= macro to deal with =tikzpicture= inclusion
 #+BEGIN_SRC emacs-lisp
   (setq org-babel-latex-htlatex "htlatex")
   (defmacro by-backend (&rest body)
@@ -440,11 +471,11 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   #preamble {
-      /* font-size:1.1em; */
+      font-size:0.9em;
       text-transform:uppercase;
       float:left;
-      /* margin-left:-12em; */
-      width:9em;
+      margin-left:-6em;
+      width:15em;
       text-align:right;
       position:fixed;
   }

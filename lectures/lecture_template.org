@@ -287,4 +287,4 @@ utilisation est peu répandue.
 [fn:2] les compilateurs récents permettent l'usage du mot clé =export= lors de
 la définition d'un patron =export template<class T> T min(T a, T b) {...}=. On
 peut alors utiliser ce patron depuis un autre fichier source, en se contentant
-de mentionner sa "déclaration".}.
+de mentionner sa "déclaration".
