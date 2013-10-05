@@ -1,0 +1,124 @@
+#+TITLE:  Convention d'écriture et organisation des programmes
+#+AUTHOR: Xavier Garrido
+#+DATE:   05/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{1}
+#+LATEX_HEADER: \renewcommand{\chaptername}{annexe}
+
+La conception d'un programme informatique aussi complexe soit il, nécessite
+quelques règles afin de faciliter autant son écriture que sa lecture voire sa
+relecture. Ce chapitre propose ainsi une revue, non-exhaustive, de différentes
+règles, plus ou moins arbitraires, érigées afin de rendre un programme
+informatique lisible et compréhensible. Libre à chacun de suivre ou non ces
+quelques recommendations...
+
+* Principales règles d'écriture
+
+Historiquement, le besoin de "normaliser" l'écriture de programme informatique a
+naturellement conduit leurs auteurs à définir certaines règles
+élémentaires. C'est ainsi que Charles Simonyi[fn:1] a introduit une convention
+d'écriture baptisée notation hongroise (Charles Simonyi en plus d'être touriste
+spatial est hongrois) qui permet de préciser la nature d'une variable en
+ajoutant à son nom, un préfixe relatif au type de la variable. Les principales
+règles issues de cette notation sont listées dans le Tableau [[tab::hunNota]].
+
+#+TBLNAME: tab::hunNota
+#+CAPTION: *Notation hongroise telle que définie par Charles Simonyi.*
+#+CAPTION: Une variable entière se voit ainsi précéder de la
+#+CAPTION: lettre =i= en référence au type =integer= alors que
+#+CAPTION: la déclaration d'un pointeur se fera à l'aide de la lettre =p=
+|----------------+----------------------|
+| Préfixe        | Description          |
+|----------------+----------------------|
+| =i=            | =integer=            |
+| =f=            | =float=              |
+| =d=            | =double=             |
+| =c=            | =character=          |
+| =b=            | =boolean=            |
+| =by= ou =byte= | =byte=               |
+|----------------+----------------------|
+| =str=          | \Cpp =string= object |
+| =v=            | \Cpp =vector= object |
+|----------------+----------------------|
+| =p=            | pointeur vers        |
+| =r=            | référence à          |
+|----------------+----------------------|
+| =m_=           | variable membre      |
+| =g_=           | variable globale     |
+| =s_=           | variable statique    |
+|----------------+----------------------|
+
+Suivant ces règles, une variable de type =float= s'écrit, par exemple, =fRadius=
+tandis que cette même grandeur devient =m_fRadius= dès lors qu'elle est membre
+d'une classe.
+
+Bien que cette notation comporte plusieurs avantages, elle n'en reste pas moins
+inadaptée lorsque nous sommes confrontés au problème de portabilité ou encore
+lorsqu'il est nécessaire de changer le type d'une variable. En se référant à
+l'exemple précédent, si nous devions changer le type de notre variable =fRadius=
+de =float= en =double=, il serait alors nécessaire de remplacer toutes les
+occurrences de =fRadius= en =dRadius=. Opération fastidieuse et parfois risquée.
+
+Nous conserverons toutefois certaines de ces notations, en particulier celles
+qui sont indépendantes de l'architecture de la machine comme =m_= pour les
+membres de classe de même que pour la déclaration de variable locale (=i= sera
+notamment utilisé au sein des boucles : =for (unsigned int iRun = 0;...)=).
+
+* Déclaration des variables
+
+Le choix des noms de variable (et de méthode) doit être le plus explicite
+possible. Des déclarations telles que =nb= sont à proscrire étant donné qu'elles
+ne renseignent pas sur la nature des variables mises en jeu. Le nom doit donc
+fournir le plus d'information possible, la longueur de l'identifiant ne devant
+finalement pas être un frein à la déclaration de variable.
+
+Sachant qu'un nom de variable est composé de caractères alphanumériques, le
+premier devant obligatoirement être une lettre (éventuellement un /underscore/
+=_=), nous proposons les constructions suivantes :
+
+- pour les variables membres d'une classe, la variable est préfixé par le champ
+  =m_=. Chaque mot est écrit en minuscule, les mots étant séparés par le
+  caractère =_= (ex : =m_radius_detector=),
+
+- pour des variables locales, seule le préfixe est substitué par toute autre
+  identificateur, la syntaxe respectant la première règle (ex :
+  =my_radius_detetector=).
+
+Par ailleurs, le respect de l'orthographe est également à prendre en
+considération. Ainsi, il est préférable d'écrire le nom d'une méthode
+=get_parameters ()= dès lors qu'elle retourne un ensemble de paramètres et
+=get_parameter ()= lorsqu'il s'agira de récupérer la valeur d'un seul paramètre.
+
+Enfin, on évitera autant que possible les rédondances dans les identifiants qui
+ont tendance à rallonger l'écriture et surchargent la relecture. Par exemple,
+=my_detector.initialize_detector ()= devient =my_detector.initialize ()=.
+
+* Organisation des programmes
+
+Au niveau de l'écriture du code, la modularité du programme est une donnée
+essentielle. Les idées qui en sont à la base sont les suivantes :
+
+- diviser le travail en plusieurs équipes,
+
+- créer des programmes indépendants de la problématique globale, donc
+  réutilisables par d'autres logiciels,
+
+- limiter les risques d'erreurs liés à la reprogrammation de certaines parties
+  du code.
+
+Ces principes issus du développement de projet d'envergure demeurent toutefois
+applicable au développeur lambda. En effet, il est toujours plus facile de
+décomposer un problème en ses éléments, forcément plus simples, que de le
+traiter dans sa totalité. Par ailleurs, l'introduction par la programmation
+orienté-objet de la notion de classe et donc de structure de données facilitent
+grandement la conception de programme modulaire.
+
+Pour atteindre cet objectif, il est indispensable de pouvoir découper un
+programme en sous-programmes indépendants. Pour que chacun puisse travailler sur
+sa partie de programme, il faut que ces morceaux de programme soient dans des
+fichiers séparés.
+
+[fn:1] père des logiciels Word et Excel mais également connu pour ses vols comme
+touriste à bord de la station spatiale internationale en 2007 et 2009

@@ -35,6 +35,10 @@ do =make= within the courses directories.
   (require 'ox-latex)
   (require 'ox-beamer)
 #+END_SRC
+*** Place table caption below table
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-table-caption-above nil)
+#+END_SRC
 *** Code blocks
 This activates a number of widely used languages, you are encouraged to activate
 more languages using the customize interface for the =org-babel-load-languages=
@@ -160,20 +164,21 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+END_SRC
 *** Building html preamble
 #+TBLNAME: lecture_list :results none
-|----------------------------+-----------------------------------------------|
-| lecture_pointeur           | Pointeurs, références & allocation dynamique  |
-| lecture_fonction           | Rappels sur les fonctions                     |
-| lecture_specificite_c++    | Les spécificités du C++                       |
-| lecture_struct_class       | Structures et classes                         |
-| lecture_encapsulation      | Encapsulation des données                     |
-| lecture_constructeur       | Notions de constructeur et de destructeur     |
-| lecture_amitie             | Fonctions et classes amies                    |
-| lecture_surcharge          | Surcharge d'opérateur                         |
-| lecture_heritage           | Héritage                                      |
-| lecture_template           | Notions de patrons de fonctions et de classes |
-| lecture_librairie_standard | Introduction à la librairie standard STL      |
-| annexe_compilation         | A. Compilation et directives de préprocesseur |
-|----------------------------+-----------------------------------------------|
+|----------------------------+----------------------------------------------------------|
+| lecture_pointeur           | Pointeurs, références & allocation dynamique             |
+| lecture_fonction           | Rappels sur les fonctions                                |
+| lecture_specificite_c++    | Les spécificités du C++                                  |
+| lecture_struct_class       | Structures et classes                                    |
+| lecture_encapsulation      | Encapsulation des données                                |
+| lecture_constructeur       | Notions de constructeur et de destructeur                |
+| lecture_amitie             | Fonctions et classes amies                               |
+| lecture_surcharge          | Surcharge d'opérateur                                    |
+| lecture_heritage           | Héritage                                                 |
+| lecture_template           | Notions de patrons de fonctions et de classes            |
+| lecture_librairie_standard | Introduction à la librairie standard STL                 |
+| annexe_compilation         | A. Compilation et directives de préprocesseur            |
+| annexe_convention_ecriture | B. Convention d'écrciture et organisation des programmes |
+|----------------------------+----------------------------------------------------------|
 
 #+NAME: html-preamble
 #+HEADERS: :var list=""
