@@ -1,0 +1,81 @@
+#+TITLE:  Écriture/lecture sur l'entrée/sortie standard
+#+AUTHOR: Xavier Garrido
+#+DATE:   05/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{2}
+#+LATEX_HEADER: \renewcommand{\chaptername}{annexe}
+
+* Rappel sur l'instruction =printf=
+
+*** Syntaxe :
+#+BEGIN_SRC c++
+  int printf (const char *format [, arg [, arg]...]);
+#+END_SRC
+
+où :
+
+- =const char *format= est une chaîne de caractère,
+
+- =arg= sont les arguments qui correspondent aux spécifications de
+  *format* au sein de la chaîne de caractère.
+
+Exemple :
+#+BEGIN_SRC c++
+  int i = 5;
+  // %d est la spécification de format pour les entiers, i est son argument
+  printf ("i =\n %d", i);
+#+END_SRC
+
+
+* Les nouvelles possibilités d'entrée/sortie du \Cpp
+
+Les commandes d'entrée sortie =cout= / =cin= du \Cpp n'ont *pas besoin de
+spécification de format*, elles prennent en charge le formatage des variables à
+afficher ou à affecter par l'utilisateur.
+
+*** Syntaxe
+
+#+BEGIN_SRC c++
+  cout << VariableAfficherNum1 << VariableAfficherNum2 <<  ... ;
+  cin >> VariableA_AffecterNum1 >> VariableA_AffecterNum2 >> ... ;
+#+END_SRC
+
+L'opérateur =<<= ou =>>= indique la direction du flot de données: =>>= va dans
+le sens de la lecture (occidentale) et va donc vers l'ordinateur. À contrario,
+=<<= sort de l'ordinateur.
+
+Exemple :
+#+BEGIN_SRC c++
+  const int i = 25;
+  const double f = 4.52;
+  int j;
+
+  cout << "i = " << i << endl << "f = " << f;
+  cout << endl << "Entrer j" << endl;
+  cin >> j ;
+#+END_SRC
+
+
+*** Remarques
+
+- La bibliothèque qui contient entre autre =cout= et =cin=
+  est =iostream=, il faut donc l'inclure dans le programme par
+  =#include <iostream>=. Elle remplace la librairie standard
+  =stdio.h= utilisée en langage\nbsp{}C.
+
+- Il est nécessaire d'ajouter au début du code la commande suivante
+  #+BEGIN_SRC c++
+    using namespace std;
+  #+END_SRC
+  pour utiliser les entrées-sorties directement via =cout=/=cin=. Sinon, il faut
+  utiliser l'opérateur de portée =::= pour écrire =std::cout= (/cf./ [[file:lecture_specificite_c++.pdf]["Fiches sur
+  les spécificités du \Cpp"]]).
+
+- Le saut de ligne caractérisé par la commande =\n= peut également être remplacé
+  par l'opérateur =endl=. L'utilisation de =endl= apporte une plus grande
+  lisibilité au code. Par ailleurs, la grande majorité des opérations liées à la
+  présentation (=\t= pour tabulation ...) sont regroupées dans la librairie
+  =iomanip=, la synthaxe propre au langage C restant, en tout état de cause,
+  valable.
