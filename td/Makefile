@@ -1,7 +1,10 @@
 # -*- mode: makefile; -*-
 EMACS=emacs
-BATCH=$(EMACS) --batch --no-init-file \
-		--eval '(require (quote org))' \
+BATCH=$(EMACS) --batch --no-init-file						\
+		--eval "(require 'org)"						\
+		--eval "(org-babel-do-load-languages 'org-babel-load-languages	\
+			'((sh . t)))"						\
+		--eval "(setq org-confirm-babel-evaluate nil)"			\
 		--eval '(org-babel-load-file "../README.org")'
 
 files_org = $(wildcard *.org)
