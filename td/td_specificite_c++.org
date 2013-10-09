@@ -68,10 +68,10 @@ somme des couples de lapins lors des deux moins précédents.
   afin d'utiliser cette fonction (on commentera provisoirement la précédente
   fonction =fibonacci=), compiler et tester l'exécution.
 
-- Observer le résultat de la précompilation /via/ la commande =g++ -E ...= et
-  modifier en conséquence, le fichier d'en-tête afin de minimiser la taille de
-  l'exécutable. On s'aidera pour cela des directives de préprocesseur =#define=
-  et =#ifndef=.
+# - Observer le résultat de la précompilation /via/ la commande =g++ -E ...= et
+#   modifier en conséquence, le fichier d'en-tête afin de minimiser la taille de
+#   l'exécutable. On s'aidera pour cela des directives de préprocesseur =#define=
+#   et =#ifndef=.
 
 - Finalement, décommenter la version "locale" de =fibonacci= /i.e./ celle
   contenue dans le programme principal et définie au début de cette
