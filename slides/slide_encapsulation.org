@@ -79,7 +79,7 @@ toutes fonctions extérieures à la classe
 * Intérêts de L'encapsulation
 
 - Lors de la programmation et surtout de la réutilisation d'un objet dans un
-  autre programme, l'encapsulation empêche la modification non voulu des données
+  autre programme, l'encapsulation empêche la modification non voulue des données
   membres,
 
 - L'objet, vu de l'extérieur, *n'est caractérisé que par ses méthodes* :

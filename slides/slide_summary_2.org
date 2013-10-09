@@ -31,7 +31,7 @@
 
 * Déclaration des membres...
 
-** Fichier =particuler.h=
+** Fichier =particule.h=
 #+BEGIN_SRC c++
   #ifndef __particule_h__
   #define __particule_h__ 1

@@ -1,4 +1,4 @@
-#+TITLE:  Spécificités du C++ (indépendante de la POO)
+#+TITLE:  Spécificités du C++ (indépendantes de la POO)
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}
@@ -60,7 +60,7 @@
   { ... }
 #+END_SRC
 
-- En l'absence de second argument, le compilateur assigne la valeur 1.0 à la
+- En l'absence de second argument, le compilateur assigne la valeur 0.0 à la
   variable =ord=
 
 - Les arguments concernés doivent *obligatoirement* être les *derniers* dans la

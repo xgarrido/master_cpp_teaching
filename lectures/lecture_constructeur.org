@@ -227,7 +227,7 @@ la classe impliquée est de taille conséquente). En outre, si la classe =point=
 dispose de membres dynamiques, =p_geometry_type= par exemple, seules les valeurs
 des pointeurs seront recopiées et non leurs emplacements mémoire. Il conviendra
 alors de surcharger l'opérateur d'affectation === de telle sorte que les membres
-pointeurs soient également affectés (/cf./ Chapitre [[file:lecture_surcharge_operateur.pdf]["Surcharge d'opérateur"]]).
+pointeurs soient également affectés (/cf./ Chapitre [[file:lecture_surcharge_operateur.pdf][Surcharge d'opérateur]]).
 
 * Les objets dynamiques
 
@@ -359,4 +359,4 @@ code suivant fournit un exemple d'implémentation de constructeur de recopie
   par défaut semblable (copie superficielle), la prise en compte d'une copie
   profonde passe par des mécanismes différents : définition d'un constructeur de
   recopie pour l'initialisation, surdéfinition de l'opérateur === pour
-  l'affectation (/cf./ Chapitre [[file:lecture_surcharge.pdf]["Surcharge d'opérateur"]]).
+  l'affectation (/cf./ Chapitre /[[file:lecture_surcharge.pdf][Surcharge d'opérateur]]/).

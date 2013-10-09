@@ -1,4 +1,4 @@
-#+TITLE:  TD 2 : Structure/Classe
+#+TITLE:  TD 2 : Classes
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil
@@ -11,6 +11,17 @@
 Dans l'ensemble des exercices suivants, on privilégiera une déclaration et une
 définition des classes dans des fichiers distincts. En outre, on fournira un
 programme principal de test.
+
+En attendant le cours sur l’encapsulation, déclarer tous les membres avec une
+visibilité publique :
+#+BEGIN_SRC c++
+class Point
+{
+public:
+  ...
+};
+#+END_SRC
+
 
 ** Classe =Point=
 

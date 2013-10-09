@@ -6,7 +6,7 @@
 #+LATEX_CLASS: beamer
 #+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
 
-* Notions de classes en POO
+* Notion de classe
 
 - Langage objet : analyse du problème en termes *de nature et de structure des
   données* \neq programmation impérative (en C ou fortran) qui relève plus de
