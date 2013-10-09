@@ -35,6 +35,11 @@ do =make= within the courses directories.
   (require 'ox-latex)
   (require 'ox-beamer)
 #+END_SRC
+*** Use smart quote when exporting
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-with-smart-quotes t)
+#+END_SRC
+
 *** Place table caption below table
 #+BEGIN_SRC emacs-lisp
   (setq org-latex-table-caption-above nil)
