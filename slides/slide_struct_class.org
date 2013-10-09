@@ -27,8 +27,7 @@
     class particule
     {
       // Déclaration de membres
-      char * m_nom;
-      double m_mass;
+      double m_masse;
       double m_charge;
       ...
     };
@@ -49,7 +48,6 @@
     class particule
     {
       // Déclaration de membres
-      char * m_nom;
       double m_masse;
       double m_charge;
       ...
@@ -68,7 +66,6 @@
     class particule
     {
       // Déclaration de membres
-      char * m_nom;
       double m_masse;
       double m_charge;
 
@@ -87,7 +84,6 @@
     class particule
     {
       // Déclaration de membres
-      char * m_nom;
       double m_masse;
       double m_charge;
 
@@ -155,7 +151,6 @@
     struct particule
     {
       // Déclaration de membres
-      char * m_nom;
       double m_masse;
       double m_charge;
       ...
