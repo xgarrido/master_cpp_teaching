@@ -19,7 +19,7 @@
 * Principales notions
 
 - Le \Cpp introduit la notion de référence afin de faciliter la manipulation des
-  variables notamment au sein des fonction
+  variables notamment au sein des fonctions
 
   #+BEGIN_CENTER
   *\rightarrow transmission des arguments par référence*
@@ -359,7 +359,7 @@ g++ dummy.cc test_dummy.cc -o test_dummy.exe
 :END:
 
 1. *Protection du code source :* un utilisateur \lambda n'a besoin que de la
-   déclaration de la fonction i.e. le fichier =dummy.h= et du fichier objet
+   déclaration de la fonction /i.e./ le fichier =dummy.h= et du fichier objet
    associé /i.e./ =dummy.o=.
 
 2. *Temps de compilation :* seuls les fichiers sources /i.e./ =*.cc= modifiés,
