@@ -15,11 +15,11 @@ programme principal de test.
 En attendant le cours sur l’encapsulation, déclarer tous les membres avec une
 visibilité publique :
 #+BEGIN_SRC c++
-class Point
-{
-public:
-  ...
-};
+  class Point
+  {
+  public:
+    ...
+  };
 #+END_SRC
 
 
