@@ -19,7 +19,7 @@
 * Principales notions
 
 - Le \Cpp introduit la notion de référence afin de faciliter la manipulation des
-  variables notamment au sein des fonction
+  variables notamment au sein des fonctions
 
   #+BEGIN_CENTER
   *\rightarrow transmission des arguments par référence*
@@ -43,6 +43,56 @@
   #+BEGIN_CENTER
   *\rightarrow compilation séparée*
   #+END_CENTER
+
+* Transmission par référence
+:PROPERTIES:
+:BEAMER_ENV: fullframe
+:END:
+
+** =dummy.h=
+:PROPERTIES:
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc]
+:END:
+#+BEGIN_SRC c++ -n
+  #ifndef __dummy_h__
+  #define __dummy_h__ 1
+  void dummy ();
+  void dummy (int i_);
+  void dummy (int & i_, double & a_, char & c_);
+  #endif
+#+END_SRC
+
+#+BEAMER: \vspace{-0.7cm}
+
+** =dummy.cc=
+:PROPERTIES:
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc]
+:END:
+#+BEGIN_SRC c++ -n
+  #include "dummy.h"
+  void dummy () {}
+  void dummy (int i_) {}
+  void dummy (int & i_, double & a_, char & c_) {}
+#+END_SRC
+
+#+BEAMER: \vspace{-0.7cm}
+
+** =test_dummy.cc=
+:PROPERTIES:
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc]
+:END:
+#+BEGIN_SRC c++ -n
+  #include "dummy.h"
+  int main ()
+  {
+    dummy ();
+    int i = 10; double a = 2.0; char c = 'a';
+    dummy (i, a, c);
+  }
+#+END_SRC
 
 * Transmission par référence
 :PROPERTIES:
@@ -309,7 +359,7 @@ g++ dummy.cc test_dummy.cc -o test_dummy.exe
 :END:
 
 1. *Protection du code source :* un utilisateur \lambda n'a besoin que de la
-   déclaration de la fonction i.e. le fichier =dummy.h= et du fichier objet
+   déclaration de la fonction /i.e./ le fichier =dummy.h= et du fichier objet
    associé /i.e./ =dummy.o=.
 
 2. *Temps de compilation :* seuls les fichiers sources /i.e./ =*.cc= modifiés,
