@@ -188,9 +188,11 @@ introduisant des mécanismes de redondance. Le second problème qui touche à ce
 aspect de redondance, provient d'entités comme une méthode ou un membre qui sont
 présents plusieurs fois dans les ancêtres d'une classe. Pour illustrer ce point,
 considérons la situation suivante
+
 #+HEADER: :file (by-backend (html "tree.svg") (t 'nil))
 #+HEADER: :results (by-backend (html "raw") (t "latex"))
 #+BEGIN_SRC latex
+  \definecolor{blue}{RGB}{0,72,112}
   \begin{center}
   \begin{tikzpicture}[
       grow=down,
