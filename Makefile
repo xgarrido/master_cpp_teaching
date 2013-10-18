@@ -14,3 +14,4 @@ all: html
 html:
 	@mkdir -p doc/stylesheets
 	@$(BATCH) --visit "README.org" --funcall org-publish-cpp
+	@rm -f README.el

@@ -173,43 +173,105 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+END_SRC
 *** Building html preamble
 #+TBLNAME: lecture_list :results none
-|----------------------------+------------------------------------------------------|
-| lecture_pointeur           | Pointeurs, références & allocation dynamique         |
-| lecture_fonction           | Rappels sur les fonctions                            |
-| lecture_specificite_c++    | Les spécificités du C++                              |
-| lecture_struct_class       | Structures et classes                                |
-| lecture_encapsulation      | Encapsulation des données                            |
-| lecture_constructeur       | Notions de constructeur et de destructeur            |
-| lecture_amitie             | Fonctions et classes amies                           |
-| lecture_surcharge          | Surcharge d'opérateur                                |
-| lecture_heritage           | Héritage                                             |
-| lecture_template           | Notions de patrons de fonctions et de classes        |
-| lecture_librairie_standard | Introduction à la librairie standard STL             |
-| annexe_compilation         | Compilation et directives de préprocesseur           |
-| annexe_convention_ecriture | Convention d'écriture et organisation des programmes |
-| annexe_cout_cin            | Écriture/lecture sur l'entrée/sortie standard        |
-| annexe_variable_statique   | Les membres données statiques                        |
-| annexe_enum_typedef        | L'énumération enum & Utilisation de typedef          |
-|----------------------------+------------------------------------------------------|
+|---+----------------------------+------------------------------------------------------|
+| + | lecture_pointeur           | Pointeurs, références & allocation dynamique         |
+| + | lecture_fonction           | Rappels sur les fonctions                            |
+| + | lecture_specificite_c++    | Les spécificités du C++                              |
+| + | lecture_struct_class       | Structures et classes                                |
+| - | lecture_encapsulation      | Encapsulation des données                            |
+| - | lecture_constructeur       | Notions de constructeur et de destructeur            |
+| - | lecture_amitie             | Fonctions et classes amies                           |
+| - | lecture_surcharge          | Surcharge d'opérateur                                |
+| - | lecture_heritage           | Héritage                                             |
+| - | lecture_template           | Notions de patrons de fonctions et de classes        |
+| - | lecture_librairie_standard | Introduction à la librairie standard STL             |
+| + | annexe_compilation         | Compilation et directives de préprocesseur           |
+| + | annexe_convention_ecriture | Convention d'écriture et organisation des programmes |
+| + | annexe_cout_cin            | Écriture/lecture sur l'entrée/sortie standard        |
+| - | annexe_variable_statique   | Les membres données statiques                        |
+| - | annexe_enum_typedef        | Utilisation de enum et de typedef                    |
+|---+----------------------------+------------------------------------------------------|
 
 #+NAME: html-preamble
 #+HEADERS: :var list=""
 #+BEGIN_SRC sh :tangle no :results output
-  dummy=true
+  hr=true
+  tag=true
   for f in $list
   do
-      if [[ $f == *lecture_* ]]; then
-          preamble+='<a href=\"'$f'.html\">'
+      if [ $f == '+' ]; then
+          if $tag; then preamble+='</a>'; else preamble+='</aa>';fi
+          preamble+='<a href=\"'
+          tag=true
+      elif [ $f == '-' ]; then
+          if $tag; then preamble+='</a>'; else preamble+='</aa>';fi
+          preamble+='<aa>'
+          tag=false
+      elif [[ $f == *lecture_* || $f == *slide_* ]]; then
+          if $tag; then preamble+=$f'.html\">';fi
       elif [[ $f == *annexe_* ]]; then
-          if $dummy; then preamble+='<hr/>';fi
-          preamble+='<a href=\"'$f'.html\">'
-          dummy=false
+          if $hr; then preamble+='<hr/>';fi
+          if $tag; then preamble+=$f'.html\">';fi
+          hr=false
       else
           preamble+=$f' '
       fi
   done
-  preamble+='</a>'
+  if $tag; then preamble+='</a>';fi
   echo -ne $preamble
+#+END_SRC
+*** Building index page
+:PROPERTIES:
+:TANGLE: doc/index.html
+:END:
+#+BEGIN_SRC html
+  <?xml version="1.0" encoding="utf-8"?>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+      <title>Cours de C++ du Master 1 Physique Fondamentale, Université Paris Sud</title>
+      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <link rel="stylesheet" href="./stylesheets/styles.css">
+      <link rel="stylesheet" href="./stylesheets/org-pygments.css">
+      <style media="screen" type="text/css">
+        #preamble {
+        text-transform:none;
+        text-align:left;
+        font-size:20px;
+        width:200px;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="preamble" class="status">
+        <a href="./lectures/lecture_pointeur.html">Fiches C++<small>Cours écrits</small></a>
+        <a href="./lectures/lecture_pointeur.html">Transparents C++<small>Présentations orales</small></a>
+        <a href="./lectures/lecture_pointeur.html">Travaux Dirigés<small>Exercices de C++</small></a>
+      </div>
+      <div id="content">
+        <h1 class="title">Cours de C++ du Master 1 Physique Fondamentale, Université Paris Sud</h1><hr/>
+        <p>
+          Ce site regroupe les documents écrits relatifs au cours de C++ du Master
+          1 de Physique Fondamentale de l'Université Paris-Sud. Ce cours contient :
+          <li><a href="./lecture/lecture_pointeur.html">un cours écrit sous forme de fiche</a></li>
+          <li><a href="./lecture/lecture_pointeur.html">les transparents de cours</a></li>
+          <li><a href="./lecture/lecture_pointeur.html">un ensemble d'exercices</a></li>
+        </p>
+
+        <p>
+          Les différents supports sont accessibles <i>via</i> les liens
+          hypertextes situés à la gauche de cette page.
+        </p>
+        <p>
+          Historiquement, ces fiches de cours ont été initialement rédigées par
+          Mathieu Loumaigne, moniteur à l'Université Paris-Sud puis, reprises et
+          enrichies par, successivement, <a href="mailto:xavier.garrido@upsud.fr">Xavier
+          Garrido</a> et Yann Leprince.
+        </p>
+      </div>
+    </body>
+  </html>
 #+END_SRC
 *** Define =org-project=
 #+BEGIN_SRC emacs-lisp :noweb yes
@@ -223,12 +285,12 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
     (add-to-list
      'org-publish-project-alist
      `("cpp"
-       :base-directory ,this-dir
+       :base-directory ,(expand-file-name "lectures" this-dir)
        :recursive t
        :exclude "README.org"
        :html-extension "html"
        :base-extension "org"
-       :publishing-directory ,(expand-file-name "doc" this-dir)
+       :publishing-directory ,(expand-file-name "doc/lectures" this-dir)
        :publishing-function org-html-publish-to-html
        :section-numbers nil
        :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
@@ -292,12 +354,12 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
       margin:0 auto;
       padding:50px;
       font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color:#777;
+      color:#777777;
       font-weight:300;
   }
 
   h1, h2, h3, h4, h5, h6 {
-      color:#222;
+      color:#222222;
       margin:0 0 20px;
   }
 
@@ -323,24 +385,24 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   a {
-      color:#39c;
+      color:#3399cc;
       font-weight:400;
       text-decoration:none;
   }
 
   a:hover {
-      color:#069;
+      color:#006699;
   }
 
   a small {
       font-size:11px;
-      color:#777;
+      color:#777777;
       margin-top:-0.6em;
       display:block;
   }
 
   a:hover small {
-      color:#777;
+      color:#777777;
   }
 
   blockquote, .remark {
@@ -352,7 +414,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 
   code, pre, .prompt {
       font-family:Inconsolata, Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-      color:#777;
+      color:#777777;
       font-size:12px;
   }
 
@@ -367,7 +429,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   .prompt {
       margin-bottom:15px;
       padding:8px 15px;
-      background: #777;
+      background: #777777;
       color:#e5e5e5;
       border-radius:5px;
       border:1px solid #e5e5e5;
@@ -400,12 +462,12 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   dt {
-      color:#444;
+      color:#444444;
       font-weight:700;
   }
 
   th {
-      color:#444;
+      color:#444444;
   }
 
   img {
@@ -459,7 +521,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   header ul a {
       line-height:1;
       font-size:11px;
-      color:#999;
+      color:#999999;
       display:block;
       text-align:center;
       padding-top:6px;
@@ -467,7 +529,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   header ul a:hover {
-      color:#999;
+      color:#999999;
       background: -moz-linear-gradient(top, #fff 0%, #ddd 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#ddd));
       background: -webkit-linear-gradient(top, #fff 0%,#ddd 100%);
@@ -483,7 +545,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   strong {
-      color:#222;
+      color:#222222;
       font-weight:700;
   }
 
@@ -500,7 +562,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   header ul a strong {
       font-size:14px;
       display:block;
-      color:#222;
+      color:#222222;
   }
 
   #content {
@@ -536,7 +598,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 
       padding:0;
 
-      background: #eee;
+      background: #eeeeee;
       background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
       background: -webkit-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
@@ -568,7 +630,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   header ul a {
       line-height:1;
       font-size:11px;
-      color:#999;
+      color:#999999;
       display:block;
       text-align:center;
       padding-top:6px;
@@ -576,7 +638,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   }
 
   header ul a:hover {
-      color:#999;
+      color:#999999;
       background: -moz-linear-gradient(top, #fff 0%, #ddd 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#ddd));
       background: -webkit-linear-gradient(top, #fff 0%,#ddd 100%);
@@ -599,11 +661,24 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
   #preamble a {
       display:block;
       padding:0.2em 1em;
-      color:#39c;
+      color:#3399cc;
   }
 
   #preamble a:hover {
       background-color:#39c;
+      text-decoration:none;
+      color:#f9f9f9;
+      -webkit-transition:color .2s linear;
+  }
+
+  #preamble aa {
+      display:block;
+      padding:0.2em 1em;
+      color:#999999;
+  }
+
+  #preamble aa:hover {
+      background-color:#999999;
       text-decoration:none;
       color:#f9f9f9;
       -webkit-transition:color .2s linear;
