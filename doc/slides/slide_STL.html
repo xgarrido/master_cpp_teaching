@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Introduction à la librairie standard</title>
+<!-- 2013-10-19 sam. 16:36 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><aa>Encapsulation des données </aa><aa>Constructeur & Destructeur de classe </aa><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Introduction à la librairie standard</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">La librairie standard STL</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+La librairie standard STL (<i>Standard Template Library</i>) du C++ fournit <b>un
+ensemble de containers</b> en exploitant très largement les mécanismes étendus du
+C++ par rapport au C
+</p>
+
+<ul class="org-ul">
+<li>l&rsquo;approche objet et les capacités d&rsquo;abstraction en particulier sur les
+opérateurs,
+</li>
+
+<li>la surdéfinition des opérateurs,
+</li>
+
+<li>les patrons ou templates.
+</li>
+</ul>
+
+<p>
+La STL fournit par ailleurs des algorithmes (optimisés) permettant la
+manipulation aisée de ces nouveaux containers (initialisation, recherche de
+valeurs &#x2026;)
+</p>
+
+<div class="center">
+<p>
+<a href="http://www.sgi.com/tech/stl/table_of_contents.html">http://www.sgi.com/tech/stl/table_of_contents.html</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-2">
+<p>
+En C, une chaîne de caractère se présente sous la forme d&rsquo;un tableau
+de caractères
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">char</span> * <span class="org-variable-name">name</span> = <span class="org-keyword">new</span> <span class="org-type">char</span>[256];
+</pre>
+</div>
+
+<p>
+La manipulation de ces pointeurs de caractères peut se faire par le biais de
+fonctions définies dans <code>string.h</code> (<code>cstring</code> en C++)
+</p>
+
+<p>
+Le C n&rsquo;utilisant pas la surcharge d&rsquo;opérateurs tels que <code>+=</code> ou <code>+</code>, la
+manipulation est globalement complexe (sans parler de la désallocation de
+mémoire).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Utilisation de la classe <code>string</code> en C++
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Assignation/copie de strings</span>
+  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string1</span> = <span class="org-string">"abcd"</span>;
+  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string2</span> = my_string1;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Initialisation de strings</span>
+  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string3</span> (my_string2);
+  ...
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Concat&#233;nation</span>
+my_string2 += <span class="org-string">"abcd"</span>;
+<span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string4</span> = my_string1 + <span class="org-string">"toto"</span>;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Comparaison</span>
+<span class="org-keyword">const</span> <span class="org-type">bool</span> <span class="org-variable-name">are_equal</span> = (my_string1 == my_string2);
+<span class="org-keyword">if</span> (are_equal)
+  {
+    <span class="org-constant">std</span>::cout &lt;&lt; my_string1 &lt;&lt; <span class="org-string">" est identique &#224; "</span> &lt;&lt; my_string2 &lt;&lt; <span class="org-constant">std</span>::endl;
+  }
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Longueur d'une string</span>
+<span class="org-type">size_t</span> <span class="org-variable-name">size</span> = my_string1.size ();
+<span class="org-comment-delimiter">// </span><span class="org-comment">Recherche dans une string</span>
+<span class="org-type">size_t</span> <span class="org-variable-name">pos</span> = my_string1.find (<span class="org-string">"bc"</span>);
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>La classe <code>vector</code> est proche par son utilisation du tableau défini en C,
+</li>
+
+<li>L&rsquo;avantage majeur de la classe <code>vector</code> tient en trois points :
+
+<ol class="org-ol">
+<li>l&rsquo;utilisation de la notion de patron lui permet de manipuler n&rsquo;importe quel
+type de données,
+</li>
+
+<li>sa capacité à réallouer automatiquement l&rsquo;espace mémoire nécessaire via la
+méthode <code>push_back</code>,
+</li>
+
+<li>la désallocation de mémoire est automatique grâce à l&rsquo;implémentation d&rsquo;un
+destructeur.
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;vector&gt;</span>
+<span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration d'un vecteur d'entiers de taille non connue</span>
+  <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">my_vector1</span>;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Ajout de trois elements</span>
+  my_vector1.push_back (4);
+  my_vector1.push_back (2);
+  my_vector1.push_back (5);
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">La m&#233;thode size pr&#233;cise le nombre d'entr&#233;e courante</span>
+  <span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; my_vector1.size (); ++i)
+    <span class="org-constant">std</span>::cout &lt;&lt; i &lt;&lt; <span class="org-string">" "</span> &lt;&lt; my_vector1[i] &lt;&lt; <span class="org-constant">std</span>::endl;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un vecteur d'entier contenant 70,70,70,70,70</span>
+<span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">my_vector2</span> (5, 70);
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">R&#233;assignation des valeurs de ce vecteur</span>
+my_vector2[0] = 5;
+my_vector2[1] = 3;
+my_vector2[2] = 7;
+my_vector2[3] = 4;
+my_vector2[4] = 8;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Nettoyage de l'espace m&#233;moire</span>
+my_vector2.clear ();
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un vecteur de particule</span>
+<span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;particule&gt; <span class="org-variable-name">my_particles</span>;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un ensemble de particule</span>
+<span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; 10; ++i)
+  {
+    <span class="org-type">particule</span> <span class="org-variable-name">my_particle</span> (0.511*i, -1.6e-19*i);
+    my_particles.push_back (my_particle);
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">Affiche la derni&#232;re particule</span>
+    my_particles.back ().affiche ();
+  }
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

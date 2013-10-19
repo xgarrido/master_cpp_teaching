@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Jeu du blackjack</title>
+<!-- 2013-10-19 sam. 16:36 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="td_pointeur_fonction.html">Compilation, pointeur & références </a><a href="td_specificite_c++.html">Spécificités du C++ </a><a href="td_classes.html">Classes en C++ </a><aa>Fraction de nombres complexes </aa><aa>Constructeur & destructeurs </aa><aa>Surcharge d'opérateur </aa><aa>Polymorphisme & classe abstraite </aa><a href="td_blackjack.html">Jeu du blackjack </a>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Jeu du blackjack</h1><hr/>
+<blockquote>
+<p>
+Le but de TD est de programmer une partie de blackjack pour ensuite simuler un
+grand nombre de parties et (peut-être) trouver le moyen de perdre le plus
+lentement possible son argent au casino.
+</p>
+</blockquote>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Règles du jeu</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Chaque joueur joue contre le croupier, (qui représente la banque, ou le casino)
+et non contre les autres joueurs.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">But du jeu</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Après avoir reçu deux cartes, le joueur tire des cartes pour s&rsquo;approcher de la
+valeur 21 sans la dépasser.  Le but du joueur est d&rsquo;obtenir un total de points
+supérieur à celui du donneur sans dépasser 21.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Valeurs des cartes au blackjack</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Chaque carte numérotée de 2 à 10, a sa valeur nominale (égale au numéro sur la
+carte). Les valets, les dames et les rois (les figures), ont une valeur de 10
+points : ces cartes sont appelées des bûches par les compteurs de cartes. L&rsquo;As
+vaut 1 point ou 11 points, selon ce qui arrange au mieux le joueur : une sorte
+de &ldquo;joker&rdquo;.  La meilleure combinaison possible est le blackjack, à savoir la
+valeur 21 obtenue avec deux cartes (AS + FIGURE). Dans ce cas précis, le
+paiement se fait automatiquement à 3:2, le joueur emporte 1,5 fois sa mise.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Le jeu de blackjack</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Les joueurs placent leurs mises avant que le croupier ne distribue les
+cartes. Le donneur distribue deux cartes visibles à chaque joueur et deux cartes
+à lui-même, une visible, l&rsquo;autre cachée (retournée).
+</p>
+
+<p>
+<b>Faire un blackjack :</b> Il y&rsquo;a blackjack lorsque un joueur reçoit 2 cartes
+totalisant une valeur de 21 lors de la première donne (un As et un 10 ou une
+figure). C&rsquo;est la meilleure main que l&rsquo;on puisse avoir, le joueur gagne une fois
+et demi sa mise initiale.  Si un joueur a un blackjack, le croupier paiera le
+joueur immédiatement avant de continuer avec les autres joueurs de la table.
+</p>
+
+<p>
+<b>Le tour des joueurs :</b> Après avoir reçu vos deux premières cartes et que tous
+les blackjacks de la table ont été payés, Un joueur peut rester ou tirer une
+nouvelle carte. Après avoir reçu une troisième carte, le joueur peut s&rsquo;arrêter
+ou en demander une nouvelle et ce, autant de fois qu&rsquo;il le souhaite à condition
+qu&rsquo;il ne dépasse pas un total de 21 (auquel cas, il perd).
+</p>
+
+<p>
+<b>Le tour du croupier :</b> Le croupier est le dernier joueur à agir. Une fois que
+tous les joueurs ont joué, le croupier montre sa carte cachée, révélant ainsi la
+valeur en cours de sa main et il continue de jouer sa main comme tout joueur. Le
+croupier doit continuer de tirer jusqu&rsquo;à qu&rsquo;il ait une valeur d&rsquo;au moins 17, il
+restera alors.
+</p>
+
+<p>
+Si le croupier a une valeur totale de 16 ou moins, il doit tirer des cartes
+additionnelles pour tenter d&rsquo;avoir une valeur entre 17 et 21. Si le croupier
+dépasse 21, tous les joueurs qui sont en lice gagnent. Sinon, les joueurs qui
+ont un total supérieur à celui du donneur gagnent et les joueurs qui ont un
+total inférieur perdent. En cas d&rsquo;égalité, la mise du joueur est remboursée
+(l&rsquo;argent ne change pas de main). Une fois que toutes les mains ont été payées
+ou que les mises ont été encaissées, une nouvelle donne peut avoir lieu.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Programmation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Créer une classe <code>Banquier</code> qui possède comme membres:
+</p>
+
+<ul class="org-ul">
+<li>un entier <code>PremiereCarte</code>,
+</li>
+<li>un entier <code>Score</code>,
+</li>
+<li>un pointeur de double qui contiendra un tableau de l&rsquo;évolution des gains ou
+des pertes de la banque,
+</li>
+</ul>
+
+<p>
+ainsi que :
+</p>
+
+<ul class="org-ul">
+<li>un constructeur,
+</li>
+<li>un destructeur,
+</li>
+<li>les méthodes <code>Get</code> et <code>Set</code> nécessaire,
+</li>
+<li>une méthode pour générer une nouvelle partie,
+</li>
+<li>une méthode débutant la partie et en inspectant les blackjacks,
+</li>
+<li>une méthode demandant à chaque joueur de tirer des cartes ou non,
+</li>
+<li>une méthode simulant la fin de partie où la banque joue puis répartit les
+gains.
+</li>
+</ul>
+
+<p>
+La classe <code>Banquier</code> doit être amie (<code>friend</code>) de la classe joueur.
+</p>
+
+<p>
+Créer une classe <code>Joueur</code> qui possède :
+</p>
+
+<ul class="org-ul">
+<li>un entier <code>Score</code>,
+</li>
+<li>un pointeur de double qui contiendra un tableau de l&rsquo;évolution des gains ou
+des pertes du joueur,
+</li>
+<li>un entier <code>Mise</code>,
+</li>
+<li>un booléen <code>EnJeu</code>,
+</li>
+<li>une énumeration qui répertoriera plusieurs types de jeu possibles <i>i.e.</i> <code>enum TypeDeJeu{PRUDENT, NORMAL, RISQUE}</code>,
+</li>
+</ul>
+
+<p>
+et devra disposer des méthodes suivantes :
+</p>
+
+<ul class="org-ul">
+<li>un constructeur,
+</li>
+<li>un destructeur,
+</li>
+<li>les méthodes <code>Get</code> et <code>Set</code> nécessaires,
+</li>
+<li>une méthode <code>Mise</code> qui selon le <code>TypeDeJeu</code> du joueur mise une somme au
+départ,
+</li>
+<li>une méthode <code>Jeu</code> qui selon le <code>TypeDeJeu</code> du joueur et ce que la banque à
+tirer comme première carte décide de tirer ou non des cartes supplémentaires.
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
