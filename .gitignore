@@ -3,12 +3,6 @@
 
 doc/
 
-*/*.pdf
-*/*.svg
-*/*.tex
-*/*.auxlock
-*/*.fdb_latexmk
-*/*.fls
-*/*~
-*/latex.d/
-*/tikz.d/
+/lectures/
+/slides/
+/td/
