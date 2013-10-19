@@ -1,4 +1,4 @@
-#+TITLE:  TD 0 : Compilation, pointeur & références
+#+TITLE:  Compilation, pointeur & références
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}

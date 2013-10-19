@@ -1,4 +1,4 @@
-#+TITLE:  TD 5 : Surcharge d'opérateur
+#+TITLE:  Surcharge d'opérateur
 #+AUTHOR: Xavier Garrido
 #+DATE:   23/09/2013
 #+OPTIONS: toc:nil

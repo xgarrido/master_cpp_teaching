@@ -1,4 +1,4 @@
-#+TITLE:  Les patrons de fonctions et de classes
+#+TITLE:  Patrons de fonctions et de classes
 #+AUTHOR: Xavier Garrido
 #+DATE:   01/10/2013
 #+OPTIONS: toc:nil ^:{}

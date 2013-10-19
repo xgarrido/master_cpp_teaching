@@ -1,4 +1,4 @@
-#+TITLE:  TD 1 : Spécificités du C++
+#+TITLE:  Spécificités du C++
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil
@@ -50,9 +50,6 @@ somme des couples de lapins lors des deux moins précédents.
   commenter le temps d'exécution dans ce mode par rapport aux précédentes
   déclarations.
 
-# - Compiler le programme en optimisant son exécution afin de tirer profit des
-#   quatre CPU de l'ordinateur.
-
 - Concevoir et implémenter une fonction =rfibonacci= proposant une solution
   récursive au calcul de la suite de Fibonacci. À partir de cette fonction,
   déduire une macro équivalente, l'implémenter et expliquer le résultat de la
@@ -67,11 +64,6 @@ somme des couples de lapins lors des deux moins précédents.
   =fibonacci.cc=, définissant cette fonction. Modifier le programme principal
   afin d'utiliser cette fonction (on commentera provisoirement la précédente
   fonction =fibonacci=), compiler et tester l'exécution.
-
-# - Observer le résultat de la précompilation /via/ la commande =g++ -E ...= et
-#   modifier en conséquence, le fichier d'en-tête afin de minimiser la taille de
-#   l'exécutable. On s'aidera pour cela des directives de préprocesseur =#define=
-#   et =#ifndef=.
 
 - Finalement, décommenter la version "locale" de =fibonacci= /i.e./ celle
   contenue dans le programme principal et définie au début de cette

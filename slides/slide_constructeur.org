@@ -1,4 +1,4 @@
-#+TITLE:  Constructeur & destructeur de classe
+#+TITLE:  Constructeur & Destructeur de classe
 #+AUTHOR: Xavier Garrido
 #+DATE:   29/09/2013
 #+OPTIONS: toc:nil ^:{}

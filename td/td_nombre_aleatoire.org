@@ -1,4 +1,4 @@
-#+TITLE:  TD 4 : Classe générée aléatoirement
+#+TITLE:  Classe "aléatoire"
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil

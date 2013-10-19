@@ -1,4 +1,4 @@
-#+TITLE:  Tâche de fond 0 : Blackjack
+#+TITLE:  Jeu du blackjack
 #+AUTHOR: Xavier Garrido
 #+DATE:   23/09/2013
 #+OPTIONS: toc:nil
