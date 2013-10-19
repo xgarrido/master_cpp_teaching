@@ -1,9 +1,0 @@
-*.pdf
-*.tex
-*.auxlock
-*.vrb
-*.fdb_latexmk
-*.fls
-*~
-latex.d/
-tikz.d/

@@ -1,2 +1,11 @@
 /README.el
 doc/
+
+*/*.pdf
+*/*.tex
+*/*.auxlock
+*/*.fdb_latexmk
+*/*.fls
+*/*~
+*/latex.d/
+*/tikz.d/
