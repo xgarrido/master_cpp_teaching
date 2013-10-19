@@ -321,6 +321,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
        :publishing-directory ,(expand-file-name "doc/lectures" this-dir)
        :publishing-function org-html-publish-to-html
        :section-numbers nil
+       :time-stamp-file nil
        :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(lecture_list)>>
@@ -338,6 +339,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
        :publishing-directory ,(expand-file-name "doc/td" this-dir)
        :publishing-function org-html-publish-to-html
        :section-numbers nil
+       :time-stamp-file nil
        :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(td_list)>>
@@ -355,6 +357,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
        :publishing-directory ,(expand-file-name "doc/slides" this-dir)
        :publishing-function org-html-publish-to-html
        :section-numbers nil
+       :time-stamp-file nil
        :html-head "<link rel=\"stylesheet\" href=\"../stylesheets/styles.css\">
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(slide_list)>>
