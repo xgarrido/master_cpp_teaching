@@ -249,7 +249,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 #+END_SRC
 *** Building index page
 :PROPERTIES:
-:TANGLE: doc/index.html
+:TANGLE: index.html
 :END:
 #+BEGIN_SRC html
   <?xml version="1.0" encoding="utf-8"?>
@@ -259,8 +259,8 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
     <head>
       <title>Cours de C++ du Master 1 Physique Fondamentale, Université Paris Sud</title>
       <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-      <link rel="stylesheet" href="./stylesheets/styles.css">
-      <link rel="stylesheet" href="./stylesheets/org-pygments.css">
+      <link rel="stylesheet" href="./doc/stylesheets/styles.css">
+      <link rel="stylesheet" href="./doc/stylesheets/org-pygments.css">
       <style media="screen" type="text/css">
         #preamble {
         text-transform:none;
@@ -272,18 +272,18 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
     </head>
     <body>
       <div id="preamble" class="status">
-        <a href="./lectures/lecture_pointeur.html">Fiches C++<small>Cours écrits</small></a>
-        <a href="./slides/slide_compilation.html">Transparents C++<small>Présentations orales</small></a>
-        <a href="./td/td_pointeur_fonction.html">Travaux Dirigés<small>Exercices de C++</small></a>
+        <a href="./doc/lectures/lecture_pointeur.html">Fiches C++<small>Cours écrits</small></a>
+        <a href="./doc/slides/slide_compilation.html">Transparents C++<small>Présentations orales</small></a>
+        <a href="./doc/td/td_pointeur_fonction.html">Travaux Dirigés<small>Exercices de C++</small></a>
       </div>
       <div id="content">
         <h1 class="title">Cours de C++ du Master 1 Physique Fondamentale, Université Paris Sud</h1><hr/>
         <p>
           Ce site regroupe les documents écrits relatifs au cours de C++ du Master
           1 de Physique Fondamentale de l'Université Paris-Sud. Ce cours contient :
-          <li><a href="./lectures/lecture_pointeur.html">un cours écrit sous forme de fiche</a></li>
-          <li><a href="./slides/slide_compilation.html">les transparents de cours</a></li>
-          <li><a href="./td/td_pointeur_fonction.html">un ensemble d'exercices</a></li>
+          <li><a href="./doc/lectures/lecture_pointeur.html">un cours écrit sous forme de fiche</a></li>
+          <li><a href="./doc/slides/slide_compilation.html">les transparents de cours</a></li>
+          <li><a href="./doc/td/td_pointeur_fonction.html">un ensemble d'exercices</a></li>
         </p>
 
         <p>
