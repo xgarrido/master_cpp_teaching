@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet</title>
+<!-- 2013-10-19 sam. 07:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Utlisation des librairies standards</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+La grande majorité des librairies utilisées dans le langage~C est présente et
+utilisable en C++. Toutefois, leur définition a été optimisée pour les besoins
+du C++. Dans la pratique, l&rsquo;inclusion des librairies <code>math.h</code>, <code>time.h</code>&#x2026; sera
+remplacée par les librairies <code>cmath</code>, <code>ctime</code>. En règle générale, tous fichiers
+d&rsquo;en-tête issus de la librarie standard abandonnent l&rsquo;extension <code>.h</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Déclaration de variables</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+En C, il fallait d&rsquo;abord déclarer les variables, puis ensuite les
+instructions. En C++, il est possible de déclarer les variables quelque soit
+l&rsquo;endroit. À titre d&rsquo;exemple
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">for</span> (<span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span> = 0; i &lt; 10; i++) {...}
+</pre>
+</div>
+<p>
+est maintenant possible en C++.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Argument par défaut</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+C++ permet d&rsquo;inclure des valeurs par défauts dans les <b>prototypes</b> de
+fonctions. Le prototype s&rsquo;écrit alors :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">type</span> <span class="org-function-name">nom_fonction</span> (..., <span class="org-type">type</span> <span class="org-variable-name">argument</span> = valeur_par_d&#233;faut);
+</pre>
+</div>
+<p>
+Soit
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">initialisation</span> (<span class="org-type">double</span> <span class="org-variable-name">abs</span>, <span class="org-type">double</span> <span class="org-variable-name">ord</span> = 5.6)
+</pre>
+</div>
+<p>
+que l&rsquo;on appelera de la façon suivante
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">initialisation (4); <span class="org-comment-delimiter">// </span><span class="org-comment">valeur 5.6 par d&#233;faut pour ord</span>
+</pre>
+</div>
+
+<p>
+<b>En l&rsquo;absence de second argument</b>, le compilateur assigne la valeur 5.6 à la
+variable <code>ord</code>.
+</p>
+
+<p>
+Lorsqu&rsquo;une déclaration prévoit des valeurs par défauts, les arguments concernés
+doivent <b>obligatoirement</b> être les <b>derniers</b> dans la liste.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Surdéfinition de fonction</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+En C++ deux fonctions peuvent porter le même nom<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> à condition qu&rsquo;elles
+n&rsquo;aient pas les mêmes arguments. Le compilateur se charge d&rsquo;appeler la &ldquo;bonne&rdquo;
+fonction suivant le contexte c&rsquo;est-à-dire au vu de la liste d&rsquo;arguments donnée
+lors de l&rsquo;appel. Ainsi
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">fonction_lambda</span> (<span class="org-type">int</span> , <span class="org-type">double</span> , <span class="org-type">char</span>);
+</pre>
+</div>
+<p>
+et
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">fonction_lambda</span> (<span class="org-type">double</span>);
+</pre>
+</div>
+<p>
+seront deux fonctions différentes grâce aux différents types d&rsquo;arguments
+déclarés.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Fonction <code>inline</code></h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Généralement en C, l&rsquo;emploi d&rsquo;une fonction &ldquo;courte&rdquo; pour laquelle le temps
+d&rsquo;exécution est primordial, amène à définir une macro (malgré les inconvénients
+que cela implique). En C++, il existe dans ce cas une solution plus
+satisfaisante : utiliser une fonction &ldquo;en ligne&rdquo;. Sans rentrer dans les
+détails<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>, la fonction en ligne permet une économie d&rsquo;exécution mais fait
+perdre de l&rsquo;espace en mémoire par rapport à une fonction conventionnelle.
+</p>
+
+<p>
+La syntaxe dans l&rsquo;<b>en-tête</b> de la fonction est la suivante
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">inline</span> &lt;<span class="org-type">D&#233;claration</span> standard <span class="org-type">de</span> <span class="org-variable-name">fonction</span>&gt;
+</pre>
+</div>
+<p>
+Exemple
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">inline</span> <span class="org-type">double</span> <span class="org-function-name">carre</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x</span>) { <span class="org-keyword">return</span> x*x; }
+</pre>
+</div>
+
+<div class="remark">
+<p>
+Lorsqu&rsquo;une méthode est déclarée dans le corps de la classe elle est, par défaut,
+&ldquo;en ligne&rdquo;
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Les espaces de noms</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Les espaces de noms sont des zones de déclaration qui permettent de délimiter la
+recherche des noms des identificateurs par le compilateur. Leur but est
+essentiellement de regrouper les identificateurs et d&rsquo;éviter les conflits de
+noms entre plusieurs parties d&rsquo;un même projet. À titre d&rsquo;exemple, lorsque l&rsquo;on
+doit utiliser plusieurs bibliothèque dans programme, on peut être confronté au
+problème dit de &ldquo;pollution de l&rsquo;espace des noms&rdquo;, à savoir qu&rsquo;un même
+identificateur peut très bien avoir été utilisé par plusieurs bibliothèques. Ce
+type de conflit provient du fait que le C++ ne fournit qu&rsquo;un seul espace de
+noms de portée globale. Grâce aux espaces de noms non globaux, ce type de
+problème peut être évité. Il s&rsquo;agit donc de donner un nom à un &ldquo;espace&rdquo; de
+déclarations, en procédant ainsi
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">namespace</span> <span class="org-constant">nom_bibli</span> { <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration usuelles de fonctions, variables ...  }</span>
+</pre>
+</div>
+<p>
+Pour se référer aux identificateurs définis dans cet espace de noms, on utilise
+l&rsquo;instruction <code>using</code>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">using</span> <span class="org-keyword">namespace</span> <span class="org-constant">nom_bibli</span>;
+</pre>
+</div>
+<p>
+que l&rsquo;on place à un niveau global, <i>i.e.</i> entre l&rsquo;inclusion des fichiers
+d&rsquo;entête et le corps du programme.
+</p>
+
+<p>
+Les identificateurs de la librairie standard (les opérateurs d&rsquo;entrée/sortie de
+flux <code>cout, cin</code> notamment) sont ainsi définis dans l&rsquo;espace de noms
+<code>std</code>. Ainsi, chaque programme principal débutera généralement par
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span> <span class="org-comment-delimiter">// </span><span class="org-comment">librairie standard de gestion</span>
+                    <span class="org-comment-delimiter">// </span><span class="org-comment">des flux d'entr&#233;es/sortie ...</span>
+<span class="org-keyword">using</span> <span class="org-keyword">namespace</span> <span class="org-constant">std</span>;
+
+<span class="org-type">int</span> <span class="org-function-name">main</span> () { <span class="org-comment-delimiter">// </span><span class="org-comment">corps du programme principal }</span>
+</pre>
+</div>
+
+<div class="remark">
+<p>
+Dans le cas où plusieurs espaces de noms sont utilisés, certains comportant des
+identificateurs identiques, on pourra lever l&rsquo;ambiguïté en utilisant l&rsquo;opérateur
+de portée <i><code>::</code></i> en remplaçant, par exemple, <i><code>cout</code></i> par <i><code>std::cout</code></i>
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Le type <code>bool</code></h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Ce type est tout naturellement formé de deux valeurs notées <code>true</code> et
+<code>false</code>. Les résultats des comparaisons ou des combinaisons logiques doivent
+être de ce type. Par ailleurs, il existe des conversions implicites:
+</p>
+
+<ul class="org-ul">
+<li>de <code>bool</code> en numérique <i>i.e.</i> <code>true</code> devenant 1 et <code>false</code> devenant 0,
+</li>
+
+<li>de numérique (y compris flottant) vers <code>bool</code> à savoir que toute valeur non
+nulle devient <code>true</code> et zéro est équivalent à <code>false</code>.
+</li>
+</ul>
+
+<p>
+Dans la pratique, le type <code>bool</code> appporte une plus grande clarté et une
+meilleure lisibilité aux programmes, ce qui, en règle générale, fait défaut au
+C.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Les nouveaux opérateurs de cast</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+En C++ comme en C, il est possible de réaliser des conversions explicites à
+l&rsquo;aide d&rsquo;un opérateur de &ldquo;cast&rdquo;. Les conversions acceptées comportent
+naturellement les conversions implicites (voir, entre autres, le paragraphe
+précédent), auxquelles s&rsquo;ajoutent des conversions &ldquo;dégradantes&rdquo; ou dépendantes
+de l&rsquo;implémentation.
+</p>
+
+<p>
+La norme ANSI de C++ propose de nouveaux opérateurs de cast, plus évocateurs,
+de la nature de la conversion mise en œuvre. Ils sont formés comme les
+opérateurs classiques à l&rsquo;aide du type souhaité, complété d&rsquo;un mot clé précisant
+le type de conversion:
+</p>
+
+<ul class="org-ul">
+<li><code>const_cast</code> permet d&rsquo;ajouter ou de supprimer le modificateur <code>const</code>, les
+types de départ et d&rsquo;arrivée devant être identiques,
+</li>
+
+<li><code>reinterpret_cast</code> permet les conversions dont le résultat dépend de
+l&rsquo;implémentation; typiquement, des conversions d&rsquo;entier vers pointeur et de
+pointeur vers entier,
+</li>
+
+<li><code>static_cast</code> permet les conversions indépendantes de l&rsquo;implémentation
+(d&rsquo;entier vers entier mais également de pointeur vers pointeur malgré les
+différences qui peuvent apparaître en raison des contraintes d&rsquo;alignement
+propres à chaque implémentation).
+</li>
+</ul>
+
+<p>
+Le programme suivant propose quelques utilisations de ces nouveaux opérateurs
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-variable-name">n</span> = 12;
+<span class="org-keyword">const</span> <span class="org-type">int</span> * <span class="org-variable-name">ad1</span> = &amp;n;
+<span class="org-type">int</span> * <span class="org-variable-name">ad2</span>;
+ad2 = (<span class="org-type">int</span> *) ad1;           <span class="org-comment-delimiter">// </span><span class="org-comment">ancienne forme en C</span>
+ad2 = <span class="org-keyword">const_cast</span>&lt;<span class="org-type">int</span> *&gt; ad1; <span class="org-comment-delimiter">// </span><span class="org-comment">nouvelle forme conseill&#233;e</span>
+
+<span class="org-type">long</span> <span class="org-variable-name">l</span> = 4;
+<span class="org-type">int</span> <span class="org-variable-name">p</span>;
+p = (<span class="org-type">int</span>) l;                 <span class="org-comment-delimiter">// </span><span class="org-comment">ancienne forme en C</span>
+p = <span class="org-keyword">static_cast</span>&lt;<span class="org-type">int</span>&gt; (l);    <span class="org-comment-delimiter">// </span><span class="org-comment">nouvelle forme conseill&#233;e</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+de façon générale, on parle de surdéfinition ou surcharge lorsqu&rsquo;un même
+symbole peut avoir deux significations différentes en fonction du contexte.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+en réalité, la fonction en ligne est très proche d&rsquo;une macro, elle ne
+fait que &ldquo;recopier&rdquo; le code de la fonction à l&rsquo;endroit de l&rsquo;appel de la fonction.
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

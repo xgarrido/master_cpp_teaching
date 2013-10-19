@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Compilation &amp; Directives de Préprocesseur</title>
+<!-- 2013-10-19 sam. 07:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><aa>Encapsulation des données </aa><aa>Constructeur & Destructeur de classe </aa><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Compilation &amp; Directives de Préprocesseur</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-1">
+<ol class="org-ol">
+<li><b>Précompilation :</b> consiste à traiter, à <i>parser</i> les fichiers sources
+avant compilation (résolution des directives de préprocesseur
+<i>i.e.</i> remplacement de macros, suppression de texte, inclusion de
+fichiers&#x2026;)
+
+<div class="prompt">
+<p>
+g++ -E fichier_source.cc
+</p>
+
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li><b>Précompilation</b>
+</li>
+<li><b>Compilation séparée :</b> traduction du code en langage machine.
+<div class="prompt">
+<p>
+g++ -c fichier_source.cc
+</p>
+
+</div>
+<p>
+Cette opération conduit à la création d&rsquo;un <b>fichier objet</b> d&rsquo;extension <code>.o</code>
+(ici <code>fichier_source.o</code>).
+</p>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li><b>Précompilation</b>
+</li>
+<li><b>Compilation séparée</b>
+</li>
+<li><b>Édition de liens :</b> consiste à regrouper la totalité des données de même que
+les fichiers objets et les bibliothèques (fonctions de la bibliothèque
+standard et des autres bibliothèques externes) ainsi qu&rsquo;à résoudre les
+références inter-fichiers.
+<div class="prompt">
+<p>
+g++ fichier_source1.o fichier_source2.o&#x2026; -o&nbsp;fichier_executable
+</p>
+
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Les trois précédentes étapes peuvent être réalisées en une seule opération via
+la commande
+
+<div class="cbox">
+<div class="prompt">
+<p>
+g++ fichier_source1.cc fichier_source2.cc&#x2026; -o&nbsp;fichier_executable
+</p>
+
+</div>
+
+</div>
+</li>
+
+<li>Le binaire ainsi généré <code>fichier_executable</code> peut alors être exécuté depuis le
+répertoire local
+
+<div class="cbox">
+<div class="prompt">
+<p>
+./fichier_executable
+</p>
+
+</div>
+
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Options de compilation</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li><b>l&rsquo;option <code>-Ichemin</code></b> indique au compilateur où sont localisés les fichiers
+d&rsquo;en-têtes nécessaires à la compilation séparée du programme. Par défaut, le
+compilateur recherche ces fichiers localement et dans le répertoire
+<code>/usr/include</code>,
+</li>
+
+<li><b>l&rsquo;option <code>-W</code></b> permet l&rsquo;activation des messages de mise en garde. Différents
+niveaux sont accessibles, le plus complet étant <code>-Wall -Wextra</code>,
+</li>
+
+<li><b>l&rsquo;option <code>-Didentificateur</code></b> permet la définition d&rsquo;identificateur à fournir
+lors du processus de précompilation. L&rsquo;activation des directives de
+préprocesseur peut se faire par ce biais.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Démystifier la command <code>ccc</code></h2>
+<div class="outline-text-2" id="text-6">
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Le préprocesseur recherche des directives de compilation repérées en début de
+ligne par le symbole <code>#</code> et se terminant avec la fin de la ligne.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#directive</span> [param&#232;tre]
+</pre>
+</div>
+
+<p>
+Par exemple,
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
+<span class="org-preprocessor">#define</span> <span class="org-variable-name">PI</span> 3.141592
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Utilisation de directives de condition</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Il est possible de contrôler ce qui sera compilé effectivement ou non, avec les
+clauses de condition :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#if</span> condition
+...
+<span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+
+<p>
+Le code compris dans la séquence <code>#if</code> &#x2013; <code>#endif</code> est considéré par le
+compilateur seulement si la condition est vraie (non nulle).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">Exemple (1/2)</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li><b><code>test_debug.cc</code></b>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
+<span class="org-keyword">using</span> <span class="org-keyword">namespace</span> <span class="org-constant">std</span>;
+
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+<span class="org-preprocessor">  #if</span> (DEBUG == 1)
+  cout &lt;&lt; <span class="org-string">"DEBUG: "</span>
+       &lt;&lt; <span class="org-string">"Mode debug du programme"</span> &lt;&lt; endl;
+<span class="org-preprocessor">  #else</span>
+  cout &lt;&lt; <span class="org-string">"NOTICE: "</span>
+       &lt;&lt; <span class="org-string">"Mode normal du programme"</span> &lt;&lt; endl;
+<span class="org-preprocessor">  #endif</span>
+}
+</pre>
+</div>
+</li>
+</ul>
+
+<p>
+Utilisation :
+</p>
+<div class="prompt">
+<p>
+g++ -DDEBUG=1 test_debug.cc -o test_debug
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10">Exemple (2/2)</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li><b><code>dummy.h</code></b>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h
+<span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h</span> 1
+<span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+</li>
+
+<li><b><code>dummy.cc</code></b>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+</pre>
+</div>
+</li>
+
+<li><b><code>test_dummy.cc</code></b>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  dummy ();
+}
+</pre>
+</div>
+</li>
+</ul>
+
+<p>
+Utilisation :
+</p>
+<div class="prompt">
+<p>
+g++ dummy.cc test_dummy.cc -o test_dummy
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

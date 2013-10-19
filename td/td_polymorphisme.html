@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Polymorphisme</title>
+<!-- 2013-10-19 sam. 07:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="td_pointeur_fonction.html">Compilation, pointeur & références </a><a href="td_specificite_c++.html">Spécificités du C++ </a><a href="td_classes.html">Classes en C++ </a><aa>Fraction de nombres complexes </aa><aa>Constructeur & destructeurs </aa><aa>Surcharge d'opérateur </aa><aa>Polymorphisme & classe abstraite </aa><a href="td_blackjack.html">Jeu du blackjack </a>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Polymorphisme</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Classe <code>Employe</code></h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Créer une classe abstraite <code>Employe</code> contenant :
+</p>
+
+<ul class="org-ul">
+<li>un nom de type <code>string</code> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>,
+</li>
+<li>un prénom de type <code>string</code>,
+</li>
+<li>un entier correspondant à l&rsquo;âge.
+</li>
+</ul>
+
+<p>
+On définira également les méthodes suivantes :
+</p>
+
+<ul class="org-ul">
+<li>un constructeur,
+</li>
+<li>un destructeur (virtuel),
+</li>
+<li>une méthode purement virtuelle <code>CalculerSalaire</code>,
+</li>
+<li>une méthode virtuelle <code>GetNom</code> qui sera redéfinie dans les classes filles.
+</li>
+</ul>
+
+<p>
+Dans le programme principal, créer une instance d&rsquo;<code>Employe</code> puis générer un
+tableau de pointeur d&rsquo;<code>Employe</code> appelé <code>Entreprise</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Branche <code>Commercial</code></h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Créer une classe <code>Commercial</code> qui hérite d&rsquo;<code>Employe</code>. Cette classe a un membre
+de plus qu&rsquo;<code>Employe</code> : un entier <code>ChiffreAffaire</code>. Dans la mesure où elle
+n&rsquo;explicite pas la méthode <code>CalculerSalaire</code>, la classe <code>Commercial</code> est
+abstraite.
+</p>
+
+<p>
+Créer une classe <code>Vendeur</code> dérivant de <code>commercial</code> avec :
+</p>
+
+<ul class="org-ul">
+<li>un constructeur,
+</li>
+<li>un destructeur,
+</li>
+<li>définir le salaire \emph{via} la méthode virtuelle <code>CalculerSalaire</code>. Par
+exemple, une base fixe à 1000 euros + 20\% du <code>ChiffreAffaire</code>,
+</li>
+<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le vendeur :&rdquo; puis le nom.
+</li>
+</ul>
+
+<p>
+Créer une classe <code>Representant</code> héritant de <code>Commercial</code> avec :
+</p>
+
+<ul class="org-ul">
+<li>un constructeur,
+</li>
+<li>un destructeur,
+</li>
+<li>définir le salaire \emph{via} la méthode virtuelle <code>CalculerSalaire</code>,
+</li>
+<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le représentant :&rdquo; puis le nom.
+</li>
+</ul>
+
+<p>
+Dans le programme principal, remplir le tableau de pointeur d&rsquo;<code>Employe</code> par
+l&rsquo;adresse d&rsquo;un <code>Vendeur</code> et d&rsquo;un <code>Representant</code>.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+la classe <code>string</code> fait partie de la librairie standard et facilite la
+gestion et la manipulation des chaînes de caractères. Pour pouvoir l&rsquo;utiliser,
+il conviendra d&rsquo;inclure le fichier d&rsquo;en-tête <code>string</code>.
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

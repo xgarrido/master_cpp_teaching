@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Classes</title>
+<!-- 2013-10-19 sam. 07:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="td_pointeur_fonction.html">Compilation, pointeur & références </a><a href="td_specificite_c++.html">Spécificités du C++ </a><a href="td_classes.html">Classes en C++ </a><aa>Fraction de nombres complexes </aa><aa>Constructeur & destructeurs </aa><aa>Surcharge d'opérateur </aa><aa>Polymorphisme & classe abstraite </aa><a href="td_blackjack.html">Jeu du blackjack </a>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Classes</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Déclaration et utilisation de classe en C++</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Dans l&rsquo;ensemble des exercices suivants, on privilégiera une déclaration et une
+définition des classes dans des fichiers distincts. En outre, on fournira un
+programme principal de test.
+</p>
+
+<p>
+En attendant le cours sur l’encapsulation, déclarer tous les membres avec une
+visibilité publique :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">Point</span>
+{
+<span class="org-keyword">public</span>:
+  ...
+};
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Classe <code>Point</code></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Créer une classe <code>Point</code> composée de deux coordonnées réelles puis déclarer et
+définir une méthode pour initialiser ces valeurs ainsi qu&rsquo;une méthode affichant
+les deux coordonnées.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Tableau d&rsquo;objets</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Déclarer un tableau contenant cinq objets de type <code>Point</code>. Initialiser chacune
+des entrées du tableau puis créer une fonction affichant les coordonnées du
+point le plus éloigné de l&rsquo;origine.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Classe <code>Polygone</code></h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Créer une classe <code>Polygone</code> possédant :
+</p>
+
+<ul class="org-ul">
+<li>un entier non signé correspondant à l&rsquo;ordre du polygone <i>i.e.</i> au nombre de
+sommets,
+</li>
+<li>un tableau de <code>Point</code> contenant les coordonnées de chacun des sommets (10
+sommets maximum soit un décagone)<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+</li>
+</ul>
+
+<p>
+En définissant une méthode permettant l&rsquo;initialisation de la classe <code>Polygone</code>,
+faire un programme test remplissant cette classe. Définissez une méthode qui
+calculera le périmètre d&rsquo;un polygone.
+</p>
+
+<p>
+Déclarer par la suite un tableau de trois éléments de type <code>Polygone</code>. Remplir
+chacune des trois instances puis faire une fonction qui renverra le nom de celui
+ayant le plus grand périmètre.
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+pour les plus téméraires, substituer au tableau statique un tableau
+dynamique (pointeur de classe <code>Point</code> alloué avec <code>new</code>) dont le nombre
+d&rsquo;entrées sera indexé sur l&rsquo;ordre du polygone. On rajoutera une méthode
+permettant la destruction du tableau en fin de programme.
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

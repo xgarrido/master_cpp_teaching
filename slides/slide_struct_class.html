@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Structure &amp; Classes</title>
+<!-- 2013-10-19 sam. 07:37 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><aa>Encapsulation des données </aa><aa>Constructeur & Destructeur de classe </aa><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Structure &amp; Classes</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Notion de classe</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Langage objet : analyse du problème en termes <b>de nature et de structure des
+données</b> &ne; programmation impérative (en C ou fortran) qui relève plus de
+l&rsquo;aglorithmie
+</li>
+
+<li>Une classe est
+
+<ol class="org-ol">
+<li><b>une généralisation de la notion de type (<code>int</code>, <code>double</code>,&#x2026;)</b>
+</li>
+
+<li><b>une association de données membres et d&rsquo;opérations s&rsquo;y rapportant
+(méthodes ou fonctions membres)</b>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Déclaration de classe</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <code>double</code>,&#x2026;)
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
+  ...
+};
+</pre>
+</div>
+</li>
+</ul>
+
+<div class="cbox">
+<p>
+\ding{42} Ne pas oublier le point virgule à la fin de la déclaration
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Déclaration de classe</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <code>double</code>,&#x2026;)
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
+  ...
+};
+...
+<span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
+particule particule1, particule2;
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Accès aux membres de la classe en C++</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>Classe <b>&rarr; association de données membres et de méthodes (fonctions
+membres)</b>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration des m&#233;thodes</span>
+  <span class="org-type">void</span> <span class="org-function-name">initialise</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">masse_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">charge_</span>);
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+};
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Définition de méthodes de classes</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Identique à la définition d&rsquo;une fonction mais préfixée du nom de la classe et
+de l&rsquo;opérateur de portée <code>::</code>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration des m&#233;thodes</span>
+  <span class="org-type">void</span> <span class="org-function-name">initialise</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">masse_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">charge_</span>);
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+};
+
+<span class="org-type">void</span> <span class="org-constant">particule</span>::<span class="org-function-name">initialise</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">masse_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">charge_</span>)
+{
+  m_masse  = masse_;
+  m_charge = charge_;
+}
+...
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
+  <span class="org-type">particule</span> <span class="org-variable-name">particule1</span>, <span class="org-variable-name">particule2</span>;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
+  particule1.initialise (0.511, -1.6e-19);
+  particule2.initialise (938.0, +1.6e-19);
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
+  <span class="org-type">particule</span> * <span class="org-variable-name">particule1</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
+  <span class="org-type">particule</span> * <span class="org-variable-name">particule2</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
+  particule1-&gt;initialise (0.511, -1.6e-19);
+  particule2-&gt;initialise (938.0, +1.6e-19);
+
+  ...
+  <span class="org-keyword">delete</span> particule1;
+  <span class="org-keyword">delete</span> particule2;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Annexes</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">Accès aux membres d&rsquo;une structure</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li>L&rsquo;accès aux membres se fait par l&rsquo;intermédiaire de l&rsquo;opérateur point <code>.</code>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">struct</span> <span class="org-type">particule</span>
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
+  ...
+};
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objet de type particule</span>
+<span class="org-type">particule</span> <span class="org-variable-name">particule1</span>, <span class="org-variable-name">particule2</span>;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
+particule1.m_masse  = 0.511;
+particule1.m_charge = -1.6e-19;
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
