@@ -9,8 +9,6 @@
 
 * Description détaillée du processus de compilation
 
-TOTO TATA
-
 Le processus de compilation se décompose en différentes phases conduisant à la
 construction d'un fichier binaire exécutable. Ces phases ne sont, en général,
 pas spécifiques au \Cpp et quand bien même les différents outils de
