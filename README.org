@@ -325,7 +325,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(lecture_list)>>
                       <hr/>
-                      <a href=\"../index.html\">Retour menu principal</a>"
+                      <a href=\"../../index.html\">Retour menu principal</a>"
        :html-postamble nil))
     (add-to-list
      'org-publish-project-alist
@@ -342,7 +342,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(td_list)>>
                        <hr/>
-                       <a href=\"../index.html\">Retour menu principal</a>"
+                       <a href=\"../../index.html\">Retour menu principal</a>"
        :html-postamble nil))
     (add-to-list
      'org-publish-project-alist
@@ -359,7 +359,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
                    <link rel=\"stylesheet\" href=\"../stylesheets/org-pygments.css\">"
        :html-preamble "<<html-preamble(slide_list)>>
                        <hr/>
-                       <a href=\"../index.html\">Retour menu principal</a>"
+                       <a href=\"../../index.html\">Retour menu principal</a>"
        :html-postamble nil))
     (add-to-list
      'org-publish-project-alist
