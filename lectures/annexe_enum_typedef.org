@@ -1,0 +1,73 @@
+#+TITLE:  L'énumération =enum= & Utilisation de =typedef=
+#+AUTHOR: Xavier Garrido
+#+DATE:   05/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{4}
+#+LATEX_HEADER: \renewcommand{\chaptername}{annexe}
+
+* Énumération =enum=
+
+Une énumération est une collection finie d'entiers auxquels on a donné à chacun
+un nom explicite. Une variable de cette énumération ne peut posséder qu'un
+entier de cette collection et aucun autre entier.
+
+Comme pour les commandes du préprocesseur, l'instruction définissant une
+énumération tient surtout d'un *raffinement syntaxique* permettant de remplacer
+des valeurs constantes par un nom plus lisible (pour un humain...). L'énumération
+
+- améliore la lisibilité du code,
+
+- rajoute un niveau de sécurité dans les valeurs saisies par
+  l'utilisateur. Seuls les entiers appartenant à l'énumération seront valides.
+
+Une énumération est généralement employée lorsque l'objet du monde réel qu'elle
+modélise possède des valeurs ou des états très simples totalement discrets (un
+feu tricolore, le code génétique ATCGU, les quatres saisons...).
+
+Le mot clé est =enum=
+#+BEGIN_SRC c++
+  enum nome_numeration {
+    ELEMENT_1, // 0 par défaut
+    ELEMENT_2, // valeur 1
+    ...
+  };
+#+END_SRC
+
+*** Exemple:
+#+BEGIN_SRC c++
+  enum Simpson {
+    eHOMER,
+    eMARGE,
+    eBART,
+    eLISA,
+    eMAGGIE
+  };
+#+END_SRC
+
+La déclaration se fait /via/ =nom_enumeration instance_enum=, soit pour notre exemple
+#+BEGIN_SRC c++
+  Simpson personnage_Simpson_1 = eHOMER;
+#+END_SRC
+
+* Utilisation de =typedef=
+
+=typedef= permet de créer son propre type en se calquant sur un type
+existant (=int=, =double=, =char=...). =typedef= ne crée pas de nouveau type, il
+construit une forme d'alias. Cette fonctionnalité du \Cpp permet ainsi
+
+- d'améliorer la lisibilité du code,
+
+- au début d'un projet, de définir un nouveau type /via/ =typedef=, modifier cet
+  alias sans avoir à changer l'appel vers les variables usant de ce type.
+
+Sous certaines conditions, l'utilisation de =typedef= peut rendre plus délicate
+la lecture du code pour une personne indépendante du projet. Tout le monde est
+habitué à =int= et non à =MonTypedefEntierQueJaimeBien=
+
+*** Exemple :
+#+BEGIN_SRC c++
+  typedef int mon_typedef_entier;
+  mon_typedef_entier entier_test = 1; // Equivalent à int
+#+END_SRC

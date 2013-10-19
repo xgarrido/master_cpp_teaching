@@ -1,0 +1,426 @@
+#+TITLE:  Héritage (Partie 2) : Méthodes virtuelles & Classes abstraites
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_HEADER:\newcommand{\ttb}[1]{\textcolor{black}{#1}}
+#+LATEX_HEADER:\newcommand{\ttg}[1]{\textcolor{green}{#1}}
+
+
+* Rappel sur l'héritage simple
+
+#+BEGIN_SRC c++
+  class polygone
+  {
+  protected:
+    unsigned int m_nombre_segment;
+  };
+
+  class rectangle : public polygone
+  {
+  public:
+    void set_largeur (const double largeur_);
+
+  private:
+    double m_longueur;
+    double m_largeur;
+  };
+#+END_SRC
+
+- La relation d'héritage est matérialisée par l'usage de la directive *=public
+  polygone=*
+
+- Le mot-clé *=protected=* autorise la classe dérivée (ici =rectangle=) à
+  accéder aux membres de la classe de base (ici =polygone=)
+
+* Rappel sur l'héritage simple
+
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    polygone (const unsigned int nbr_segment_) :
+      m_nombre_segment (nbr_segment_) {}
+  protected:
+    unsigned int m_nombre_segment;
+  };
+
+  class rectangle : public polygone
+  {
+  public:
+    rectangle (const double longueur_, const double largeur_) :
+      polygone (4),
+      m_longueur (longueur_), m_largeur (largeur_) {}
+  };
+#+END_SRC
+* Liaisons dynamiques & Méthodes virtuelles
+
+** Classe =polygone=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+** Classe =rectangle=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class rectangle : public polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+** Programme principal
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  int main ()
+  {
+    polygone  my_polygone;
+    rectangle my_rectangle;
+    my_polygone.affiche  ();
+    my_rectangle.affiche ();
+  }
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+#+BEGIN_CENTER
+*Comportement souhaité car le compilateur connait, lors de la compilation, le
+ type d'objet instancié*
+#+END_CENTER
+
+* Liaisons dynamiques & Méthodes virtuelles
+
+** Classe =polygone=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+** Classe =rectangle=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class rectangle : public polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+** Programme principal
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  int main ()
+  {
+    polygone  my_polygone;
+    rectangle my_rectangle;
+    my_polygone.affiche  ();
+    my_rectangle.polygone::affiche ();
+  }
+#+END_SRC
+
+* Liaisons dynamiques & Méthodes virtuelles
+
+** Classe =polygone=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+** Classe =rectangle=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class rectangle : public polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+** Programme principal
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  int main ()
+  {
+    polygone  * ptr_polygone1 = new polygone;
+    rectangle * ptr_polygone2 = new rectangle;
+    ptr_polygone1->affiche ();
+    ptr_polygone1->affiche ();
+  }
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+#+BEAMER: \pause
+#+BEGIN_CENTER
+*Comportement non souhaité car le compilateur ne connait pas, lors de la
+ compilation, le type d'objet alloué : _liaison statique_*
+#+END_CENTER
+
+* Liaisons dynamiques & Méthodes virtuelles
+
+** Classe =polygone=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    virtual void affiche () const;
+    ...
+  };
+#+END_SRC
+** Classe =rectangle=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class rectangle : public polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+** Programme principal
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  int main ()
+  {
+    polygone  * ptr_polygone1 = new polygone;
+    rectangle * ptr_polygone2 = new rectangle;
+    ptr_polygone1->affiche ();
+    ptr_polygone1->affiche ();
+  }
+#+END_SRC
+
+** <empty>
+:PROPERTIES:
+:BEAMER_ENV: ignoreheading
+:END:
+
+#+BEGIN_CENTER
+*L'utilisation d'une liaison dynamique via le mot-clé =virtual= indique au
+compilateur que le choix de la méthode ne s'effectuera qu'à l'exécution du code*
+#+END_CENTER
+
+* Liaisons dynamiques & Méthodes virtuelles
+
+#+BEGIN_CENTER
+Le processus de virtualisation permet ainsi de *redéfinir* des méthodes suivant
+la finalité de la classe fille
+#+END_CENTER
+
+** Classe =polygone=
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:END:
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    virtual void affiche () const;
+    ...
+  };
+
+  void polygone::affiche () const
+  {
+    cout << "Nombre de segment = "
+         << m_nombre_segment << endl;
+
+  }
+#+END_SRC
+
+** Classe =rectangle=
+:PROPERTIES:
+:BEAMER_COL: 0.65
+:END:
+#+BEGIN_SRC c++
+  class rectangle : public polygone
+  {
+  public:
+    void affiche () const;
+    ...
+  };
+
+  void rectangle::affiche () const
+  {
+    polygone::affiche ();
+    cout << "Longueur = " << m_longeur << endl;
+         << "Largeur  = " << m_largeur << endl;
+  }
+#+END_SRC
+
+* Classes abstraites
+
+- La notion de liaison dynamique permet de redéfinir une méthode au sein de
+  classes filles : on parle de *méthodes virtuelles*
+
+- \Cpp permet la déclaration de *méthodes virtuelles pures* c'est-à-dire des
+  méthodes dont *la définition n'est pas donnée*
+
+* Classes abstraites
+
+Exemple du jeu d'échec :
+#+BEGIN_SRC latex
+  \begin{center}
+    \begin{tikzpicture}[
+        grow=down,
+        linet/.style={very thick,draw=blue!60,
+          shorten >=0pt, shorten <=0pt, ->},
+        punkt/.style={rectangle, rounded corners, shade, top color=white,
+          bottom color=blue!10, draw=blue!60, very
+          thick, text centered, text width=6em}
+      ]
+      \ttfamily\color{blue}
+      \path (0,0) node(a) [punkt] {class piece}
+      (-3.5,-1.5) node(b) [punkt] {class pion}
+      (+0.0,-1.5) node(c) [punkt] {class tour}
+      (+3.5,-1.5) node(d) [punkt] {class ...};
+      \draw[linet] (a) -- (b);
+      \draw[linet] (a) -- (c);
+      \draw[linet, dashed] (a) -- (d);
+    \end{tikzpicture}
+  \end{center}
+#+END_SRC
+
+- La classe =piece= est par construction *une classe abstraite* : elle déclare
+  des méthodes =affiche ()=, =deplacement ()= mais ne les définit pas
+
+- La définition n'intervient que dans les classes dérivées qui spécialisent les
+  méthodes en fonction de leur besoin
+
+* Classes abstraites
+
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[
+      grow=down,
+      linet/.style={very thick,draw=blue!60,
+        shorten >=0pt, shorten <=0pt, ->},
+      punkt/.style={rectangle, rounded corners, shade, top color=white,
+        bottom color=blue!10, draw=blue!60, very
+        thick, text centered, align=left}
+    ]
+    \ttfamily\scriptsize\color{blue}
+    \path (0,0) node(a) [punkt] {
+      class \ttb{piece}\\
+      \{\\
+      ~~virtual void \ttb{affiche} () const = 0;\\
+      ~~virtual bool \ttb{deplacement} ()~~~= 0;\\
+      \};
+    }
+    (-3.5,-4.5) node(b) [punkt] {
+      class \ttb{pion}\\
+      \{\\
+      ~~void \ttb{pion::affiche} () const\\
+      ~~\{\\
+      ~~~~\ttb{cout <<} \ttg{"P"} \ttb{<< endl;}\\
+      ~~\}\\
+      \};
+    }
+    (+3.5,-4.5) node(c) [punkt] {
+      class \ttb{tour}\\
+      \{\\
+      ~~void \ttb{tour::affiche} () const\\
+      ~~\{\\
+      ~~~~\ttb{cout <<} \ttg{"T"} \ttb{<< endl;}\\
+      ~~\}\\
+      \};
+    };
+    \draw[linet] (a) -- (b);
+    \draw[linet] (a) -- (c);
+  \end{tikzpicture}
+#+END_SRC
+
+* Classes abstraites
+
+#+BEGIN_SRC c++
+  #include "pion.h"
+  #include "tour.h"
+  int main ()
+  {
+    const size_t nbr_pieces = 2;
+    piece * pieces[nbr_pieces];
+
+    pieces[0] = new pion ();
+    pieces[1] = new tour ();
+
+    for (size_t i = 0; i < nbr_pieces; ++i)
+    {
+      pieces[i]->affiche ();
+    }
+  }
+#+END_SRC
+
+#+BEAMER: \pause
+#+BEGIN_CENTER
+Étant donné le canevas fourni par la déclaration de la classe =piece=, libre à
+chacun de développer, de façon indépendante, sa propre implémentation de =piece=
+en définissant ces fonctionnalités
+#+END_CENTER

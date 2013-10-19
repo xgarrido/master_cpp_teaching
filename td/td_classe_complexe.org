@@ -1,0 +1,53 @@
+#+TITLE:  Fraction de nombres complexes
+#+AUTHOR: Xavier Garrido
+#+DATE:   18/09/2013
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,,cpp_teaching_classes]
+#+LATEX_HEADER: \setcounter{chapter}{3}
+
+* Classe =Complexe=
+
+- Écrire une classe =Complexe=, possédant quatre membres de type =double= :
+
+  - Partie réelle
+  - Partie imaginaire
+  - Module
+  - Argument
+
+- Une méthode d'initialisation des membres.
+
+- Et les méthodes suivantes :
+
+  - Addition, Soustraction
+  - Multiplication
+  - Division
+  - Conjugué
+
+* Classe =Fraction=
+
+- Écrire une classe =Fraction=, possédant deux membres entier :
+
+  - Numérateur
+  - Dénominateur
+
+- Une méthode d'initialisation des membres.
+
+- Et les méthodes :
+
+  - =Affiche= :: qui affiche la fraction sous la forme Numérateur/Dénominateur
+                 /e.g./ 4/3
+  - =Addition, Soustraction= ::
+  - =Inverse= ::
+  - =Multiplication=, =Division= ::
+  - =Reduire= :: qui réduit la fraction /i.e./ 28/6 devient 14/3
+  - =Resultat= :: qui effectue la divison et fournit le résultat
+
+* Classe =FractionComplexe=                                        :noexport:
+
+Utiliser les deux classes précédentes pour afficher les fractions de complexe
+sous la forme
+
+\[
+\frac{a_1 + i \times b_1}{a_2 + i \times b_2}
+\]

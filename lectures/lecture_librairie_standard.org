@@ -1,0 +1,246 @@
+#+TITLE:  Introduction à la librairie standard STL
+#+AUTHOR: Xavier Garrido
+#+DATE:   02/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_CLASS: lecture
+#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
+#+LATEX_HEADER: \setcounter{chapter}{10}
+
+Le langage \Cpp en lui-même ne fournit que très peu d'outils pour la gestion des
+chaînes de caractères, les entrées/sorties et les collections (que l'on regroupe
+communément sous l'appelation de containers), car il n'ajoute pour ces besoins
+rien par rapport au C.
+
+La librairie standard STL (/Standard Template Library/) du \Cpp apporte donc une
+réponse standardisée et exploitant très largement les mécanismes étendus du \Cpp
+par rapport à C, que sont :
+
+- l'approche objet et les capacités d'abstraction en particulier sur les
+  opérateurs,
+
+- les patrons de classe,
+
+- la surdéfinition des opérateurs.
+
+Cette bibliothèque implémente un grand nombre de classe patron décrivant des
+containers génériques pour le langage \Cpp afin de pallier aux limitations
+intrinsèques au langage C. La STL fournit de plus des algorithmes permettant de
+manipuler aisément ces containers (pour les initialiser, rechercher des valeurs,
+...). D'autre part, la STL introduit également le concept d'itérateur qui permet
+de parcourir très facilement un container en s'affranchissant complètement de la
+manière dont il est implémenté.
+
+L'objectif de cette introduction n'est pas de faire un inventaire exhaustif des
+possibilités offertes par la STL, mais d'en donner un aperçu au travers
+d'exemples courants d'utilisation. On pourra trouver le détail des classes de la
+STL à l'adresse suivante :
+
+#+BEGIN_CENTER
+[[http://www.sgi.com/tech/stl/table_of_contents.html]]
+#+END_CENTER
+
+* Principales classes de la STL
+
+Les types de données disponibles sont multiples; cependant, les trois
+fréquemment utilisés sont le vecteur, la liste et la table associative. Pour
+pouvoir bénéficier de leurs fonctionnalités, les fichiers d'entêtes homonymes
+doivent être inclus : on utilisera par exemple =#include <vector>= pour un
+vecteur, =#include <list>= pour une liste, etc. Par ailleurs, l'ensemble de ces
+containers appartiennent à l'espace de nom standard =std=.  Nous allons plus
+spécifiquement discuter des vecteurs et des listes chainées (=string=), les
+opérations sur les autres conteneurs étant similaires du fait de leur
+implémentation.
+
+** La classe =vector=
+
+La classe =vector= est proche du tableau du C. Tous les éléments contenus dans
+le =vector= sont adjacents en mémoire, ce qui permet d'accéder immédiatement à
+n'importe quel élément. L'avantage majeur du =vector= comparé au tableau du C
+réside dans sa faculté à se réallouer automatiquement en cas de besoin lors de
+l'utilisation de la méthode =push_back= par exemple. La désallocation est
+également simplifiée de par l'existence du destructeur de classe. Cependant,
+contrairement à un tableau classique, une case n'est accessible par l'opérateur
+=[]= que si elle a été allouée au préalable (sinon une erreur de segmentation se
+déclenche).
+
+L'exemple ci-dessous présente les principales méthodes issues de la
+classe =vector=
+
+#+BEGIN_SRC c++
+  #include <vector>
+  #include <iostream>
+
+  int main ()
+  {
+    // Déclaration d'un vecteur d'entiers de taille non connue
+    std::vector<int> myVector;
+
+    // Ajout de trois éléments
+    myVector.push_back (4);
+    myVector.push_back (2);
+    myVector.push_back (5);
+
+    // La méthode size précise le nombre d'entrée courante
+    for (unsigned int iEntry = 0; iEntry < myVector.size(); ++iEntry)
+      std::cout << iEntry << " " << myVector[iEntry] << std::endl;
+
+    // Création d'un vecteur d'entier contenant 70,70,70,70,70
+    std::vector<int> mySecondVector(5,70);
+
+    // Réassignation des valeurs de ce vecteur
+    mySecondVector[0] = 5;
+    mySecondVector[1] = 3;
+    mySecondVector[2] = 7;
+    mySecondVector[3] = 4;
+    mySecondVector[4] = 8;
+
+    mySecondVector.clear();
+  }
+#+END_SRC
+
+Parmi les quelques instructions présentées, on distingue l'utilisation de la
+méthode =push_back= qui permet d'ajouter un élément en fin de vecteur tout en
+réallouant l'espace mémoire nécessaire. La méthode =push_front= réalise
+l'opération inverse à savoir l'ajout d'une entrée en début de vecteur. Du fait
+du déplacement de l'ensemble des valeurs précédemment assignées et allouées en
+mémoire, cette méthode nécessite un temps plus conséquent afin de réorganiser la
+structure en mémoire du vecteur.
+
+On note également l'utilisation de la méthode =size= qui permet de déterminer le
+nombre d'élément courramment alloué. Il est ainsi possible de parcourir
+l'ensemble des valeurs "recueillies" jusqu'à présent (nous verrons à la fin de
+ce cours, que la notion d'itérateur généralise ce mécanisme indépendamment de la
+classe mise en jeu).
+
+Comme nous le soulignions précédemment, l'opérateur =[]= est également
+accessible rendant l'utilisation de la classe =vector= similaire au tableau. On
+remarquera toutefois qu'il existe la méthode =at= dont la finalité est identique
+à l'opérateur =[]= mais qui vérifie préalablement l'existence de l'élément. Dans
+le cas d'un dépassement de mémoire, le programme stoppe de manière plus élégante
+qu'un =segmentation fault= en précisant l'origine de l'arrêt. Enfin, la méthode
+=clear= permet de vider le vecteur de sa substance en ramenant sa taille à 0.
+
+#+BEGIN_REMARK
+Il ne faut pas perdre de vue qu'une réallocation mémoire est coûteuse en terme
+de temps de calcul. Aussi, si la taille d'un vecteur est connue par avance, il
+faut autant que possible le créer directement à cette taille.
+#+END_REMARK
+
+** La classe =string=
+
+Il est possible en \Cpp d'utiliser les chaînes de caractères héritées du
+C. Celui-ci ne disposant pas de type "chaîne" primitif (c'est à dire intégré au
+langage), celles-ci sont représentées sous forme de tableaux de caractères
+terminés par un =\0= (caractère ASCII =0=). Le plus souvent, pour des
+raisons de souplesse, les chaînes sont allouées dynamiquement : le type de
+données représentant donc les chaînes de caractères en C est =char*= (qui
+signifie pointeur sur caractère ou pointeur sur tableau de caractères : on ne
+peut pas faire la différence en C). L'ensemble des manipulations classiques sur
+les chaînes de caractères est disponible à partir du fichier d'entête =string.h=
+(obtention de la longueur, concaténation, copie, segmentation,...).
+
+Cependant, le fait d'utiliser une représentation aussi peu abstraite pose
+beaucoup de problèmes en pratique : le code n'est pas toujours lisible, et une
+certaine attention est requise pour gérer convenablement la mémoire sous peine
+d'obtenir des fuites mémoire ou, plus grave, des segmentation faults. Afin de
+manipuler plus aisément les chaîne de caractères, une classe =string= a été
+définie et intégrée dans la librairie standard.
+
+Les chaînes de caractères se trouvent dans le header =string= (à ne pas
+confondre avec =string.h=, qui contient les fonctionnalités pour manipuler les
+chaînes de caractères C). L'exemple suivant présente quelques unes des
+possibilités offertes par cette classe
+
+#+BEGIN_SRC c++
+  #include <string>
+  #include <iostream>
+
+  int main ()
+  {
+    // Assignation/copie de strings
+    std::string myString1 = "abcd";
+    std::string myString2 = myString1;
+    // Initialisation de strings
+    std::string myString3 (myString2);
+
+    // Concaténation
+    myString2 += "abcd";
+    std::string myString4 = myString1 + "toto";
+
+    // Comparaison
+    const bool myBoolean = (myString1 == myString2);
+    if (myBoolean)
+      std::cout << myString1 << " est identique à " << myString2 << std::endl;
+
+    // Longueur d'un string
+    unsigned int size = myString1.size ();
+
+    // Recherche dans un string
+    unsigned int pos = myString1.find ("bc");
+  }
+#+END_SRC
+
+On reconnaît entre autre la méthode =size= qui précise la taille /i.e./ le
+nombre de caractère, d'une instance de =string=. La surcharge des opérateurs
+tels que =+== ou =+= permet par ailleurs de concaténer des chaînes de caractères
+tandis que la méthode =find= indique la position à laquelle est trouvée la
+première occurence de la chaine de caractère fournie en argument.
+
+Nous ne faisons ici, que citer certaines des méthodes les plus communément
+utilisées. Le lecteur intéressé pourra se référer aux nombreux ouvrage ainsi
+qu'aux différentes pages internet traitant du sujet. Nous soulignerons
+finalement la possibilité grâce au mécanisme des patrons de déclarer des
+vecteurs de chaines de caractères /via/ l'instruction =vector<string>
+myStringVector=.
+
+* Les itérateurs
+
+Un =iterator= (et sa version constante =const_iterator=) permet de parcourir un
+container du début à la fin en renvoyant un pointeur vers l'objet
+sélectionné. Un =const_iterator=, contrairement à un =iterator=, donne un accès
+uniquement en lecture à l'élément "pointé". Ainsi, un parcours avec des
+=const_iterator= maintient la constance de l'objet et ne permettra pas de le
+modifier. C'est pourquoi un container "=const=" peut être parcouru par des
+=const_iterator= et non par des =iterator=. De manière générale, quand on a le
+choix entre des =iterator= ou des =const_iterator=, il faut toujours privilégier
+les =const_iterator= car ils rendent la section de code à laquelle ils servent
+plus générique (applicable aux containers constants ou non).
+
+Appliqué au containers de la STL, on trouve ainsi les méthodes
+
+- =begin()= qui retourne un =iterator= pointant sur le premier élément,
+
+- =end()= qui retourne un =iterator= pointant juste "après" le dernier élément,
+
+- l'opérateur =++= qui permet d'incrémenter l'=iterator= en le faisant
+  passer à l'élément suivant.
+
+À titre d'exemple, le programme suivant explicite leur utilisation
+
+#+BEGIN_SRC c++
+  #include <vector>
+  #include <iostream>
+
+  const std::vector<string> setVector()
+  {
+    std::vector<string> v;
+    v.push_back("John");
+    v.push_back("Deuf");
+    return v;
+  }
+
+  int main ()
+  {
+    const std::vector<string> myVector(setVector());
+
+    // ne compile pas car myVector est const
+    // std::vector<string>::iterator itVector;
+    std::vector<string>::const_iterator itVector;
+
+    for (itVector = myVector.begin(); itVector != myVector.end(); ++itVector)
+      cout << *itVector << endl;
+  }
+#+END_SRC
+
+Dans le même esprit, il existe également les contreparties =reverse_iterator= et
+=const_reverse_iterator= qui parcourent l'instance de la fin vers le début.
