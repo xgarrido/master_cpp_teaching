@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Classe &ldquo;aléatoire&rdquo;</title>
+<!-- 2013-10-19 sam. 16:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="td_pointeur_fonction.html">Compilation, pointeur & références </a><a href="td_specificite_c++.html">Spécificités du C++ </a><a href="td_classes.html">Classes en C++ </a><aa>Fraction de nombres complexes </aa><aa>Constructeur & destructeurs </aa><aa>Surcharge d'opérateur </aa><aa>Polymorphisme & classe abstraite </aa><a href="td_blackjack.html">Jeu du blackjack </a>
+                     <hr/>
+                     <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Classe &ldquo;aléatoire&rdquo;</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Constructeur de la classe <code>Complexe</code></h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Reprendre l&rsquo;exercice précédent sur la classe <code>Complexe</code> en remplaçant la
+méthode <code>Initialise</code> par un constructeur.
+</li>
+
+<li>Déclarer un second constructeur qui initialisera, non plus la partie réelle et
+imaginaire, mais le module et l&rsquo;argument d&rsquo;un nombre complexe. Quelle
+alternative pourra-t-on proposer afin de résoudre le problème de surdéfinition
+du constructeur dans ce cas précis ?
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Jeux de hasard et loi de probabilité</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Déclaration de la classe <code>Hasard</code></h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Écrire une classe <code>Hasard</code> possédant les membres suivants :
+
+<ul class="org-ul">
+<li>deux entiers constants non signés, l&rsquo;un définissant un nombre maximal de
+valeurs à tirer aléatoirement, l&rsquo;autre la valeur maximale pouvant être
+générée aléatoirement (<i>cf. <a href="#sec-2-2-1">Addendum 1</a></i> relatif aux générateurs aléatoires),
+</li>
+
+<li>un tableau dynamique de valeurs entières non signées qui sauvegardera les
+résultats des tirages aléatoires successifs.
+</li>
+</ul>
+</li>
+
+<li>Déclarer un constructeur qui initialisera les membres de la classe en
+attachant une attention particulière à allouer correctement l&rsquo;espace mémoire
+nécessaire.
+</li>
+
+<li>Déclarer un destructeur de classe qui restituera l&rsquo;espace mémoire alloué
+dynamiquement.
+</li>
+
+<li>Surdéfinir une méthode permettant d&rsquo;afficher soit l&rsquo;ensemble des tirages
+aléatoires soit le \(i\)<sup>ème</sup> tirage.
+</li>
+
+<li>Définir une méthode de comparaison de deux instances de <code>Hasard</code> dont la
+valeur de retour sera un booléen.
+</li>
+</ul>
+
+<p>
+Exécuter plusieurs fois le programme en affichant l&rsquo;ensemble des valeurs
+générées. Proposer une solution visant à générer, pour chaque exécution, une
+nouvelle série de valeurs aléatoires.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">Décompte du nombre d&rsquo;instanciation de la classe <code>Hasard</code></h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+En utilisant un membre statique (<i>cf. <a href="#sec-2-2-2">Addendum 2</a></i>), déterminer le nombre
+d&rsquo;objets créés au cours de l&rsquo;exécution du programme.
+</p>
+
+<p>
+De la même manière, utiliser un membre statique afin d&rsquo;estimer le nombre total
+d&rsquo;occurences de la valeur 0.
+</p>
+</div>
+
+<div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">Addendum 1</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+La librairie standard <code>cstdlib</code> du C++ fournit un générateur de nombre
+pseudo-aléatoire <code>rand()</code> retournant une valeur entière comprise entre 0 et
+<code>RAND_MAX</code>. Suivant les architectures, <code>RAND_MAX</code> peut varier d&rsquo;une machine à
+l&rsquo;autre. Par ailleurs, comme un générateur de nombres aléatoires est exécuté sur
+un ordinateur par nature déterministe, il devient <i>de facto</i> un algorithme
+déterministe. Ses sorties sont inévitablement entachées d&rsquo;une caractéristique
+absente d&rsquo;une vraie suite aléatoire : la périodicité. Avec des ressources
+limitées (mémoire, nombre de registres, &#x2026;), le générateur retrouvera le même
+état interne. Un générateur non périodique n&rsquo;est pas impossible, mais nécessite
+une mémoire croissante pour ne pas se retrouver dans le même état. Pour
+contourner cet obstacle théorique, le générateur peut commencer dans un état
+quelconque (la &ldquo;graine&rdquo;, <i>seed</i> en anglais). L&rsquo;initialisation se fait par
+l&rsquo;intermédiaire de la méthode <code>srand(int seed)</code> qui prend pour argument la
+graine. Il produira toutefois la même séquence de nombres aléatoires si la graine
+reste identique.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2">Addendum 2</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+Les différentes instances d&rsquo;une classe ont toutes les mêmes méthodes. Mais
+chaque instance a ses propres membres. Un membre statique est, par définition,
+un <b>membre qui est le même</b>, <i>i.e.</i> situé dans le même espace mémoire, pour
+toutes les instances de la classe. La syntaxe de sa déclaration est la suivante:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">nom_classe</span> {
+  ...
+  <span class="org-keyword">static</span> type nom_variable_statique;
+  ...
+};
+</pre>
+</div>
+
+<p>
+Un membre statique doit être initialisé explicitement dans le fichier <code>.cc</code>
+correspondant à la classe, avec la syntaxe suivante:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">type</span> <span class="org-constant">nom_classe</span>::<span class="org-variable-name">nom_variable_statique</span> = valeur_initiale;
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

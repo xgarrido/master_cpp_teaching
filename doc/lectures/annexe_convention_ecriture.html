@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Convention d&rsquo;écriture et organisation des programmes</title>
+<!-- 2013-10-19 sam. 16:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Convention d&rsquo;écriture et organisation des programmes</h1><hr/>
+<p>
+La conception d&rsquo;un programme informatique aussi complexe soit il, nécessite
+quelques règles afin de faciliter autant son écriture que sa lecture voire sa
+relecture. Ce chapitre propose ainsi une revue, non-exhaustive, de différentes
+règles, plus ou moins arbitraires, érigées afin de rendre un programme
+informatique lisible et compréhensible. Libre à chacun de suivre ou non ces
+quelques recommendations&#x2026;
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Principales règles d&rsquo;écriture</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Historiquement, le besoin de &ldquo;normaliser&rdquo; l&rsquo;écriture de programme informatique a
+naturellement conduit leurs auteurs à définir certaines règles
+élémentaires. C&rsquo;est ainsi que Charles Simonyi<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> a introduit une convention
+d&rsquo;écriture baptisée notation hongroise (Charles Simonyi en plus d&rsquo;être touriste
+spatial est hongrois) qui permet de préciser la nature d&rsquo;une variable en
+ajoutant à son nom, un préfixe relatif au type de la variable. Les principales
+règles issues de cette notation sont listées dans le Tableau <a href="#tab::hunNota">1</a>.
+</p>
+
+<table id="tab::hunNota" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption align="above"><span class="table-number">Table 1:</span> <b>Notation hongroise telle que définie par Charles Simonyi.</b> Une variable entière se voit ainsi précéder de la lettre <code>i</code> en référence au type <code>integer</code> alors que la déclaration d&rsquo;un pointeur se fera à l&rsquo;aide de la lettre <code>p</code></caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Préfixe</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>i</code></td>
+<td class="left"><code>integer</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>f</code></td>
+<td class="left"><code>float</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>d</code></td>
+<td class="left"><code>double</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>c</code></td>
+<td class="left"><code>character</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>b</code></td>
+<td class="left"><code>boolean</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>by</code> ou <code>byte</code></td>
+<td class="left"><code>byte</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>str</code></td>
+<td class="left">C++ <code>string</code> object</td>
+</tr>
+
+<tr>
+<td class="left"><code>v</code></td>
+<td class="left">C++ <code>vector</code> object</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>p</code></td>
+<td class="left">pointeur vers</td>
+</tr>
+
+<tr>
+<td class="left"><code>r</code></td>
+<td class="left">référence à</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>m_</code></td>
+<td class="left">variable membre</td>
+</tr>
+
+<tr>
+<td class="left"><code>g_</code></td>
+<td class="left">variable globale</td>
+</tr>
+
+<tr>
+<td class="left"><code>s_</code></td>
+<td class="left">variable statique</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Suivant ces règles, une variable de type <code>float</code> s&rsquo;écrit, par exemple, <code>fRadius</code>
+tandis que cette même grandeur devient <code>m_fRadius</code> dès lors qu&rsquo;elle est membre
+d&rsquo;une classe.
+</p>
+
+<p>
+Bien que cette notation comporte plusieurs avantages, elle n&rsquo;en reste pas moins
+inadaptée lorsque nous sommes confrontés au problème de portabilité ou encore
+lorsqu&rsquo;il est nécessaire de changer le type d&rsquo;une variable. En se référant à
+l&rsquo;exemple précédent, si nous devions changer le type de notre variable <code>fRadius</code>
+de <code>float</code> en <code>double</code>, il serait alors nécessaire de remplacer toutes les
+occurrences de <code>fRadius</code> en <code>dRadius</code>. Opération fastidieuse et parfois risquée.
+</p>
+
+<p>
+Nous conserverons toutefois certaines de ces notations, en particulier celles
+qui sont indépendantes de l&rsquo;architecture de la machine comme <code>m_</code> pour les
+membres de classe de même que pour la déclaration de variable locale (<code>i</code> sera
+notamment utilisé au sein des boucles : <code>for (unsigned int iRun = 0;...)</code>).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Déclaration des variables</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Le choix des noms de variable (et de méthode) doit être le plus explicite
+possible. Des déclarations telles que <code>nb</code> sont à proscrire étant donné qu&rsquo;elles
+ne renseignent pas sur la nature des variables mises en jeu. Le nom doit donc
+fournir le plus d&rsquo;information possible, la longueur de l&rsquo;identifiant ne devant
+finalement pas être un frein à la déclaration de variable.
+</p>
+
+<p>
+Sachant qu&rsquo;un nom de variable est composé de caractères alphanumériques, le
+premier devant obligatoirement être une lettre (éventuellement un <i>underscore</i>
+<code>_</code>), nous proposons les constructions suivantes :
+</p>
+
+<ul class="org-ul">
+<li>pour les variables membres d&rsquo;une classe, la variable est préfixé par le champ
+<code>m_</code>. Chaque mot est écrit en minuscule, les mots étant séparés par le
+caractère <code>_</code> (ex : <code>m_radius_detector</code>),
+</li>
+
+<li>pour des variables locales, seule le préfixe est substitué par toute autre
+identificateur, la syntaxe respectant la première règle (ex :
+<code>my_radius_detetector</code>).
+</li>
+</ul>
+
+<p>
+Par ailleurs, le respect de l&rsquo;orthographe est également à prendre en
+considération. Ainsi, il est préférable d&rsquo;écrire le nom d&rsquo;une méthode
+<code>get_parameters ()</code> dès lors qu&rsquo;elle retourne un ensemble de paramètres et
+<code>get_parameter ()</code> lorsqu&rsquo;il s&rsquo;agira de récupérer la valeur d&rsquo;un seul paramètre.
+</p>
+
+<p>
+Enfin, on évitera autant que possible les rédondances dans les identifiants qui
+ont tendance à rallonger l&rsquo;écriture et surchargent la relecture. Par exemple,
+<code>my_detector.initialize_detector ()</code> devient <code>my_detector.initialize ()</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Organisation des programmes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Au niveau de l&rsquo;écriture du code, la modularité du programme est une donnée
+essentielle. Les idées qui en sont à la base sont les suivantes :
+</p>
+
+<ul class="org-ul">
+<li>diviser le travail en plusieurs équipes,
+</li>
+
+<li>créer des programmes indépendants de la problématique globale, donc
+réutilisables par d&rsquo;autres logiciels,
+</li>
+
+<li>limiter les risques d&rsquo;erreurs liés à la reprogrammation de certaines parties
+du code.
+</li>
+</ul>
+
+<p>
+Ces principes issus du développement de projet d&rsquo;envergure demeurent toutefois
+applicable au développeur lambda. En effet, il est toujours plus facile de
+décomposer un problème en ses éléments, forcément plus simples, que de le
+traiter dans sa totalité. Par ailleurs, l&rsquo;introduction par la programmation
+orienté-objet de la notion de classe et donc de structure de données facilitent
+grandement la conception de programme modulaire.
+</p>
+
+<p>
+Pour atteindre cet objectif, il est indispensable de pouvoir découper un
+programme en sous-programmes indépendants. Pour que chacun puisse travailler sur
+sa partie de programme, il faut que ces morceaux de programme soient dans des
+fichiers séparés.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+père des logiciels Word et Excel mais également connu pour ses vols comme
+touriste à bord de la station spatiale internationale en 2007 et 2009
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

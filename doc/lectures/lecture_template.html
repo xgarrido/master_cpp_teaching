@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Notions de patrons de fonctions et de classes</title>
+<!-- 2013-10-19 sam. 16:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Notions de patrons de fonctions et de classes</h1><hr/>
+<p>
+Nous avons vu que la surdéfinition de fonctions permettait de donner un nom
+unique à plusieurs fonctions réalisant un travail différent. La notion de
+&ldquo;patron&rdquo; de fonction (<i>template</i> en anglais) est à la fois plus puissante et
+plus restrictive; plus puissante car il suffit d&rsquo;écrire une seule fois la
+définition d&rsquo;une fonction pour que le compilateur puisse automatiquement
+l&rsquo;adapter à n&rsquo;importe quel type; plus restrictive car cela suppose alors que
+l&rsquo;ensemble des fonctions ainsi définies corresponde à la même définition, donc
+au même algorithme. Dans ce cadre, les notions de surdéfinition de fonction et
+de patron de fonctions répondent chacune à un besoin différent.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Les patrons de fonction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Pour tenter d&rsquo;illustrer l&rsquo;intérêt des patrons de fonctions et leurs différences
+vis-à-vis de la surdéfinition de fonction, considérons le cas scolaire de la
+recherche du minimum de deux valeurs. Du point de vue de la surdéfinition de
+fonction, il s&rsquo;agit d&rsquo;écrire une fonction <code>min</code> pour chaque type de variable
+rencontrée, soit
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">b</span>)
+{
+  <span class="org-keyword">return</span> a &lt; b ? a : b;
+}
+
+<span class="org-type">float</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">b</span>)
+{
+  <span class="org-keyword">return</span> a &lt; b ? a : b;
+}
+
+<span class="org-type">char</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">b</span>)
+{
+  <span class="org-keyword">return</span> a &lt; b ? a : b;
+}
+</pre>
+</div>
+
+<p>
+Selon le contexte c&rsquo;est-à-dire suivant le type d&rsquo;argument fourni lors de l&rsquo;appel
+de la fonction <code>min</code>, le compilateur se chargera d&rsquo;utiliser la fonction
+adéquat. Toutefois, l&rsquo;ensemble de ces définitions réalise la même opération et
+d&rsquo;autre part, il devient nécessaire à l&rsquo;auteur de la fonction, de considérer
+l&rsquo;ensemble des types possibles et imaginables. Pour simplifer considérablement
+les choses, le C++ permet l&rsquo;utilisation de <b>patrons de fonctions</b> afin de
+généraliser la définition de fonctions. Ainsi, l&rsquo;ensemble des cas susceptibles
+d&rsquo;être rencontrés par la surdéfinition de fonctions peut se résumer à la
+déclaration suivante
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">T</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">b</span>)
+{
+  <span class="org-keyword">return</span> a &lt; b ? a : b;
+}
+</pre>
+</div>
+
+<p>
+Seul l&rsquo;entête a changé, le corps de la fonction étant nécessairement indépendant
+du type de paramètres<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> fournis. Ainsi la précédente déclaration précise que
+l&rsquo;on est en présence d&rsquo;un patron (<code>template</code>) dans lequel apparaît un
+&ldquo;paramètre&rdquo; de type désigné par la lettre <code>T</code>. En d&rsquo;autres termes, dans la
+définition de la fonction <code>min</code>, <code>T</code> représente un type quelconque à la fois
+type de retour de la fonction mais également argument de cette dernière.
+</p>
+
+<p>
+Pour utiliser le patron <code>min</code> précédemment crée, il suffit d&rsquo;utiliser la
+fonction <code>min</code> dans des conditions appropriées (dans notre cas, en fournissant
+deux arguments de même type). Le code suivant illustre quelques appels de cette
+fonction
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">i1</span> = 2, <span class="org-variable-name">i2</span> = 7;
+  <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">f1</span> = 3.4, <span class="org-variable-name">f2</span> = 5.6;
+  <span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">c1</span> = <span class="org-string">'d'</span>, <span class="org-variable-name">c2</span> = <span class="org-string">'z'</span>;
+
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (i1,i2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; f1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; f2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (f1,f2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; c1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; c2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (c1,c2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min(&amp;c1,&amp;c2) = "</span> &lt;&lt; min (&amp;c1,&amp;c2) &lt;&lt; endl;
+}
+</pre>
+</div>
+
+<p>
+Dans le premier cas où les arguments sont de type <code>int</code>, le compilateur
+&ldquo;enregistrera&rdquo; <i>i.e.</i> fabriquera automatiquement la fonction <code>min</code> dite fonction
+patron correspondant à des arguments de type entier. De même, pour des arguments
+de type <code>float</code> ou un caractère.
+</p>
+
+<p>
+S&rsquo;il n&rsquo;est plus nécessaire de définir une implémentation par type de données, le
+compilateur doit cependant disposer de la définition du patron afin de
+déterminer quelle fonction enregistrer. Aussi, la définition doit nécessairement
+intervenir avant une quelconque utilisation de la fonction. D&rsquo;autre part, cette
+généralisation dans l&rsquo;écriture de fonctions s&rsquo;applique également aux classes
+moyennant la surcharge des opérateurs mis en jeu (ici, l&rsquo;opérateur <code>&lt;</code>). Il est
+parfaitement envisageable d&rsquo;appeler la fonction <code>min</code> avec comme argument la
+désormais célèbre classe <code>Point</code>, sous réserve que l&rsquo;opérateur d&rsquo;infériorité <code>&lt;</code>
+soit surchargé. Ainsi, le programme suivant demeure valable
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">Point</span>
+{
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">Point</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">abs</span> = 0,
+        <span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">ord</span> = 0) : m_X(abs), m_Y(ord) {}
+
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-function-name">GetNorme</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_X*m_X+m_Y*m_Y; }
+  <span class="org-keyword">friend</span> <span class="org-type">bool</span> <span class="org-keyword">operator</span><span class="org-function-name">&lt;</span>(<span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p1</span>, <span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p2</span>);
+<span class="org-keyword">private</span>:
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_X</span>;
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_Y</span>;
+};
+
+<span class="org-type">bool</span> <span class="org-keyword">operator</span><span class="org-function-name">&lt;</span>(<span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p1</span>, <span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p2</span>)
+{
+  <span class="org-keyword">return</span> p1.GetNorme() &lt; p2.GetNorme();
+}
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+  <span class="org-type">Point</span> <span class="org-variable-name">myPoint1</span>(3,4), <span class="org-variable-name">myPoint2</span>(5,2);
+  <span class="org-type">Point</span> <span class="org-variable-name">myPoint3</span> = min(myPoint1,myPoint2);
+}
+</pre>
+</div>
+
+<p>
+Le couplage entre patron de fonctions et surcharge d&rsquo;opérateur constitue donc un
+outil puissant qui permet d&rsquo;obtenir une forme &ldquo;d&rsquo;abstraction&rdquo; en
+s&rsquo;affranchissant des problèmes de type.
+</p>
+</div>
+
+<div id="outline-container-sec-1-0-1" class="outline-4">
+<h4 id="sec-1-0-1">Remarques</h4>
+<div class="outline-text-4" id="text-1-0-1">
+<ul class="org-ul">
+<li>Le mécanisme même des patrons fait que ces instructions sont utilisées par le
+compilateur pour enregistrer chaque fois qu&rsquo;il est nécessaire, les
+instructions correspondant à la fonction requise. La définition de patron ne
+peut donc intervenir dans un module objet (fichiers <code>.cc,.cpp</code>,&#x2026;)
+indépendant de l&rsquo;utilisation qui en sera faite. Dans la pratique, les
+définitions de patrons se situent donc dans un fichier d&rsquo;entête de telle sorte
+à être &ldquo;en ligne"<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
+</li>
+
+<li>Un patron de fonctions peut comporter un ou
+plusieurs paramètres de type, chacun devant être précédé du mot clé
+<code>class</code> :
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>...&gt; <span class="org-type">void</span> <span class="org-function-name">fct</span>(<span class="org-type">T</span> <span class="org-variable-name">t</span>, <span class="org-type">U</span> <span class="org-variable-name">u</span>, ...)
+</pre>
+</div>
+<p>
+Dans tous les cas, il est nécessaire que chaque paramètre de type
+apparaisse au moins une fois dans l&rsquo;entête du patron.
+</p>
+</li>
+
+<li>Dans l&rsquo;hypothèse où la fonction <code>min</code> est appelée avec des arguments de type
+différents (<code>char</code> et <code>int</code>, par exemple), il y aura une erreur de compilation
+du fait que le C++ impose une correspondance absolue des types. Il est
+cependant possible d&rsquo;intervenir sur ce mécanisme d&rsquo;identification de type, en
+imposant le type des arguments lors de l&rsquo;appel de la fonction. Ainsi, les
+instructions suivantes sont toutes valables
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i1</span> = 2;
+<span class="org-type">int</span> <span class="org-variable-name">i2</span> = 3;
+<span class="org-type">char</span> <span class="org-variable-name">c1</span> = <span class="org-string">'c'</span>;
+<span class="org-comment-delimiter">// </span><span class="org-comment">Force l'utilisation de min&lt;int&gt; en imposant la conversion</span>
+<span class="org-comment-delimiter">// </span><span class="org-comment">de c en int, le r&#233;sultat &#233;tant une valeur enti&#232;re</span>
+cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; c1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span>
+     &lt;&lt; <span class="org-type">min</span>&lt;<span class="org-type">int</span>&gt;(c1, i2) &lt;&lt; endl;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Force l'utilisation de min&lt;int&gt; en imposant la conversion</span>
+<span class="org-comment-delimiter">// </span><span class="org-comment">de i1 en int, le r&#233;sultat &#233;tant une valeur enti&#232;re</span>
+cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span>
+     &lt;&lt; <span class="org-type">min</span>&lt;<span class="org-type">int</span>&gt;(i1, i2) &lt;&lt; endl;
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Force l'utilisation de min&lt;char&gt; en imposant la conversion</span>
+<span class="org-comment-delimiter">// </span><span class="org-comment">de i1 et i2 en char, le r&#233;sultat &#233;tant un caract&#232;re</span>
+cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span>
+     &lt;&lt; <span class="org-type">min</span>&lt;<span class="org-type">char</span>&gt;(i1,i2) &lt;&lt; endl;
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Les patrons de classe</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Le précédent paragraphe a montré comment C++ permettait, grâce à la notion de
+patron de fonction, de définir une famille de fonctions paramétrées par un ou
+plusieurs types. D&rsquo;une manière comparable, C++ permet de définir des &ldquo;patrons
+de classe&rdquo; afin de définir une seule et unique fois la classe pour que le
+compilateur puisse automatiquement l&rsquo;adapter à différents types. Ce mécanisme
+évite ainsi de définir plusieurs classes similaires pour décrire un même concept
+appliqué à plusieurs types de données différents. Cette notion est largement
+utilisée pour définir tous les types de &ldquo;containers&rdquo; (comme les listes, les
+tables, les piles, etc.), mais également d&rsquo;algorithmes génériques tels que ceux
+de la bibliothèque standard.
+</p>
+
+<p>
+La syntaxe permettant de définir un patron de classe est similaire à celle qui
+permet de définir des patrons de fonctions. Un exemple de classe template,
+portant sur la structure <code>Point</code> pour laquelle la précision de représentation
+(entiers, entiers non signés, réels,&#x2026;) est le paramètre type de la classe, est
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-keyword">class</span> <span class="org-type">Point</span>
+{
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">Point</span>(<span class="org-type">T</span> <span class="org-variable-name">abs</span> = 0, <span class="org-type">T</span> <span class="org-variable-name">ord</span> = 0) : m_X(abs), m_Y(ord) {}
+  <span class="org-type">void</span> <span class="org-function-name">Affiche</span>();
+<span class="org-keyword">private</span>:
+  <span class="org-type">T</span> <span class="org-variable-name">m_X</span>;
+  <span class="org-type">T</span> <span class="org-variable-name">m_Y</span>;
+};
+</pre>
+</div>
+
+<p>
+Pour complèter la définition de notre patron de classe, il convient de définir
+les méthodes. Selon que l&rsquo;on souhaite définir la méthode en ligne (<i>i.e.</i> à
+l&rsquo;intérieur de la définition du patron de classe) ou non, la démarche est
+sensiblement différente. Dans le cas de la définition en ligne telle le
+constructeur <code>Point(T abs = 0, T ord = 0)</code>, l&rsquo;utilisation demeure naturelle, la
+seule contrainte tenant à l&rsquo;emploi du paramètre de type <code>T</code>. En revanche,
+lorsque la méthode est définie en dehors, il est impératif de rappeler au
+compilateur :
+</p>
+
+<ul class="org-ul">
+<li>que, dans la définition de cette fonction, vont apparaître des paramètres de
+type. On fournit donc la liste de paramètre sous la forme <code>template&lt;class T&gt;</code>,
+</li>
+
+<li>le nom du patron concerné. Par exemple, si nous définissons la méthode
+  <code>Affiche</code>, son nom sera <code>Point&lt;T&gt;::Affiche()</code>.
+</li>
+</ul>
+
+<p>
+Ainsi, la méthode <code>Affiche</code> serait définie de la façon suivante
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">void</span> <span class="org-constant">Point</span>&lt;<span class="org-type">T</span>&gt;::<span class="org-function-name">Affiche</span>()
+{
+  cout &lt;&lt; <span class="org-string">"Coordonn&#233;es : "</span> &lt;&lt; m_X &lt;&lt; <span class="org-string">" "</span> &lt;&lt; m_Y &lt;&lt; endl;
+}
+</pre>
+</div>
+
+<p>
+L&rsquo;utilisation de patron de classe est similaire à celle des patrons de fonctions
+à ceci près qu&rsquo;il est nécessaire d&rsquo;imposer le paramètre de type lors de
+l&rsquo;instanciation de la classe. Aussi après avoir crée le patron de classe
+<code>Point</code>, la déclaration d&rsquo;instances de <code>Point</code> est
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">Point</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">myPointWithInteger</span>;
+<span class="org-type">Point</span>&lt;<span class="org-type">double</span>&gt; <span class="org-function-name">myPointWithDouble</span>(3.2,4.5);
+</pre>
+</div>
+
+<p>
+Les contraintes d&rsquo;utilisation de patron de classe sont du même ordre que celles
+inhérentes à l&rsquo;utilisation des patrons de fonctions : les recommendations issues
+du premier paragraphe de cette fiche sont donc également applicables aux patrons
+de classe. La principale d&rsquo;entre elles tient à la définition de la classe et de
+ses méthodes qui est indispensable au compilateur pour enregistrer chaque fois
+que nécessaire les instructions requises. En pratique, on placera donc les
+définitions de patron dans un fichier d&rsquo;entête approprié.
+</p>
+
+<p>
+Il est également envisageable de fournir un nombre quelconque de paramètre de
+type dans la définition du patron de classe de même que des paramètres
+expressions. L&rsquo;exemple ci-dessous illustre ces cas
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n</span>&gt; <span class="org-keyword">class</span> <span class="org-type">Tableau</span>
+{
+  <span class="org-type">T</span> <span class="org-variable-name">m_Tab</span>[n];
+  <span class="org-type">U</span> <span class="org-variable-name">m_Mean</span>;
+
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">Tableau</span>() {}
+  <span class="org-type">T</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">[]</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span>) <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_Tab[i]; }
+  <span class="org-type">U</span> <span class="org-function-name">GetMean</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_Mean; }
+};
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+  <span class="org-type">Tableau</span>&lt;<span class="org-type">int</span>, <span class="org-type">float</span>, 5&gt; <span class="org-variable-name">myTableau1</span>;
+  <span class="org-type">Tableau</span>&lt;<span class="org-type">float</span>, <span class="org-type">float</span>, 10&gt; <span class="org-variable-name">myTableau2</span>;
+  <span class="org-type">Tableau</span>&lt;<span class="org-type">Point</span>&lt;<span class="org-type">int</span>&gt;, <span class="org-type">Point</span>&lt;<span class="org-type">float</span>&gt;, 6&gt; <span class="org-variable-name">myTableau3</span>;
+}
+</pre>
+</div>
+
+<p>
+Par ailleurs, il n&rsquo;est pas possible de surdéfinir un patron de classe
+c&rsquo;est-à-dire de créer plusieurs patrons de même nom mais comportant une liste de
+paramètres (de type ou d&rsquo;expression) différent et ce contrairement aux patrons
+de fonctions. En conséquence, les ambiguïtés évoquées lors de l&rsquo;instanciation
+d&rsquo;une classe fonction ne peuvent plus se poser dans le cas de l&rsquo;instanciation
+d&rsquo;une classe patron.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+dans le cadre des patrons de fonctions et de classes, on parle
+communément de paramètres et non d&rsquo;argument. D&rsquo;autre part, le C++ a décidé
+d&rsquo;employer le mot clé <code>class</code> pour préciser que <code>T</code> est un paramètre de
+type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
+clé <code>typename</code> qui peut se substituer au mot clé <code>class</code>. Cependant, son
+utilisation est peu répandue.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+les compilateurs récents permettent l&rsquo;usage du mot clé <code>export</code> lors de
+la définition d&rsquo;un patron <code>export template&lt;class T&gt; T min(T a, T b) {...}</code>. On
+peut alors utiliser ce patron depuis un autre fichier source, en se contentant
+de mentionner sa &ldquo;déclaration&rdquo;.
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
