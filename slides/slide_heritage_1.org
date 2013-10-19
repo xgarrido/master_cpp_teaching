@@ -1,0 +1,199 @@
+#+TITLE:  Héritage (Partie 1)
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+
+* Introduction
+
+- L'héritage est un nouveau moyen de faire intéragir les classes entre elles par
+  le biais de *relations dites hiérarchiques*
+
+#+BEGIN_SRC latex
+  \begin{center}
+    \begin{tikzpicture}[
+        grow=down,
+        linet/.style={very thick,draw=blue!60,
+          shorten >=0pt, shorten <=0pt, ->},
+        punkt/.style={rectangle, rounded corners, shade, top color=white,
+          bottom color=blue!10, draw=blue!60, very thick,
+          text centered, text width=9.5em}
+      ]
+      \ttfamily\color{blue}
+      \path (0,0)    node(a) [punkt] {class A (polygone)}
+            (0,-1.5) node(b) [punkt] {class B (rectangle)};
+      \draw[linet] (a) -- (b);
+    \end{tikzpicture}
+  \end{center}
+#+END_SRC
+
+* Introduction
+
+#+BEGIN_SRC latex
+  \begin{center}
+    \begin{tikzpicture}[
+        grow=down,
+        linet/.style={very thick,draw=blue!60,
+          shorten >=0pt, shorten <=0pt, ->},
+        punkt/.style={rectangle, rounded corners, shade, top color=white,
+          bottom color=blue!10, draw=blue!60, very thick,
+          text centered, text width=9.5em}
+      ]
+      \ttfamily\color{blue}
+      \path (0,0)    node(a) [punkt] {class A (polygone)}
+      (0,-1.5) node(b) [punkt] {class B (rectangle)};
+      \draw[linet] (a) -- (b);
+    \end{tikzpicture}
+  \end{center}
+#+END_SRC
+
+- Une classe =B= qui hérite d'une classe =A= a accès à tous les membres et
+  méthodes de =A=
+
+#+BEAMER: \pause
+
+- Ainsi, la classe =B= est basée sur la classe =A= mais peut également ajouter
+  de nouveaux membres ainsi que de nouvelles méthodes propres à sa fonction :
+
+  - [\rightarrow] la classe =A= que l'on appellera *classe mère ou de base* est
+    *une généralisation* de =B=,
+
+  - [\rightarrow] la classe =B= que l'on dit *dérivée ou classe fille*
+    de =A= est donc *spécialisation* de =A=.
+
+* Notions d'héritage simple
+
+#+BEGIN_SRC c++
+  class polygone
+  {
+  protected:
+    unsigned int m_nombre_segment;
+  };
+
+  class rectangle : public polygone
+  {
+  public:
+    void set_largeur (const double largeur_);
+
+  private:
+    double m_longueur;
+    double m_largeur;
+  };
+#+END_SRC
+
+#+BEAMER: \pause
+- La relation d'héritage est matérialisée par l'usage de la directive *=public
+  polygone=*
+#+BEAMER: \pause
+- Le mot-clé *=protected=* autorise la classe dérivée (ici =rectangle=) à accéder
+  aux membres de la classe de base (ici =polygone=)
+
+* Statut des membres et méthodes de classe
+
+- =private= :: les membres ne sont accessibles qu'aux méthodes et aux fonctions
+               amies de la classe
+- =protected= :: les membres sont accessibles aux méthodes de la classe de base
+                 ainsi qu'aux classes dérivées. Ils demeurent toutefois
+                 inaccessibles à l'utilisateur de la classe contrairement au
+                 statut =public=
+- =private= :: les membres sont accessibles non seulement aux méthodes mais
+               également à l'utilisateur de la classe c'est-à-dire à n'importe
+               quel objet/instance du type de la classe
+
+* Appels des constructeurs et destructeurs
+
+#+BEGIN_SRC c++
+  class polygone
+  {
+  public:
+    polygone (const unsigned int nbr_segment_) :
+      m_nombre_segment (nbr_segment_) {}
+  protected:
+    unsigned int m_nombre_segment;
+  };
+
+  class rectangle : public polygone
+  {
+  public:
+    rectangle (const double longueur_, const double largeur_) :
+      polygone (4),
+      m_longueur (longueur_), m_largeur (largeur_) {}
+  };
+#+END_SRC
+
+* Appels des constructeurs et destructeurs
+
+- À la construction d'une classe fille, le constructeur de la classe mère est
+  appelé *_avant_* toutes autres opérations
+
+- Lors de la destruction d'une classe fille, le destructeur de la classe de base
+  est appelé automatiquement *_après_* le destructeur de la classe fille
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+* Héritage vs. Composition
+
+Il faut bien distinguer les deux liens logiques que sont l'héritage et la
+composition:
+
+- Composition :: relation de type *_possède un_*; la classe =polygone= possède
+                 un ensemble de =point=
+- Héritage :: relation de type *_est un_*; la classe =rectangle= est un
+              =polygone=
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
+
+* Héritage vs. Interface
+
+Si l'héritage est une notion relativement puissante en POO, il faut néanmoins
+éviter les relations hiérarchique inappropriées.
+
+#+BEAMER: \vspace{+0.5cm}
+
+*Exemple :*
+
+Un objet de type =oiseau= tout comme un objet de type =avion= ont une fonction
+en commun à savoir voler.
+
+#+BEAMER: \vspace{+0.5cm}
+
+*Sont ils toutefois des classes dérivés d'une classe plus générale de type
+ =volatile= ?*
+
+#+BEAMER: \pause\vspace{0.5cm}
+
+On préfèrera utiliser l'héritage au niveau d'un partage de fonctionnalité /i.e./
+*une interface* déclarant une capacité à voler, chaque classe =oiseau= et
+=avion= spécialisant la méthode =vole=
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
+
+4. *Créer* des instances de ces objets et *utiliser* leurs méthodes pour
+   répondre au problème posé.
