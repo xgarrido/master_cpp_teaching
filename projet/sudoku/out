@@ -1,0 +1,2307 @@
+ Carre de ligne 1 de colonne 1
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][3] = 9
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 0
+ c[1][1].n[2][2] 0
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 0
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][1] = 4
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 0
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 0
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 8
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 0
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][2] = 3
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 1 de colonne 2
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][3] = 3
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 9
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][2] = 1
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 1 de colonne 3
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][2] = 1
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 2 de colonne 1
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][1] = 6
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][3] = 8
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 9
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][1] = 5
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 2 de colonne 2
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][1] = 4
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][2] = 5
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][2] = 3
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][3] = 9
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 2 de colonne 3
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][3] = 9
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 7
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][1] = 8
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][3] = 4
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 3 de colonne 1
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][2] = 5
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 3 de colonne 2
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][2] = 7
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 8
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][1] = 1
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Carre de ligne 3 de colonne 3
+ Nombre de valeurs a affecter? 
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[1][2] = 4
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][2] = 2
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[2][3] = 3
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ Ligne? 
+ Colonne? 
+ Valeur? 
+ affectation n[3][1] = 7
+ c[1][1].n[1][1] 0
+ c[1][1].n[1][2] 0
+ c[1][1].n[1][3] 9
+ c[1][1].n[2][1] 4
+ c[1][1].n[2][2] 8
+ c[1][1].n[2][3] 0
+ c[1][1].n[3][1] 0
+ c[1][1].n[3][2] 3
+ c[1][1].n[3][3] 0
+ test carre c[1][1] -1074816592
+ Affichage du carre 1,1
+0|0|9
+4|8|0
+0|3|0
+ Affichage du carre 1,2
+0|0|3
+0|9|0
+0|1|0
+ Affichage du carre 1,3
+0|1|0
+0|0|0
+0|0|0
+ Affichage du carre 2,1
+6|0|8
+0|9|0
+5|0|0
+ Affichage du carre 2,2
+4|5|0
+0|0|0
+0|3|9
+ Affichage du carre 2,3
+0|0|9
+0|7|0
+8|0|4
+ Affichage du carre 3,1
+0|0|0
+0|0|0
+0|5|0
+ Affichage du carre 3,2
+0|7|0
+0|8|0
+1|0|0
+ Affichage du carre 3,3
+0|4|0
+0|2|3
+7|0|0
+ Creation des tableaux des cases vides... 
+ Creation des tableaux des valeurs interdites pour le carre... 
+ Creation des tableaux des valeurs autorisees pour le carre... 
+ test c[1][1].n[3][2] 3
+ test c[1][1].n[3][3] 0
+ fin routine n_vide 5
+ apres fin routine n_vide 5
+***** Carre 1,1 : 
+ n_vide 5
+ valeur_autorisee 1
+ valeur_autorisee 2
+ valeur_autorisee 5
+ valeur_autorisee 6
+ valeur_autorisee 7
+ fin routine n_vide 6
+ apres fin routine n_vide 6
+***** Carre 1,2 : 
+ n_vide 6
+ valeur_autorisee 2
+ valeur_autorisee 4
+ valeur_autorisee 5
+ valeur_autorisee 6
+ valeur_autorisee 7
+ valeur_autorisee 8
+ fin routine n_vide 8
+ apres fin routine n_vide 8
+***** Carre 1,3 : 
+ n_vide 8
+ valeur_autorisee 2
+ valeur_autorisee 3
+ valeur_autorisee 4
+ valeur_autorisee 5
+ valeur_autorisee 6
+ valeur_autorisee 7
+ valeur_autorisee 8
+ valeur_autorisee 9
+ fin routine n_vide 5
+ apres fin routine n_vide 5
+***** Carre 2,1 : 
+ n_vide 5
+ valeur_autorisee 1
+ valeur_autorisee 2
+ valeur_autorisee 3
+ valeur_autorisee 4
+ valeur_autorisee 7
+ fin routine n_vide 5
+ apres fin routine n_vide 5
+***** Carre 2,2 : 
+ n_vide 5
+ valeur_autorisee 1
+ valeur_autorisee 2
+ valeur_autorisee 6
+ valeur_autorisee 7
+ valeur_autorisee 8
+ fin routine n_vide 5
+ apres fin routine n_vide 5
+***** Carre 2,3 : 
+ n_vide 5
+ valeur_autorisee 1
+ valeur_autorisee 2
+ valeur_autorisee 3
+ valeur_autorisee 5
+ valeur_autorisee 6
+ fin routine n_vide 8
+ apres fin routine n_vide 8
+***** Carre 3,1 : 
+ n_vide 8
+ valeur_autorisee 1
+ valeur_autorisee 2
+ valeur_autorisee 3
+ valeur_autorisee 4
+ valeur_autorisee 6
+ valeur_autorisee 7
+ valeur_autorisee 8
+ valeur_autorisee 9
+ fin routine n_vide 6
+ apres fin routine n_vide 6
+***** Carre 3,2 : 
+ n_vide 6
+ valeur_autorisee 2
+ valeur_autorisee 3
+ valeur_autorisee 4
+ valeur_autorisee 5
+ valeur_autorisee 6
+ valeur_autorisee 9
+ fin routine n_vide 5
+ apres fin routine n_vide 5
+***** Carre 3,3 : 
+ n_vide 5
+ valeur_autorisee 1
+ valeur_autorisee 5
+ valeur_autorisee 6
+ valeur_autorisee 8
+ valeur_autorisee 9
+ Determination des valeurs interdites pour une case d un carre a cause d autres carres 
+ Nombre de cases vides 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 0
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ Nombre de cases vides 6
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 0
+ Nombre de cases vides 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 5
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 5 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ Nombre de cases vides 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ Nombre de cases vides 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ Nombre de cases vides 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 0
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ Nombre de cases vides 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 5
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 5 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 5
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 5 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 6
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 4
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 7
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 4 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ Nombre de cases vides 6
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 4
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 2
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 3
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ Nombre de cases vides 5
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 1
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 8
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 2
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ c[i2][j2].n_interdit[no_ligne][no_colonne] 3
+ l= 1 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 5
+ l= 2 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 1
+ l= 3 c[i2][j2].interdit[no_ligne][no_colonne][ncompt] 9
+ Recherche des solutions carre par carre...
+######### Carre 1,1###############
+ ************ Solution 1
+2|6|9
+4|8|1
+7|3|5
+ ************ Solution 2
+7|6|9
+4|8|1
+2|3|5
+######### Carre 1,2###############
+ ************ Solution 1
+2|4|3
+5|9|6
+7|1|8
+ ************ Solution 2
+2|4|3
+5|9|6
+8|1|7
+ ************ Solution 3
+2|4|3
+5|9|7
+6|1|8
+ ************ Solution 4
+2|4|3
+5|9|7
+8|1|6
+ ************ Solution 5
+2|4|3
+6|9|5
+7|1|8
+ ************ Solution 6
+2|4|3
+6|9|5
+8|1|7
+ ************ Solution 7
+2|4|3
+6|9|7
+5|1|8
+ ************ Solution 8
+2|4|3
+6|9|7
+8|1|5
+ ************ Solution 9
+2|4|3
+7|9|5
+6|1|8
+ ************ Solution 10
+2|4|3
+7|9|5
+8|1|6
+ ************ Solution 11
+2|4|3
+7|9|6
+5|1|8
+ ************ Solution 12
+2|4|3
+7|9|6
+8|1|5
+ ************ Solution 13
+2|6|3
+5|9|7
+8|1|4
+ ************ Solution 14
+2|6|3
+7|9|5
+8|1|4
+ ************ Solution 15
+5|2|3
+6|9|7
+8|1|4
+ ************ Solution 16
+5|2|3
+7|9|6
+8|1|4
+ ************ Solution 17
+5|4|3
+2|9|6
+7|1|8
+ ************ Solution 18
+5|4|3
+2|9|6
+8|1|7
+ ************ Solution 19
+5|4|3
+2|9|7
+6|1|8
+ ************ Solution 20
+5|4|3
+2|9|7
+8|1|6
+ ************ Solution 21
+5|4|3
+6|9|2
+7|1|8
+ ************ Solution 22
+5|4|3
+6|9|2
+8|1|7
+ ************ Solution 23
+5|4|3
+6|9|7
+2|1|8
+ ************ Solution 24
+5|4|3
+6|9|7
+8|1|2
+ ************ Solution 25
+5|4|3
+7|9|2
+6|1|8
+ ************ Solution 26
+5|4|3
+7|9|2
+8|1|6
+ ************ Solution 27
+5|4|3
+7|9|6
+2|1|8
+ ************ Solution 28
+5|4|3
+7|9|6
+8|1|2
+ ************ Solution 29
+5|6|3
+2|9|7
+8|1|4
+ ************ Solution 30
+5|6|3
+7|9|2
+8|1|4
+ ************ Solution 31
+6|2|3
+5|9|7
+8|1|4
+ ************ Solution 32
+6|2|3
+7|9|5
+8|1|4
+ ************ Solution 33
+6|4|3
+2|9|5
+7|1|8
+ ************ Solution 34
+6|4|3
+2|9|5
+8|1|7
+ ************ Solution 35
+6|4|3
+2|9|7
+5|1|8
+ ************ Solution 36
+6|4|3
+2|9|7
+8|1|5
+ ************ Solution 37
+6|4|3
+5|9|2
+7|1|8
+ ************ Solution 38
+6|4|3
+5|9|2
+8|1|7
+ ************ Solution 39
+6|4|3
+5|9|7
+2|1|8
+ ************ Solution 40
+6|4|3
+5|9|7
+8|1|2
+ ************ Solution 41
+6|4|3
+7|9|2
+5|1|8
+ ************ Solution 42
+6|4|3
+7|9|2
+8|1|5
+ ************ Solution 43
+6|4|3
+7|9|5
+2|1|8
+ ************ Solution 44
+6|4|3
+7|9|5
+8|1|2
+ ************ Solution 45
+7|2|3
+5|9|6
+8|1|4
+ ************ Solution 46
+7|2|3
+6|9|5
+8|1|4
+ ************ Solution 47
+7|4|3
+2|9|5
+6|1|8
+ ************ Solution 48
+7|4|3
+2|9|5
+8|1|6
+ ************ Solution 49
+7|4|3
+2|9|6
+5|1|8
+ ************ Solution 50
+7|4|3
+2|9|6
+8|1|5
+ ************ Solution 51
+7|4|3
+5|9|2
+6|1|8
+ ************ Solution 52
+7|4|3
+5|9|2
+8|1|6
+ ************ Solution 53
+7|4|3
+5|9|6
+2|1|8
+ ************ Solution 54
+7|4|3
+5|9|6
+8|1|2
+ ************ Solution 55
+7|4|3
+6|9|2
+5|1|8
+ ************ Solution 56
+7|4|3
+6|9|2
+8|1|5
+ ************ Solution 57
+7|4|3
+6|9|5
+2|1|8
+ ************ Solution 58
+7|4|3
+6|9|5
+8|1|2
+ ************ Solution 59
+7|6|3
+2|9|5
+8|1|4
+ ************ Solution 60
+7|6|3
+5|9|2
+8|1|4
+ ************ Solution 61
+8|2|3
+5|9|6
+7|1|4
+ ************ Solution 62
+8|2|3
+5|9|7
+6|1|4
+ ************ Solution 63
+8|2|3
+6|9|5
+7|1|4
+ ************ Solution 64
+8|2|3
+6|9|7
+5|1|4
+ ************ Solution 65
+8|2|3
+7|9|5
+6|1|4
+ ************ Solution 66
+8|2|3
+7|9|6
+5|1|4
+ ************ Solution 67
+8|4|3
+2|9|5
+6|1|7
+ ************ Solution 68
+8|4|3
+2|9|5
+7|1|6
+ ************ Solution 69
+8|4|3
+2|9|6
+5|1|7
+ ************ Solution 70
+8|4|3
+2|9|6
+7|1|5
+ ************ Solution 71
+8|4|3
+2|9|7
+5|1|6
+ ************ Solution 72
+8|4|3
+2|9|7
+6|1|5
+ ************ Solution 73
+8|4|3
+5|9|2
+6|1|7
+ ************ Solution 74
+8|4|3
+5|9|2
+7|1|6
+ ************ Solution 75
+8|4|3
+5|9|6
+2|1|7
+ ************ Solution 76
+8|4|3
+5|9|6
+7|1|2
+ ************ Solution 77
+8|4|3
+5|9|7
+2|1|6
+ ************ Solution 78
+8|4|3
+5|9|7
+6|1|2
+ ************ Solution 79
+8|4|3
+6|9|2
+5|1|7
+ ************ Solution 80
+8|4|3
+6|9|2
+7|1|5
+ ************ Solution 81
+8|4|3
+6|9|5
+2|1|7
+ ************ Solution 82
+8|4|3
+6|9|5
+7|1|2
+ ************ Solution 83
+8|4|3
+6|9|7
+2|1|5
+ ************ Solution 84
+8|4|3
+6|9|7
+5|1|2
+ ************ Solution 85
+8|4|3
+7|9|2
+5|1|6
+ ************ Solution 86
+8|4|3
+7|9|2
+6|1|5
+ ************ Solution 87
+8|4|3
+7|9|5
+2|1|6
+ ************ Solution 88
+8|4|3
+7|9|5
+6|1|2
+ ************ Solution 89
+8|4|3
+7|9|6
+2|1|5
+ ************ Solution 90
+8|4|3
+7|9|6
+5|1|2
+ ************ Solution 91
+8|6|3
+2|9|5
+7|1|4
+ ************ Solution 92
+8|6|3
+2|9|7
+5|1|4
+ ************ Solution 93
+8|6|3
+5|9|2
+7|1|4
+ ************ Solution 94
+8|6|3
+5|9|7
+2|1|4
+ ************ Solution 95
+8|6|3
+7|9|2
+5|1|4
+ ************ Solution 96
+8|6|3
+7|9|5
+2|1|4
+######### Carre 1,3###############
+ ************ Solution 1
+2|1|5
+3|6|7
+4|9|8
+ ************ Solution 2
+2|1|5
+6|3|7
+4|9|8
+ ************ Solution 3
+2|1|6
+3|5|7
+4|9|8
+ ************ Solution 4
+2|1|6
+5|3|7
+4|9|8
+ ************ Solution 5
+2|1|7
+3|5|6
+4|9|8
+ ************ Solution 6
+2|1|7
+3|6|5
+4|9|8
+ ************ Solution 7
+2|1|7
+5|3|6
+4|9|8
+ ************ Solution 8
+2|1|7
+6|3|5
+4|9|8
+ ************ Solution 9
+2|1|8
+3|5|6
+4|9|7
+ ************ Solution 10
+2|1|8
+3|5|7
+4|9|6
+ ************ Solution 11
+2|1|8
+3|6|5
+4|9|7
+ ************ Solution 12
+2|1|8
+3|6|7
+4|9|5
+ ************ Solution 13
+2|1|8
+5|3|6
+4|9|7
+ ************ Solution 14
+2|1|8
+5|3|7
+4|9|6
+ ************ Solution 15
+2|1|8
+6|3|5
+4|9|7
+ ************ Solution 16
+2|1|8
+6|3|7
+4|9|5
+ ************ Solution 17
+4|1|2
+3|5|6
+9|8|7
+ ************ Solution 18
+4|1|2
+3|5|7
+6|9|8
+ ************ Solution 19
+4|1|2
+3|5|7
+9|6|8
+ ************ Solution 20
+4|1|2
+3|5|7
+9|8|6
+ ************ Solution 21
+4|1|2
+3|6|5
+9|8|7
+ ************ Solution 22
+4|1|2
+3|6|7
+5|9|8
+ ************ Solution 23
+4|1|2
+3|6|7
+9|5|8
+ ************ Solution 24
+4|1|2
+3|6|7
+9|8|5
+ ************ Solution 25
+4|1|2
+5|3|6
+9|8|7
+ ************ Solution 26
+4|1|2
+5|3|7
+6|9|8
+ ************ Solution 27
+4|1|2
+5|3|7
+9|6|8
+ ************ Solution 28
+4|1|2
+5|3|7
+9|8|6
+ ************ Solution 29
+4|1|2
+6|3|5
+9|8|7
+ ************ Solution 30
+4|1|2
+6|3|7
+5|9|8
+ ************ Solution 31
+4|1|2
+6|3|7
+9|5|8
+ ************ Solution 32
+4|1|2
+6|3|7
+9|8|5
+ ************ Solution 33
+4|1|5
+2|3|6
+9|8|7
+ ************ Solution 34
+4|1|5
+2|3|7
+6|9|8
+ ************ Solution 35
+4|1|5
+2|3|7
+9|6|8
+ ************ Solution 36
+4|1|5
+2|3|7
+9|8|6
+ ************ Solution 37
+4|1|5
+3|6|2
+9|8|7
+ ************ Solution 38
+4|1|5
+3|6|7
+2|9|8
+ ************ Solution 39
+4|1|5
+3|6|7
+9|8|2
+ ************ Solution 40
+4|1|5
+6|3|2
+9|8|7
+ ************ Solution 41
+4|1|5
+6|3|7
+2|9|8
+ ************ Solution 42
+4|1|5
+6|3|7
+9|8|2
+ ************ Solution 43
+4|1|6
+2|3|5
+9|8|7
+ ************ Solution 44
+4|1|6
+2|3|7
+5|9|8
+ ************ Solution 45
+4|1|6
+2|3|7
+9|5|8
+ ************ Solution 46
+4|1|6
+2|3|7
+9|8|5
+ ************ Solution 47
+4|1|6
+3|5|2
+9|8|7
+ ************ Solution 48
+4|1|6
+3|5|7
+2|9|8
+ ************ Solution 49
+4|1|6
+3|5|7
+9|8|2
+ ************ Solution 50
+4|1|6
+5|3|2
+9|8|7
+ ************ Solution 51
+4|1|6
+5|3|7
+2|9|8
+ ************ Solution 52
+4|1|6
+5|3|7
+9|8|2
+ ************ Solution 53
+4|1|7
+2|3|5
+6|9|8
+ ************ Solution 54
+4|1|7
+2|3|5
+9|6|8
+ ************ Solution 55
+4|1|7
+2|3|5
+9|8|6
+ ************ Solution 56
+4|1|7
+2|3|6
+5|9|8
+ ************ Solution 57
+4|1|7
+2|3|6
+9|5|8
+ ************ Solution 58
+4|1|7
+2|3|6
+9|8|5
+ ************ Solution 59
+4|1|7
+3|5|2
+6|9|8
+ ************ Solution 60
+4|1|7
+3|5|2
+9|6|8
+ ************ Solution 61
+4|1|7
+3|5|2
+9|8|6
+ ************ Solution 62
+4|1|7
+3|5|6
+2|9|8
+ ************ Solution 63
+4|1|7
+3|5|6
+9|8|2
+ ************ Solution 64
+4|1|7
+3|6|2
+5|9|8
+ ************ Solution 65
+4|1|7
+3|6|2
+9|5|8
+ ************ Solution 66
+4|1|7
+3|6|2
+9|8|5
+ ************ Solution 67
+4|1|7
+3|6|5
+2|9|8
+ ************ Solution 68
+4|1|7
+3|6|5
+9|8|2
+ ************ Solution 69
+4|1|7
+5|3|2
+6|9|8
+ ************ Solution 70
+4|1|7
+5|3|2
+9|6|8
+ ************ Solution 71
+4|1|7
+5|3|2
+9|8|6
+ ************ Solution 72
+4|1|7
+5|3|6
+2|9|8
+ ************ Solution 73
+4|1|7
+5|3|6
+9|8|2
+ ************ Solution 74
+4|1|7
+6|3|2
+5|9|8
+ ************ Solution 75
+4|1|7
+6|3|2
+9|5|8
+ ************ Solution 76
+4|1|7
+6|3|2
+9|8|5
+ ************ Solution 77
+4|1|7
+6|3|5
+2|9|8
+ ************ Solution 78
+4|1|7
+6|3|5
+9|8|2
+ ************ Solution 79
+4|1|8
+2|3|5
+6|9|7
+ ************ Solution 80
+4|1|8
+2|3|5
+9|6|7
+ ************ Solution 81
+4|1|8
+2|3|6
+5|9|7
+ ************ Solution 82
+4|1|8
+2|3|6
+9|5|7
+ ************ Solution 83
+4|1|8
+2|3|7
+5|9|6
+ ************ Solution 84
+4|1|8
+2|3|7
+6|9|5
+ ************ Solution 85
+4|1|8
+2|3|7
+9|5|6
+ ************ Solution 86
+4|1|8
+2|3|7
+9|6|5
+ ************ Solution 87
+4|1|8
+3|5|2
+6|9|7
+ ************ Solution 88
+4|1|8
+3|5|2
+9|6|7
+ ************ Solution 89
+4|1|8
+3|5|6
+2|9|7
+ ************ Solution 90
+4|1|8
+3|5|7
+2|9|6
+ ************ Solution 91
+4|1|8
+3|5|7
+6|9|2
+ ************ Solution 92
+4|1|8
+3|5|7
+9|6|2
+ ************ Solution 93
+4|1|8
+3|6|2
+5|9|7
+ ************ Solution 94
+4|1|8
+3|6|2
+9|5|7
+ ************ Solution 95
+4|1|8
+3|6|5
+2|9|7
+ ************ Solution 96
+4|1|8
+3|6|7
+2|9|5
+ ************ Solution 97
+4|1|8
+3|6|7
+5|9|2
+ ************ Solution 98
+4|1|8
+3|6|7
+9|5|2
+ ************ Solution 99
+4|1|8
+5|3|2
+6|9|7
+ ************ Solution 100
+4|1|8
+5|3|2
+9|6|7
+ ************ Solution 101
+4|1|8
+5|3|6
+2|9|7
+ ************ Solution 102
+4|1|8
+5|3|7
+2|9|6
+ ************ Solution 103
+4|1|8
+5|3|7
+6|9|2
+ ************ Solution 104
+4|1|8
+5|3|7
+9|6|2
+ ************ Solution 105
+4|1|8
+6|3|2
+5|9|7
+ ************ Solution 106
+4|1|8
+6|3|2
+9|5|7
+ ************ Solution 107
+4|1|8
+6|3|5
+2|9|7
+ ************ Solution 108
+4|1|8
+6|3|7
+2|9|5
+ ************ Solution 109
+4|1|8
+6|3|7
+5|9|2
+ ************ Solution 110
+4|1|8
+6|3|7
+9|5|2
+ ************ Solution 111
+5|1|2
+3|6|7
+4|9|8
+ ************ Solution 112
+5|1|2
+6|3|7
+4|9|8
+ ************ Solution 113
+5|1|6
+2|3|7
+4|9|8
+ ************ Solution 114
+5|1|7
+2|3|6
+4|9|8
+ ************ Solution 115
+5|1|7
+3|6|2
+4|9|8
+ ************ Solution 116
+5|1|7
+6|3|2
+4|9|8
+ ************ Solution 117
+5|1|8
+2|3|6
+4|9|7
+ ************ Solution 118
+5|1|8
+2|3|7
+4|9|6
+ ************ Solution 119
+5|1|8
+3|6|2
+4|9|7
+ ************ Solution 120
+5|1|8
+3|6|7
+4|9|2
+ ************ Solution 121
+5|1|8
+6|3|2
+4|9|7
+ ************ Solution 122
+5|1|8
+6|3|7
+4|9|2
+ ************ Solution 123
+6|1|2
+3|5|7
+4|9|8
+ ************ Solution 124
+6|1|2
+5|3|7
+4|9|8
+ ************ Solution 125
+6|1|5
+2|3|7
+4|9|8
+ ************ Solution 126
+6|1|7
+2|3|5
+4|9|8
+ ************ Solution 127
+6|1|7
+3|5|2
+4|9|8
+ ************ Solution 128
+6|1|7
+5|3|2
+4|9|8
+ ************ Solution 129
+6|1|8
+2|3|5
+4|9|7
+ ************ Solution 130
+6|1|8
+2|3|7
+4|9|5
+ ************ Solution 131
+6|1|8
+3|5|2
+4|9|7
+ ************ Solution 132
+6|1|8
+3|5|7
+4|9|2
+ ************ Solution 133
+6|1|8
+5|3|2
+4|9|7
+ ************ Solution 134
+6|1|8
+5|3|7
+4|9|2
+######### Carre 2,1###############
+ ************ Solution 1
+6|1|8
+3|9|4
+5|2|7
+ ************ Solution 2
+6|1|8
+3|9|4
+5|7|2
+ ************ Solution 3
+6|2|8
+3|9|4
+5|1|7
+ ************ Solution 4
+6|2|8
+3|9|4
+5|7|1
+ ************ Solution 5
+6|7|8
+3|9|4
+5|1|2
+ ************ Solution 6
+6|7|8
+3|9|4
+5|2|1
+######### Carre 2,2###############
+ ************ Solution 1
+4|5|1
+2|6|8
+7|3|9
+ ************ Solution 2
+4|5|1
+6|2|8
+7|3|9
+ ************ Solution 3
+4|5|1
+8|2|6
+7|3|9
+ ************ Solution 4
+4|5|1
+8|6|2
+7|3|9
+ ************ Solution 5
+4|5|2
+8|6|1
+7|3|9
+ ************ Solution 6
+4|5|7
+8|2|1
+6|3|9
+ ************ Solution 7
+4|5|7
+8|6|1
+2|3|9
+######### Carre 2,3###############
+ ************ Solution 1
+1|3|9
+2|7|5
+8|6|4
+ ************ Solution 2
+1|3|9
+5|7|2
+8|6|4
+ ************ Solution 3
+2|3|9
+1|7|5
+8|6|4
+ ************ Solution 4
+2|3|9
+5|7|1
+8|6|4
+######### Carre 3,1###############
+ ************ Solution 1
+1|2|3
+9|4|7
+8|5|6
+ ************ Solution 2
+1|2|3
+9|6|7
+8|5|4
+ ************ Solution 3
+1|2|3
+9|7|4
+8|5|6
+ ************ Solution 4
+1|2|3
+9|7|6
+8|5|4
+ ************ Solution 5
+1|2|6
+9|4|7
+8|5|3
+ ************ Solution 6
+1|2|6
+9|7|4
+8|5|3
+ ************ Solution 7
+1|6|2
+9|4|7
+8|5|3
+ ************ Solution 8
+1|6|2
+9|7|4
+8|5|3
+ ************ Solution 9
+1|6|3
+9|4|7
+8|5|2
+ ************ Solution 10
+1|6|3
+9|7|4
+8|5|2
+ ************ Solution 11
+2|1|3
+9|4|7
+8|5|6
+ ************ Solution 12
+2|1|3
+9|6|7
+8|5|4
+ ************ Solution 13
+2|1|3
+9|7|4
+8|5|6
+ ************ Solution 14
+2|1|3
+9|7|6
+8|5|4
+ ************ Solution 15
+2|1|6
+9|4|7
+8|5|3
+ ************ Solution 16
+2|1|6
+9|7|4
+8|5|3
+ ************ Solution 17
+2|6|1
+9|4|7
+8|5|3
+ ************ Solution 18
+2|6|1
+9|7|4
+8|5|3
+ ************ Solution 19
+2|6|3
+9|1|7
+8|5|4
+ ************ Solution 20
+2|6|3
+9|7|1
+8|5|4
+ ************ Solution 21
+3|1|2
+9|4|7
+8|5|6
+ ************ Solution 22
+3|1|2
+9|6|7
+8|5|4
+ ************ Solution 23
+3|1|2
+9|7|4
+8|5|6
+ ************ Solution 24
+3|1|2
+9|7|6
+8|5|4
+ ************ Solution 25
+3|1|6
+9|4|7
+8|5|2
+ ************ Solution 26
+3|1|6
+9|7|4
+8|5|2
+ ************ Solution 27
+3|2|1
+9|4|7
+8|5|6
+ ************ Solution 28
+3|2|1
+9|6|7
+8|5|4
+ ************ Solution 29
+3|2|1
+9|7|4
+8|5|6
+ ************ Solution 30
+3|2|1
+9|7|6
+8|5|4
+ ************ Solution 31
+3|2|6
+9|1|7
+8|5|4
+ ************ Solution 32
+3|2|6
+9|7|1
+8|5|4
+ ************ Solution 33
+3|6|1
+9|4|7
+8|5|2
+ ************ Solution 34
+3|6|1
+9|7|4
+8|5|2
+ ************ Solution 35
+3|6|2
+9|1|7
+8|5|4
+ ************ Solution 36
+3|6|2
+9|7|1
+8|5|4
+ ************ Solution 37
+8|1|2
+7|4|6
+9|5|3
+ ************ Solution 38
+8|1|2
+7|6|4
+9|5|3
+ ************ Solution 39
+8|1|2
+9|4|7
+3|5|6
+ ************ Solution 40
+8|1|2
+9|6|7
+3|5|4
+ ************ Solution 41
+8|1|2
+9|7|4
+3|5|6
+ ************ Solution 42
+8|1|2
+9|7|6
+3|5|4
+ ************ Solution 43
+8|1|3
+7|4|6
+9|5|2
+ ************ Solution 44
+8|1|3
+7|6|4
+9|5|2
+ ************ Solution 45
+8|1|3
+9|4|7
+2|5|6
+ ************ Solution 46
+8|1|3
+9|6|7
+2|5|4
+ ************ Solution 47
+8|1|3
+9|7|4
+2|5|6
+ ************ Solution 48
+8|1|3
+9|7|6
+2|5|4
+ ************ Solution 49
+8|1|6
+9|4|7
+2|5|3
+ ************ Solution 50
+8|1|6
+9|4|7
+3|5|2
+ ************ Solution 51
+8|1|6
+9|7|4
+2|5|3
+ ************ Solution 52
+8|1|6
+9|7|4
+3|5|2
+ ************ Solution 53
+8|2|1
+7|4|6
+9|5|3
+ ************ Solution 54
+8|2|1
+7|6|4
+9|5|3
+ ************ Solution 55
+8|2|1
+9|4|7
+3|5|6
+ ************ Solution 56
+8|2|1
+9|6|7
+3|5|4
+ ************ Solution 57
+8|2|1
+9|7|4
+3|5|6
+ ************ Solution 58
+8|2|1
+9|7|6
+3|5|4
+ ************ Solution 59
+8|2|3
+1|4|7
+9|5|6
+ ************ Solution 60
+8|2|3
+1|6|7
+9|5|4
+ ************ Solution 61
+8|2|3
+1|7|4
+9|5|6
+ ************ Solution 62
+8|2|3
+1|7|6
+9|5|4
+ ************ Solution 63
+8|2|3
+7|1|4
+9|5|6
+ ************ Solution 64
+8|2|3
+7|1|6
+9|5|4
+ ************ Solution 65
+8|2|3
+7|4|1
+9|5|6
+ ************ Solution 66
+8|2|3
+7|6|1
+9|5|4
+ ************ Solution 67
+8|2|6
+1|4|7
+9|5|3
+ ************ Solution 68
+8|2|6
+1|7|4
+9|5|3
+ ************ Solution 69
+8|2|6
+7|1|4
+9|5|3
+ ************ Solution 70
+8|2|6
+7|4|1
+9|5|3
+ ************ Solution 71
+8|2|6
+9|1|7
+3|5|4
+ ************ Solution 72
+8|2|6
+9|7|1
+3|5|4
+ ************ Solution 73
+8|6|1
+9|4|7
+2|5|3
+ ************ Solution 74
+8|6|1
+9|4|7
+3|5|2
+ ************ Solution 75
+8|6|1
+9|7|4
+2|5|3
+ ************ Solution 76
+8|6|1
+9|7|4
+3|5|2
+ ************ Solution 77
+8|6|2
+1|4|7
+9|5|3
+ ************ Solution 78
+8|6|2
+1|7|4
+9|5|3
+ ************ Solution 79
+8|6|2
+7|1|4
+9|5|3
+ ************ Solution 80
+8|6|2
+7|4|1
+9|5|3
+ ************ Solution 81
+8|6|2
+9|1|7
+3|5|4
+ ************ Solution 82
+8|6|2
+9|7|1
+3|5|4
+ ************ Solution 83
+8|6|3
+1|4|7
+9|5|2
+ ************ Solution 84
+8|6|3
+1|7|4
+9|5|2
+ ************ Solution 85
+8|6|3
+7|1|4
+9|5|2
+ ************ Solution 86
+8|6|3
+7|4|1
+9|5|2
+ ************ Solution 87
+8|6|3
+9|1|7
+2|5|4
+ ************ Solution 88
+8|6|3
+9|7|1
+2|5|4
+ ************ Solution 89
+9|1|2
+7|4|6
+8|5|3
+ ************ Solution 90
+9|1|2
+7|6|4
+8|5|3
+ ************ Solution 91
+9|1|3
+7|4|6
+8|5|2
+ ************ Solution 92
+9|1|3
+7|6|4
+8|5|2
+ ************ Solution 93
+9|2|1
+7|4|6
+8|5|3
+ ************ Solution 94
+9|2|1
+7|6|4
+8|5|3
+ ************ Solution 95
+9|2|3
+1|4|7
+8|5|6
+ ************ Solution 96
+9|2|3
+1|6|7
+8|5|4
+ ************ Solution 97
+9|2|3
+1|7|4
+8|5|6
+ ************ Solution 98
+9|2|3
+1|7|6
+8|5|4
+ ************ Solution 99
+9|2|3
+7|1|4
+8|5|6
+ ************ Solution 100
+9|2|3
+7|1|6
+8|5|4
+ ************ Solution 101
+9|2|3
+7|4|1
+8|5|6
+ ************ Solution 102
+9|2|3
+7|6|1
+8|5|4
+ ************ Solution 103
+9|2|6
+1|4|7
+8|5|3
+ ************ Solution 104
+9|2|6
+1|7|4
+8|5|3
+ ************ Solution 105
+9|2|6
+7|1|4
+8|5|3
+ ************ Solution 106
+9|2|6
+7|4|1
+8|5|3
+ ************ Solution 107
+9|6|2
+1|4|7
+8|5|3
+ ************ Solution 108
+9|6|2
+1|7|4
+8|5|3
+ ************ Solution 109
+9|6|2
+7|1|4
+8|5|3
+ ************ Solution 110
+9|6|2
+7|4|1
+8|5|3
+ ************ Solution 111
+9|6|3
+1|4|7
+8|5|2
+ ************ Solution 112
+9|6|3
+1|7|4
+8|5|2
+ ************ Solution 113
+9|6|3
+7|1|4
+8|5|2
+ ************ Solution 114
+9|6|3
+7|4|1
+8|5|2
+######### Carre 3,2###############
+ ************ Solution 1
+3|7|2
+9|8|5
+1|4|6
+ ************ Solution 2
+3|7|2
+9|8|5
+1|6|4
+ ************ Solution 3
+3|7|5
+9|8|4
+1|2|6
+ ************ Solution 4
+3|7|5
+9|8|4
+1|6|2
+ ************ Solution 5
+3|7|5
+9|8|6
+1|2|4
+ ************ Solution 6
+3|7|5
+9|8|6
+1|4|2
+ ************ Solution 7
+3|7|6
+9|8|5
+1|2|4
+ ************ Solution 8
+3|7|6
+9|8|5
+1|4|2
+######### Carre 3,3###############
+ ************ Solution 1
+1|4|5
+6|2|3
+7|9|8
+ ************ Solution 2
+1|4|5
+9|2|3
+7|6|8
+ ************ Solution 3
+1|4|5
+9|2|3
+7|8|6
+ ************ Solution 4
+1|4|6
+5|2|3
+7|9|8
+ ************ Solution 5
+1|4|8
+5|2|3
+7|9|6
+ ************ Solution 6
+5|4|1
+6|2|3
+7|9|8
+ ************ Solution 7
+5|4|1
+9|2|3
+7|6|8
+ ************ Solution 8
+5|4|1
+9|2|3
+7|8|6
+ ************ Solution 9
+5|4|6
+1|2|3
+7|9|8
+ ************ Solution 10
+5|4|8
+1|2|3
+7|9|6
+ ************ Solution 11
+6|4|1
+5|2|3
+7|9|8
+ ************ Solution 12
+6|4|5
+1|2|3
+7|9|8
+ ************ Solution 13
+9|4|1
+5|2|3
+7|6|8
+ ************ Solution 14
+9|4|1
+5|2|3
+7|8|6
+ ************ Solution 15
+9|4|5
+1|2|3
+7|6|8
+ ************ Solution 16
+9|4|5
+1|2|3
+7|8|6
+ Recherche de solutions globales 
+ ######### SOLUTION GLOBALE 1 ######## 
+ ***** Carre 1,1 *****
+7|6|9
+4|8|1
+2|3|5
+ ***** Carre 1,2 *****
+5|2|3
+6|9|7
+8|1|4
+ ***** Carre 1,3 *****
+4|1|8
+3|5|2
+6|9|7
+ ***** Carre 2,1 *****
+6|7|8
+3|9|4
+5|1|2
+ ***** Carre 2,2 *****
+4|5|1
+2|6|8
+7|3|9
+ ***** Carre 2,3 *****
+2|3|9
+1|7|5
+8|6|4
+ ***** Carre 3,1 *****
+8|2|6
+1|4|7
+9|5|3
+ ***** Carre 3,2 *****
+3|7|5
+9|8|6
+1|4|2
+ ***** Carre 3,3 *****
+9|4|1
+5|2|3
+7|8|6

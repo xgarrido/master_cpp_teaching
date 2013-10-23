@@ -1,0 +1,3 @@
+g++ -g -I/exp/nemo/simard/sudoku -c Carre.cpp
+g++ -g -I/exp/nemo/simard/sudoku -c Prog.cpp
+g++ -g -o Prog Prog.o Carre.o

@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper,twoside]{report}
+
+\input{../../base/BasePackage.sty}
+\input{../../base/OptionsListingC++.sty}
+
+\usepackage{newalgMy}
+
+% Mettre des hyperliens dans le pdf
+\hypersetup{pdftitle={Projet jeu d'échec},
+  pdfsubject={Projet d'informatique - Magistère de Physique Fondamentale},
+  pdfauthor={Xavier Garrido, LAL,
+    <garrido@lal.in2p3.fr>},
+  pdfkeywords={jeu, échec, C++}
+}
+
+\begin{document}
+\renewcommand{\chaptername}{Projet}
+
+\setcounter{chapter}{1}
+\chapter{Jeu d'échecs}
+\label{projet::jeu_echec}
+
+Ce projet consiste à programmer un jeu d'échecs en ligne de
+commande. Il n'est évidemment pas question de créer une ``intelligence
+artificielle'' : la partie se jouera entre humains consentants.
+
+Le programme pourra être conçu dans cet ordre :
+
+\begin{enumerate}
+
+\item[\textbullet] un échiquier,
+
+\item[\textbullet] une classe abstraite \lstinline$Piece$ définissant
+  les méthodes de base telles que le déplacement,
+
+\item [\textbullet] des classes filles telles que \lstinline$Tour$,
+  \lstinline$Pion$~\ldots, héritant de \lstinline$Piece$ et
+  surdéfinissant les méthodes préalablement déclarées,
+
+  \item[\textbullet] les règles élémentaires telles que la prise de
+    pièce, l'échec et l'échec et mat.
+\end{enumerate}
+
+Accessoirement, on pourra s'intéresser :
+
+\begin{enumerate}
+
+\item[\textbullet] au roque,
+\item[\textbullet] à la prise en passant,
+\item[\textbullet] à la promotion du pion.
+
+\end{enumerate}
+
+De même, si la programmation d'une intelligence artificielle, on
+pourra envisager de jouer contre l'ordinateur, cer dernier jouant
+aléatoirement une pièce.
+
+\paragraph{Remarques :} Suggestion de présentation de l'échiquier en ligne de commande (\url{http://fr.wikipedia.org/wiki/Echec})
+
+\begin{center}
+  \begin{lstlisting}
+
+        +----+----+----+----+----+----+----+----+
+    8   | *K |    |    |    |  *R|    |    |    |
+        |----|----|----|----|----|----|----|----|
+    7   |    | *P |    |    |    |  Q |    |    |
+        |----|----|----|----|----|----|----|----|
+    6   | *P |    |    |    |    |    |    |    |
+        |----|----|----|----|----|----|----|----|
+    5   |    | *Q |    |    |    |    | *P |    |
+        |----|----|----|----|----|----|----|----|
+    4   |    |    |    |    |    |    |    |    |
+        |----|----|----|----|----|----|----|----|
+    3   |  P |    |    |    |    |  P |    |    |
+        |----|----|----|----|----|----|----|----|
+    2   |    |  P |    |    |    |    |  P |    |
+        |----|----|----|----|----|----|----|----|
+    1   |    |  K |    |    |    |    |    |  R |
+        +----+----+----+----+----+----+----+----+
+          a    b    c    d    e    f    g    h
+        
+  \end{lstlisting}
+\end{center}
+
+\end{document} 

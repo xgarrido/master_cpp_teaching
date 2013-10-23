@@ -1,0 +1,7 @@
+\backcite {kirk1,kirk2}{{1}{1.1}{section.1.1}}
+\backcite {metro}{{2}{1.1}{equation.1.1}}
+\backcite {metro,hastings}{{2}{1.2}{section.1.2}}
+\backcite {metro,hastings}{{2}{1.1}{figure.1.1}}
+\backcite {metro}{{2}{c}{Hfootnote.3}}
+\backcite {hastings}{{2}{c}{Hfootnote.3}}
+\backcite {robert,marin,gilks}{{4}{d}{Hfootnote.4}}
