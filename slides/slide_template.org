@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_CLASS_OPTIONS: [cpp_teaching]
 
 * Notions de patrons ou =template=
 
