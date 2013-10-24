@@ -61,22 +61,22 @@ toutes fonctions extérieures à la classe
 
 #+BEGIN_SRC c++
   // Définition des méthodes
-  double particle::get_masse () const
+  double particule::get_masse () const
   {
     return m_masse;
   }
 
-  void particle::set_masse (const double masse_)
+  void particule::set_masse (const double masse_)
   {
     m_masse = masse_;
   }
   ...
-  particle electron;
+  particule electron;
   electron.set_masse (0.511);
   const double electron_masse = electron.get_masse ();
 #+END_SRC
 
-* Intérêts de L'encapsulation
+* Intérêts de l'encapsulation
 
 - Lors de la programmation et surtout de la réutilisation d'un objet dans un
   autre programme, l'encapsulation empêche la modification non voulue des données
