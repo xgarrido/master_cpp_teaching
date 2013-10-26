@@ -15,7 +15,6 @@ html:
 	@mkdir -p doc/stylesheets
 	@$(BATCH) --visit "README.org" --funcall org-publish-cpp
 	@rm -f README.el
-	@find doc -name "*.html~" | xargs rm
 
 clean:
 	@rm -rf doc index.html
