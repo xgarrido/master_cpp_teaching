@@ -178,8 +178,8 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 | + | lecture_fonction           | Rappels sur les fonctions                            |
 | + | lecture_specificite_c++    | Les spécificités du C++                              |
 | + | lecture_struct_class       | Structures et classes                                |
-| - | lecture_encapsulation      | Encapsulation des données                            |
-| - | lecture_constructeur       | Notions de constructeur et de destructeur            |
+| + | lecture_encapsulation      | Encapsulation des données                            |
+| + | lecture_constructeur       | Notions de constructeur et de destructeur            |
 | - | lecture_amitie             | Fonctions et classes amies                           |
 | - | lecture_surcharge          | Surcharge d'opérateur                                |
 | - | lecture_heritage           | Héritage                                             |
@@ -197,7 +197,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 | + | td_pointeur_fonction   | Compilation, pointeur & références |
 | + | td_specificite_c++     | Spécificités du C++                |
 | + | td_classes             | Classes en C++                     |
-| - | td_class_complexe      | Fraction de nombres complexes      |
+| + | td_class_complexe      | Fraction de nombres complexes      |
 | - | td_nombre_aleatoire    | Constructeur & destructeurs        |
 | - | td_surcharge_operateur | Surcharge d'opérateur              |
 | - | td_polymorphisme       | Polymorphisme & classe abstraite   |
@@ -210,8 +210,8 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 | + | slide_pointeur         | Pointeurs, Références & Allocation Dynamique de Mémoire |
 | + | slide_specificite_c++  | Spécificités du C++ (indépendantes de la POO)           |
 | + | slide_struct_class     | Structures & Classes                                    |
-| - | slide_encapsulation    | Encapsulation des données                               |
-| - | slide_constructeur     | Constructeur & Destructeur de classe                    |
+| + | slide_encapsulation    | Encapsulation des données                               |
+| + | slide_constructeur     | Constructeur & Destructeur de classe                    |
 | - | slide_amitie_surcharge | Amitié & Surcharge d'opérateur                          |
 | - | slide_heritage_1       | Héritage (Partie 1)                                     |
 | - | slide_heritage_2       | Héritage (Partie 2)                                     |
