@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_CLASS_OPTIONS: [cpp_teaching]
 
 * Notion de classe
 
@@ -137,11 +137,8 @@
 
 * Annexes
 :PROPERTIES:
-:BEAMER_OPT: plain
-:BEAMER_ENV: fullframe
+:BEAMER_ENV: appendix
 :END:
-
-#+BEAMER: \partpage
 
 * Accès aux membres d'une structure
 
@@ -162,5 +159,4 @@
     // Accès aux membres
     particule1.m_masse  = 0.511;
     particule1.m_charge = -1.6e-19;
-
   #+END_SRC
