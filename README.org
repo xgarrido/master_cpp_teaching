@@ -198,7 +198,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 | + | td_specificite_c++     | Spécificités du C++                |
 | + | td_classes             | Classes en C++                     |
 | + | td_class_complexe      | Fraction de nombres complexes      |
-| - | td_nombre_aleatoire    | Constructeur & destructeurs        |
+| + | td_nombre_aleatoire    | Constructeur & destructeurs        |
 | - | td_surcharge_operateur | Surcharge d'opérateur              |
 | - | td_polymorphisme       | Polymorphisme & classe abstraite   |
 | + | td_blackjack           | Jeu du blackjack                   |
