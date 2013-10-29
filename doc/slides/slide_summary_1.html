@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Résumé sur les spécificités du C++ hors POO</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><aa>Encapsulation des données </aa><aa>Constructeur & Destructeur de classe </aa><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+                     <hr/>
+                     <a href="../../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Résumé sur les spécificités du C++ hors POO</h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Principales notions</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Le C++ introduit la notion de référence afin de faciliter la manipulation des
+variables notamment au sein des fonctions
+
+<div class="center">
+<p>
+<b>&rarr; transmission des arguments par référence</b>
+</p>
+</div>
+</li>
+</ul>
+
+<ul class="org-ul">
+<li>En C++ plusieurs fonctions peuvent porter le même nom dès lors qu&rsquo;elles n&rsquo;ont
+pas le même contexte d&rsquo;appel
+
+<div class="center">
+<p>
+<b>&rarr; surdéfinition ou surcharge de fonction</b>
+</p>
+</div>
+</li>
+</ul>
+
+<ul class="org-ul">
+<li>Les macros telles qu&rsquo;utilisées en C sont à éviter (<i>cf.</i> <a href="http://www.parashift.com/c++-faq/inline-vs-macros.html">evil#1</a>, <a href="http://www.parashift.com/c++-faq/macros-with-if.html">evil#2</a>,
+<a href="http://www.parashift.com/c++-faq/macros-with-multi-stmts.html">evil#3</a>, <a href="http://www.parashift.com/c++-faq/macros-with-token-pasting.html">evil#4</a>). Les seules véritables directives de préprocesseur à
+utiliser sont <b><code>#include</code>, <code>#ifndef</code> / <code>#define</code></b>
+
+<div class="center">
+<p>
+<b>&rarr; compilation séparée</b>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Transmission par référence</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
+<span class="linenr">2: </span><span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h__</span> 1
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>);
+<span class="linenr">5: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>);
+<span class="linenr">6: </span><span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>) {}
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>) {}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="linenr">3: </span>{
+<span class="linenr">4: </span>  dummy ();
+<span class="linenr">5: </span>  <span class="org-type">int</span> <span class="org-variable-name">i</span> = 10; <span class="org-type">double</span> <span class="org-variable-name">a</span> = 2.0; <span class="org-type">char</span> <span class="org-variable-name">c</span> = <span class="org-string">'a'</span>;
+<span class="linenr">6: </span>  dummy (i, a, c);
+<span class="linenr">7: </span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Transmission par référence</h2>
+<div class="outline-text-2" id="text-3">
+<div class="cbox">
+<p>
+Transmission par référence
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
+<span class="linenr">2: </span><span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h__</span> 1
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>);
+<span class="linenr">5: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>);
+<span class="linenr">6: </span><span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>) {}
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>) {}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="linenr">3: </span>{
+<span class="linenr">4: </span>  dummy ();
+<span class="linenr">5: </span>  <span class="org-type">int</span> <span class="org-variable-name">i</span> = 10; <span class="org-type">double</span> <span class="org-variable-name">a</span> = 2.0; <span class="org-type">char</span> <span class="org-variable-name">c</span> = <span class="org-string">'a'</span>;
+<span class="linenr">6: </span>  dummy (i, a, c);
+<span class="linenr">7: </span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Surdéfinition de fonction</h2>
+<div class="outline-text-2" id="text-4">
+<div class="cbox">
+<p>
+Surdéfinition de fonction
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
+<span class="linenr">2: </span><span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h__</span> 1
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>);
+<span class="linenr">5: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>);
+<span class="linenr">6: </span><span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>) {}
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>) {}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="linenr">3: </span>{
+<span class="linenr">4: </span>  dummy ();
+<span class="linenr">5: </span>  <span class="org-type">int</span> <span class="org-variable-name">i</span> = 10; <span class="org-type">double</span> <span class="org-variable-name">a</span> = 2.0; <span class="org-type">char</span> <span class="org-variable-name">c</span> = <span class="org-string">'a'</span>;
+<span class="linenr">6: </span>  dummy (i, a, c);
+<span class="linenr">7: </span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-5">
+<div class="cbox">
+<p>
+Directives de préprocesseur
+</p>
+
+</div>
+</div>
+
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
+<span class="linenr">2: </span><span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h__</span> 1
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>);
+<span class="linenr">5: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>);
+<span class="linenr">6: </span><span class="org-preprocessor">#endif</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+<span class="linenr">3: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> <span class="org-variable-name">i_</span>) {}
+<span class="linenr">4: </span><span class="org-type">void</span> <span class="org-function-name">dummy</span> (<span class="org-type">int</span> &amp; <span class="org-variable-name">i_</span>, <span class="org-type">double</span> &amp; <span class="org-variable-name">a_</span>, <span class="org-type">char</span> &amp; <span class="org-variable-name">c_</span>) {}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-5-3">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
+<span class="linenr">2: </span><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="linenr">3: </span>{
+<span class="linenr">4: </span>  dummy ();
+<span class="linenr">5: </span>  <span class="org-type">int</span> <span class="org-variable-name">i</span> = 10; <span class="org-type">double</span> <span class="org-variable-name">a</span> = 2.0; <span class="org-type">char</span> <span class="org-variable-name">c</span> = <span class="org-string">'a'</span>;
+<span class="linenr">6: </span>  dummy (i, a, c);
+<span class="linenr">7: </span>}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Compilation</h2>
+<div class="outline-text-2" id="text-6">
+<div class="prompt">
+<p>
+g++ dummy.cc test_dummy.cc -o test_dummy.exe
+</p>
+
+</div>
+
+<div class="cbox">
+<p>
+\ding{42} Les fichiers d&rsquo;en-tête ne sont jamais compilés !
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Pourquoi tant de fichiers ?</h2>
+<div class="outline-text-2" id="text-7">
+<ol class="org-ol">
+<li><b>Protection du code source :</b> un utilisateur &lambda; n&rsquo;a besoin que de la
+déclaration de la fonction <i>i.e.</i> le fichier <code>dummy.h</code> et du fichier objet
+associé <i>i.e.</i> <code>dummy.o</code>.
+</li>
+
+<li><b>Temps de compilation :</b> seuls les fichiers sources <i>i.e.</i> <code>*.cc</code> modifiés,
+doivent être recompilés.
+</li>
+
+<li><b>Structure &amp; accès du code :</b> à terme chaque structure/classe nouvellement
+crée se verra associer deux fichiers, sa déclaration et sa définition, ainsi
+qu&rsquo;un programme <code>test</code>.
+</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>L&rsquo;énumération <code>enum</code> &amp; Utilisation de <code>typedef</code></title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">L&rsquo;énumération <code>enum</code> &amp; Utilisation de <code>typedef</code></h1><hr/>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Énumération <code>enum</code></h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Une énumération est une collection finie d&rsquo;entiers auxquels on a donné à chacun
+un nom explicite. Une variable de cette énumération ne peut posséder qu&rsquo;un
+entier de cette collection et aucun autre entier.
+</p>
+
+<p>
+Comme pour les commandes du préprocesseur, l&rsquo;instruction définissant une
+énumération tient surtout d&rsquo;un <b>raffinement syntaxique</b> permettant de remplacer
+des valeurs constantes par un nom plus lisible (pour un humain&#x2026;). L&rsquo;énumération
+</p>
+
+<ul class="org-ul">
+<li>améliore la lisibilité du code,
+</li>
+
+<li>rajoute un niveau de sécurité dans les valeurs saisies par
+l&rsquo;utilisateur. Seuls les entiers appartenant à l&rsquo;énumération seront valides.
+</li>
+</ul>
+
+<p>
+Une énumération est généralement employée lorsque l&rsquo;objet du monde réel qu&rsquo;elle
+modélise possède des valeurs ou des états très simples totalement discrets (un
+feu tricolore, le code génétique ATCGU, les quatres saisons&#x2026;).
+</p>
+
+<p>
+Le mot clé est <code>enum</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">enum</span> <span class="org-type">nome_numeration</span> {
+  <span class="org-variable-name">ELEMENT_1</span>, <span class="org-comment-delimiter">// </span><span class="org-comment">0 par d&#233;faut</span>
+  <span class="org-variable-name">ELEMENT_2</span>, <span class="org-comment-delimiter">// </span><span class="org-comment">valeur 1</span>
+  ...
+};
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-0-1" class="outline-4">
+<h4 id="sec-1-0-1">Exemple:</h4>
+<div class="outline-text-4" id="text-1-0-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">enum</span> <span class="org-type">Simpson</span> {
+  <span class="org-variable-name">eHOMER</span>,
+  <span class="org-variable-name">eMARGE</span>,
+  <span class="org-variable-name">eBART</span>,
+  <span class="org-variable-name">eLISA</span>,
+  <span class="org-variable-name">eMAGGIE</span>
+};
+</pre>
+</div>
+
+<p>
+La déclaration se fait <i>via</i> <code>nom_enumeration instance_enum</code>, soit pour notre exemple
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">Simpson</span> <span class="org-variable-name">personnage_Simpson_1</span> = eHOMER;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Utilisation de <code>typedef</code></h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>typedef</code> permet de créer son propre type en se calquant sur un type
+existant (<code>int</code>, <code>double</code>, <code>char</code>&#x2026;). <code>typedef</code> ne crée pas de nouveau type, il
+construit une forme d&rsquo;alias. Cette fonctionnalité du C++ permet ainsi
+</p>
+
+<ul class="org-ul">
+<li>d&rsquo;améliorer la lisibilité du code,
+</li>
+
+<li>au début d&rsquo;un projet, de définir un nouveau type <i>via</i> <code>typedef</code>, modifier cet
+alias sans avoir à changer l&rsquo;appel vers les variables usant de ce type.
+</li>
+</ul>
+
+<p>
+Sous certaines conditions, l&rsquo;utilisation de <code>typedef</code> peut rendre plus délicate
+la lecture du code pour une personne indépendante du projet. Tout le monde est
+habitué à <code>int</code> et non à <code>MonTypedefEntierQueJaimeBien</code>
+</p>
+</div>
+
+<div id="outline-container-sec-2-0-1" class="outline-4">
+<h4 id="sec-2-0-1">Exemple :</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">typedef</span> <span class="org-type">int</span> <span class="org-type">mon_typedef_entier</span>;
+<span class="org-type">mon_typedef_entier</span> <span class="org-variable-name">entier_test</span> = 1; <span class="org-comment-delimiter">// </span><span class="org-comment">Equivalent &#224; int</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Notions de constructeur et de destructeur</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Notions de constructeur et de destructeur</h1><hr/>
+<p>
+Le constructeur et le destructeur sont deux <b>méthodes</b> particulières qui sont
+appelées respectivement à la création et à la destruction d&rsquo;un objet. Toute
+classe a un constructeur et un destructeur par défaut, fournis par le
+compilateur. Toutefois, il est souvent nécessaire de les redéfinir afin de gérer
+certaines actions (initialisation des membres, appel de méthodes&#x2026;) qui doivent
+avoir lieu lors de la création d&rsquo;un objet puis lors de sa destruction. À titre
+d&rsquo;exemple, si l&rsquo;objet contient des variables allouées dynamiquement, il faut
+leur réserver de la mémoire à la création de l&rsquo;objet ou, à défaut, mettre les
+pointeurs correspondants à <code>0</code> (ou <code>NULL</code>). À la destruction de l&rsquo;objet, il convient
+de restituer la mémoire éventuellement allouée.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Définition des constructeurs et des destructeurs</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Le constructeur se définit comme une méthode à part entière. Cependant, pour que
+le compilateur puisse la considérer en tant que telle, les deux conditions
+suivantes doivent être validées :
+</p>
+
+<ul class="org-ul">
+<li>le constructeur doit porter <b>le même nom</b> que la classe,
+</li>
+
+<li>le constructeur ne doit avoir <b>aucun type</b>, <code>void</code> compris.
+</li>
+</ul>
+
+<p>
+Considérons la classe <code>point</code> précédemment utilisée. La fonction membre
+<code>initialise</code> est naturellement remplacée par un constructeur, c&rsquo;est-à-dire par
+une méthode dépourvue de type et nommée <code>point</code>. La déclaration de cette classe
+devient alors
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">point</span>
+{
+<span class="org-keyword">private</span> :
+  <span class="org-type">int</span> <span class="org-variable-name">m_X</span>;
+  <span class="org-type">int</span> <span class="org-variable-name">m_Y</span>;
+
+<span class="org-keyword">public</span> :
+  <span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>); <span class="org-comment-delimiter">// </span><span class="org-comment">Constructeur de la classe point</span>
+};
+</pre>
+</div>
+<p>
+La définition du constructeur reste identique à celle de la méthode
+<code>initialise</code>, à savoir l&rsquo;assignation de la valeur <code>abs</code>, respectivement <code>ord</code>,
+au membre <code>m_X</code>, respectivement <code>m_Y</code>, mais le prototype s&rsquo;écrit
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>) { m_X = abs; m_Y = ord; }
+</pre>
+</div>
+
+<div class="remark">
+<p>
+Lors de la construction d&rsquo;un objet, il est recommandé <b>d&rsquo;initialiser</b> les
+membres au travers du constructeur plutôt que <b>d&rsquo;assigner</b> leurs
+valeurs. Autrement dit, à l&rsquo;assignation <code>m_X = abs; m_Y = ord</code>, on préférera
+l&rsquo;initialisation suivante
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>) : m_X(abs), m_Y(ord) {}
+</pre>
+</div>
+<p>
+Cette possibilité devient indispensable en cas :
+</p>
+
+<ul class="org-ul">
+<li>d&rsquo;initialisation d&rsquo;un membre constant,
+</li>
+<li>d&rsquo;initialisation d&rsquo;un membre qui est une référence.
+</li>
+</ul>
+
+</div>
+
+<p>
+Le destructeur doit respecter les mêmes règles que le constructeur sachant que
+son nom est toujours précédé du signe tilde. Comme nous l&rsquo;avons souligné en
+introduction, l&rsquo;utilisation d&rsquo;un destructeur est naturelle lors de la libération
+de l&rsquo;espace mémoire alloué. Supposons l&rsquo;ajout d&rsquo;un pointeur de caractère <code>char
+*p_geometry_type</code> (portant sur le type de géométrie mis en jeu, euclidienne par
+exemple) à la classe <code>point</code>. La déclaration de la classe <code>point</code> devient
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">point</span>
+{
+<span class="org-keyword">private</span> :
+  ...
+  <span class="org-type">char</span> *p_geometry_type;
+
+<span class="org-keyword">public</span> :
+  <span class="org-function-name">point</span> ();
+  <span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>);
+  ~<span class="org-function-name">point</span> (); <span class="org-comment-delimiter">// </span><span class="org-comment">Destructeur de la classe point</span>
+};
+</pre>
+</div>
+<p>
+tandis que la restitution de la mémoire allouée pour <code>p_geometry_type</code> se
+formalise de la façon suivante
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-constant">point</span>::~<span class="org-function-name">point</span>() { <span class="org-keyword">delete</span>[] p_geometry_type; }
+</pre>
+</div>
+
+<p>
+Le constructeur est appelé après l&rsquo;allocation de la mémoire de l&rsquo;objet alors que
+le destructeur est appelé avant la libération de cette mémoire. La gestion de
+l&rsquo;allocation dynamique de mémoire avec les classes est ainsi simplifiée. Par
+ailleurs, les constructeurs peuvent avoir des paramètres. Ils peuvent donc être
+surchargés (<i>cf.</i>  fiche sur les spécificités du C++), à la différence des
+destructeurs qui n&rsquo;ont jamais d&rsquo;arguments. Cela tient au fait qu&rsquo;en général, le
+contexte dans lequel un objet est crée, est connu ce qui n&rsquo;est pas le cas lors
+de sa destruction : il n&rsquo;existe donc qu&rsquo;un seul destructeur pour une classe
+donnée. La classe <code>point</code> peut ainsi proposer plusieurs constructeurs, l&rsquo;appel
+se faisant suivant le contexte, c&rsquo;est-à-dire suivant l&rsquo;instanciation d&rsquo;un objet
+<code>point</code>. On pourra imaginer ainsi la déclaration suivante
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">Point</span>
+{
+<span class="org-keyword">private</span> :
+  <span class="org-type">int</span> <span class="org-variable-name">m_X</span>;
+  <span class="org-type">int</span> <span class="org-variable-name">m_Y</span>;
+  <span class="org-type">char</span> *<span class="org-variable-name">p_geometry_type</span>;
+
+<span class="org-keyword">public</span> :
+  point ();
+  point (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>);
+  point (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n_size</span>);
+  ~point ();
+};
+</pre>
+</div>
+<p>
+où les constructeurs sont définis ainsi
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Constructeur par d&#233;faut</span>
+<span class="org-constant">point</span>::<span class="org-function-name">point</span> () : m_X(0), m_Y(0), p_geometry_type(0) {}
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Simple initialisation des coordonn&#233;es</span>
+<span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>) : m_X(abs), m_Y(ord), p_geometry_type(0) {}
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Initialisation des coordon&#233;es et allocation dynamique</span>
+<span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n_size</span>) :
+  m_X(abs), m_Y(ord), p_geometry_type(<span class="org-keyword">new</span> <span class="org-type">char</span>[n_size + 1]) {}
+</pre>
+</div>
+<p>
+Selon le besoin, l&rsquo;utilisateur de la classe choisira l&rsquo;un des constructeurs
+précédents lors de la création d&rsquo;un objet <code>point</code>. À titre d&rsquo;exemple, les
+instanciations suivantes seront toutes différentes tout en étant chacune
+valables.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">point</span> <span class="org-variable-name">my_point1</span>;             <span class="org-comment-delimiter">// </span><span class="org-comment">construction par d&#233;faut</span>
+<span class="org-type">point</span> <span class="org-function-name">my_point2</span> (1, 2);      <span class="org-comment-delimiter">// </span><span class="org-comment">initialisation des coordonn&#233;es</span>
+<span class="org-type">point</span> <span class="org-function-name">my_point3</span> (1, 2, 256); <span class="org-comment-delimiter">// </span><span class="org-comment">allocation dynamique pour</span>
+                             <span class="org-comment-delimiter">// </span><span class="org-comment">le pointeur p_geometry_type</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-1-0-1" class="outline-4">
+<h4 id="sec-1-0-1">Remarques</h4>
+<div class="outline-text-4" id="text-1-0-1">
+<ul class="org-ul">
+<li>Lorsqu&rsquo;un constructeur se contente d&rsquo;attribuer des valeurs initiales aux
+données membres, le destructeur est rarement indispensable. En revanche, il le
+devient dés lors que l&rsquo;objet est amené (par le biais de son constructeur ou
+d&rsquo;autres fonctions membres) à allouer dynamiquement de la mémoire.
+</li>
+
+<li>En théorie, constructeurs et destructeurs peuvent être publics ou privés. En
+pratique, à moins d&rsquo;avoir de bonnes raisons de faire le contraire, il vaut
+mieux les rendre publics. En effet, un destructeur privé ne pourra pas être
+appelé directement, ce qui dans l&rsquo;absolu n&rsquo;est pas dramatique dès lors
+qu&rsquo;aucune allocation dynamique n&rsquo;a été nécessaire. En revanche, si le
+constructeur d&rsquo;une classe est privé, il ne sera plus possible de créer
+d&rsquo;objets <i>via</i> ce constructeur. Seule exception notable à cette règle, la
+possibilité de déclarer le constructeur par défaut (celui sans argument) comme
+privé, afin d&rsquo;interdire l&rsquo;utilisation d&rsquo;un objet sans avoir explicitement
+initialiser ces valeurs membres. Cette condition assure une plus grande
+robustesse au programme, l&rsquo;utilisateur devant nécessairement préciser les
+valeurs initiales de chacun des membres de l&rsquo;objet.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Objets membres</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Il est tout à fait possible qu&rsquo;une classe possède un membre donnée lui-même de
+type classe. Par exemple, la classe <code>point</code> préalablement définie, pourra être
+un membre d&rsquo;une classe <code>cercle</code> ainsi définie
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">cercle</span>
+{
+<span class="org-keyword">private</span>:
+  <span class="org-type">point</span>  <span class="org-variable-name">m_centre</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_rayon</span>;
+  ...
+};
+</pre>
+</div>
+
+<p>
+La situation d&rsquo;objets membres correspond à une relation entre classes du type
+relation de possession. Effectivement, on peut dire qu&rsquo;un cercle possède un
+centre (de type <code>point</code>). Ce type de relation s&rsquo;oppose à la relation de type
+&ldquo;relation est&rdquo; inhérente à la notion d&rsquo;héritage (<i>cf.</i> Chapitre <a href="lecture_heritage.html">&ldquo;Héritage&rdquo;</a>).
+</p>
+
+<p>
+La présence d&rsquo;un constructeur de classe <code>point</code> impose la création d&rsquo;un
+constructeur de classe <code>cercle</code>. En effet, en l&rsquo;absence de constructeur, le
+membre <code>m_centre</code> se verrait certes attribuer un emplacement en mémoire, mais
+son constructeur ne pourrait être appelé. Il est donc nécessaire d&rsquo;une part de
+définir un constructeur pour <code>cercle</code> et d&rsquo;autre part, de spécifier les
+arguments à fournir au constructeur de <code>point</code>. Le constructeur suivant
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">cercle</span>
+{
+<span class="org-keyword">private</span>:
+  <span class="org-type">point</span>  <span class="org-variable-name">m_centre</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_rayon</span>;
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">cercle</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>, <span class="org-type">double</span> <span class="org-variable-name">rayon</span>);
+};
+
+<span class="org-constant">cercle</span>::<span class="org-function-name">cercle</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>, <span class="org-type">double</span> <span class="org-variable-name">rayon</span>) : centre(abs, ord), m_rayon(rayon)
+{
+  ...
+}
+</pre>
+</div>
+<p>
+propose ainsi une solution. Les constructeurs seront appelés dans l&rsquo;ordre
+suivant: <code>point</code>, <code>cercle</code> tandis que les destructeurs seront appelés dans
+l&rsquo;ordre inverse.
+</p>
+</div>
+
+<div id="outline-container-sec-2-0-1" class="outline-4">
+<h4 id="sec-2-0-1">Remarques</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<p>
+Il pourrait être envisagé de définir le constructeur de <code>cercle</code> de la façon
+suivante:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-constant">cercle</span>::<span class="org-function-name">cercle</span> (<span class="org-type">int</span> <span class="org-variable-name">abs</span>, <span class="org-type">int</span> <span class="org-variable-name">ord</span>, <span class="org-type">double</span> <span class="org-variable-name">rayon</span>) : m_rayon(rayon)
+{
+  centre = point (abs, ord);
+  ...
+}
+</pre>
+</div>
+
+<p>
+Cependant, on créerait alors un objet temporaire de type <code>point</code> supplémentaire
+provoquant le ralentissement du programme lors de l&rsquo;exécution (<i>a fortiori</i> si
+la classe impliquée est de taille conséquente). En outre, si la classe <code>point</code>
+dispose de membres dynamiques, <code>p_geometry_type</code> par exemple, seules les valeurs
+des pointeurs seront recopiées et non leurs emplacements mémoire. Il conviendra
+alors de surcharger l&rsquo;opérateur d&rsquo;affectation <code>=</code> de telle sorte que les membres
+pointeurs soient également affectés (<i>cf.</i> Chapitre <a href="lecture_surcharge_operateur.html">Surcharge d&rsquo;opérateur</a>).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Les objets dynamiques</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Les objets dynamiques, par opposition aux objets automatiques dont la durée de
+vie se limite à l&rsquo;appel d&rsquo;une fonction ou à la taille d&rsquo;un bloc (boucle <code>for</code>,
+par exemple), ne sont explicitement détruits qu&rsquo;à l&rsquo;appel de l&rsquo;opérateur
+<code>delete</code>. Cette instruction a pour conséquence l&rsquo;exécution du destructeur de la
+classe et donc, la désallocation de l&rsquo;espace mémoire réservé. En outre, la
+déclaration d&rsquo;objets dynamiques se fait <i>via</i> l&rsquo;opérateur <code>new</code>; le ou les
+constructeurs constituent alors le passage obligé lors de la création de
+l&rsquo;objet. Plus précisément, après l&rsquo;allocation dynamique de l&rsquo;emplacement mémoire
+requis, l&rsquo;opérateur <code>new</code> appellera le constructeur de l&rsquo;objet adéquat selon la
+nature des arguments figurant à la suite de son appel. Ainsi, les déclarations
+suivantes
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">point</span> * <span class="org-variable-name">ptr_point1</span> = <span class="org-keyword">new</span> <span class="org-type">point</span> ();
+<span class="org-type">point</span> * <span class="org-variable-name">ptr_point2</span> = <span class="org-keyword">new</span> <span class="org-type">point</span> (2,5);
+</pre>
+</div>
+
+<p>
+permettront soit l&rsquo;appel du constructeur par défaut (premier cas), soit l&rsquo;appel
+du constructeur initialisant les membres de la classe aux valeurs 2 et 5 (second
+cas).
+</p>
+
+<p>
+L&rsquo;accès aux méthodes de l&rsquo;objet pointé <code>ptr_point1</code> ou <code>ptr_point2</code> se fera par
+des appels de la forme <code>ptr_point1-&gt;affiche ();</code> équivalents aux instructions de
+type <code>(*ptr_point1).affiche();</code>
+</p>
+
+<p>
+Dès lors que l&rsquo;objet dynamique n&rsquo;est plus nécessaire, l&rsquo;utilisation de
+l&rsquo;opérateur <code>delete</code>, indissociable de l&rsquo;opérateur <code>new</code>, entrainera alors
+l&rsquo;appel du destructeur de classe.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Constructeur de recopie</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Nous venons de voir que le C++ garantissait l&rsquo;appel d&rsquo;un constructeur pour un
+objet créé par une déclaration ou par un <code>new</code>. Ce point est fondamental
+puisqu&rsquo;il certifie qu&rsquo;un objet ne pourra être créé sans avoir été placé, au
+préalable, dans &ldquo;un état initial convenable&rdquo; (du moins jugé comme tel par le
+concepteur de l&rsquo;objet).
+</p>
+
+<p>
+Cependant, il existe des circonstances dans lesquelles il est nécessaire de
+construire un objet quand bien même le programmeur n&rsquo;a pas prévu de constructeur
+pour cela. La situation la plus fréquente est celle où la valeur d&rsquo;un objet doit
+être transmise en argument à une fonction. Dans ce cas précis, il est
+indispensable de créer, dans un emplacement local à la fonction, un objet qui
+soit une copie de l&rsquo;argument effectif. Le même problème se pose dans le cas d&rsquo;un
+objet renvoyé par valeur comme résultat d&rsquo;une fonction; il faut alors créer un
+objet qui soit une copie du résultat. Une troisième situation se rencontre lors
+de l&rsquo;initialisation d&rsquo;un objet par copie d&rsquo;un objet du même type.
+</p>
+
+<p>
+De manière générale, on regroupe ces trois situations sous le nom
+d&rsquo;<b>initialisation par recopie</b> <i>i.e.</i> la création d&rsquo;un objet par recopie d&rsquo;un
+objet existant de même type. Pour réaliser une telle opération, C++ a prévu
+d&rsquo;utiliser un constructeur particulier dit <b>constructeur de recopie</b>. En
+l&rsquo;absence d&rsquo;un tel constructeur, un traitement par défaut est prévu. Toutefois,
+ce comportement par défaut, se contente d&rsquo;effectuer une copie de chacun des
+membres de la classe. On retrouve ainsi une situation analogue à celle qui est
+mise en place (par défaut) lors d&rsquo;une affectation entre objets de même type. Le
+problème se pose alors pour des objets contenant des pointeurs sur des
+emplacements dynamiques. Par défaut, seules les valeurs des pointeurs seront
+recopiées, les emplacements pointées ne le seront pas.
+</p>
+
+<p>
+Afin de conserver les espaces mémoires alloués, il est possible de fournir
+explicitement, dans la classe, un constructeur de recopie. Il s&rsquo;agit d&rsquo;un
+constructeur disposant d&rsquo;un seul argument du type de la classe et transmis
+obligatoirement par référence. Son entête doit donc être de l&rsquo;une de ces deux
+formes :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++">point (point&amp; the_point);
+</pre>
+</div>
+<p>
+ou
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">point (<span class="org-keyword">const</span> <span class="org-type">point</span>&amp; <span class="org-variable-name">the_point</span>);
+</pre>
+</div>
+
+<p>
+C&rsquo;est à ce constructeur et donc au concepteur de la classe, de prendre en charge
+l&rsquo;intégralité du travail de copie : copie superficielle c&rsquo;est-à-dire copie des
+membres et copie profonde à savoir copie des espaces alloués dynamiquement. Le
+code suivant fournit un exemple d&rsquo;implémentation de constructeur de recopie
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">point</span>
+{
+<span class="org-keyword">private</span> :
+  <span class="org-type">int</span> <span class="org-variable-name">m_X</span>;
+  <span class="org-type">int</span> <span class="org-variable-name">m_Y</span>;
+  <span class="org-type">char</span> *<span class="org-variable-name">p_geometry_type</span>;
+
+<span class="org-keyword">public</span> :
+  <span class="org-function-name">point</span> ();
+  <span class="org-function-name">point</span> (<span class="org-keyword">const</span> <span class="org-type">point</span>&amp; <span class="org-variable-name">the_point</span>);
+  ~<span class="org-function-name">point</span> ();
+};
+
+<span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-keyword">const</span> <span class="org-type">point</span>&amp; <span class="org-variable-name">the_point</span>)
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Copie superficielle</span>
+  m_X = the_point.m_X;
+  m_Y = the_point.m_Y;
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Copie profonde</span>
+  <span class="org-keyword">if</span> (the_point.p_geometry_type) {
+    p_geometry_type = <span class="org-keyword">new</span> <span class="org-type">char</span>[strlen(the_point.p_geometry_type) + 1];
+    strcpy(p_geometry_type, the_point.p_geometry_type);
+  }
+}
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-sec-4-0-1" class="outline-4">
+<h4 id="sec-4-0-1">Remarques</h4>
+<div class="outline-text-4" id="text-4-0-1">
+<ul class="org-ul">
+<li>Le C++ impose au constructeur par recopie que son unique argument soit
+transmis par référence ce qui relève d&rsquo;une logique implacable puisque, dans le
+cas contraire, l&rsquo;appel du constructeur de recopie impliquerait une
+intialisation par recopie de l&rsquo;argument et donc un appel du constructeur de
+recopie qui, lui même, etc etc etc. Quoiqu&rsquo;il en soit la forme <code>point (point
+  the_point);</code> serait rejetée lors de la compilation.
+</li>
+
+<li>Les deux formes précédentes <code>point (point&amp; the_point)</code> et <code>point (const point&amp;
+  the_point)</code> peuvent exister au sein d&rsquo;une même classe. Dans ce cas, la
+première serait utilisée en cas d&rsquo;initialisation par un objet quelconque
+tandis que la seconde serait utilisée en cas d&rsquo;initialisation par un objet
+constant. En général, comme un tel constructeur de recopie n&rsquo;a logiquement
+aucune raison de vouloir modifier l&rsquo;objet reçu en argument, il est conseillé
+de ne définir que la seconde forme qui restera ainsi applicable aux deux
+situations évoquées.
+</li>
+
+<li>Bien que l&rsquo;initialisation par recopie et l&rsquo;affectation présente un traitement
+par défaut semblable (copie superficielle), la prise en compte d&rsquo;une copie
+profonde passe par des mécanismes différents : définition d&rsquo;un constructeur de
+recopie pour l&rsquo;initialisation, surdéfinition de l&rsquo;opérateur <code>=</code> pour
+l&rsquo;affectation (<i>cf.</i> Chapitre <i><a href="lecture_surcharge.html">Surcharge d&rsquo;opérateur</a></i>).
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Héritage</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Héritage</h1><hr/>
+<p>
+L&rsquo;héritage introduit un nouveau moyen de faire intéragir les classes entre elles
+au moyen de relations dites <b>hiérarchiques</b>. Lorsqu&rsquo;une classe <code>B</code> hérite d&rsquo;une
+classe <code>A</code>, <code>B</code> a accès, dans l&rsquo;absolu, à tous les membres et les méthodes de
+<code>A</code> <sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. La classe <code>B</code> est donc basée sur la classe <code>A</code> mais peut également
+ajouter de nouveaux membres ainsi que de nouvelles méthodes propres à sa
+fonction voire modifier une partie du contenu de la classe mère <code>A</code>. La classe
+<code>B</code>, qui est dite dérivée ou fille de <code>A</code>, est donc <b>une spécialisation</b> de <code>A</code>
+tandis que la classe <code>A</code> constitue <b>une généralisation</b> de <code>B</code>.
+</p>
+
+<p>
+Cette technique constitue l&rsquo;un des fondements de la P.O.O de part la possibilité
+de développer de nouveaux &ldquo;outils&rdquo; en se fondant sur un ensemble &ldquo;d&rsquo;acquis&rdquo;
+<i>i.e.</i> de classes préexistantes. La classe dérivée hérite des potentialités de
+la classe de base, lui en ajoute éventuellement, sans qu&rsquo;il soit nécessaire de
+remettre en cause la classe de base. D&rsquo;un point de vue technique, il n&rsquo;est plus
+nécessaire de recompiler la classe de base, ni même de disposer du programme
+source correspondant. Seuls les fichiers d&rsquo;en-tête soit ceux contenant la
+déclaration de la classe, sont requis. Enfin, l&rsquo;héritage n&rsquo;est pas limité à un
+seul niveau : une classe dérivée peut devenir à son tour classe de base. La
+notion d&rsquo;héritage apparaît ainsi comme un outil de spécialisation croissante.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Notion d&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+La relation d&rsquo;héritage entre deux classes s&rsquo;effectue lors de la déclaration de
+la classe fille. À titre d&rsquo;exemple, considérons une classe de base nommée
+<code>polygone</code> de laquelle dérive une classe fille <code>rectangle</code> :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
+{
+<span class="org-keyword">protected</span> :
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_ordre</span>;
+  ...
+};
+
+<span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
+{
+<span class="org-keyword">public</span> :
+  <span class="org-comment-delimiter">// </span><span class="org-comment">M&#233;thodes propres &#224; la classe rectangle</span>
+  <span class="org-type">void</span> <span class="org-function-name">set_largeur</span> (<span class="org-type">double</span> <span class="org-variable-name">largeur</span>);
+
+<span class="org-keyword">private</span> :
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Membres propres &#224; la classe rectangle</span>
+  <span class="org-type">double</span> <span class="org-variable-name">m_longueur</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_largeur</span>;
+  ...
+};
+</pre>
+</div>
+
+<p>
+La relation d&rsquo;héritage entre les classes <code>rectangle</code> et <code>polygone</code> est
+matérialisée par la déclaration
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
+</pre>
+</div>
+<p>
+qui spécifie que <code>rectangle</code> est une classe dérivée de la classe <code>polygone</code>. Par
+ailleurs, le mot <code>public</code> signifie que les membres publics de la classe de base
+(<code>polygone</code>) seront des membres publics de la classe dérivée (<code>rectangle</code>) : on
+parle alors de dérivation publique. C&rsquo;est le cas le plus fréquemment rencontré,
+l&rsquo;alternative étant de déclarer l&rsquo;héritage comme d&rsquo;ordre privé ce qui implique
+que la classe dérivée n&rsquo;a plus accès aux membres publics de sa classe de base.
+</p>
+
+<div class="remark">
+<p>
+Dans l&rsquo;exemple précédent, si l&rsquo;on convient que la classe <code>rectangle</code> est une
+spécialisation de la classe <code>polygone</code> (en toute logique la classe <code>rectangle</code>
+devrait être une spécialisation d&rsquo;une classe <code>quadrilatere</code>), nous pouvons
+parfaitement imaginer que la classe <code>polygone</code> dérive d&rsquo;une classe plus générale
+telle qu&rsquo;une classe <code>polyèdre</code>. La notion de spécialisation croissante apparaît
+dès lors naturelle.
+</p>
+
+</div>
+
+<p>
+À travers cet exemple, nous notons également l&rsquo;apparition du mot clé <code>protected</code>
+qui étend les possibilité d&rsquo;encapsulation des données. Ce statut permet à la
+classe dérivée d&rsquo;accéder aux membres de la classe de base. Pour la classe
+dérivée, il n&rsquo;est donc plus nécessaire de &ldquo;passer&rdquo; par les méthodes de la classe
+de base.
+</p>
+
+<p>
+Nous pouvons résumer les différents statuts de membres<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup> de classe de la
+façon suivante :
+</p>
+
+<dl class="org-dl">
+<dt> <code>private</code> </dt><dd>les membres ne sont accessibles qu&rsquo;aux méthodes et aux fonctions
+amies de la classe;
+</dd>
+
+<dt> <code>protected</code> </dt><dd>les membres sont accessibles aux méthodes de la classe de base
+ainsi qu&rsquo;aux classes dérivées. Ils demeurent toutefois
+inaccessibles à l&rsquo;utilisateur de la classe contrairement au
+statut public comme précisé ci-dessous;
+</dd>
+
+<dt> <code>public</code> </dt><dd>les membres sont accessibles non seulement aux méthodes mais
+également à l&rsquo;utilisateur de la classe soit à n&rsquo;importe quel objet
+du type de la classe.
+</dd>
+</dl>
+</div>
+
+
+<div id="outline-container-sec-1-0-1" class="outline-4">
+<h4 id="sec-1-0-1">Remarques importantes</h4>
+<div class="outline-text-4" id="text-1-0-1">
+<p>
+De manière générale dans la programmation orientée objet, le développeur procède
+ainsi :
+</p>
+
+<ul class="org-ul">
+<li><b>Répertorier</b> les objets nécessaires à la description du problème,
+</li>
+
+<li><b>Réfléchir</b> aux liens logiques entre ces objets (composition<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>, amitié,
+héritage, &#x2026;)
+</li>
+
+<li><b>Implémenter</b> ces objets
+</li>
+
+<li><b>Créer</b> des instances de ces objets et <b>utiliser</b> leurs méthodes pour répondre
+au problème donné.
+</li>
+</ul>
+
+<p>
+Revenons sur le deuxième point et distinguons bien les deux liens logiques
+composition et héritage :
+</p>
+
+<dl class="org-dl">
+<dt> Composition : Relation de type A_UN </dt><dd>Par exemple, la classe voiture A_UNE
+roue (un des membres de voiture est une instance de la classe roue)
+</dd>
+
+<dt> Héritage : Relation de type EST_UN </dt><dd>Par exemple, la classe voiture EST_UN
+véhicule (la classe voiture hérite du contenu de la classe véhicule et
+l&rsquo;enrichit)
+</dd>
+</dl>
+
+<p>
+Cette phase de modélisation représente une grande partie du temps consacré à la
+résolution d&rsquo;un problème. Si elle peut sembler de prime abord superflue, elle
+facilite à terme la mise en œuvre puis la maintenance du code. Il faut savoir
+qu&rsquo;en théorie<sup><a id="fnr.4" name="fnr.4" class="footref" href="#fn.4">4</a></sup> 30 à 40% du temps consacré à un projet relève de sa
+modélisation, 50% à sa maintenance et seulement 10% à son écriture.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Appel des constructeurs et destructeurs</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Les règles de construction et de destruction de classe s&rsquo;appliquent également
+aux classes dérivées en tenant compte toutefois de la structure hiérarchique
+liant classes dérivées à classes de base. Ainsi, à la construction d&rsquo;une classe
+fille, le constructeur de la classe de base est appelé avant toutes autres
+opérations. Tout comme la construction permet l&rsquo;initialisation des membres d&rsquo;une
+classe, il est possible de spécifier, lors de la construction de la classe
+dérivée, les paramètres de la classe de base. Dans l&rsquo;exemple précédent, on peut
+donc écrire
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
+{
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">polygone</span> (<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">ordre</span>) : m_ordre (ordre) {}
+<span class="org-keyword">protected</span>:
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_ordre</span>;
+  ...
+};
+
+<span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
+{
+<span class="org-keyword">public</span>:
+  <span class="org-function-name">rectangle</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">longueur</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">largeur</span>) :
+    polygone (4), m_longueur (longueur), m_largeur (largeur) {}
+  ...
+};
+</pre>
+</div>
+<p>
+Si rien n&rsquo;est spécifié, le constructeur par défaut est alors appelé.
+</p>
+
+<p>
+Lors de la destruction d&rsquo;un objet d&rsquo;une classe dérivée, le destructeur de la
+classe de base est appelé automatiquement après le destructeur de la classe
+fille. Les appels aux destructeurs se font donc dans l&rsquo;ordre inverse des appels
+aux constructeurs.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Notion d&rsquo;héritage multiple</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Le langage C++ dispose de possibilités d&rsquo;héritage multiple. Cette
+généralisation permet notamment de s&rsquo;affranchir de la contrainte hiérarchique
+imposée par l&rsquo;héritage simple. La déclaration d&rsquo;héritage multiple s&rsquo;introduit
+ainsi
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>, <span class="org-keyword">public</span> <span class="org-type">couleur</span> {...};
+</pre>
+</div>
+<p>
+où la classe <code>couleur</code> permettrait d&rsquo;assigner une couleur aux objets
+<code>rectangle</code>. Il est clair que la classe <code>rectangle</code> dérive des classes
+<code>polygone</code> et <code>couleur</code> sans que ces dernières n&rsquo;aient cependant de relation
+hiérarchique entre elles: la classe <code>polygone</code> n&rsquo;est pas une spécialisation de
+la classe <code>couleur</code> et inversement.
+</p>
+
+<p>
+Malgré l&rsquo;intérêt et les quelques avantages qu&rsquo;introduisent l&rsquo;héritage multiple,
+l&rsquo;utilisation reste assez peu répandue. La principale raison réside dans les
+difficultés qu&rsquo;implique cette notion au niveau de la conception des
+programmes. Il est, en effet, plus facile de structurer un ensemble de classe
+selon des relations &ldquo;grand-mère &#x2013; mère &#x2013; fille &#x2026;&rdquo; soit d&rsquo;héritage simple que
+selon une modélisation faisant intervenir des liens autres que de parenté et
+introduisant des mécanismes de redondance. Le second problème qui touche à cet
+aspect de redondance, provient d&rsquo;entités comme une méthode ou un membre qui sont
+présents plusieurs fois dans les ancêtres d&rsquo;une classe. Pour illustrer ce point,
+considérons la situation suivante
+</p>
+
+
+<div class="figure">
+<p><img src="tree.svg" alt="tree.svg" />
+</p>
+</div>
+
+<p>
+qui correspond à des déclarations telles que :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
+{
+  ...
+  <span class="org-type">int</span> x,y;
+  ..
+};
+<span class="org-keyword">class</span> <span class="org-type">B</span> : <span class="org-keyword">public</span> <span class="org-type">A</span> {...};
+<span class="org-keyword">class</span> <span class="org-type">C</span> : <span class="org-keyword">public</span> <span class="org-type">A</span> {...};
+<span class="org-keyword">class</span> <span class="org-type">D</span> : <span class="org-keyword">public</span> <span class="org-type">B</span>, <span class="org-keyword">public</span> <span class="org-type">C</span> {...};
+</pre>
+</div>
+<p>
+Dans ce cas de figure, <code>D</code> hérite deux fois de <code>A</code>. Aussi, les membres de <code>A</code>
+(méthodes ou membres) apparaissent deux fois dans la classe <code>D</code>. Pour ce qui est
+des méthodes, bien que cela soit manifestement inutile étant donné qu&rsquo;elles
+réalisent les mêmes opérations, il n&rsquo;y a néanmoins pas duplication du fait de
+leur appartenance à la classe de base <code>A</code>. En revanche, les membres <code>x</code> et <code>y</code>
+seront effectivement dupliqués dans tous les objets de type <code>D</code>. La question se
+pose alors de savoir si oui ou non il y a redondance dans l&rsquo;information
+véhiculée par la classe <code>D</code>. Suivant le problème rencontré, on souhaitera
+disposer de deux jeux de données en se contentant de les distinguer à l&rsquo;aide de
+l&rsquo;opérateur de résolution de portée: <code>A::B::x</code> et <code>A::C::x</code>
+</p>
+
+<p>
+Toutefois, et dans la grande majorité des cas, la duplication n&rsquo;est pas
+souhaitée sinon fortement déconseillée. Dans ces conditions, il est nécessaire
+de préciser au compilateur de n&rsquo;incorporer qu&rsquo;une seule fois les membres de <code>A</code>
+dans la classe <code>D</code>. Pour cela, il s&rsquo;agit de spécifier, dans les déclarations des
+classes <code>B</code> et <code>C</code>, que la classe <code>A</code> est &ldquo;virtuelle&rdquo; (mot clé <code>virtual</code>) :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">B</span> : <span class="org-keyword">public</span> <span class="org-keyword">virtual</span> <span class="org-type">A</span> {...};
+<span class="org-keyword">class</span> <span class="org-type">C</span> : <span class="org-keyword">public</span> <span class="org-keyword">virtual</span> <span class="org-type">A</span> {...};
+<span class="org-keyword">class</span> <span class="org-type">D</span> : <span class="org-keyword">public</span> <span class="org-type">B</span>, <span class="org-keyword">public</span> <span class="org-type">C</span> {...};
+</pre>
+</div>
+
+<p>
+La notion de classe virtuelle est propre au C++. D&rsquo;autres langages intégrant la
+P.O.O proposent des outils différents afin de fusionner les fonctions répétées
+tandis que Java, par exemple, ne permet pas l&rsquo;héritage
+multiple<sup><a id="fnr.5" name="fnr.5" class="footref" href="#fn.5">5</a></sup>. Cependant, la finesse des mécanismes sémantiques mis en jeu dans
+l&rsquo;héritage multiple a rebuté beaucoup d&rsquo;utilisateurs et explique la mauvaise
+réputation qu&rsquo;a acquise ce mécanisme dans une partie de la communauté des
+développeurs.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Liaison dynamique et méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Pour illustrer l&rsquo;intérêt de la liaison dynamique<sup><a id="fnr.6" name="fnr.6" class="footref" href="#fn.6">6</a></sup>, considérons l&rsquo;exemple
+suivant :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
+{
+  ...
+  <span class="org-type">void</span> affiche ();
+  ...
+};
+<span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
+{
+  ...
+  <span class="org-type">void</span> affiche ();
+  ...
+};
+</pre>
+</div>
+<p>
+que l&rsquo;on utilise dans un programme principal de cette manière :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">polygone</span> <span class="org-variable-name">my_polygone</span>;
+<span class="org-type">rectangle</span> <span class="org-variable-name">my_rectangle</span>;
+<span class="org-type">polygone</span> *<span class="org-variable-name">ptr_polygone1</span> = &amp;my_polygone;
+<span class="org-type">polygone</span> *<span class="org-variable-name">ptr_polygone2</span> = &amp;my_rectangle;
+</pre>
+</div>
+
+<p>
+L&rsquo;instruction <code>ptr_polygone1-&gt;affiche ();</code> appelle la méthode <code>affiche</code> de la
+classe <code>polygone</code>. Or, si nous exécutons l&rsquo;instruction <code>ptr_polygone2-&gt;affiche
+();</code> cette dernière fait également appel à la méthode <code>affiche</code> de la classe
+<code>polygone</code> et non à celle définie pour la classe <code>rectangle</code>. Ce comportement
+est du au choix de la méthode qui a lieu lors de la compilation du programme :
+<code>ptr_polygone2</code> étant un pointeur de type <code>polygone</code>, le compilateur lui a
+attribué l&rsquo;ensemble des méthodes de la classe <code>polygone</code> et non celle de la
+classe <code>rectangle</code>. On parle alors de &ldquo;ligature statique&rdquo;.
+</p>
+
+<p>
+Pour pallier cette limitation et préserver les liaisons entre classes et
+méthodes, le C++ propose le mécanisme de fonctions virtuelles. Il suffit de
+déclarer &ldquo;virtuelle&rdquo; (mot clé <code>virtual</code>) la méthode <code>affiche</code> de la classe mère
+soit la classe <code>polygone</code> dans notre exemple :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">Polygone</span>
+{
+  ...
+  <span class="org-keyword">virtual</span> <span class="org-type">void</span> affiche ();
+  ...
+};
+</pre>
+</div>
+
+<p>
+Cette instruction indique au compilateur que les éventuels appels de la fonction
+<code>affiche</code> doivent utiliser une liaison dynamique et non plus statique. Autrement
+dit, lorsque le compilateur rencontrera un appel tel que :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++">ptr_polygone2-&gt;affiche ();
+</pre>
+</div>
+<p>
+il ne décidera pas de la procédure à appeler. Il se contentera de mettre en
+place un dispositif permettant de n&rsquo;effectuer le choix de la méthode qu&rsquo;au
+moment de l&rsquo;exécution de cette instruction, le choix étant finalement basé sur
+le type exact de l&rsquo;objet faisant l&rsquo;appel.
+</p>
+
+<p>
+Ce processus de virtualisation permet ainsi de redéfinir des méthodes<sup><a id="fnr.7" name="fnr.7" class="footref" href="#fn.7">7</a></sup>
+suivant la finalité de la classe fille. D&rsquo;autre part, il s&rsquo;inscrit parfaitement
+dans l&rsquo;esprit de spécialisation inhérent à la notion d&rsquo;héritage. La méthode
+<code>affiche</code> redéfinie dans la classe fille <code>rectangle</code> permettra, par exemple,
+d&rsquo;afficher la longeur et la largeur du rectangle ou toutes autres informations
+propres à la classe <code>rectangle</code>.
+</p>
+
+<div class="remark">
+<p>
+Dans l&rsquo;exemple précédent, l&rsquo;instruction
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">polygone</span> *<span class="org-variable-name">ptr_polygone2</span> = &amp;my_rectangle;
+</pre>
+</div>
+<p>
+demeure valable du fait de conversions standards automatiquement définies entre
+une classe de base et ses classes dérivées. Ainsi, des conversions implicites
+permettent de :
+</p>
+<ul class="org-ul">
+<li>convertir un objet de type <code>rectangle</code> en un objet de type <code>polygone</code>,
+</li>
+<li>convertir un pointeur sur un objet de type <code>rectangle</code> vers un pointeur sur
+un objet de type <code>polygone</code>,
+</li>
+<li>convertir une référence sur un objet de type <code>rectangle</code> vers une référence
+sur un objet de type <code>polygone</code>.
+</li>
+</ul>
+
+<p>
+Ces conversions ne présentent aucun risque particulier puisqu&rsquo;un objet de type
+<code>rectangle</code> est avant tout un objet de type <code>polygone</code>. Dans le premier cas,
+c&rsquo;est une conversion d&rsquo;objet qui est effectuée : seuls les attributs définis
+dans <code>polygone</code> sont pris en compte, ceux supplémentaires définis dans
+<code>rectangle</code> ne sont pas pris en considération. Dans les deux autres cas
+(pointeurs et références), c&rsquo;est uniquement une conversion de type qui est
+réalisée : l&rsquo;objet en lui-même n&rsquo;est pas affecté. Ce qui implique qu&rsquo;un pointeur
+de type <code>polygone</code> puisse pointer vers un objet de type <code>rectangle</code> <sup><a id="fnr.8" name="fnr.8" class="footref" href="#fn.8">8</a></sup>,
+l&rsquo;inverse n&rsquo;étant pas vrai. L&rsquo;instruction <code>rectangle *ptr_rectangle =
+&amp;my_polygone</code> provoquera une erreur de compilation.
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Classe abstraite</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Nous venons d&rsquo;introduire dans le paragraphe précédent, la notion de liaison
+dynamique qui permet de redéfinir une méthode au sein de classes filles. C++
+autorise la déclaration de méthodes virtuelles pures, c&rsquo;est-à-dire de méthodes
+dont la définition n&rsquo;est pas donnée. À titre d&rsquo;exemple, la classe <code>polygone</code> est
+destinée à être la classe de base de toutes figures géométriques planes. Suivant
+leurs caractéristiques, ces figures vont être implémentées dans diverses classes
+dérivées <code>rectangle</code>, <code>cercle</code>&#x2026;. Dans ce contexte, la classe <code>polygone</code> sert
+de cadre générique pour la définition des méthodes dans les classes dérivées. En
+particulier, la méthode <code>affiche</code> peut être considérer comme une méthode
+virtuelle pure au sens où sa définition dépend de la classe dérivée. La classe
+<code>rectangle</code> affichera la longueur et la largeur tandis que la classe <code>cercle</code>
+indiquera le rayon. Aussi, chaque classe dérivée redéfinira la méthode <code>affiche</code>
+à sa guise, la classe de base <code>polygone</code> servant de dénominateur commun à
+l&rsquo;ensemble de ces objets plus ou moins hétéroclites.
+</p>
+
+<p>
+La déclaration d&rsquo;une méthode virtuelle pure se formalise ainsi :
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
+{
+  ...
+  <span class="org-keyword">virtual</span> <span class="org-type">void</span> affiche () = 0;
+};
+</pre>
+</div>
+<p>
+la définition de la méthode <code>affiche</code> étant donnée dans les classes
+dérivées. Lorsqu&rsquo;une classe possède au moins une méthode virtuelle pure, on
+parle de <b>classe abstraite</b>. D&rsquo;un point de vue conceptuel, une classe abstraite
+est tellement globale, qu&rsquo;elle n&rsquo;est plus assez précise pour pouvoir décrire le
+fonctionnement de certaines méthodes; elle ne constitue plus en soi un objet et
+ne peut donc être instanciée. En revanche, les classes abstraites peuvent être
+utilisées dans le cadre du polymorphisme ce qui facilite la manipulation
+homogène d&rsquo;une famille d&rsquo;objets. L&rsquo;exemple suivant explicite cet aspect en
+utilisant un pointeur sur une classe abstraite <code>filtre</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">filtre</span>
+{
+<span class="org-keyword">protected</span> :
+  <span class="org-type">double</span> <span class="org-variable-name">m_frequence_coupure</span>;
+  <span class="org-type">double</span> <span class="org-variable-name">m_facteur_qualite</span>;
+
+<span class="org-keyword">public</span> :
+  <span class="org-keyword">virtual</span> <span class="org-type">double</span> <span class="org-function-name">process_signal</span> () = 0;
+};
+</pre>
+</div>
+
+<p>
+La méthode <code>process_signal</code> est virtuelle pure en raison de la dépendance du
+filtrage vis-à-vis du filtre utilisé. Une classe dérivant de <code>filtre</code> telle que
+<code>filtre_passe_bas</code> et donc héritant de ces méthodes pourra légitimement définir
+la méthode <code>process_signal</code> (filtre passe-bas à la fréquence de coupure).
+</p>
+
+<p>
+Quand bien même on ne peut créer d&rsquo;instance de classe abstraite, il est possible
+de créer un pointeur sur la classe <code>filtre</code>. Ce pointeur peut, par la suite,
+pointer sur des instances de classe dérivée de <code>filtre</code>. Dans le programme
+principal suivant, on obtient ainsi un tableau dont chaque élément est un objet
+différent mais néanmoins dérivé de la classe <code>filtre</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Exemple de classe h&#233;ritant de filtre</span>
+<span class="org-keyword">class</span> <span class="org-type">filtre_passe_bas</span> : <span class="org-keyword">public</span> <span class="org-type">filtre</span>
+{
+  ...
+  <span class="org-keyword">public</span>:
+  <span class="org-type">double</span> process_signal ();
+  ...
+};
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">Red&#233;finition de la m&#233;thode process_signal pour la classe filtre_passe_bas</span>
+<span class="org-type">double</span> <span class="org-constant">filtre_passe_bas</span>::<span class="org-function-name">process_signal</span> ()
+{
+  ...
+}
+
+<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">gnbr_filtre</span> = 3;
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Un tableau qui contient des pointeurs vers des filtres</span>
+  <span class="org-type">filtre</span> **<span class="org-variable-name">tab_filtre</span> = <span class="org-keyword">new</span> <span class="org-type">filtre</span>*[gnbr_filtre];
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">On peut instancier filtre_passe_bas car elle n'est plus abstraite</span>
+  <span class="org-type">filtre_passe_bas</span> <span class="org-variable-name">F_LP</span>;
+  tab_filtre[0] = &amp;F_LP;
+
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Autres classes d&#233;riv&#233;es de filtre</span>
+  <span class="org-type">filtre_passe_haut</span> <span class="org-variable-name">F_HP</span>;
+  tab_filtre[1] = &amp;F_HP;
+
+  <span class="org-type">filtre_bande_passe</span> <span class="org-variable-name">F_BP</span>;
+  tab_filtre[2] = &amp;F_BP;
+
+  <span class="org-keyword">for</span> (<span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">ifiltre</span> &lt; 0 ; ifiltre &lt; gnbr_filtre; ifiltre++)
+    {
+      <span class="org-comment-delimiter">// </span><span class="org-comment">Chaque &#233;l&#233;ment du tableau va appeller SA propre m&#233;thode</span>
+      tab_filtre[ifiltre]-&gt;process_signal ();
+    }
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+nous préciserons par la suite les limitations liées à un tel accès
+</p></div>
+
+<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+par membre, nous entendons membres et fonction membres <i>i.e.</i> méthodes
+</p></div>
+
+<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+par composition, on entend qu&rsquo;une classe possède parmi ses membres une
+instance d&rsquo;une autre classe
+</p></div>
+
+<div class="footdef"><sup><a id="fn.4" name="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+généralement et plus particulièrement en Physique, cette phase de
+modélisation est trop souvent délaissée : la maintenance du code devient, dans
+ces conditions, une tâche extrêmement laborieuse
+</p></div>
+
+<div class="footdef"><sup><a id="fn.5" name="fn.5" class="footnum" href="#fnr.5">5</a></sup> <p class="footpara">
+Java dispose de la notion d&rsquo;interface, inconnue du C++, qui permet en
+général de traiter plus élégamment les problèmes.
+</p></div>
+
+<div class="footdef"><sup><a id="fn.6" name="fn.6" class="footnum" href="#fnr.6">6</a></sup> <p class="footpara">
+on parle également de typage dynamique voir de ligature dynamique
+</p></div>
+
+<div class="footdef"><sup><a id="fn.7" name="fn.7" class="footnum" href="#fnr.7">7</a></sup> <p class="footpara">
+à distinguer de la surdéfinition où un symbole a un sens différent selon
+le contexte. Dans la redéfinition, les deux sens du même symbole ont une partie
+en commun, la méthode redéfinie est seulement plus précise
+</p></div>
+
+<div class="footdef"><sup><a id="fn.8" name="fn.8" class="footnum" href="#fnr.8">8</a></sup> <p class="footpara">
+on parle de polymorphisme sachant qu&rsquo;en biologie, ce terme reflète la
+caractéristique d&rsquo;un organisme à se présenter sous différentes formes sans
+changer de nature
+</p></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

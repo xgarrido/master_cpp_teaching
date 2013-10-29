@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Fonctions amies</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<link rel="stylesheet" href="../stylesheets/styles.css">
+                 <link rel="stylesheet" href="../stylesheets/org-pygments.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+</a><a href="lecture_pointeur.html">Pointeurs, références & allocation dynamique </a><a href="lecture_fonction.html">Rappels sur les fonctions </a><a href="lecture_specificite_c++.html">Les spécificités du C++ </a><a href="lecture_struct_class.html">Structures et classes </a><aa>Encapsulation des données </aa><aa>Notions de constructeur et de destructeur </aa><aa>Fonctions et classes amies </aa><aa>Surcharge d'opérateur </aa><aa>Héritage </aa><aa>Notions de patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard STL </aa><a href=""></a><hr/><a href="annexe_compilation.html">Compilation et directives de préprocesseur </a><a href="annexe_convention_ecriture.html">Convention d'écriture et organisation des programmes </a><a href="annexe_cout_cin.html">Écriture/lecture sur l'entrée/sortie standard </a><aa>Les membres données statiques </aa><aa>Utilisation de enum et de typedef </aa>
+                    <hr/>
+                    <a href="../../index.html">Retour menu principal</a>
+</div>
+<div id="content">
+<h1 class="title">Fonctions amies</h1><hr/>
+<p>
+De part l&rsquo;encapsulation des données, les fonctions extérieures à une classe
+n&rsquo;ont pas accès aux membres privés de cette classe&#x2026; à l&rsquo;exception <b>des
+fonctions amies</b>.
+</p>
+
+<p>
+En effet en déclarant une fonction amie d&rsquo;une classe <code>A</code>, cette fonction a accès
+à tous les membres de <code>A</code>, tout comme le ferait une méthode de <code>A</code>.
+</p>
+
+<p>
+La &ldquo;déclaration d&rsquo;amitié&rdquo; permet donc de déclarer dans une classe, les fonctions
+que l&rsquo;on autorise à accéder à ses membres privés. Conceptuellement, cette notion
+va à l&rsquo;encontre de l&rsquo;encapsulation des données; les fonctions amies ne sont jamais
+indispensables, elles sont juste pratiques.
+</p>
+
+<p>
+La syntaxe fait intervenir le mot clé <code>friend</code> et l&rsquo;on distingue trois cas de
+figures selon la nature de la fonction
+</p>
+
+<ol class="org-ol">
+<li>Fonction extérieure amie d&rsquo;une classe <code>A</code>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
+{
+  ...
+  <span class="org-keyword">friend</span> type nom_fonction_ext&#233;rieure (...);
+  ...
+};
+</pre>
+</div>
+</li>
+
+<li>Fonction membre d&rsquo;une classe <code>B</code>, amie de la classe <code>A</code>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
+{
+  ...
+  <span class="org-keyword">friend</span> type <span class="org-constant">B</span>::nom_m&#233;thode_de_A (...);
+  ...
+};
+</pre>
+</div>
+</li>
+
+<li>Toutes les méthodes d&rsquo;une classe <code>B</code> sont amies de la classe <code>A</code>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span> { ...  <span class="org-keyword">friend</span> <span class="org-keyword">class</span> <span class="org-type">B</span>; ...  };
+</pre>
+</div>
+</li>
+</ol>
+
+<p>
+Remarques :
+</p>
+<ul class="org-ul">
+<li>On déclare souvent une fonction amie d&rsquo;une classe <code>A</code> lorsque la fonction amie
+renvoie un objet de la classe <code>A</code>
+</li>
+
+<li>Il est parfois nécessaire d&rsquo;indiquer au compilateur que la déclaration de la
+classe n&rsquo;interviendra que plus loin dans le code. Dans ce cas, il faut user
+d&rsquo;une déclaration &ldquo;en amont&rdquo; (<i>forward declaration</i> en anglais) <i>via</i>
+l&rsquo;instruction <code>class nom_classe;</code>
+</li>
+
+<li>Si deux classes <code>A</code> et <code>B</code> sont amies, les objet de <code>A</code> ne peuvent pas accéder
+aux membres de <code>B</code>. Ce sont les méthodes de <code>A</code> qui peuvent accéder aux
+membres de <code>B</code>
+</li>
+</ul>
+</div>
+</body>
+</html>
