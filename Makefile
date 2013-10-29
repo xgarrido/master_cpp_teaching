@@ -15,6 +15,12 @@ html:
 	@mkdir -p doc/stylesheets
 	@$(BATCH) --visit "README.org" --funcall org-publish-cpp
 	@rm -f README.el
+	@find doc -name *.*~ | xargs rm -f
+	@tar czvf /tmp/org-cpp-publish.tar.gz index.html doc
+	@git checkout gh-pages
+	@tar xzvf /tmp/org-cpp-publish.tar.gz
+	@if [ -n "`git status --porcelain`" ]; then git commit -am "update doc" && git push; fi
+	@git checkout master
 
 clean:
 	@rm -rf doc index.html
