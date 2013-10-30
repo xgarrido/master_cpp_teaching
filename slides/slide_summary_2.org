@@ -84,7 +84,7 @@
 
     ...
 
-    private:
+  private:
     double m_masse;
     double m_charge;
   };
@@ -98,8 +98,8 @@
   #include "particule.h"
 
   // Constructeur par défaut
-  particule::particule () : m_masse  (0.0),
-                            m_charge (0.0)
+  particule::particule () :
+    m_masse  (0.0), m_charge (0.0)
   {
   }
 
