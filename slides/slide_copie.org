@@ -1,5 +1,5 @@
 #+TITLE:  Copie d'objets
-#+AUTHOR: Xavier Garrido
+#+AUTHOR: Yann Leprince
 #+DATE:   28/10/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
@@ -64,7 +64,6 @@ main : 0
 g : 10\\
 main : 10
 #+END_CBOX
-
 
 * Passage d'objets par valeur, par référence
 ** Passage par valeur
@@ -183,7 +182,6 @@ L'objet est copié
 Une copie inutile est évitée
 #+END_CBOX
 
-
 * Objets constants
 
 Le mot-clé =const= interdit la modification de l'objet auquel il s'applique.
@@ -206,8 +204,7 @@ Le mot-clé =const= interdit la modification de l'objet auquel il s'applique.
 
 Le compilateur doit savoir quelles méthodes modifient l'objet.
 
-
-* Méthodes et « =const=-correctness »
+* Méthodes et "=const=-correctness"
 
 Le prototype d'une méthode doit se terminer par =const= si celle-ci ne
 modifie pas l'objet :
@@ -225,11 +222,10 @@ modifie pas l'objet :
 
 #+BEAMER: \pause
 
-Par défaut les méthodes peuvent modifier l'objet.
+- Par défaut les méthodes peuvent modifier l'objet.
 
-En cas d'oubli de =const=, la méthode ne peut donc pas être utilisée sur des
-objets constants.
-
+- En cas d'oubli de =const=, la méthode ne peut donc pas être utilisée sur des
+  objets constants.
 
 * Copier un objet
 
@@ -252,7 +248,6 @@ existant.
   };
 #+END_SRC
 
-
 * Copier un objet : le constructeur de copie
 
 Exemple de définition d'un constructeur de copie :
@@ -271,12 +266,11 @@ Exemple de définition d'un constructeur de copie :
 
 #+BEAMER: \pause
 
-En l'absence de constructeur de copie le compilateur en génère un
-automatiquement : il copie une à une les valeurs des membres.
+- En l'absence de constructeur de copie le compilateur en génère un
+  automatiquement : il copie une à une les valeurs des membres.
 
-Lorsqu'une classe gère de la mémoire allouée dynamiquement, un constructeur de
-copie est donc *indispensable*.
-
+- Lorsqu'une classe gère de la mémoire allouée dynamiquement, un constructeur de
+  copie est donc *indispensable*.
 
 * Exemple de copie inévitable
 
@@ -294,7 +288,6 @@ Parfois on ne peut pas éviter de copier un objet :
 #+END_SRC
 
 La valeur de retour de =f= est copiée dans le nouvel objet =z=.
-
 
 * Exemple de copie évitable
 

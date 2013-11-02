@@ -212,6 +212,7 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
 | + | slide_struct_class     | Structures & Classes                                    |
 | + | slide_encapsulation    | Encapsulation des données                               |
 | + | slide_constructeur     | Constructeur & Destructeur de classe                    |
+| + | slide_copie            | Copie d'objets                                          |
 | - | slide_amitie_surcharge | Amitié & Surcharge d'opérateur                          |
 | - | slide_heritage_1       | Héritage (Partie 1)                                     |
 | - | slide_heritage_2       | Héritage (Partie 2)                                     |
