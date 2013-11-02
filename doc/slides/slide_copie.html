@@ -54,48 +54,6 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
-    MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
-        displayAlign: "center",
-        displayIndent: "2em",
-
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
-             }
-        }
-    });
-/*]]>*///-->
-</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -366,10 +324,6 @@ objets constants.
 <h2 id="sec-6">Copier un objet</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-C++ permet de définir comment copier un objet.
-</p>
-
-<p>
 La copie est la création d&rsquo;un nouvel objet ayant la même valeur qu&rsquo;un objet
 existant.
 </p>
@@ -468,10 +422,13 @@ Mais on peut souvent éviter des copies inutiles :
 </pre>
 </div>
 
+<div class="cbox">
 <p>
 La variable locale <code>z</code> est copiée dans un objet anonyme retourné par la
 fonction.
 </p>
+
+</div>
 </div>
 </div>
 
@@ -487,14 +444,12 @@ fonction.
 </pre>
 </div>
 
+<div class="cbox">
 <p>
-Il n&rsquo;y a plus de variable locale.
+Il n&rsquo;y a plus de variable locale. L&rsquo;objet anonyme est construit directement.
 </p>
 
-<p>
-L&rsquo;objet anonyme est construit<br  />
-directement.
-</p>
+</div>
 </div>
 </div>
 </div>
