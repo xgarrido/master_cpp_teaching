@@ -57,7 +57,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
                      <hr/>
                      <a href="../../index.html">Retour menu principal</a>
 </div>
@@ -215,9 +215,7 @@ obligatoire<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></s
 <span class="org-comment-delimiter">// </span><span class="org-comment">Destruction</span>
 <span class="org-constant">particule</span>::~<span class="org-function-name">particule</span> ()
 {
-  <span class="org-keyword">if</span> (m_nom)
-    <span class="org-keyword">delete</span>[] m_nom;
-  m_nom = 0;
+  <span class="org-keyword">delete</span>[] m_nom;
 }
 </pre>
 </div>
