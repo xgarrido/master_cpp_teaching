@@ -115,8 +115,6 @@
   // Destruction
   particule::~particule ()
   {
-    if (m_nom)
-      delete[] m_nom;
-    m_nom = 0;
+    delete[] m_nom;
   }
 #+END_SRC

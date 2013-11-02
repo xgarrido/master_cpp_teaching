@@ -1,0 +1,339 @@
+#+TITLE:  Copie d'objets
+#+AUTHOR: Xavier Garrido
+#+DATE:   28/10/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+BEAMER: \setbeamercovered{invisible}
+
+* Rappel : passage par valeur, par référence
+** Passage par valeur
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void f(int i)
+  {
+    i = 10;
+    cout << "f : " << i << endl;
+  }
+
+  int main()
+  {
+    int e = 0;
+    f(e);
+    cout << "main : " << e << endl;
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<2>
+#+BEGIN_CBOX
+f : 10\\
+main : 0
+#+END_CBOX
+
+#+BEAMER: \onslide<all>
+** Passage par référence
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void g(int& i)
+  {
+    i = 10;
+    cout << "g : " << i << endl;
+  }
+
+  int main()
+  {
+    int e = 0;
+    g(e);
+    cout << "main : " << e << endl;
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<2>
+#+BEGIN_CBOX
+g : 10\\
+main : 10
+#+END_CBOX
+
+
+* Passage d'objets par valeur, par référence
+** Passage par valeur
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void f(Complexe z)
+  {
+    z.set_real_imag(2, 3);
+    cout << "f : ";
+    z.affiche();
+  }
+
+  int main()
+  {
+    Complexe p(1, 0.5);
+    f(p);
+    cout << "main : ";
+    p.affiche();
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<2>
+#+BEGIN_CBOX
+f : (2 + 3i)\\
+main : (1 + 0.5i)
+#+END_CBOX
+
+#+BEAMER: \onslide<all>
+** Passage par référence
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void g(Complexe& z)
+  {
+    z.set_real_imag(2, 3);
+    cout << "g : ";
+    z.affiche();
+  }
+
+  int main()
+  {
+    Complexe p(1, 0.5);
+    g(p);
+    cout << "main : ";
+    p.affiche();
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<2>
+#+BEGIN_CBOX
+g : (2 + 3i)\\
+main : (2 + 3i)
+#+END_CBOX
+
+* Passage d'objets par valeur, par référence
+#+BEAMER: \onslide<all>
+** Passage par valeur
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void f(Complexe z)
+  {
+    cout << "Le complexe vaut ";
+    z.affiche();
+  }
+
+  int main()
+  {
+    Complexe p(1, 0.5);
+    f(p);
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<3>
+#+BEGIN_CBOX
+L'objet est copié
+#+END_CBOX
+
+#+BEAMER: \onslide<2-3>
+** Passage par référence constante
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  void g(const Complexe& z)
+  {
+    cout << "Le complexe vaut ";
+    z.affiche();
+  }
+
+  int main()
+  {
+    Complexe p(1, 0.5);
+    g(p);
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+#+BEAMER: \onslide<3>
+#+BEGIN_CBOX
+Une copie inutile est évitée
+#+END_CBOX
+
+
+* Objets constants
+
+Le mot-clé =const= interdit la modification de l'objet auquel il s'applique.
+
+#+BEGIN_SRC c++
+  const int i = 42;
+  i = 3;  // erreur de compilation
+#+END_SRC
+
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  void f(const Complexe& z)
+  {
+    z.affiche();  // possible
+    z.set_real_imag(1, 2);  // impossible
+  }
+#+END_SRC
+
+#+BEAMER: \pause
+
+Le compilateur doit savoir quelles méthodes modifient l'objet.
+
+
+* Méthodes et « =const=-correctness »
+
+Le prototype d'une méthode doit se terminer par =const= si celle-ci ne
+modifie pas l'objet :
+
+#+BEGIN_SRC c++
+  class Complexe
+  {
+  public:
+    ...
+    void affiche() const;
+    void set_real_imag(double real, double imag);
+    ...
+  };
+#+END_SRC
+
+#+BEAMER: \pause
+
+Par défaut les méthodes peuvent modifier l'objet.
+
+En cas d'oubli de =const=, la méthode ne peut donc pas être utilisée sur des
+objets constants.
+
+
+* Copier un objet
+
+\Cpp permet de définir comment copier un objet.
+
+La copie est la création d'un nouvel objet ayant la même valeur qu'un objet
+existant.
+
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  class Point
+  {
+  public:
+    ...
+    Point(const Point& other);
+    ...
+  private:
+    int m_x;
+    int m_y;
+  };
+#+END_SRC
+
+
+* Copier un objet : le constructeur de copie
+
+Exemple de définition d'un constructeur de copie :
+
+#+BEGIN_SRC c++
+  #include "Point.h"
+  #include <iostream>
+  using namespace std;
+
+  Point::Point(const Point& other)
+    : m_x(other.m_x), m_y(other.m_y)
+  {
+    cout << "copie de Point" << endl;
+  }
+#+END_SRC
+
+#+BEAMER: \pause
+
+En l'absence de constructeur de copie le compilateur en génère un
+automatiquement : il copie une à une les valeurs des membres.
+
+Lorsqu'une classe gère de la mémoire allouée dynamiquement, un constructeur de
+copie est donc *indispensable*.
+
+
+* Exemple de copie inévitable
+
+Parfois on ne peut pas éviter de copier un objet :
+
+#+BEGIN_SRC c++
+  Complexe f();
+
+  int main()
+  {
+    Complexe z = f();
+    z.affiche();
+    return EXIT_SUCCESS;
+  }
+#+END_SRC
+
+La valeur de retour de =f= est copiée dans le nouvel objet =z=.
+
+
+* Exemple de copie évitable
+
+Mais on peut souvent éviter des copies inutiles :
+
+** Copie inutile
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+
+#+BEGIN_SRC c++
+  Complexe f()
+  {
+    Complexe z(1, 2);
+    return z;
+  }
+#+END_SRC
+
+La variable locale =z= est copiée dans un objet anonyme retourné par la
+fonction.
+
+#+BEAMER: \pause
+** Sans copie inutile
+:PROPERTIES:
+:BEAMER_COL: 0.5
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+
+#+BEGIN_SRC c++
+  Complexe f()
+  {
+    return Complexe(1, 2);
+  }
+#+END_SRC
+
+Il n'y a plus de variable locale.
+
+L'objet anonyme est construit\\
+directement.

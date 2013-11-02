@@ -8,44 +8,77 @@
 
 * Classe =Complexe=
 
-- Écrire une classe =Complexe=, possédant quatre membres de type =double= :
+Écrire une classe =Complexe=, possédant :
 
-  - Partie réelle
-  - Partie imaginaire
-  - Module
-  - Argument
+- Deux membres de type =double= :
 
-- Une méthode d'initialisation des membres.
+  - Partie réelle,
+  - Partie imaginaire ;
 
-- Et les méthodes suivantes :
+- Un ou plusieurs constructeurs ;
 
-  - Addition, Soustraction
-  - Multiplication
-  - Division
-  - Conjugué
+- Une méthode =affiche= pour les tests ;
+
+- Des méthodes d'accès : partie réelle, partie imaginaire, module, argument ;
+
+- Des méthodes de modification : =set_real_imag(double, double)= et
+  =set_mod_arg(double, double)= ;
+
+- Une méthode retournant le conjugué.
+
+
+Écrire ensuite les fonctions d'addition, soustraction, multiplication, et
+division, suivant ce prototype :
+
+#+BEGIN_SRC c++
+  Complexe operation(const Complexe& z1, const Complexe& z2);
+#+END_SRC
+
+
+* Évolution de la classe =Complexe=
+
+Faire évoluer la classe =Complexe=, *sans changer son interface publique*, en y
+ajoutant deux membres de données :
+
+  - Module,
+  - Argument.
+
+Ainsi, les méthodes d'accès au module et à l'argument seront plus rapide,
+puisqu'il leur suffira de lire la valeur stockée, et non plus de recalculer à
+la volée.
+
+S'assurer que les constructeurs et toutes les méthodes de modification
+préservent la synchronisation entre les quatre valeurs stockées.
+
 
 * Classe =Fraction=
 
-- Écrire une classe =Fraction=, possédant deux membres entier :
+Sur le même modèle, écrire une classe =Fraction=, possédant :
 
-  - Numérateur
-  - Dénominateur
+- Deux membres entiers :
 
-- Une méthode d'initialisation des membres.
+  - Numérateur,
+  - Dénominateur ;
 
-- Et les méthodes :
+- Un ou plusieurs constructeurs ;
 
-  - =Affiche= :: qui affiche la fraction sous la forme Numérateur/Dénominateur
-                 /e.g./ 4/3
-  - =Addition, Soustraction= ::
-  - =Inverse= ::
-  - =Multiplication=, =Division= ::
-  - =Reduire= :: qui réduit la fraction /i.e./ 28/6 devient 14/3
-  - =Resultat= :: qui effectue la divison et fournit le résultat
+- Une méthode =affiche= pour les tests (qui affiche la fraction sous la forme
+  Numérateur/Dénominateur /e.g./ 4/3) ;
 
-* Classe =FractionComplexe=                                        :noexport:
+- Des méthodes d'accès ;
 
-Utiliser les deux classes précédentes pour afficher les fractions de complexe
+- Une méthode de modification ;
+
+- Une méthode retournant la fraction inverse (dénominateur / numérateur) ;
+
+- Une méthode =reduire= : qui réduit la fraction /i.e./ 28/6 devient 14/3 ;
+
+- =approx= : qui retourne la valeur approchée de la fraction par un =double=.
+
+
+* Classe =FractionComplexe= :noexport:
+
+Utiliser les deux classes précédentes pour afficher les fractions de complexes
 sous la forme
 
 \[

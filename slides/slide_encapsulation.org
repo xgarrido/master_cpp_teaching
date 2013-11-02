@@ -43,7 +43,7 @@ toutes fonctions extérieures à la classe
   class particule
   {
   public:
-    // Déclaration des getters et setters
+    // Déclaration des méthodes d'accès
     double get_masse  () const;
     double get_charge () const;
 
@@ -66,7 +66,7 @@ toutes fonctions extérieures à la classe
     return m_masse;
   }
 
-  void particule::set_masse (const double masse_)
+  void particule::set_masse (double masse_)
   {
     m_masse = masse_;
   }
