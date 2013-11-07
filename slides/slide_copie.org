@@ -3,8 +3,7 @@
 #+DATE:   28/10/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
-#+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching, nologo]
+#+LATEX_CLASS: cpp-slide
 #+BEAMER: \setbeamercovered{invisible}
 
 * Rappel : passage par valeur, par référence

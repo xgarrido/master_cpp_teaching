@@ -3,8 +3,7 @@
 #+DATE:   15/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
-#+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching]
+#+LATEX_CLASS: cpp-slide
 
 * Rappels sur les adresses et pointeurs
 :PROPERTIES:

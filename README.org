@@ -112,10 +112,10 @@ Only include one default package and remove all the crapppy stuff included by
 **** Beamer template
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-latex-classes
-               '("cpp-beamer"
+               '("cpp-slide"
                  "\\documentclass[c]{beamer}
                   [PACKAGES]
-                  \\usepackage{custom-beamer}
+                  \\usepackage[cpp_teaching]{../slide-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -146,7 +146,7 @@ bottom of the frame.
   (add-to-list 'org-export-filter-footnote-reference-functions 'sk-beamer-footnote)
 #+END_SRC
 
-We define a new environment for "colored" box
+We also define a new environment for "colored" box
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-beamer-environments-extra
                '("cbox" "c" "\\begin{cbox}%o(%h)" "\\end{cbox}"))
@@ -181,6 +181,14 @@ We define a new environment for "colored" box
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 *** Define dedicated function for export
+#+BEGIN_SRC emacs-lisp
+  (defun cpp-export-slides ()
+    (progn
+      ;;(setq org-latex-default-class "cpp-slide")
+      (org-beamer-export-to-pdf)
+      ))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   (defun cpp-export-lectures ()
     (progn
@@ -438,6 +446,432 @@ layout)
   }{}
 #+END_SRC
 
+**** Beamer style
+:PROPERTIES:
+:TANGLE: slide-style.sty
+:END:
+***** Special progress bar in footline
+#+NAME: generate_footline
+#+HEADERS: :var style="default" :var color="gray"
+#+BEGIN_SRC sh :results output :tangle no :noweb yes
+  echo '\let\@email\@empty'
+  echo '\@ifundefined{email}{%'
+  echo '  \newcommand\email[1]{\gdef\@email{#1}}}{}'
+  echo '\defbeamertemplate{footline}{cbfootline}{%'
+  echo '  \usebeamerfont{page number in head/foot}'
+  echo '  \hspace{1em}\inserttitle\hfill'
+  echo '  \insertpagenumber'
+  echo '  \kern1em\vskip2pt'
+  echo '  \color{'$color'}% to color the progressbar'
+  echo '  \hspace*{-\beamer@leftmargin}%'
+  echo '  \rule{\beamer@leftmargin}{2pt}%'
+  echo '  \rlap{\rule{\dimexpr'
+  echo '      \beamer@startpageofframe\dimexpr'
+  echo '      \beamer@rightmargin+\textwidth\relax/\beamer@endpageofdocument}{1pt}}'
+  echo '  % next empty line is mandatory!'
+  echo ' '
+  echo '  \vspace{.0\baselineskip}'
+  echo '         {}'
+  echo '}'
+#+END_SRC
+***** General settings
+****** Basics
+#+BEGIN_SRC latex
+  \NeedsTeXFormat{LaTeX2e}
+  \ProvidesPackage{slide-style}[2013/11/07 v0.01 C++ beamer templates]
+#+END_SRC
+****** Package options
+#+BEGIN_SRC latex
+  \RequirePackage{kvoptions}
+  \SetupKeyvalOptions{
+    family=cb,
+    prefix=cb@
+  }
+  \DeclareBoolOption[false]{nologo}
+  \DeclareBoolOption[false]{notitlelogo}
+  \DeclareBoolOption[false]{noheaderlogo}
+  \DeclareBoolOption[false]{noauthor}
+  \DeclareBoolOption[false]{cpp_teaching}
+  \ProcessKeyvalOptions*
+#+END_SRC
+****** Parsing options
+Here we parse result of =ProcessKeyvalOptions= done previously in order to set
+different booleans used in the nex section.
+#+BEGIN_SRC latex
+  \RequirePackage{ifthen}
+  \newboolean{has_driver_name}
+  \setboolean{has_driver_name}{false}
+  \ifthenelse{\boolean{cb@cpp_teaching}}{
+    \setboolean{has_driver_name}{true}
+    \setboolean{cb@nologo}{true}
+    \setboolean{cb@noauthor}{true}
+  }{}
+  \ifthenelse{\boolean{has_driver_name}}{
+  }{
+    \PackageWarning{slide-style}{You do not specify a 'driver' name !}}{
+  }
+  \ifthenelse{\boolean{cb@nologo}}{
+    \setboolean{cb@notitlelogo}{true}
+    \setboolean{cb@noheaderlogo}{true}
+  }{}
+#+END_SRC
+****** Package requirements
+******* =hyperref= package
+#+BEGIN_SRC latex
+  \hypersetup{
+    xetex,
+    colorlinks=true,
+    urlcolor=green,
+    filecolor=green,
+    linkcolor=red,
+    plainpages=false,
+    pdfpagelabels,
+    bookmarksnumbered,
+    pagebackref
+  }
+#+END_SRC
+******* Sans math
+#+BEGIN_SRC latex
+  \RequirePackage[eulergreek,EULERGREEK]{sansmath}
+  \sansmath
+#+END_SRC
+****** Default themes
+#+BEGIN_SRC latex
+  \usetheme{default}
+  \usecolortheme{whale}
+#+END_SRC
+****** Color definitions
+Since color must be applied in a very last time, we define a bash script to be
+called within =postamble= part of [[Template settings]]
+#+NAME: generate_beamer_colors
+#+BEGIN_SRC latex :results output :tangle no
+  \setbeamercolor{structure}{fg=generic2}
+  \setbeamercolor{alerted text}{fg=generic0}
+  \setbeamercolor{example text}{fg=generic1}
+  \setbeamercolor{block title}{use=structure,fg=structure.bg, bg=structure.fg}
+  \setbeamercolor{block body}{use=structure, fg=structure.fg, bg=structure.bg}
+  \setbeamercolor{frametitle}{use=structure, fg=structure.fg, bg=}
+  \setbeamercolor{example title}{use=example,fg=example.bg, bg=example.fg}
+  \setbeamercolor{example body}{use=example, fg=example.fg, bg=example.bg}
+  \setbeamercolor{itemize item}{fg=generic2}
+  \setbeamercolor{footnote}{fg=generic3}
+  \setbeamercolor{footnote mark}{fg=generic3}
+
+  \setbeamercolor{ruc_upper}{fg=white,bg=red}
+  \setbeamercolor{ruc_lower}{fg=red,bg=white}
+  \setbeamercolor{guc_upper}{fg=white,bg=green}
+  \setbeamercolor{guc_lower}{fg=green,bg=white}
+  \setbeamercolor{buc_upper}{fg=white,bg=blue}
+  \setbeamercolor{buc_lower}{fg=blue,bg=white}
+
+  \setbeamercolor{lruc}{fg=white,bg=red!10}
+  \setbeamercolor{lrtuc}{fg=red,bg=red!10}
+  \setbeamercolor{lguc}{fg=white,bg=green!10}
+  \setbeamercolor{lgtuc}{fg=green,bg=green!10}
+  \setbeamercolor{lbuc}{fg=white,bg=blue!10}
+  \setbeamercolor{lbtuc}{fg=blue,bg=blue!10}
+  \setbeamercolor{louc}{fg=white,bg=orange!10}
+  \setbeamercolor{lotuc}{fg=orange,bg=orange!10}
+  \setbeamercolor{lwuc}{fg=blue,bg=white}
+#+END_SRC
+
+****** Font
+#+BEGIN_SRC latex
+  \setmonofont[Scale=0.9]{Inconsolata}
+  \newfontfamily{\Handwritten}{Gunny Handwriting}
+  \setbeamerfont{page number in head/foot}{size=\tiny}
+#+END_SRC
+****** Beamer options
+#+BEGIN_SRC latex
+  \DeclareOptionBeamer{shadow}[true]{\def\beamer@themerounded@shadow{#1}}
+  \ExecuteOptionsBeamer{shadow=true}
+  \ProcessOptionsBeamer
+
+  \setbeamercovered{transparent}
+  \setbeamertemplate{blocks}[rounded][shadow=\beamer@themerounded@shadow]
+#+END_SRC
+****** Title page definition
+First, make title frame plain (no page number, not footline...)
+#+BEGIN_SRC latex
+  \def\maketitle{\ifbeamer@inframe\titlepage\else\frame[plain,noframenumbering]{\titlepage}\fi}
+#+END_SRC
+
+Also add a logo if any
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{cb@notitlelogo}}{}{
+    \titlegraphic{\resizebox{!}{15mm}{\logo}}}
+#+END_SRC
+
+Set =subtitle= font to =\scriptsize=
+#+BEGIN_SRC latex
+  \setbeamerfont{subtitle}{size=\scriptsize,parent=title}
+#+END_SRC
+
+Then define the custom beamer template
+#+BEGIN_SRC latex
+  \newcommand{\insertprefixtitle}{}
+  \defbeamertemplate*{title page}{custom}[1][colsep=-4bp,
+    rounded=true,shadow=\beamer@themerounded@shadow]{
+    \vbox{}
+    \vfill
+    \begin{centering}
+      \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+        \usebeamerfont{title}\insertprefixtitle\inserttitle\par%
+        \ifx\insertsubtitle\@empty%
+        \else%
+        \vskip0.25em%
+               {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\vspace{2ex}\insertsubtitle\par}%
+               \fi%
+      \end{beamercolorbox}%
+      \vskip1em\par
+      \ifthenelse{\boolean{cb@noauthor}}{}{
+        \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+          \usebeamerfont{author}\usebeamercolor[bg]{title}\insertauthor
+        \end{beamercolorbox}
+      }
+      \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+        \usebeamerfont{institute}\usebeamercolor[bg]{title}\insertinstitute
+      \end{beamercolorbox}
+      %%\begin{beamercolorbox}[sep=8pt,center,#1]{date}
+      %%  \usebeamerfont{date}\insertdate
+      %%\end{beamercolorbox}
+      \vskip0.5em{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    \end{centering}
+    \vfill
+  }
+#+END_SRC
+
+****** Appendix page definition
+This tweak is used to include =appendix= page with the name style as =title=
+page. First, rename the =appendix= name :
+#+BEGIN_SRC latex
+  \renewcommand{\appendix}{
+    \begin{frame}[plain]{}
+      \partpage
+    \end{frame}
+  }
+#+END_SRC
+
+Then use almost the default part page style but include the command =\appendix=
+in order to keep the total page number unchanged.
+#+BEGIN_SRC latex
+  \defbeamertemplate*{part page}{custom}[1][colsep=-4bp,
+    rounded=true,shadow=\beamer@themerounded@shadow]{
+    \begin{centering}
+      \vskip1em\par
+      \begin{beamercolorbox}[sep=16pt,center,#1]{part title}
+        \usebeamerfont{part title}\appendixname\par
+      \end{beamercolorbox}
+    \end{centering}
+  }
+#+END_SRC
+****** Adding logo to frametitle
+#+BEGIN_SRC latex
+  \RequirePackage[absolute,overlay]{textpos}
+  \ifthenelse{\boolean{cb@noheaderlogo}}{}{
+    \addtobeamertemplate{frametitle}{}{%
+      \begin{textblock}{14}(13.9,0.25)
+        \resizebox{!}{8mm}{\logo}
+      \end{textblock}
+    }
+  }
+#+END_SRC
+****** Colored block environment
+We define a new colored bow environment that can be also used for =orgmode=
+headline. The parameters are the following one :
+- box width,
+- box color,
+- text options such as =\centering= of text size,
+- =x= and =y= positions,
+- box title.
+
+The last parameters, if specified, are used within a =textblock=
+environment, otherwise a =minipage= is defined.
+#+BEGIN_SRC latex
+  \newcommand{\IfNoValueOrEmptyTF}[3]{\IfNoValueTF{#1}{#2}{\if\relax\detokenize{#1}\relax#2\else#3\fi}}
+  \RequirePackage{xparse}
+  \NewDocumentEnvironment{cbox}{o o o o o d()}{
+    \IfNoValueOrEmptyTF{#4}{
+      \begin{center}
+        \begin{minipage}[c]{\IfNoValueOrEmptyTF{#1}{0.9\linewidth}{#1}}}{
+      \begin{textblock}{\IfNoValueOrEmptyTF{#1}{10}{#1}}(#4,#5)}
+    \begin{beamerboxesrounded}[upper=\IfNoValueOrEmptyTF{#2}{lbtuc}{#2}, lower=\IfNoValueOrEmptyTF{#2}{lbtuc}{#2}, shadow=false]
+      {\IfNoValueOrEmptyTF{#3}{}{#3}\IfNoValueOrEmptyTF{#6}{}{#6}}
+      \IfNoValueOrEmptyTF{#3}{}{#3}
+  }{
+    \end{beamerboxesrounded}
+    \IfNoValueOrEmptyTF{#4}{\end{minipage}\end{center}}{\end{textblock}}
+  }
+#+END_SRC
+
+****** Animated prompt environment
+Taken from this [[http://tex.stackexchange.com/questions/37869/beamer-animations-how-to-simulate-terminal-input-and-output][post forum]] on stackexchange. For some obscure reasons, this
+piece of code can not be included into the [[C++ teaching style]].
+#+BEGIN_SRC latex
+  \RequirePackage{animate}
+  \RequirePackage{expl3}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %commands for simulating terminal in/output
+  %\scroll[<line separator string>]{<width as TeX dim>}
+  %                             {<number of lines>}{terminal text line}
+  %\clearbuf  %clears line buffer
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \ExplSyntaxOn
+  \seq_new:N\g_linebuffer_seq
+  \seq_new:N\g_inputline_seq
+  \newcommand\scroll[4][§§]{
+    \color{generic2}
+    \seq_set_split:Nnn\g_inputline_seq{#1}{#4}
+    \seq_map_inline:Nn\g_inputline_seq{
+      \seq_gput_right:Nx\g_linebuffer_seq{##1}
+      \int_compare:nT{\seq_count:N\g_linebuffer_seq>#3}{
+        \seq_gpop_left:NN\g_linebuffer_seq\dummy
+      }
+    }
+    \mbox{\begin{minipage}[t][#3\baselineskip]{#2}
+        \ttfamily
+        \seq_map_inline:Nn\g_linebuffer_seq{\mbox{##1}\\}
+    \end{minipage}}
+  }
+  \newcommand\clearbuf{\seq_gclear:N\g_linebuffer_seq}
+  \ExplSyntaxOff
+#+END_SRC
+****** Footline
+Remove navigation symbols
+#+BEGIN_SRC latex
+  \beamertemplatenavigationsymbolsempty
+#+END_SRC
+
+Add special footline with a slick progress bar
+#+BEGIN_SRC latex :noweb yes
+    \def\progressbar@progressbar{} % the progress bar
+    \newcount\progressbar@tmpcounta% auxiliary counter
+    \newcount\progressbar@tmpcountb% auxiliary counter
+    \newdimen\progressbar@pbht %progressbar height
+    \newdimen\progressbar@pbwd %progressbar width
+    \newdimen\progressbar@tmpdim % auxiliary dimension
+
+    \progressbar@pbwd=\linewidth
+    \progressbar@pbht=1pt
+
+    % the progress bar
+    \def\progressbar@progressbar{%
+      \tikzexternaldisable
+
+      \progressbar@tmpcounta=\insertframenumber
+      \progressbar@tmpcountb=\inserttotalframenumber
+      \progressbar@tmpdim=\progressbar@pbwd
+      \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+      \divide\progressbar@tmpdim by \progressbar@tmpcountb
+
+      \begin{tikzpicture}[very thin]
+        \draw[generic3,line width=\progressbar@pbht] (0pt, 0pt) -- ++ (1.25\progressbar@tmpdim,0pt);
+      \end{tikzpicture}%
+    }
+    \ifthenelse{\boolean{has_driver_name}}{
+      \ifthenelse{\boolean{cb@cpp_teaching}}{
+        \defbeamertemplate{footline}{cbfootline}{%
+          \usebeamerfont{page number in head/foot}
+          \hspace{1em}\inserttitle\hfill
+          \insertpagenumber
+          \kern1em\vskip2pt
+          \color{generic3}% to color the progressbar
+          \hspace*{-\beamer@leftmargin}%
+          \rule{\beamer@leftmargin}{2pt}%
+          \rlap{\rule{\dimexpr
+              \beamer@startpageofframe\dimexpr
+              \beamer@rightmargin+\textwidth\relax/\beamer@endpageofdocument}{1pt}}
+          % next empty line is mandatory!
+
+          \vspace{.0\baselineskip}
+                 {}
+        }
+      }{}
+      \setbeamertemplate{footline}[cbfootline]{}
+      \setbeamercolor{footline}{use=structure, fg=generic3, bg=structure.bg}
+    }{}
+#+END_SRC
+****** Footnote
+Redefine footnote template for beamer
+#+BEGIN_SRC latex
+  \defbeamertemplate*{footnote}{custom}
+                     {
+                       \parbox{11.5cm}{\raggedleft
+                         \tiny
+                         \parindent 1em\noindent%
+                         \hbox to 1em{\hfil\insertfootnotemark}\insertfootnotetext%
+                       }
+                       \vskip +1pt
+                     }
+#+END_SRC
+
+Use personal footnote symbol starting with dagger and not with asterisk.
+#+BEGIN_SRC latex
+  \def\@fnsymbol#1{\ensuremath{\ifcase#1\or \dagger\or \ddagger\or
+    \mathsection\or \mathparagraph\or \|\or **\or \dagger\dagger
+    \or \ddagger\ddagger \else\@ctrerr\fi}}
+  \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+  \renewcommand{\footnoterule}{}
+#+END_SRC
+
+Reset counter for every beamer frame
+#+BEGIN_SRC latex
+  \RequirePackage{perpage}
+  \MakePerPage{footnote}
+#+END_SRC
+
+If the text within the footnote is very long, LaTeX may split the footnote over
+several pages. You can prevent LaTeX from doing so by increasing the penalty for
+such an operation.
+#+BEGIN_SRC latex
+  \interfootnotelinepenalty=10000
+#+END_SRC
+***** Template settings
+Given the =driver= to be used, generic colors, special title inclusion are set
+up. Practically, everything can be done within this section.
+
+****** Preamble
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{cb@cpp_teaching}}{
+#+END_SRC
+****** Changing appendix name
+#+BEGIN_SRC latex
+  \renewcommand{\appendixname}{Annexes}
+#+END_SRC
+****** Colors
+#+BEGIN_SRC latex
+  \definecolor{red}{RGB}{221,42,43}
+  \definecolor{green}{RGB}{132,184,24}
+  \definecolor{blue}{RGB}{0,72,112}
+  \definecolor{orange}{RGB}{192,128,64}
+  \definecolor{gray}{RGB}{107,108,110}
+
+  \colorlet{generic0}{green}
+  \colorlet{generic1}{green}
+  \colorlet{generic2}{blue}
+  \colorlet{generic3}{gray}
+#+END_SRC
+****** Title prefix
+#+BEGIN_SRC latex
+  \newcommand{\Cpp}{\mbox{C\vspace{.5em}\protect\raisebox{.2ex}{\footnotesize++~}}}
+  \renewcommand{\insertprefixtitle}{\textbf{Cours \Cpp}\vskip0.25em\normalsize}
+#+END_SRC
+****** =prompt= environment
+#+BEGIN_SRC latex
+  \newenvironment{prompt}
+                 {\begin{center}\tt\color{blue}\$}
+                 {\end{center}}
+
+#+END_SRC
+****** Minted lexer
+#+BEGIN_SRC latex
+  \usemintedstyle{upsud}
+#+END_SRC
+****** Postamble
+#+BEGIN_SRC latex :noweb yes
+  <<generate_beamer_colors>>
+  }{}
+#+END_SRC
 ** Settings for =org= to =html= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp

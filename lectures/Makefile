@@ -15,8 +15,7 @@ all: $(files_pdf)
 
 %.pdf: %.org
 	@echo "NOTICE: Exporting $< to pdf...";
-	@$(BATCH) --visit "$<" --funcall cpp-export-lectures
-#> /dev/null 2>&1;
+	@$(BATCH) --visit "$<" --funcall cpp-export-lectures > /dev/null 2>&1;
 	@rm -f ../*.sty
 
 clean:

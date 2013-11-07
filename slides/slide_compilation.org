@@ -3,8 +3,7 @@
 #+DATE:   11/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
-#+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [cpp_teaching]
+#+LATEX_CLASS: cpp-slide
 
 * Mécanismes de compilation
 
@@ -77,7 +76,7 @@
 
 #+BEGIN_SRC latex
   \centering
-  \begin{animateinline}[step]{1}
+  \begin{animateinline}[step,poster=last]{1}
     %%, controls, buttonsize=1em, buttonfg=0.6:0.6:0.6
     \clearbuf\scroll{0.9\linewidth}{8}{\noexpand\$\;which ccc}
     \newframe
