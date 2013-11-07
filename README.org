@@ -10,20 +10,18 @@ behind C++ and the Object Oriented Programming.
 
 * Installation
 
-To use these materials you will need to install some dedicated LaTeX templates
-independantly developed https://github.com/xgarrido/latex-templates. See the
-README inside this github repository to know how to install them.
+To fully use this package, you will need to install the proper Pygments style to
+match University of Paris Sud colors. The repository address is
+https://github.com/xgarrido/pygments-styles with the installation
+commands. Without it, compilation will go fine except that you will get fancy
+color for the code blocks.
 
-You will also need to install the proper Pygments style to match University of
-Paris Sud colors. The repository address is
-https://github.com/xgarrido/pygments-styles with the installation commands.
-
-Given the successful installation of the LaTeX templates + Pygments style, you
-will need special =orgmode= settings to translate the =org= files into =pdf=
-documents. All the needed code is embedded within this file in the next
-section. There is no need to detangle this file since emacs will do it when you
-will use the Makefile in the corresponding directories. So, next step will be to
-do =make= within the courses directories.
+Given the successful installation of the Pygments style, you will need special
+=orgmode= settings to translate the =org= files into =pdf= documents. All the
+needed code is embedded within this file in the next sections. There is no need
+to detangle this file since emacs will do it when you will use the Makefile in
+the corresponding directories. So, next step will be to do =make= within the
+different directories.
 
 * Orgmode settings
 :PROPERTIES:
