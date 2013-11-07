@@ -156,9 +156,9 @@ We define a new environment for "colored" box
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
                '("cpp-lecture"
-                 "\\documentclass{report}
+                 "\\documentclass[10pt,a4paper,twoside]{report}
                   [PACKAGES]
-                  \\usepackage{lecture-style}
+                  \\usepackage[cpp_teaching_lectures]{../lecture-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -170,9 +170,9 @@ We define a new environment for "colored" box
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
                '("cpp-class"
-                 "\\documentclass{report}
+                 "\\documentclass[10pt,a4paper]{report}
                   [PACKAGES]
-                  \\usepackage[10pt,a4paper,cpp_teaching_classes]{../lecture-style}
+                  \\usepackage[cpp_teaching_classes]{../lecture-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -181,6 +181,14 @@ We define a new environment for "colored" box
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 *** Define dedicated function for export
+#+BEGIN_SRC emacs-lisp
+  (defun cpp-export-lectures ()
+    (progn
+      (setq org-latex-default-class "cpp-lecture")
+      (org-latex-export-to-pdf)
+      ))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   (defun cpp-export-classes ()
     (progn

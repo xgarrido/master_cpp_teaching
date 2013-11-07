@@ -2,8 +2,6 @@
 #+AUTHOR: Xavier Garrido
 #+DATE:   23/09/2013
 #+OPTIONS: toc:nil ^:{}
-#+LATEX_CLASS: lecture
-#+LATEX_CLASS_OPTIONS: [10pt,a4paper,twoside,cpp_teaching_lectures]
 #+LATEX_HEADER: \setcounter{chapter}{7}
 
 Le \Cpp permet de surdéfinir les opérateurs[fn:1] c'est-à-dire de donner un sens
