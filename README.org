@@ -273,12 +273,11 @@ different booleans used in the nex section.
 ***** Template settings
 Given the =driver= to be used, generic colors, special title inclusion are set
 up. Practically, everything can be done within this section.
-****** C++ teaching style
-******* Preamble
+****** Preamble
 #+BEGIN_SRC latex
   \ifthenelse{\boolean{has_driver_name}}{
 #+END_SRC
-******* Colors
+****** Colors
 #+BEGIN_SRC latex
   \definecolor{red}{RGB}{221,42,43}
   \definecolor{green}{RGB}{132,184,24}
@@ -286,7 +285,7 @@ up. Practically, everything can be done within this section.
   \definecolor{orange}{RGB}{192,128,64}
   \definecolor{gray}{RGB}{107,108,110}
 #+END_SRC
-******* Fonts
+****** Fonts
 #+BEGIN_SRC latex
   \setmonofont[Scale=0.9]{Inconsolata}
   \RequirePackage{mathpazo}
@@ -302,11 +301,11 @@ up. Practically, everything can be done within this section.
     \setromanfont[Mapping=tex-text, Numbers=OldStyle]{Minion Pro}
   }
 #+END_SRC
-******* Minted lexer
+****** Minted lexer
 #+BEGIN_SRC latex
   \usemintedstyle{upsud}
 #+END_SRC
-******* Fancy headings
+****** Fancy headings
 #+BEGIN_SRC latex
   \RequirePackage{fancyhdr}
   \ifthenelse{\boolean{ls@oldstyle}}{
@@ -335,19 +334,19 @@ up. Practically, everything can be done within this section.
   }
 #+END_SRC
 ******* Layout
-******** Title tweak
+******* Title tweak
 No title
 #+BEGIN_SRC latex
   \renewcommand*{\maketitle}{}
 #+END_SRC
-******** Paragraph indent
+******* Paragraph indent
 No paragraph indent
 #+BEGIN_SRC latex
   \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
     \setlength{\parindent}{0cm}
   }{}
 #+END_SRC
-******** Chapter style
+******* Chapter style
 We want chapter with fancy style (see [[Fancy headings]]) but we do not want
 explicit call of =\chapter= command within the =org= document. Thus we use a
 LaTeX hook to automatically add this command at the begin of the document.
@@ -375,7 +374,7 @@ No page number for first chapter pages
 #+BEGIN_SRC latex
   \let\ps@plain=\ps@empty
 #+END_SRC
-******** Section style
+******* Section style
 We change the sections style using =titlesec= package
 #+BEGIN_SRC latex
   \ifthenelse{\boolean{ls@oldstyle}}{}{
@@ -385,16 +384,16 @@ We change the sections style using =titlesec= package
     \titleformat*{\subsubsection}{\itshape\color{blue!60}}
   }
 #+END_SRC
-******** Set space line
+******* Set space line
 #+BEGIN_SRC latex
   \RequirePackage[onehalfspacing]{setspace}
   \setstretch{1.02}
 #+END_SRC
-******** Make page wider
+******* Make page wider
 #+BEGIN_SRC latex
   \RequirePackage{a4wide}
 #+END_SRC
-******** Footnote style
+******* Footnote style
 #+BEGIN_SRC latex
   \renewcommand{\footnoterule}{\color{blue}%
     \vskip-\footruleskip\vskip-\footrulewidth%
@@ -402,18 +401,18 @@ We change the sections style using =titlesec= package
   \renewcommand{\thefootnote}{\alph{footnote}}
   \interfootnotelinepenalty=10000
 #+END_SRC
-******** Header style
+******* Header style
 #+BEGIN_SRC latex
   \renewcommand{\headrulewidth}{1.5pt}
 #+END_SRC
-******** Caption setup
+******* Caption setup
 #+BEGIN_SRC latex
   \RequirePackage{ccaption}
   \captionnamefont{\footnotesize\bfseries}
   \captiontitlefont{\footnotesize}
   \renewcommand{\fnum@figure}[1]{Figure~\thefigure~-- }
 #+END_SRC
-******** Tweaking geometry
+******* Tweaking geometry
 This has to be set here for obscure reasons (maybe =fncychap= redefines geometry
 layout)
 #+BEGIN_SRC latex
@@ -421,25 +420,37 @@ layout)
     \RequirePackage[top=1.0cm, width=16cm]{geometry}
   }{}
 #+END_SRC
-******* New environment
-******** Remark
+******* VC status
+#+NAME: vc-status
+#+BEGIN_SRC sh :results output :tangle no
+  if [ -d .git ]; then
+      log=$(LC_MESSAGES=en git --no-pager log -1 HEAD --date=short --pretty=format:"\texttt{git} commit \href{https://github.com/xgarrido/master_cpp_teaching/commit/%H}{\color{gray}\texttt{%h}} -- %ad")
+      echo "\renewcommand*{\PrelimText}{\textnormal{\small\color{gray}${log}}}"
+  fi
+#+END_SRC
+#+BEGIN_SRC latex :noweb yes
+  \RequirePackage{prelim2e}
+  <<vc-status()>>
+#+END_SRC
+****** New environment
+******* Remark
 #+BEGIN_SRC latex
   \newenvironment{remark}
                  {\begin{quote}\ding{47}\itshape\small}
                  {\end{quote}}
 #+END_SRC
-******** Prompt
+******* Prompt
 #+BEGIN_SRC latex
   \newenvironment{prompt}
                  {\begin{quote}\color{blue!75}\tt\$\;}
                  {\end{quote}}
 #+END_SRC
-******* New command
+****** New command
 #+BEGIN_SRC latex
   \newcommand{\Cpp}{\mbox{C\vspace{.5em}\protect\raisebox{.2ex}{\footnotesize++~}}}
   \newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
 #+END_SRC
-******* Postamble
+****** Postamble
 #+BEGIN_SRC latex
   }{}
 #+END_SRC
@@ -448,30 +459,6 @@ layout)
 :PROPERTIES:
 :TANGLE: slide-style.sty
 :END:
-***** Special progress bar in footline
-#+NAME: generate_footline
-#+HEADERS: :var style="default" :var color="gray"
-#+BEGIN_SRC sh :results output :tangle no :noweb yes
-  echo '\let\@email\@empty'
-  echo '\@ifundefined{email}{%'
-  echo '  \newcommand\email[1]{\gdef\@email{#1}}}{}'
-  echo '\defbeamertemplate{footline}{cbfootline}{%'
-  echo '  \usebeamerfont{page number in head/foot}'
-  echo '  \hspace{1em}\inserttitle\hfill'
-  echo '  \insertpagenumber'
-  echo '  \kern1em\vskip2pt'
-  echo '  \color{'$color'}% to color the progressbar'
-  echo '  \hspace*{-\beamer@leftmargin}%'
-  echo '  \rule{\beamer@leftmargin}{2pt}%'
-  echo '  \rlap{\rule{\dimexpr'
-  echo '      \beamer@startpageofframe\dimexpr'
-  echo '      \beamer@rightmargin+\textwidth\relax/\beamer@endpageofdocument}{1pt}}'
-  echo '  % next empty line is mandatory!'
-  echo ' '
-  echo '  \vspace{.0\baselineskip}'
-  echo '         {}'
-  echo '}'
-#+END_SRC
 ***** General settings
 ****** Basics
 #+BEGIN_SRC latex
