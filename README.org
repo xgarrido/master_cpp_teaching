@@ -18,7 +18,7 @@ You will also need to install the proper Pygments style to match University of
 Paris Sud colors. The repository address is
 https://github.com/xgarrido/pygments-styles with the installation commands.
 
-Given the succesful installation of the LaTeX templates + Pygments style, you
+Given the successful installation of the LaTeX templates + Pygments style, you
 will need special =orgmode= settings to translate the =org= files into =pdf=
 documents. All the needed code is embedded within this file in the next
 section. There is no need to detangle this file since emacs will do it when you
@@ -29,6 +29,18 @@ do =make= within the courses directories.
 :PROPERTIES:
 :TANGLE: README.el
 :END:
+** Create/clean directories
+The following code make sure the needed directories are created for export as
+well as for tangling this file
+#+BEGIN_SRC emacs-lisp
+  (defun cpp-create-directories ()
+    (let* ((this-dir (file-name-directory (or load-file-name buffer-file-name))))
+      (progn
+        (make-directory (expand-file-name "doc/stylesheets" this-dir) t)
+        )))
+  (cpp-create-directories)
+#+END_SRC
+
 ** Settings for =org= to =pdf= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp
@@ -46,7 +58,7 @@ do =make= within the courses directories.
 #+END_SRC
 *** No author
 #+BEGIN_SRC emacs-lisp
-(setq org-export-with-author nil)
+  (setq org-export-with-author nil)
 #+END_SRC
 *** Code blocks
 This activates a number of widely used languages, you are encouraged to activate
@@ -67,6 +79,21 @@ although it is not added by default as a security precaution.
   (setq org-confirm-babel-evaluate nil)
 #+END_SRC
 
+*** =minted= setup
+Code fragments are syntax highlighted using [[https://code.google.com/p/minted/][minted]] LaTeX package
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-listings 'minted)
+  (setq org-latex-minted-options
+        '(;;("frame" "lines")
+          ("fontsize" "\\footnotesize")
+          ("samepage" "")
+          ("mathescape" "")
+          ("xrightmargin" "0.5cm")
+          ("xleftmargin"  "0.5cm")
+          ))
+#+END_SRC
+
 *** Default list of LaTeX packages
 Only include one default package and remove all the crapppy stuff included by
 =org= \rightarrow =latex= translation.
@@ -85,7 +112,7 @@ Only include one default package and remove all the crapppy stuff included by
 **** Beamer template
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-latex-classes
-               '("beamer"
+               '("cpp-beamer"
                  "\\documentclass[c]{beamer}
                   [PACKAGES]
                   \\usepackage{custom-beamer}
@@ -128,7 +155,7 @@ We define a new environment for "colored" box
 **** Lecture template
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
-               '("lecture"
+               '("cpp-lecture"
                  "\\documentclass{report}
                   [PACKAGES]
                   \\usepackage{lecture-style}
@@ -139,22 +166,28 @@ We define a new environment for "colored" box
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
-
-*** =minted= setup
-Code fragments are syntax highlighted using [[https://code.google.com/p/minted/][minted]] LaTeX package
-
-#+BEGIN_SRC emacs-lisp
-  (setq org-latex-listings 'minted)
-  (setq org-latex-minted-options
-        '(;;("frame" "lines")
-          ("fontsize" "\\footnotesize")
-          ("samepage" "")
-          ("mathescape" "")
-          ("xrightmargin" "0.5cm")
-          ("xleftmargin"  "0.5cm")
-          ))
+**** Class template
+#+BEGIN_SRC emacs-lisp :results none
+  (add-to-list 'org-latex-classes
+               '("cpp-class"
+                 "\\documentclass{report}
+                  [PACKAGES]
+                  \\usepackage[10pt,a4paper,cpp_teaching_classes]{../lecture-style}
+                  [NO-DEFAULT-PACKAGES]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
-
+*** Define dedicated function for export
+#+BEGIN_SRC emacs-lisp
+  (defun cpp-export-classes ()
+    (progn
+      (setq org-latex-default-class "cpp-class")
+      (org-latex-export-to-pdf)
+      ))
+#+END_SRC
 *** Set LaTeX command
 #+BEGIN_SRC emacs-lisp
    (defun sk-latexmk-cmd (backend)
@@ -162,10 +195,241 @@ Code fragments are syntax highlighted using [[https://code.google.com/p/minted/]
         pdflatex, or xelatex as appropriate, using latexmk."
      (when (org-export-derived-backend-p backend 'latex)
        (let ((texcmd)))
-       (setq texcmd "jobname=$(basename %f | sed 's/\.tex//');latexmk -xelatex -shell-escape -quiet %f && mkdir -p latex.d && mv ${jobname}.* latex.d/. && mv latex.d/${jobname}.{org,tex,pdf,fdb_latexmk} .")
+       (setq texcmd "jobname=$(basename %f | sed 's/\.tex//');latexmk -xelatex -shell-escape -quiet %f && mkdir -p latex.d && mv ${jobname}.* latex.d/. && mv latex.d/${jobname}.{org,tex,pdf,fdb_latexmk,aux} .")
        (setq org-latex-pdf-process (list texcmd))))
   (org-add-hook 'org-export-before-processing-hook 'sk-latexmk-cmd)
 #+END_SRC
+*** LaTeX stylesheets
+**** Lectures/class style
+:PROPERTIES:
+:TANGLE: lecture-style.sty
+:END:
+***** General settings
+****** Basics
+#+BEGIN_SRC latex
+  \NeedsTeXFormat{LaTeX2e}
+  \ProvidesPackage{lecture-style}[2013/09/18 v0.01 Custom lecture/course templates]
+#+END_SRC
+****** Package options
+#+BEGIN_SRC latex
+  \RequirePackage{kvoptions}
+  \SetupKeyvalOptions{
+    family=ls,
+    prefix=ls@
+  }
+  \DeclareBoolOption[false]{nologo}
+  \DeclareBoolOption[false]{oldstyle}
+  \DeclareBoolOption[false]{cpp_teaching_lectures}
+  \DeclareBoolOption[false]{cpp_teaching_classes}
+  \ProcessKeyvalOptions*
+#+END_SRC
+****** Parsing options
+Here we parse result of =ProcessKeyvalOptions= done previously in order to set
+different booleans used in the nex section.
+#+BEGIN_SRC latex
+  \RequirePackage{ifthen}
+  \newboolean{has_driver_name}
+  \setboolean{has_driver_name}{false}
+  \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
+    \setboolean{has_driver_name}{true}
+  }{}
+  \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
+    \setboolean{has_driver_name}{true}
+  }{}
+  \ifthenelse{\boolean{has_driver_name}}{
+  }{
+    \PackageWarning{lecture-style}{You do not specify a 'driver' name !}}{
+  }
+#+END_SRC
+****** Package requirements
+******* =hyperref= package
+#+BEGIN_SRC latex
+  \hypersetup{
+    xetex,
+    colorlinks=true,
+    urlcolor=green,
+    filecolor=green,
+    linkcolor=red,
+    plainpages=false,
+    pdfpagelabels,
+    bookmarksnumbered,
+    pagebackref
+  }
+#+END_SRC
+***** Template settings
+Given the =driver= to be used, generic colors, special title inclusion are set
+up. Practically, everything can be done within this section.
+****** C++ teaching style
+******* Preamble
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{has_driver_name}}{
+#+END_SRC
+******* Colors
+#+BEGIN_SRC latex
+  \definecolor{red}{RGB}{221,42,43}
+  \definecolor{green}{RGB}{132,184,24}
+  \definecolor{blue}{RGB}{0,72,112}
+  \definecolor{orange}{RGB}{192,128,64}
+  \definecolor{gray}{RGB}{107,108,110}
+#+END_SRC
+******* Fonts
+#+BEGIN_SRC latex
+  \setmonofont[Scale=0.9]{Inconsolata}
+  \RequirePackage{mathpazo}
+
+  \ifthenelse{\boolean{ls@oldstyle}}{
+    \setmainfont
+        [ BoldFont       = texgyrepagella-bold.otf ,
+          ItalicFont     = texgyrepagella-italic.otf ,
+          BoldItalicFont = texgyrepagella-bolditalic.otf ]
+        {texgyrepagella-regular.otf}
+  }{
+    \setsansfont[Mapping=tex-text]{Myriad Pro}
+    \setromanfont[Mapping=tex-text, Numbers=OldStyle]{Minion Pro}
+  }
+#+END_SRC
+******* Minted lexer
+#+BEGIN_SRC latex
+  \usemintedstyle{upsud}
+#+END_SRC
+******* Fancy headings
+#+BEGIN_SRC latex
+  \RequirePackage{fancyhdr}
+  \ifthenelse{\boolean{ls@oldstyle}}{
+    \RequirePackage[Lenny]{fncychap}
+    \ChTitleVar{\Huge\bfseries}
+    \ChNameVar{\fontsize{14}{16}\usefont{OT1}{ptm}{b}{n}\selectfont}
+    \ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{b}{n}\selectfont}
+  }{
+    \RequirePackage[Sonny]{fncychap}
+    \ChTitleVar{\Huge\bfseries\sffamily\color{blue}}
+    \ChNameVar{\fontsize{14}{16}\selectfont\sffamily\color{blue}}
+    \ChNumVar{\fontsize{60}{62}\selectfont\sffamily\color{blue}}
+    \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
+      \ChRuleWidth{0pt}
+      \renewcommand{\DOCH}{%
+        \vspace{-2cm}
+        \raggedleft
+        \CNV\FmN{\@chapapp}\space \CNoV\thechapter
+        \par\nobreak
+        \vspace{-3cm}
+      }
+    }{}
+    \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
+      \ChRuleWidth{1.5pt}
+    }{}
+  }
+#+END_SRC
+******* Layout
+******** Title tweak
+No title
+#+BEGIN_SRC latex
+  \renewcommand*{\maketitle}{}
+#+END_SRC
+******** Paragraph indent
+No paragraph indent
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
+    \setlength{\parindent}{0cm}
+  }{}
+#+END_SRC
+******** Chapter style
+We want chapter with fancy style (see [[Fancy headings]]) but we do not want
+explicit call of =\chapter= command within the =org= document. Thus we use a
+LaTeX hook to automatically add this command at the begin of the document.
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
+    \renewcommand{\chaptername}{Exercice}
+    \ifthenelse{\boolean{ls@oldstyle}}{
+      \AtBeginDocument{\chapter{}\vspace{-1.5cm}}
+    }{
+      \AtBeginDocument{\chapter{}}
+    }
+  }{}
+  \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
+    \renewcommand{\chaptername}{Fiche}
+    \ifthenelse{\boolean{ls@oldstyle}}{
+      \AtBeginDocument{\chapter{\@title}}
+      \AtEndDocument{\clearemptydoublepage}
+    }{
+      \AtBeginDocument{\chapter{\@title}}
+      \AtEndDocument{\clearemptydoublepage}
+    }
+  }{}
+#+END_SRC
+No page number for first chapter pages
+#+BEGIN_SRC latex
+  \let\ps@plain=\ps@empty
+#+END_SRC
+******** Section style
+We change the sections style using =titlesec= package
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{ls@oldstyle}}{}{
+    \RequirePackage{titlesec}
+    \titleformat*{\section}{\Large\bfseries\sffamily\color{blue}}
+    \titleformat*{\subsection}{\large\bfseries\sffamily\color{blue!75}}
+    \titleformat*{\subsubsection}{\itshape\color{blue!60}}
+  }
+#+END_SRC
+******** Set space line
+#+BEGIN_SRC latex
+  \RequirePackage[onehalfspacing]{setspace}
+  \setstretch{1.02}
+#+END_SRC
+******** Make page wider
+#+BEGIN_SRC latex
+  \RequirePackage{a4wide}
+#+END_SRC
+******** Footnote style
+#+BEGIN_SRC latex
+  \renewcommand{\footnoterule}{\color{blue}%
+    \vskip-\footruleskip\vskip-\footrulewidth%
+    \vspace{10pt}\hrule width\columnwidth height1.5pt \vspace{5pt} \color{gray}}
+  \renewcommand{\thefootnote}{\alph{footnote}}
+  \interfootnotelinepenalty=10000
+#+END_SRC
+******** Header style
+#+BEGIN_SRC latex
+  \renewcommand{\headrulewidth}{1.5pt}
+#+END_SRC
+******** Caption setup
+#+BEGIN_SRC latex
+  \RequirePackage{ccaption}
+  \captionnamefont{\footnotesize\bfseries}
+  \captiontitlefont{\footnotesize}
+  \renewcommand{\fnum@figure}[1]{Figure~\thefigure~-- }
+#+END_SRC
+******** Tweaking geometry
+This has to be set here for obscure reasons (maybe =fncychap= redefines geometry
+layout)
+#+BEGIN_SRC latex
+  \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
+    \RequirePackage[top=1.0cm, width=16cm]{geometry}
+  }{}
+#+END_SRC
+******* New environment
+******** Remark
+#+BEGIN_SRC latex
+  \newenvironment{remark}
+                 {\begin{quote}\ding{47}\itshape\small}
+                 {\end{quote}}
+#+END_SRC
+******** Prompt
+#+BEGIN_SRC latex
+  \newenvironment{prompt}
+                 {\begin{quote}\color{blue!75}\tt\$\;}
+                 {\end{quote}}
+#+END_SRC
+******* New command
+#+BEGIN_SRC latex
+  \newcommand{\Cpp}{\mbox{C\vspace{.5em}\protect\raisebox{.2ex}{\footnotesize++~}}}
+  \newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+#+END_SRC
+******* Postamble
+#+BEGIN_SRC latex
+  }{}
+#+END_SRC
+
 ** Settings for =org= to =html= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp

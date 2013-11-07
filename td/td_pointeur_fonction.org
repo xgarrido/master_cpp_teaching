@@ -2,8 +2,6 @@
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}
-#+LATEX_CLASS: lecture
-#+LATEX_CLASS_OPTIONS: [10pt,a4paper,,cpp_teaching_classes]
 #+LATEX_HEADER: \setcounter{chapter}{0}
 
 * Compilation conditionnelle

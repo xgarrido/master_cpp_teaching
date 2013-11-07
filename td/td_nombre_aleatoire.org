@@ -2,8 +2,6 @@
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil
-#+LATEX_CLASS: lecture
-#+LATEX_CLASS_OPTIONS: [10pt,a4paper,cpp_teaching_classes]
 #+LATEX_HEADER: \setcounter{chapter}{4}
 
 * Constructeur de la classe =Complexe=
@@ -39,8 +37,9 @@
 - Surdéfinir une méthode permettant d'afficher soit l'ensemble des tirages
   aléatoires soit le \(i\)^ème tirage.
 
-- Définir une méthode de comparaison de deux instances de =Hasard= dont la
-  valeur de retour sera un booléen.
+- Définir une méthode de comparaison de deux instances de =Hasard= retournant un
+  booléen dont la valeur sera soit =true= soit =false= selon que les deux
+  instances sont identiques ou pas.
 
 Exécuter plusieurs fois le programme en affichant l'ensemble des valeurs
 générées. Proposer une solution visant à générer, pour chaque exécution, une
