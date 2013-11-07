@@ -6,8 +6,8 @@ BATCH=$(EMACS) --batch --no-init-file									\
         '((sh . t)))"											\
   --eval "(setq org-confirm-babel-evaluate nil)"							\
   --eval "(setq c-standard-font-lock-fontify-region-function 'font-lock-default-fontify-region)"	\
+  --eval '(org-babel-load-file   "./README.org")'                                                       \
   --eval '(org-babel-tangle-file "./README.org")'							\
-  --eval '(org-babel-load-file   "./README.org")'
 
 SUBDIRS_ALL = lectures td slides
 
