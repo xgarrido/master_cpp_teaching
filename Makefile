@@ -16,7 +16,7 @@ all: html
 html:
 	@echo "NOTICE: Generating html documentation..."
 	@$(BATCH) --visit "README.org" --funcall org-publish-cpp > /dev/null 2>&1
-	@rm -f README.el
+	@rm -f README.el *.sty
 	@find doc -name *.*~ | xargs rm -f
 	@tar czvf /tmp/org-cpp-publish.tar.gz index.html doc
 	@git checkout gh-pages
