@@ -97,9 +97,9 @@
                  ainsi qu'aux classes dérivées. Ils demeurent toutefois
                  inaccessibles à l'utilisateur de la classe contrairement au
                  statut =public=
-- =private= :: les membres sont accessibles non seulement aux méthodes mais
-               également à l'utilisateur de la classe c'est-à-dire à n'importe
-               quel objet/instance du type de la classe
+- =public= :: les membres sont accessibles non seulement aux méthodes mais
+              également à l'utilisateur de la classe c'est-à-dire à n'importe
+              quel objet/instance du type de la classe
 
 * Appels des constructeurs et destructeurs
 
