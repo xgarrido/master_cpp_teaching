@@ -5,6 +5,7 @@
 */*.auxlock
 */*.fdb_latexmk
 */*.fls
+*/*.vrb
 */*~
 */latex.d/
 */tikz.d/

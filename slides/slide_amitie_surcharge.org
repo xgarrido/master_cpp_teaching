@@ -1,11 +1,11 @@
-#+TITLE:  Amitié & Surcharge d'opérateur
+#+TITLE:  Surcharge d'opérateur
 #+AUTHOR: Xavier Garrido
 #+DATE:   30/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: cpp-slide
 
-* Fonctions et classes amies
+* Fonctions et classes amies                                       :noexport:
 
 - Du fait du principe d'encapsulation des données, les fonctions extérieures à
   la classe n'ont pas accès aux membres privées de cette classe...
@@ -15,7 +15,7 @@
 - Utilité : quasi nulle sauf pour quelques opérations (dont la surcharge
   d'opérateur)
 
-* Exemple de fonction amie d'une classe
+* Exemple de fonction amie d'une classe                            :noexport:
 
 #+BEGIN_SRC c++
   // Déclaration avec friend
@@ -40,7 +40,7 @@
   }
 #+END_SRC
 
-* Classe amie d'une autre classe
+* Classe amie d'une autre classe                                   :noexport:
 
 - Méthode d'une classe =B=, amie d'une autre classe =A=
 
@@ -82,6 +82,9 @@
   class point
   {
   public:
+    point (const double x, const double y);
+    double x () const;
+    double y () const;
     point & operator+= (const point & point_);
 
   private:
@@ -90,14 +93,20 @@
   };
 #+END_SRC
 
-#+BEAMER: \pause
+* Example de surcharge de l'opérateur unaire =+==
 
 #+BEGIN_SRC c++
+  // Déclaration
+  class point
+  {
+    ...
+  };
+
   // Définition
   point & point::operator+= (const point & point_)
   {
-    m_x += point_.m_x;
-    m_y += point_.m_y;
+    m_x += point_.x ();
+    m_y += point_.y ();
     return *this;
   }
 #+END_SRC
@@ -113,8 +122,8 @@
   // Définition
   point & point::operator+= (const point & point_)
   {
-    m_x += point_.m_x;
-    m_y += point_.m_y;
+    m_x += point_.x ();
+    m_y += point_.y ();
     return *this;
   }
   ...
@@ -131,52 +140,67 @@
 
 #+BEGIN_SRC c++
   // Déclaration
-  class point
-  {
-  public:
-    friend point operator+ (const point & point1_, const point & point2_);
-    // Constructeur
-    point (const double x_, const double a_y_);
-  };
+  point operator+ (const point & point1_, const point & point2_);
 
   // Définition
   point operator+ (const point & point1_, const point & point2_)
   {
-    return point (point1_.m_x + point2_.m_x, point1_.m_y + point2_.m_y);
+    return point (point1_.x () + point2_.x (), point1_.y () + point2_.y ());
   }
-
-  point my_point1 (2, 3);
-  point my_point2 (4, 5);
-  point my_point3 = my_point1 + my_point2;
+  int main ()
+  {
+    point my_point1 (2, 3);
+    point my_point2 (4, 5);
+    point my_point3 = my_point1 + my_point2;
+  }
 #+END_SRC
 
-* Constructeur de recopie et opérateur d'affectation ===
+* Opérateur d'affectation ===
 
-- La surcharge de l'opérateur d'affectation === se fait comme pour n'importe
-  quel opérateur
+- L'opérateur d'affectation === permet d'affecter une nouvelle valeur à un objet
+  *déjà existant*
+
+- Sa surcharge se fait comme pour n'importe quel opérateur
 
   #+BEGIN_SRC c++
+    // Déclaration
     class point
     {
       point & operator= (const point & point_);
     };
 
-    point & point::operator= (const point & point_)
-    {
-      if (&point_ != this)
-        {
-          m_x = point_.m_x;
-          m_y = point_.m_y;
-        }
-      return *this;
-    }
-
+    // Utilisation
     point my_point1 (2, 3);
     point my_point2 (3, 4);
     my_point2 = my_point1;
   #+END_SRC
 
-*  Constructeur de recopie et opérateur d'affectation ===
+* Opérateur d'affectation ===
+
+- Rien n'empêche d'affecter un objet à lui-même
+
+  #+BEGIN_SRC c++
+    Point a;
+    a = a;
+  #+END_SRC
+
+- Lorsque cette "affectation" risque de corrompre l'objet, utiliser un
+  garde-fou :
+
+  #+BEGIN_SRC c++
+    // Définition
+    point & point::operator= (const point & point_)
+    {
+      if (&point_ != this) // garde-fou
+        {
+          m_x = p.x();
+          m_y = p.y();
+        }
+      return *this;
+    }
+  #+END_SRC
+
+* Constructeur de recopie et opérateur d'affectation ===
 
 - Le constructeur de recopie est la méthode appelée lors de la copie d'un objet
   vers un autre objet du même type
@@ -189,8 +213,8 @@
 
     point::point (const point & point_)
     {
-      m_x = point_.m_x;
-      m_y = point_.m_y;
+      m_x = point_.x ();
+      m_y = point_.y ();
     }
 
     point my_point1 (2, 3);
@@ -202,30 +226,19 @@
 - \Cpp fournit par défaut le constructeur par recopie et l'opérateur
   d'affectation === (de même pour le constructeur et le destructeur)
 
-- Leur surdéfinition devient indispensable dès lors qu'*un membre est un
-  pointeur* afin de copier non pas l'adresse du pointeur mais sa valeur
+- Lorsque ces versions triviales ne suffisent pas (cas de l'*allocation
+  dynamique*) il faut choisir entre deux solutions :
 
-  #+BEGIN_SRC c++
-    double * vx = new double[10];
-    // Copie du pointeur et non de la valeur pointée
-    double * vy = vx;
-    // vy n'existe plus
-    delete[] vx;
-  #+END_SRC
+  - Écrire une version correcte,
 
-* Constructeur de recopie et opérateur d'affectation ===
+  - Rendre impossible la copie et l'affectation, en déclarant ces méthodes
+    privées, sans les définir :
 
-- \Cpp fournit par défaut le constructeur par recopie et l'opérateur
-  d'affectation === (de même pour le constructeur et le destructeur)
-
-- Leur surdéfinition devient indispensable dès lors qu'*un membre est un
-  pointeur* afin de copier non pas l'adresse du pointeur mais sa valeur
-
-  #+BEGIN_SRC c++
-    double * vx = new double[10];
-    double * vy = new double[10];
-    // Copie des valeurs
-    for (size_t i = 0; i < 10; ++i) vy[i] = vx[i];
-    // vy est toujours présent en mémoire
-    delete vx;
-  #+END_SRC
+    #+BEGIN_SRC c++
+      class pas_de_copie
+      {
+      private:
+        pas_de_copie (const pas_de_copie&);
+        pas_de_copie & operator= (const pas_de_copie&);
+      };
+    #+END_SRC
