@@ -214,6 +214,91 @@ We also define a new environment for "colored" box
   (org-add-hook 'org-export-before-processing-hook 'sk-latexmk-cmd)
 #+END_SRC
 *** LaTeX stylesheets
+**** Org preamble
+:PROPERTIES:
+:TANGLE:   org-preamble.sty
+:END:
+
+This section defines =org= preamble and settings for documents exported from
+=.org= to =.tex= files. The basic use is to add =\usepackage{org-preamble}= in
+your LaTeX document.
+
+***** Basics
+#+BEGIN_SRC latex
+  \NeedsTeXFormat{LaTeX2e}
+  \ProvidesPackage{org-preamble}[2013/03/03 v0.01 Bundling of Preamble items for Org to LaTeX export]
+#+END_SRC
+
+***** Style options
+Options can be passed to =org-preamble= style file within =\usepackage[options]=
+call. For the time being, I have only copied/pasted how to declare such options
+but do not use it.
+#+BEGIN_SRC latex :tangle no
+  \RequirePackage{ifthen}
+  \newboolean{@fr} %
+  \setboolean{@fr}{false} %
+  \DeclareOption{fr}{
+    \setboolean{@fr}{true}
+  }
+  \ProcessOptions
+#+END_SRC
+
+***** Packages requirements
+****** AMS packages
+#+BEGIN_SRC latex
+  \RequirePackage{amsmath,amssymb}
+#+END_SRC
+****** Listings package
+[[https://code.google.com/p/minted/][minted]] is a package that facilitates expressive syntax highlighting in LaTeX
+using the powerful Pygments library. The package also provides options to
+customize the highlighted source code output using =fancyvrb=.
+#+BEGIN_SRC latex
+  \RequirePackage[cache]{minted}
+#+END_SRC
+
+****** Unicode typesettings aka XeTeX
+#+BEGIN_SRC latex
+  \RequirePackage{ifxetex}
+  \ifxetex
+  \RequirePackage{fontspec}
+  \RequirePackage{xunicode}
+  %%\else
+  \fi
+#+END_SRC
+
+****** hyperref package
+#+BEGIN_SRC latex
+  \RequirePackage{hyperref}
+#+END_SRC
+****** [[http://www.ctan.org/pkg/pifont][pifont]] package
+#+BEGIN_SRC latex
+  \RequirePackage{pifont}
+#+END_SRC
+****** graphics package
+#+BEGIN_SRC latex
+  \RequirePackage{graphicx}
+  \graphicspath{
+    {./plot/}
+    {./figures/}
+  }
+#+END_SRC
+****** comment package
+#+BEGIN_SRC latex
+  \RequirePackage{comment}
+#+END_SRC
+****** [[http://www.texample.net/tikz/][tikz]] package
+#+BEGIN_SRC latex
+  \RequirePackage{tikz}
+  \usetikzlibrary{positioning,arrows,decorations,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
+#+END_SRC
+
+We use the external library from =tikz= to cache i.e. produce a =pdf= file of
+each =tikzpicture=. =tikz/external= looks if the pdf exist and if not, export it.
+#+BEGIN_SRC latex
+  \input "|mkdir -p latex.d"
+  \input "|mkdir -p /tmp/latex.d"
+#+END_SRC
+
 **** Lectures/class style
 :PROPERTIES:
 :TANGLE: lecture-style.sty
