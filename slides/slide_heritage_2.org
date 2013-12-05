@@ -195,10 +195,10 @@
 #+BEGIN_SRC c++
   int main ()
   {
-    polygone  * ptr_polygone1 = new polygone;
-    rectangle * ptr_polygone2 = new rectangle;
+    polygone * ptr_polygone1 = new polygone;
+    polygone * ptr_polygone2 = new rectangle;
     ptr_polygone1->affiche ();
-    ptr_polygone1->affiche ();
+    ptr_polygone2->affiche ();
   }
 #+END_SRC
 
@@ -252,10 +252,10 @@
 #+BEGIN_SRC c++
   int main ()
   {
-    polygone  * ptr_polygone1 = new polygone;
-    rectangle * ptr_polygone2 = new rectangle;
+    polygone * ptr_polygone1 = new polygone;
+    polygone * ptr_polygone2 = new rectangle;
     ptr_polygone1->affiche ();
-    ptr_polygone1->affiche ();
+    ptr_polygone2->affiche ();
   }
 #+END_SRC
 
