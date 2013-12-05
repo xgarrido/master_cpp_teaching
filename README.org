@@ -27,18 +27,6 @@ different directories.
 :PROPERTIES:
 :TANGLE: README.el
 :END:
-** Create/clean directories
-The following code make sure the needed directories are created for export as
-well as for tangling this file
-#+BEGIN_SRC emacs-lisp
-  (defun cpp-create-directories ()
-    (let* ((this-dir (file-name-directory (or load-file-name buffer-file-name))))
-      (progn
-        (make-directory (expand-file-name "doc/stylesheets" this-dir) t)
-        )))
-  (cpp-create-directories)
-#+END_SRC
-
 ** Settings for =org= to =pdf= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp
@@ -113,7 +101,7 @@ Only include one default package and remove all the crapppy stuff included by
                '("cpp-slide"
                  "\\documentclass[c]{beamer}
                   [PACKAGES]
-                  \\usepackage[cpp_teaching]{../slide-style}
+                  \\usepackage[cpp_teaching]{slide-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -156,7 +144,7 @@ We also define a new environment for "colored" box
                '("cpp-lecture"
                  "\\documentclass[10pt,a4paper,twoside]{report}
                   [PACKAGES]
-                  \\usepackage[cpp_teaching_lectures]{../lecture-style}
+                  \\usepackage[cpp_teaching_lectures]{lecture-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -170,7 +158,7 @@ We also define a new environment for "colored" box
                '("cpp-class"
                  "\\documentclass[10pt,a4paper]{report}
                   [PACKAGES]
-                  \\usepackage[cpp_teaching_classes]{../lecture-style}
+                  \\usepackage[cpp_teaching_classes]{lecture-style}
                   [NO-DEFAULT-PACKAGES]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -1191,6 +1179,7 @@ up. Practically, everything can be done within this section.
 *** CSS stylesheets
 **** Main stylesheets
 :PROPERTIES:
+:MKDIRP: yes
 :TANGLE: doc/stylesheets/styles.css
 :END:
 ***** Google fonts
@@ -1642,7 +1631,8 @@ up. Practically, everything can be done within this section.
 
 **** Org source code styles
 :PROPERTIES:
-:TANGLE:   doc/stylesheets/org-pygments.css
+:MKDIRP: yes
+:TANGLE: doc/stylesheets/org-pygments.css
 :END:
 
 #+BEGIN_SRC css

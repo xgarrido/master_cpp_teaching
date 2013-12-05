@@ -15,7 +15,8 @@ all: $(files_pdf)
 
 %.pdf: %.org
 	@echo "NOTICE: Exporting $< to pdf..."
-	@$(BATCH) --visit "$<" --funcall cpp-export-classes > /dev/null 2>&1
+	@TEXINPUTS=".:..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-classes
+#> /dev/null 2>&1
 	@rm -f ../*.sty
 
 clean:
