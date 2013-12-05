@@ -1,0 +1,73 @@
+#+TITLE:  Conception d'un programme : Héritage vs. Composition
+#+AUTHOR: Xavier Garrido
+#+DATE:   11/09/2013
+#+OPTIONS: toc:nil ^:{}
+#+STARTUP:     beamer
+#+LATEX_CLASS: cpp-slide
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+* Héritage vs. Composition
+
+Il faut bien distinguer les deux liens logiques que sont l'héritage et la
+composition:
+
+- Composition :: relation de type *_possède un_*; la classe =polygone= possède
+                 un ensemble de =point=
+- Héritage :: relation de type *_est un_*; la classe =rectangle= est un
+              =polygone=
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
+
+* Héritage vs. Interface
+
+Si l'héritage est une notion relativement puissante en POO, il faut néanmoins
+éviter les relations hiérarchique inappropriées.
+
+#+BEAMER: \vspace{+0.5cm}
+
+*Exemple :*
+
+Un objet de type =oiseau= tout comme un objet de type =avion= ont une fonction
+en commun à savoir voler.
+
+#+BEAMER: \vspace{+0.5cm}
+
+*Sont ils toutefois des classes dérivés d'une classe plus générale de type
+=volatile= ?*
+
+#+BEAMER: \pause\vspace{0.5cm}
+
+On préfèrera utiliser l'héritage au niveau d'un partage de fonctionnalité /i.e./
+*une interface* déclarant une capacité à voler, chaque classe =oiseau= et
+=avion= spécialisant la méthode =vole=
+
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
+
+4. *Créer* des instances de ces objets et *utiliser* leurs méthodes pour
+   répondre au problème posé.
