@@ -134,7 +134,7 @@ _le premier détecteur hybride_ construit sur une surface de _3000 km^{2}_
   \begin{textblock}{5}(4,6.6)
     \begin{tikzpicture}
       \node[rectangle,
-        color=red,fill=upsud_red,fill opacity=0.3,
+        color=red,fill=red,fill opacity=0.3,
         line width=1.5pt,
         draw, rounded corners,
         text width=0.5cm,
@@ -144,7 +144,7 @@ _le premier détecteur hybride_ construit sur une surface de _3000 km^{2}_
     \begin{textblock}{5}(5.55,11.6)
       \begin{tikzpicture}
         \node[rectangle,
-          color=red,fill=upsud_red,fill opacity=0.3,
+          color=red,fill=red,fill opacity=0.3,
           line width=1.5pt,
           draw, rounded corners,
           text width=0.5cm,
@@ -154,7 +154,7 @@ _le premier détecteur hybride_ construit sur une surface de _3000 km^{2}_
     \begin{textblock}{5}(12.4,10.3)
       \begin{tikzpicture}
         \node[rectangle,
-          color=red,fill=upsud_red,fill opacity=0.3,
+          color=red,fill=red,fill opacity=0.3,
           line width=1.5pt,
           draw, rounded corners,
           text width=0.5cm,
@@ -164,7 +164,7 @@ _le premier détecteur hybride_ construit sur une surface de _3000 km^{2}_
     \begin{textblock}{5}(10.2,5.7)
       \begin{tikzpicture}
         \node[rectangle,
-          color=red,fill=upsud_red,fill opacity=0.3,
+          color=red,fill=red,fill opacity=0.3,
           line width=1.5pt,
           draw, rounded corners,
           text width=0.5cm,
@@ -176,8 +176,8 @@ _le premier détecteur hybride_ construit sur une surface de _3000 km^{2}_
 #+ATTR_LATEX: :options [5][lrtuc][\centering][4.5][2.5]
 #+BEGIN_CBOX
 \scriptsize _24 télescopes de fluorescence_ détectant la lumière de
-        désexcitation du N_{2} (300 -- 400\nbsp{}nm) émise au passage des $e^\pm$ de
-        la gerbe \\ _\rightarrow profil longitudinal_
+désexcitation du N_{2} (300 -- 400\nbsp{}nm) émise au passage des $e^\pm$ de la
+gerbe \\ _\rightarrow profil longitudinal_
 #+END_CBOX
 * L'Observatoire Pierre Auger
 
