@@ -18,13 +18,13 @@
       \node (tbl) {
         \begin{tabularx}{\textwidth}{rXr}
           Aujourd'hui     & Présentation des sujets \\[2ex]
-          9 -- 14 Janvier & Indication aux enseignants du projet choisi (via formulaire web) \\[2ex]
-          11 -- 15 Mars   & Remise des programmes \textbf{par mail} à \\
+          20 -- 24 Janvier & Indication aux enseignants du projet choisi (via formulaire web) \\[2ex]
+          10 -- 14 Mars    & Remise des programmes \textbf{par mail} à \\
           &\href{xavier.garrido@u-psud.fr}{\color{blue}\ding{41}~xavier.garrido@u-psud.fr} ou\\
-          &\href{yann.leprince-psud.fr}{\color{blue}\ding{41}~yann.leprince-psud.fr} \\[2ex]
-          18 Mars avant 16h & Remise des rapports au Secrétariat \\[2ex]
-          19 Mars à 12h     & Affichage des plannings de soutenances \\[2ex]
-          19 -- 26 Mars     & Soutenances de projet informatique \\[2ex]
+          &\href{yann.leprince-psud.fr}{\color{blue}\ding{41}~yann.leprince-psud.fr} \\
+          & Remise des rapports au Secrétariat \\[2ex]
+          %% 19 Mars à 12h     & Affichage des plannings de soutenances \\[2ex]
+          31 Mars -- 4 Avril     & Soutenances de projet informatique \\[2ex]
       \end{tabularx}};
       \begin{pgfonlayer}{background}
         \draw[rounded corners, top color=blue!20,draw=white]
