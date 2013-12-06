@@ -5,7 +5,7 @@ BATCH=$(EMACS) --batch --no-init-file						\
 		--eval "(org-babel-do-load-languages 'org-babel-load-languages	\
 			'((sh . t)))"						\
 		--eval "(setq org-confirm-babel-evaluate nil)"			\
-		--eval '(org-babel-load-file "../../README.org")'                  \
+		--eval '(org-babel-load-file "../../README.org")'               \
 		--eval '(org-babel-tangle-file "../../README.org")'
 
 files_org = $(wildcard *.org)
@@ -17,7 +17,7 @@ all: $(files_pdf)
 	@echo "NOTICE: Exporting $< to pdf..."
 	TEXINPUTS=".:..:../..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-slides
 #> /dev/null 2>&1
-#	@rm -f ../../*.sty
+	@rm -f ../../*.sty
 
 clean:
 	@rm -rf	latex.d *.tex *.pdf *.fdb* *~
