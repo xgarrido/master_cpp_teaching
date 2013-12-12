@@ -1,14 +1,14 @@
 /README.el
 
-*/*.pdf
-*/*.tex
-*/*.auxlock
-*/*.fdb_latexmk
-*/*.fls
-*/*.vrb
-*/*~
-*/latex.d/
-*/tikz.d/
+*.pdf
+*.tex
+*.auxlock
+*.fdb_latexmk
+*.fls
+*.vrb
+*~
+*latex.d/
+*tikz.d/
 
 /doc/
 /notes/
