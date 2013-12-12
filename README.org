@@ -152,6 +152,16 @@ We also define a new environment for "colored" box
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
+
+Add a new tag =ignoreheading= to skip headline tagged as such.
+#+BEGIN_SRC emacs-lisp
+  (defun sk-ignore-headline (contents backend info)
+    (when (and (org-export-derived-backend-p backend 'latex 'html 'ascii)
+               (string-match "\\`.*ignoreheading.*\n"
+                             (downcase contents)))
+      (replace-match "" nil nil contents)))
+  (add-to-list 'org-export-filter-headline-functions 'sk-ignore-headline)
+#+END_SRC
 **** Class template
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
@@ -190,6 +200,15 @@ We also define a new environment for "colored" box
       (org-latex-export-to-pdf)
       ))
 #+END_SRC
+*** Add =cite= link
+#+BEGIN_SRC emacs-lisp
+  (org-add-link-type "cite" 'ebib
+                     (lambda (path desc format)
+                       (cond
+                        ((eq format 'latex)
+                         (format "\\cite{%s}" path)))))
+#+END_SRC
+
 *** Set LaTeX command
 #+BEGIN_SRC emacs-lisp
    (defun sk-latexmk-cmd (backend)
@@ -406,7 +425,7 @@ up. Practically, everything can be done within this section.
     }{}
   }
 #+END_SRC
-******* Layout
+****** Layout
 ******* Title tweak
 No title
 #+BEGIN_SRC latex
@@ -468,7 +487,7 @@ We change the sections style using =titlesec= package
 #+END_SRC
 ******* Footnote style
 #+BEGIN_SRC latex
-  \renewcommand{\footnoterule}{\color{blue}%
+  \renewcommand{\footnoterule}{\color{gray}%
     \vskip-\footruleskip\vskip-\footrulewidth%
     \vspace{10pt}\hrule width\columnwidth height1.5pt \vspace{5pt} \color{gray}}
   \renewcommand{\thefootnote}{\alph{footnote}}
@@ -518,6 +537,29 @@ layout)
                  {\begin{quote}\color{blue!75}\tt\$\;}
                  {\end{quote}}
 #+END_SRC
+******* Bibliography
+#+BEGIN_SRC latex
+  \renewenvironment{bibliography}
+                   {\section*{\bibname}% <-- this line was changed from \chapter* to \section*
+                     \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+                     \list{\@biblabel{\@arabic\c@enumiv}}%
+                          {\settowidth\labelwidth{\@biblabel{9}}%
+                            \leftmargin\labelwidth
+                            \advance\leftmargin\labelsep
+                            \@openbib@code
+                            \usecounter{enumiv}%
+                            \let\p@enumiv\@empty
+                            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+                          \sloppy
+                          \clubpenalty4000
+                          \@clubpenalty \clubpenalty
+                          \widowpenalty4000%
+                          \sfcode`\.\@m}
+                   {\def\@noitemerr
+                     {\@latex@warning{Empty `thebibliography' environment}}%
+                     \endlist}
+#+END_SRC
+
 ****** New command
 #+BEGIN_SRC latex
   \newcommand{\Cpp}{\mbox{C\vspace{.5em}\protect\raisebox{.2ex}{\footnotesize++~}}}
