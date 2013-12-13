@@ -1,18 +1,23 @@
-doc_tex = $(wildcard *.tex)
-doc_pdf = $(doc_tex:.tex=.pdf)
+# -*- mode: makefile; -*-
+EMACS=emacs
+BATCH=$(EMACS) --batch --no-init-file						\
+		--eval "(require 'org)"						\
+		--eval "(org-babel-do-load-languages 'org-babel-load-languages	\
+			'((sh . t)))"						\
+		--eval "(setq org-confirm-babel-evaluate nil)"			\
+		--eval '(org-babel-load-file "../../README.org")'               \
+		--eval '(org-babel-tangle-file "../../README.org")'
 
-all: $(doc_pdf) $(wildcard ../base/*.sty)
+files_org = $(wildcard *.org)
+files_pdf = $(files_org:.org=.pdf)
 
-%.pdf: %.tex
-	../../utils/filepp ../../base/BasePackage.sty.skeleton -o ../../base/BasePackage.sty
-	xelatex $< || exit $$?
-	xelatex $< || exit $$?
+all: $(files_pdf)
+
+%.pdf: %.org
+	@echo "NOTICE: Exporting $< to pdf...";
+	@TEXINPUTS=".:../..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-lectures
+#> /dev/null 2>&1;
+	@rm -f ../*.sty
 
 clean:
-	for f in $(doc_tex) ; do \
-	rm -f $(doc_tex:.tex=.ps) $(doc_tex:.tex=.pdf) $(doc_tex:.tex=.toc) \
-	$(doc_tex:.tex=.aux) $(doc_tex:.tex=.log) $(doc_tex:.tex=.blg) \
-	$(doc_tex:.tex=.out) $(doc_tex:.tex=.bbl) $(doc_tex:.tex=.fot) \
-	$(doc_tex:.tex=.brf) $(doc_tex:.tex=.dvi) tmp.inputs; \
-	done ; \
-	rm -rf *.aux *~
+	@rm -rf	latex.d *.tex *.pdf *.fdb* *~

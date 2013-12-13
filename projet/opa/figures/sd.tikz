@@ -1,5 +1,10 @@
 \begin{tikzpicture}[y=-1cm]
 \sf
+\definecolor{red}{RGB}{221,42,43}
+\definecolor{green}{RGB}{132,184,24}
+\definecolor{blue}{RGB}{0,72,112}
+\definecolor{orange}{RGB}{192,128,64}
+\definecolor{gray}{RGB}{107,108,110}
 \definecolor{penColor}{gray}{0.49804}
 
 \draw[thick,penColor, dashed] (4.87045,26.82875) -- (4.87045,24.74807);
