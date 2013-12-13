@@ -1,6 +1,9 @@
 /README.el
 
-*.pdf
+/lectures/*.pdf
+/slides/*.pdf
+/td/*.pdf
+
 *.tex
 *.auxlock
 *.fdb_latexmk

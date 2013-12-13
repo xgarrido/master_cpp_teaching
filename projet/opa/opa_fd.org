@@ -1,8 +1,8 @@
-#+TITLE:  Détection des rayons cosmiques d'ultra-haute énergie : Simulation du détecteur de surface
+#+TITLE:  Détection des rayons cosmiques d'ultra-haute énergie : Simulation du détecteur de fluorescence
 #+AUTHOR: Xavier Garrido
 #+DATE:   12/12/2013
 #+OPTIONS: toc:nil ^:{}
-#+LATEX_HEADER: \setcounter{chapter}{2}
+#+LATEX_HEADER: \setcounter{chapter}{3}
 #+LATEX_HEADER_EXTRA: \renewcommand{\chaptername}{Projet}
 
 Les rayons cosmiques forment un fond astrophysique de particules non-thermiques,
@@ -50,89 +50,96 @@ chaque mode de détection. En outre, la surface couverte par le détecteur de
 surface voisine de 3000 km^{2} fait de cet instrument le plus grand détecteur de
 rayons cosmiques jamais construit.
 
-
+#+BEGIN_CENTER
+#+ATTR_LATEX: :width 0.5\linewidth
+[[file:./figures/AugerEvent_200812301774.pdf]]
+#+END_CENTER
 #+NAME: fig::rec
-#+CAPTION: *Vue 3D d'un événement hybride observé par l'Observatoire Pierre Auger (figure de gauche).*
-#+CAPTION: *Description géométrique du développement du front de gerbe (figure de droite).*
+#+CAPTION: *Vue 3D d'un événement hybride observé par l'Observatoire Pierre Auger (figure du haut).*
+#+CAPTION: *Réponse d'une caméra d'un détecteur de fluorescence (figure de gauche) et*
+#+CAPTION: *profil longitudinal de la gerbe atmosphérique (figure de droite).*
 #+ATTR_LATEX: :float multicolumn :align p{0.5\linewidth}p{0.5\linewidth}
-| [[file:./figures/AugerEvent_200812301774.pdf]] | [[file:./figures/planeFront.pdf]] |
+| [[file:./figures/camera.pdf]] | [[file:./figures/gh.pdf]] |
 
 * Présentation du projet
 
-Le but de ce projet est de simuler la réponse du *détecteur de surface* puis de
-reconstruire les propriétés géométriques (position du point d'impact, énergie)
-des gerbes atmosphériques. Le détecteur de surface se présente sous la forme
-d'un réseau de maille triangulaire où chaque station est séparée de ses voisines
-par une distance de 1.5 km. Au passage des particules secondaires de la gerbe
-atmosphérique, chaque station mesure le temps d'arrivée et l'amplitude du
-signal. Grâce à ces données, on peut ainsi déterminer :
+Le but de ce projet est de simuler la réponse du détecteur de fluorescence lors
+du passage d'une gerbe atmosphérique. Le rayonnement de fluorescence est
+consécutif à l'interaction entre les particules chargées de la gerbe $e^-/e^+$
+et l'azote présent dans l'atmosphère : le rayonnement UV (300--400 nm) résulte
+de la désexcitation des atomes d'azote.
 
+Chaque détecteur de fluorescence est composé de 6 caméras comprenant
+20\times22 pixels (/cf./ Figure [[fig::rec]]). À chaque pixel correspond :
 
-- *la direction de la gerbe* à partir des temps d'arrivées de chacune des cuves
-  ayant déclenchés. Trois temps sont ainsi nécessaires pour déterminer le plan
-  de front de gerbe (/cf./ Figure [[fig::rec]]),
+- deux angles ($\theta_{i}, \phi_{i}$) où $\theta_{i}$ correspond à l'élévation
+  du pixel $(i,j)$ et où $\phi_{i}$ est l'angle azimuthal,
+- un signal dont la valeur sera vrai ou fausse selon que le pixel ait été touché
+  ou non,
+- un temps $t_{i,j}$ d'arrivée du signal dans le pixel $(i,j)$.
 
-- *les coordonnées du point d'impact* sont calculées , en première
-  approximation, comme le centre de gravité des positions des cuves pondérées
-  par leur signal,
+La caméra couvre un champ de 30° par 33°. Le pixel ($i,j$) pointe ainsi dans la
+direction :
 
-- *l'énergie de la particule primaire* est mesurée grâce à la distribution
-  latérale de signal : la densité de particule et donc le signal généré dans
-  chacune des cuves décroît avec la distance à l'axe de la gerbe $r$ selon une
-  loi de puissance. La valeur du signal à 1000 m dont l'unité est le VEM
-  (/Vertical Equivalent Muon/) permet alors de déterminer l'énergie du rayon
-  cosmique incident : 8 VEM sont ainsi équivalents à une gerbe de 10^{18} eV.
+\[
+\theta_i=1.5\times j \quad \text{et} \quad \phi_j=60 + 1.5\times(20-i)
+\]
+
+où $i\in[1,20]$ et $j\in[1,22]$.
 
 ** Génération et simulation d'événement
 
-Un événement est caractérisé par l'énergie $E$ de la particule primaire, sa
-direction (\theta, \phi) ainsi que le point d'impact $I$ ($x_i$, $y_i$). La
-première partie du projet consiste en la simulation d'une part, de gerbes
-atmosphériques et d'autre part, de la réponse du détecteur de surface. La
-génération des événements consiste à tirer aléatoirement des valeurs pour les
-variables ($E$, \theta, \phi, $x_I, y_I$) : les valeurs d'énergie $E$ seront
-uniformément comprises entre 10^{18} eV et 10^{20} eV tandis que l'angle
-\theta sera généré selon une distribution en $\cos\,\theta$.
+Un événement est caractérisé par l'énergie $E$ de la particule primaire et sa
+direction (\theta_{SDP}, \phi_{SDP}). Le plan de détection de la gerbe
+correspond au plan contenant l'axe de la gerbe et passant par le détecteur de
+fluorescence (/cf./ Figure [[fig::fd]]). La distance entre le détecteur et l'axe de
+la gerbe est alors notée $R_p$ tandis que $\chi_0$ est l'angle entre le sol et
+la direction de la gerbe. La génération des événements consiste à tirer
+aléatoirement des valeurs pour les variables précédentes : $R_p$ sera compris
+entre 8 et 12 km, \theta_{SDP} sera tiré uniformément entre 90 et 100 degrés et
+\phi_\text{SDP} entre 60 et 90 degrés. L'angle \chi_{0} variera entre 80 et 100
+degrés.
 
-#+NAME: fig::sd
-#+CAPTION: *Représentation d'un réseau de surface constitué de 3 cuves.*
-#+ATTR_LATEX: :width 0.3\linewidth
-[[file:./figures/sd.pdf]]
+#+NAME: fig::fd
+#+CAPTION: *Paramètres géométriques de la gerbe pour la reconstruction hybride.*
+#+ATTR_LATEX: :width 0.8\linewidth
+[[file:./figures/hybrid_plan.pdf]]
 
-Dans un premier temps, le détecteur de surface sera uniquement constitué de 3
-cuves qui formeront une maille élémentaire du réseau (/cf./ Figure
-[[fig::sd]]). Chaque cuve sera atteinte à un temps $t_i$ proportionnel à la distance
-séparant la cuve de l'axe de la gerbe
-
-\[
-t_i = \frac{IH_i}{c} = \frac{\vec{IS_i}\cdot\vec{a}}{c}
-\]
-
-où $\vec{a}=(1,\theta, \phi)$ Le signal
-$s_i$, exprimé en VEM, sera simulé en tenant compte de la distribution latérale
-du signal selon
-
-\[
-s_i = \left.8\right|_\text{\tiny VEM}\times\frac{E}{10^{18}\,\text{eV}}\times\left(\frac{d_\perp^i}{1000\,\text{m}}\right)^{-1.3}
-\]
-où $d_\perp^i = \sqrt{IS_i^2 - IH_i^2}$ est la distance perpendiculairement à
-l'axe de la gerbe.
+Étant donné les paramètres simulés, il s'agit de simuler la réponse d'une caméra
+au passage de cette gerbe. L'ensemble des pixels touchés vérifie l'équation
+suivante :
+#+BEGIN_SRC latex
+  \begin{equation}
+    \theta_i=\frac{\phi_j-\phi_\text{SDP}}{\tan\,\theta_\text{SDP}}
+    \label{eq::theta}
+  \end{equation}
+#+END_SRC
+et le temps d'arrivée est donné par :
+#+BEGIN_SRC latex
+  \begin{equation}
+    t_{(i,j)} = -\frac{R_p}{c}\times\left(\tan(\pi/2 - \chi_0)-\tan(\pi-\chi_0-\theta_i)\right)
+    \label{eq::time}
+  \end{equation}
+#+END_SRC
 
 ** Reconstruction des événements
 
-Étant donné les informations déduites du détecteur de surface, on déterminera le
-point d'impact de la gerbe en calculant le barycentre des positions des cuves
-pondérées par le signal. L'énergie de la gerbe sera calculée en ajustant la
-distribution latérale du signal.
+À partir des informations issues de la caméra, on reconstruira les valeurs
+$R_p$, \theta_{SDP}, \phi_{SDP} et \chi_{0}. Les valeurs de \theta_{SDP} et
+\phi_{SDP} se déduisent de l'équation \ref{eq::theta} en ajustant les données
+$(\theta_i, \phi_j)$. De même, les paramètres $R_p$ et \chi_{0} sont obtenus à
+partir du temps de chacun des pixels $(i,j)$. On comparera ces données
+reconstruites aux valeurs simulées.
 
-Les résultats obtenus seront comparés aux données simulées en générant un grand
-nombre d'événement. On discutera les biais ainsi que la résolution en énergie en
-établissant les distributions des écarts relatifs en énergie et celles du point
-d'impact.
+Dans un second temps, on pourra simuler le bruit de la caméra à savoir le fait
+que certains pixels déclenchent sans rapport avec le passage d'une gerbe
+atmosphérique. La position de ces pixels est aléatoire et le temps sera compris
+dans une fénêtre de 5 \mu{}s entre le premier et le dernier pixel
+touché. On ajoutera donc ce bruit de pixel (entre 1 et 10 pixels bruyants) et on
+évaluera l'impact sur la qualité de la reconstruction. On pourra enfin envisager
+de supprimer ce bruit en fonction de critères de cohérence spatiale et/ou
+temporelle.
 
-Dans un second temps, on pourra considérer un réseau de cuve plus dense et on
-évaluera l'évolution des précédentes quantités en fonction du nombre de
-stations.
 
 * Références                                                  :ignoreheading:
 #+LATEX: \renewcommand{\bibname}{Références}
