@@ -118,7 +118,6 @@ We also translate *bold* into beamer =structure= and underline into *bold*.
   (defun cpp-beamer-underline (contents backend info)
     (when (eq backend 'beamer)
       (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\textbf" contents)))
-
   (add-to-list 'org-export-filter-bold-functions 'cpp-beamer-bold)
   (add-to-list 'org-export-filter-underline-functions 'cpp-beamer-underline)
 #+END_SRC
@@ -156,11 +155,18 @@ We also define a new environment for "colored" box
 Add a new tag =ignoreheading= to skip headline tagged as such.
 #+BEGIN_SRC emacs-lisp
   (defun sk-ignore-headline (contents backend info)
-    (when (and (org-export-derived-backend-p backend 'latex 'html 'ascii)
+    (when (and (org-export-derived-backend-p backend 'latex)
                (string-match "\\`.*ignoreheading.*\n"
                              (downcase contents)))
       (replace-match "" nil nil contents)))
   (add-to-list 'org-export-filter-headline-functions 'sk-ignore-headline)
+
+  (defun sk-multicolumn-figure (contents backend info)
+    (when (and (org-export-derived-backend-p backend 'latex)
+               (string-match "table" contents)
+               (string-match "includegraphics" contents))
+      (replace-regexp-in-string "table" "figure" contents)))
+  (add-to-list 'org-export-filter-table-functions 'sk-multicolumn-figure)
 #+END_SRC
 **** Class template
 #+BEGIN_SRC emacs-lisp :results none
@@ -539,25 +545,25 @@ layout)
 #+END_SRC
 ******* Bibliography
 #+BEGIN_SRC latex
-  \renewenvironment{bibliography}
-                   {\section*{\bibname}% <-- this line was changed from \chapter* to \section*
-                     \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
-                     \list{\@biblabel{\@arabic\c@enumiv}}%
-                          {\settowidth\labelwidth{\@biblabel{9}}%
-                            \leftmargin\labelwidth
-                            \advance\leftmargin\labelsep
-                            \@openbib@code
-                            \usecounter{enumiv}%
-                            \let\p@enumiv\@empty
-                            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
-                          \sloppy
-                          \clubpenalty4000
-                          \@clubpenalty \clubpenalty
-                          \widowpenalty4000%
-                          \sfcode`\.\@m}
-                   {\def\@noitemerr
-                     {\@latex@warning{Empty `thebibliography' environment}}%
-                     \endlist}
+  \renewenvironment{bibliography}{%
+    \section*{\bibname}% <-- this line was changed from \chapter* to \section*
+    \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+    \list{\@biblabel{\@arabic\c@enumiv}}%
+         {\settowidth\labelwidth{\@biblabel{9}}%
+           \leftmargin\labelwidth
+           \advance\leftmargin\labelsep
+           \@openbib@code
+           \usecounter{enumiv}%
+           \let\p@enumiv\@empty
+           \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+         \sloppy
+         \clubpenalty4000
+         \@clubpenalty \clubpenalty
+         \widowpenalty4000%
+         \sfcode`\.\@m}{%
+    \def\@noitemerr
+        {\@latex@warning{Empty `thebibliography' environment}}%
+        \endlist}
 #+END_SRC
 
 ****** New command

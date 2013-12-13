@@ -54,7 +54,7 @@ rayons cosmiques jamais construit.
 #+NAME: fig::rec
 #+CAPTION: *Vue 3D d'un événement hybride observé par l'Observatoire Pierre Auger (figure de gauche).*
 #+CAPTION: *Description géométrique du développement du front de gerbe (figure de droite).*
-#+ATTR_LATEX: :float multicolumn :align p{0.5\linewidth}p{0.5\linewidth}
+#+ATTR_LATEX: :align p{0.5\linewidth}p{0.5\linewidth}
 | [[file:./figures/AugerEvent_200812301774.pdf]] | [[file:./figures/plane_front.pdf]] |
 
 * Présentation du projet
