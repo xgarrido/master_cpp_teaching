@@ -13,7 +13,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -99,7 +99,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><a href="slide_amitie_surcharge.html">Amitié & Surcharge d'opérateur </a><a href="slide_heritage_1.html">Héritage (Partie 1) </a><a href="slide_heritage_2.html">Héritage (Partie 2) </a><a href="slide_template.html">Patrons de fonctions et de classes </a><a href="slide_STL.html">Introduction à la librairie standard </a>
                      <hr/>
                      <a href="../../index.html">Retour menu principal</a>
 </div>
@@ -317,10 +317,10 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
 {
-  <span class="org-type">polygone</span>  * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
-  <span class="org-type">rectangle</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
+  <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
+  <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
   ptr_polygone1-&gt;affiche ();
-  ptr_polygone1-&gt;affiche ();
+  ptr_polygone2-&gt;affiche ();
 }
 </pre>
 </div>
@@ -375,10 +375,10 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
 {
-  <span class="org-type">polygone</span>  * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
-  <span class="org-type">rectangle</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
+  <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
+  <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
   ptr_polygone1-&gt;affiche ();
-  ptr_polygone1-&gt;affiche ();
+  ptr_polygone2-&gt;affiche ();
 }
 </pre>
 </div>

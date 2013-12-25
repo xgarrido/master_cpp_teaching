@@ -13,7 +13,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -57,7 +57,7 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><a href="slide_amitie_surcharge.html">Amitié & Surcharge d'opérateur </a><a href="slide_heritage_1.html">Héritage (Partie 1) </a><a href="slide_heritage_2.html">Héritage (Partie 2) </a><a href="slide_template.html">Patrons de fonctions et de classes </a><a href="slide_STL.html">Introduction à la librairie standard </a>
                      <hr/>
                      <a href="../../index.html">Retour menu principal</a>
 </div>
@@ -147,7 +147,7 @@ ainsi qu&rsquo;aux classes dérivées. Ils demeurent toutefois
 inaccessibles à l&rsquo;utilisateur de la classe contrairement au
 statut <code>public</code>
 </dd>
-<dt> <code>private</code> </dt><dd>les membres sont accessibles non seulement aux méthodes mais
+<dt> <code>public</code> </dt><dd>les membres sont accessibles non seulement aux méthodes mais
 également à l&rsquo;utilisateur de la classe c&rsquo;est-à-dire à n&rsquo;importe
 quel objet/instance du type de la classe
 </dd>
@@ -191,114 +191,6 @@ appelé <b><span class="underline">avant</span></b> toutes autres opérations
 est appelé automatiquement <b><span class="underline">après</span></b> le destructeur de la classe fille
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">Conception d&rsquo;un programme</h2>
-<div class="outline-text-2" id="text-7">
-<p>
-De manière générale en POO, le développeur procède de la façon suivante:
-</p>
-
-<ol class="org-ol">
-<li><b>Répertorier</b> les objets nécessaires à la description du problème,
-</li>
-
-<li><b>Réfléchir</b> aux liens logiques entre ces objets (composition, amitié,
-héritage),
-</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">Héritage vs. Composition</h2>
-<div class="outline-text-2" id="text-8">
-<p>
-Il faut bien distinguer les deux liens logiques que sont l&rsquo;héritage et la
-composition:
-</p>
-
-<dl class="org-dl">
-<dt> Composition </dt><dd>relation de type <b><span class="underline">possède un</span></b>; la classe <code>polygone</code> possède
-un ensemble de <code>point</code>
-</dd>
-<dt> Héritage </dt><dd>relation de type <b><span class="underline">est un</span></b>; la classe <code>rectangle</code> est un
-              <code>polygone</code>
-</dd>
-</dl>
-</div>
-</div>
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Conception d&rsquo;un programme</h2>
-<div class="outline-text-2" id="text-9">
-<p>
-De manière générale en POO, le développeur procède de la façon suivante:
-</p>
-
-<ol class="org-ol">
-<li><b>Répertorier</b> les objets nécessaires à la description du problème,
-</li>
-
-<li><b>Réfléchir</b> aux liens logiques entre ces objets (composition, amitié,
-héritage),
-</li>
-
-<li><b>Implémenter</b> ces objets <i>i.e.</i> déclarer les méthodes puis les définir,
-</li>
-</ol>
-</div>
-</div>
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">Héritage vs. Interface</h2>
-<div class="outline-text-2" id="text-10">
-<p>
-Si l&rsquo;héritage est une notion relativement puissante en POO, il faut néanmoins
-éviter les relations hiérarchique inappropriées.
-</p>
-
-<p>
-<b>Exemple :</b>
-</p>
-
-<p>
-Un objet de type <code>oiseau</code> tout comme un objet de type <code>avion</code> ont une fonction
-en commun à savoir voler.
-</p>
-
-<p>
-<b>Sont ils toutefois des classes dérivés d&rsquo;une classe plus générale de type
- <code>volatile</code> ?</b>
-</p>
-
-<p>
-On préfèrera utiliser l&rsquo;héritage au niveau d&rsquo;un partage de fonctionnalité <i>i.e.</i>
-<b>une interface</b> déclarant une capacité à voler, chaque classe <code>oiseau</code> et
-<code>avion</code> spécialisant la méthode <code>vole</code>
-</p>
-</div>
-</div>
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">Conception d&rsquo;un programme</h2>
-<div class="outline-text-2" id="text-11">
-<p>
-De manière générale en POO, le développeur procède de la façon suivante:
-</p>
-
-<ol class="org-ol">
-<li><b>Répertorier</b> les objets nécessaires à la description du problème,
-</li>
-
-<li><b>Réfléchir</b> aux liens logiques entre ces objets (composition, amitié,
-héritage),
-</li>
-
-<li><b>Implémenter</b> ces objets <i>i.e.</i> déclarer les méthodes puis les définir,
-</li>
-
-<li><b>Créer</b> des instances de ces objets et <b>utiliser</b> leurs méthodes pour
-répondre au problème posé.
-</li>
-</ol>
 </div>
 </div>
 </div>

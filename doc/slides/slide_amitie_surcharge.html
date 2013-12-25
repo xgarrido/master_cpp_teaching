@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Amitié &amp; Surcharge d&rsquo;opérateur</title>
+<title>Surcharge d&rsquo;opérateur</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
@@ -13,7 +13,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -99,96 +99,16 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="preamble" class="status">
-</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><aa>Amitié & Surcharge d'opérateur </aa><aa>Héritage (Partie 1) </aa><aa>Héritage (Partie 2) </aa><aa>Patrons de fonctions et de classes </aa><aa>Introduction à la librairie standard </aa>
+</a><a href="slide_compilation.html">Compilation & Directives de préprocesseur </a><a href="slide_pointeur.html">Pointeurs, Références & Allocation Dynamique de Mémoire </a><a href="slide_specificite_c++.html">Spécificités du C++ (indépendantes de la POO) </a><a href="slide_struct_class.html">Structures & Classes </a><a href="slide_encapsulation.html">Encapsulation des données </a><a href="slide_constructeur.html">Constructeur & Destructeur de classe </a><a href="slide_copie.html">Copie d'objets </a><a href="slide_amitie_surcharge.html">Amitié & Surcharge d'opérateur </a><a href="slide_heritage_1.html">Héritage (Partie 1) </a><a href="slide_heritage_2.html">Héritage (Partie 2) </a><a href="slide_template.html">Patrons de fonctions et de classes </a><a href="slide_STL.html">Introduction à la librairie standard </a>
                      <hr/>
                      <a href="../../index.html">Retour menu principal</a>
 </div>
 <div id="content">
-<h1 class="title">Amitié &amp; Surcharge d&rsquo;opérateur</h1><hr/>
+<h1 class="title">Surcharge d&rsquo;opérateur</h1><hr/>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Fonctions et classes amies</h2>
+<h2 id="sec-1">Surcharge d&rsquo;opérateur</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Du fait du principe d&rsquo;encapsulation des données, les fonctions extérieures à
-la classe n&rsquo;ont pas accès aux membres privées de cette classe&#x2026;
-</li>
-
-<li>&#x2026; à l&rsquo;exception des fonctions amies
-</li>
-
-<li>Utilité : quasi nulle sauf pour quelques opérations (dont la surcharge
-d&rsquo;opérateur)
-</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Exemple de fonction amie d&rsquo;une classe</h2>
-<div class="outline-text-2" id="text-2">
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration avec friend</span>
-<span class="org-keyword">class</span> <span class="org-type">particule</span>
-{
-  <span class="org-keyword">friend</span> <span class="org-type">void</span> <span class="org-function-name">stupid_thing</span> (<span class="org-type">particule</span> &amp; <span class="org-variable-name">particule_</span>);
-  ...
-};
-...
-<span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
-<span class="org-type">void</span> stupid_thing (particule &amp; particule_)
-{
-  particule_.m_mass = 0.511;
-}
-...
-<span class="org-comment-delimiter">// </span><span class="org-comment">Utilisation</span>
-<span class="org-type">int</span> main ()
-{
-  <span class="org-type">particule</span> <span class="org-variable-name">my_muon</span> (105.6, -1.6e-19);
-  stupid_thing (my_muon);
-  <span class="org-comment-delimiter">// </span><span class="org-comment">muon $\equiv$ &#233;lectron ?? wtf !!</span>
-}
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Classe amie d&rsquo;une autre classe</h2>
-<div class="outline-text-2" id="text-3">
-<ul class="org-ul">
-<li>Méthode d&rsquo;une classe <code>B</code>, amie d&rsquo;une autre classe <code>A</code>
-
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
-{
-  ...
-  <span class="org-keyword">friend</span> <span class="org-type">void</span> <span class="org-constant">B</span>::methode_de_B (<span class="org-type">A</span> &amp; <span class="org-variable-name">A_</span>);
-  ...
-};
-</pre>
-</div>
-</li>
-
-<li>Classe <code>B</code> amie d&rsquo;une autre classe <code>A</code>
-
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
-{
-  ...
-  <span class="org-keyword">friend</span> <span class="org-keyword">class</span> <span class="org-type">B</span>;
-  ...
-};
-</pre>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Surcharge d&rsquo;opérateur</h2>
-<div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>C++ permet de <b>surdéfinir les opérateurs</b> tels que <code>=</code>, <code>+=</code>, <code>++</code>, <code>&lt;&lt;</code>,
   <code>new</code>&#x2026;
@@ -204,15 +124,18 @@ opérateurs
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">Exemple de surcharge de l&rsquo;opérateur unaire <code>+=</code></h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Exemple de surcharge de l&rsquo;opérateur unaire <code>+=</code></h2>
+<div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration</span>
 <span class="org-keyword">class</span> <span class="org-type">point</span>
 {
 <span class="org-keyword">public</span>:
+  <span class="org-function-name">point</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">y</span>);
+  <span class="org-type">double</span> <span class="org-function-name">x</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">double</span> <span class="org-function-name">y</span> () <span class="org-keyword">const</span>;
   <span class="org-type">point</span> &amp; <span class="org-keyword">operator</span><span class="org-function-name">+=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>);
 
 <span class="org-keyword">private</span>:
@@ -221,14 +144,24 @@ opérateurs
 };
 </pre>
 </div>
-
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Example de surcharge de l&rsquo;opérateur unaire <code>+=</code></h2>
+<div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration</span>
+<span class="org-keyword">class</span> <span class="org-type">point</span>
+{
+  ...
+};
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
 <span class="org-type">point</span> &amp; <span class="org-constant">point</span>::<span class="org-keyword">operator</span><span class="org-function-name">+=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>)
 {
-  m_x += point_.m_x;
-  m_y += point_.m_y;
+  m_x += point_.x ();
+  m_y += point_.y ();
   <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
 }
 </pre>
@@ -242,16 +175,16 @@ opérateurs
 </div>
 </div>
 </div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">Exemple de surcharge de l&rsquo;opérateur unaire <code>+=</code></h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Exemple de surcharge de l&rsquo;opérateur unaire <code>+=</code></h2>
+<div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
 <span class="org-type">point</span> &amp; <span class="org-constant">point</span>::<span class="org-keyword">operator</span><span class="org-function-name">+=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>)
 {
-  m_x += point_.m_x;
-  m_y += point_.m_y;
+  m_x += point_.x ();
+  m_y += point_.y ();
   <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
 }
 ...
@@ -266,57 +199,48 @@ opérateurs
 </div>
 </div>
 </div>
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">Exemple de surcharge de l&rsquo;opérateur binaire <code>+</code></h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Exemple de surcharge de l&rsquo;opérateur binaire <code>+</code></h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration</span>
+<span class="org-type">point</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point1_</span>, <span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point2_</span>);
+
+<span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
+<span class="org-type">point</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point1_</span>, <span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point2_</span>)
+{
+  <span class="org-keyword">return</span> point (point1_.x () + point2_.x (), point1_.y () + point2_.y ());
+}
+<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+{
+  <span class="org-type">point</span> <span class="org-variable-name">my_point1</span> (2, 3);
+  <span class="org-type">point</span> <span class="org-variable-name">my_point2</span> (4, 5);
+  <span class="org-type">point</span> <span class="org-variable-name">my_point3</span> = my_point1 + my_point2;
+}
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>L&rsquo;opérateur d&rsquo;affectation <code>=</code> permet d&rsquo;affecter une nouvelle valeur à un objet
+  <b>déjà existant</b>
+</li>
+
+<li>Sa surcharge se fait comme pour n&rsquo;importe quel opérateur
+
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration</span>
 <span class="org-keyword">class</span> <span class="org-type">point</span>
 {
-<span class="org-keyword">public</span>:
-  <span class="org-keyword">friend</span> <span class="org-type">point</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point1_</span>, <span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point2_</span>);
-  <span class="org-comment-delimiter">// </span><span class="org-comment">Constructeur</span>
-  <span class="org-function-name">point</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a_y_</span>);
-};
-
-<span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
-<span class="org-type">point</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point1_</span>, <span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point2_</span>)
-{
-  <span class="org-keyword">return</span> point (point1_.m_x + point2_.m_x, point1_.m_y + point2_.m_y);
-}
-
-<span class="org-type">point</span> <span class="org-function-name">my_point1</span> (2, 3);
-<span class="org-type">point</span> <span class="org-function-name">my_point2</span> (4, 5);
-<span class="org-type">point</span> <span class="org-variable-name">my_point3</span> = my_point1 + my_point2;
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-8">
-<ul class="org-ul">
-<li>La surcharge de l&rsquo;opérateur d&rsquo;affectation <code>=</code> se fait comme pour n&rsquo;importe
-quel opérateur
-
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">point</span>
-{
   <span class="org-type">point</span> &amp; <span class="org-keyword">operator</span><span class="org-function-name">=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>);
 };
 
-<span class="org-type">point</span> &amp; <span class="org-constant">point</span>::<span class="org-keyword">operator</span><span class="org-function-name">=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>)
-{
-  <span class="org-keyword">if</span> (&amp;point_ != <span class="org-keyword">this</span>)
-    {
-      m_x = point_.m_x;
-      m_y = point_.m_y;
-    }
-  <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
-}
-
+<span class="org-comment-delimiter">// </span><span class="org-comment">Utilisation</span>
 <span class="org-type">point</span> <span class="org-function-name">my_point1</span> (2, 3);
 <span class="org-type">point</span> <span class="org-function-name">my_point2</span> (3, 4);
 my_point2 = my_point1;
@@ -326,9 +250,44 @@ my_point2 = my_point1;
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>Rien n&rsquo;empêche d&rsquo;affecter un objet à lui-même
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-type">Point</span> <span class="org-variable-name">a</span>;
+a = a;
+</pre>
+</div>
+</li>
+
+<li>Lorsque cette &ldquo;affectation&rdquo; risque de corrompre l&rsquo;objet, utiliser un
+garde-fou :
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition</span>
+<span class="org-type">point</span> &amp; <span class="org-constant">point</span>::<span class="org-keyword">operator</span><span class="org-function-name">=</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>)
+{
+  <span class="org-keyword">if</span> (&amp;point_ != <span class="org-keyword">this</span>) <span class="org-comment-delimiter">// </span><span class="org-comment">garde-fou</span>
+    {
+      m_x = p.x();
+      m_y = p.y();
+    }
+  <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
+}
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li>Le constructeur de recopie est la méthode appelée lors de la copie d&rsquo;un objet
 vers un autre objet du même type
@@ -342,8 +301,8 @@ vers un autre objet du même type
 
 <span class="org-constant">point</span>::<span class="org-function-name">point</span> (<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">point_</span>)
 {
-  m_x = point_.m_x;
-  m_y = point_.m_y;
+  m_x = point_.x ();
+  m_y = point_.y ();
 }
 
 <span class="org-type">point</span> <span class="org-function-name">my_point1</span> (2, 3);
@@ -354,51 +313,36 @@ vers un autre objet du même type
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-9">
 <ul class="org-ul">
 <li>C++ fournit par défaut le constructeur par recopie et l&rsquo;opérateur
 d&rsquo;affectation <code>=</code> (de même pour le constructeur et le destructeur)
 </li>
 
-<li>Leur surdéfinition devient indispensable dès lors qu&rsquo;<b>un membre est un
-pointeur</b> afin de copier non pas l&rsquo;adresse du pointeur mais sa valeur
+<li>Lorsque ces versions triviales ne suffisent pas (cas de l&rsquo;<b>allocation
+dynamique</b>) il faut choisir entre deux solutions :
+
+<ul class="org-ul">
+<li>Écrire une version correcte,
+</li>
+
+<li>Rendre impossible la copie et l&rsquo;affectation, en déclarant ces méthodes
+privées, sans les définir :
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> * <span class="org-variable-name">vx</span> = <span class="org-keyword">new</span> <span class="org-type">double</span>[10];
-<span class="org-comment-delimiter">// </span><span class="org-comment">Copie du pointeur et non de la valeur point&#233;e</span>
-<span class="org-type">double</span> * <span class="org-variable-name">vy</span> = vx;
-<span class="org-comment-delimiter">// </span><span class="org-comment">vy n'existe plus</span>
-<span class="org-keyword">delete</span>[] vx;
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">pas_de_copie</span>
+{
+<span class="org-keyword">private</span>:
+  <span class="org-function-name">pas_de_copie</span> (<span class="org-keyword">const</span> <span class="org-type">pas_de_copie</span>&amp;);
+  <span class="org-type">pas_de_copie</span> &amp; <span class="org-keyword">operator</span><span class="org-function-name">=</span> (<span class="org-keyword">const</span> <span class="org-type">pas_de_copie</span>&amp;);
+};
 </pre>
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-11">
-<ul class="org-ul">
-<li>C++ fournit par défaut le constructeur par recopie et l&rsquo;opérateur
-d&rsquo;affectation <code>=</code> (de même pour le constructeur et le destructeur)
-</li>
-
-<li>Leur surdéfinition devient indispensable dès lors qu&rsquo;<b>un membre est un
-pointeur</b> afin de copier non pas l&rsquo;adresse du pointeur mais sa valeur
-
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-type">double</span> * <span class="org-variable-name">vx</span> = <span class="org-keyword">new</span> <span class="org-type">double</span>[10];
-<span class="org-type">double</span> * <span class="org-variable-name">vy</span> = <span class="org-keyword">new</span> <span class="org-type">double</span>[10];
-<span class="org-comment-delimiter">// </span><span class="org-comment">Copie des valeurs</span>
-<span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; 10; ++i) vy[i] = vx[i];
-<span class="org-comment-delimiter">// </span><span class="org-comment">vy est toujours pr&#233;sent en m&#233;moire</span>
-<span class="org-keyword">delete</span> vx;
-</pre>
-</div>
 </li>
 </ul>
 </div>
