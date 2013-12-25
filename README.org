@@ -630,6 +630,7 @@ different booleans used in the nex section.
     urlcolor=green,
     filecolor=green,
     linkcolor=red,
+    citecolor=green,
     plainpages=false,
     pdfpagelabels,
     bookmarksnumbered,
@@ -992,16 +993,16 @@ up. Practically, everything can be done within this section.
 | + | lecture_struct_class       | Structures et classes                                |
 | + | lecture_encapsulation      | Encapsulation des données                            |
 | + | lecture_constructeur       | Notions de constructeur et de destructeur            |
-| - | lecture_amitie             | Fonctions et classes amies                           |
-| - | lecture_surcharge          | Surcharge d'opérateur                                |
-| - | lecture_heritage           | Héritage                                             |
-| - | lecture_template           | Notions de patrons de fonctions et de classes        |
-| - | lecture_librairie_standard | Introduction à la librairie standard STL             |
+| + | lecture_amitie             | Fonctions et classes amies                           |
+| + | lecture_surcharge          | Surcharge d'opérateur                                |
+| + | lecture_heritage           | Héritage                                             |
+| + | lecture_template           | Notions de patrons de fonctions et de classes        |
+| + | lecture_librairie_standard | Introduction à la librairie standard STL             |
 | + | annexe_compilation         | Compilation et directives de préprocesseur           |
 | + | annexe_convention_ecriture | Convention d'écriture et organisation des programmes |
 | + | annexe_cout_cin            | Écriture/lecture sur l'entrée/sortie standard        |
-| - | annexe_variable_statique   | Les membres données statiques                        |
-| - | annexe_enum_typedef        | Utilisation de enum et de typedef                    |
+| + | annexe_variable_statique   | Les membres données statiques                        |
+| + | annexe_enum_typedef        | Utilisation de enum et de typedef                    |
 |---+----------------------------+------------------------------------------------------|
 
 #+TBLNAME: td_list :results none
@@ -1011,8 +1012,8 @@ up. Practically, everything can be done within this section.
 | + | td_classes             | Classes en C++                     |
 | + | td_classe_complexe     | Fraction de nombres complexes      |
 | + | td_nombre_aleatoire    | Constructeur & destructeurs        |
-| - | td_surcharge_operateur | Surcharge d'opérateur              |
-| - | td_polymorphisme       | Polymorphisme & classe abstraite   |
+| + | td_surcharge_operateur | Surcharge d'opérateur              |
+| + | td_polymorphisme       | Polymorphisme & classe abstraite   |
 | + | td_blackjack           | Jeu du blackjack                   |
 |---+------------------------+------------------------------------|
 
@@ -1025,11 +1026,11 @@ up. Practically, everything can be done within this section.
 | + | slide_encapsulation    | Encapsulation des données                               |
 | + | slide_constructeur     | Constructeur & Destructeur de classe                    |
 | + | slide_copie            | Copie d'objets                                          |
-| - | slide_amitie_surcharge | Amitié & Surcharge d'opérateur                          |
-| - | slide_heritage_1       | Héritage (Partie 1)                                     |
-| - | slide_heritage_2       | Héritage (Partie 2)                                     |
-| - | slide_template         | Patrons de fonctions et de classes                      |
-| - | slide_STL              | Introduction à la librairie standard                    |
+| + | slide_amitie_surcharge | Amitié & Surcharge d'opérateur                          |
+| + | slide_heritage_1       | Héritage (Partie 1)                                     |
+| + | slide_heritage_2       | Héritage (Partie 2)                                     |
+| + | slide_template         | Patrons de fonctions et de classes                      |
+| + | slide_STL              | Introduction à la librairie standard                    |
 |---+------------------------+---------------------------------------------------------|
 
 #+NAME: html-preamble
