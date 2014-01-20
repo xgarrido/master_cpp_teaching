@@ -6,7 +6,7 @@
 
 * Utlisation des librairies standards
 
-La grande majorité des librairies utilisées dans le langage~C est présente et
+La grande majorité des librairies utilisées dans le langage C est présente et
 utilisable en \Cpp. Toutefois, leur définition a été optimisée pour les besoins
 du \Cpp. Dans la pratique, l'inclusion des librairies =math.h=, =time.h=... sera
 remplacée par les librairies =cmath=, =ctime=. En règle générale, tous fichiers

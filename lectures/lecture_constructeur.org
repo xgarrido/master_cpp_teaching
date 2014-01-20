@@ -135,8 +135,7 @@ valables.
 #+BEGIN_SRC c++
   point my_point1;             // construction par défaut
   point my_point2 (1, 2);      // initialisation des coordonnées
-  point my_point3 (1, 2, 256); // allocation dynamique pour
-                               // le pointeur p_geometry_type
+  point my_point3 (1, 2, 256); // allocation dynamique pour le pointeur p_geometry_type
 #+END_SRC
 
 *** Remarques

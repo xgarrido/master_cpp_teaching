@@ -1,0 +1,33 @@
+#+TITLE: Test book
+#+AUTHOR: Xavier Garrido
+#+DATE:   23/09/2013
+#+OPTIONS: toc:t ^:{}
+#+LATEX_HEADER_EXTRA: \renewcommand{\chaptername}{Chapitre}
+
+#+LATEX: \chapter{Pointeurs, références & allocation dynamique}
+#+INCLUDE: "./lecture_pointeur.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Rappels sur les fonctions}
+#+INCLUDE: "./lecture_fonction.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Les spécificités du C++}
+#+INCLUDE: "./lecture_specificite_c++.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+
+
+# #+INCLUDE: "./lecture_struct_class.org"
+# #+INCLUDE: "./lecture_encapsulation.org"
+# #+INCLUDE: "./lecture_constructeur.org"
+# #+INCLUDE: "./lecture_amitie.org"
+# #+INCLUDE: "./lecture_surcharge.org"
+# #+INCLUDE: "./lecture_heritage.org"
+# #+INCLUDE: "./lecture_template.org"
+# #+INCLUDE: "./lecture_librairie_standard.org"
+# #+INCLUDE: "./annexe_compilation.org"
+# #+INCLUDE: "./annexe_convention_ecriture.org"
+# #+INCLUDE: "./annexe_cout_cin.org"
+# #+INCLUDE: "./annexe_variable_statique.org"
+# #+INCLUDE: "./annexe_enum_typedef.org"
