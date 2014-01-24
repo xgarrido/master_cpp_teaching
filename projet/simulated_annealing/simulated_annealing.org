@@ -245,6 +245,28 @@ où le nombre de villes $N$ variera et on évaluera l'efficacité de
 l'algorithme. Visuellement, on pourra sauvegarder les itérations successives
 afin de représenter l'évolution du chemin parcouru par le voyageur.
 
+*** /Addendum/
+Tirage aléatoire de valeurs selon une distribution normale de moyenne \mu et
+d'écart-type \sigma ([[http://fr.wikipedia.org/wiki/M%C3%A9thode_de_Box-Muller][méthode de Box-Muller]]).
+
+#+BEGIN_SRC c++
+  double gaussian (const double mean_, const double sigma_)
+  {
+    double x1, x2, w;
+    do {
+      x1 = 2.0 * (rand () / double (RAND_MAX)) - 1.0;
+      x2 = 2.0 * (rand () / double (RAND_MAX)) - 1.0;
+      w = x1 * x1 + x2 * x2;
+    } while (w >= 1.0);
+
+    w = sqrt (-2.0 * log (w)/w);
+    const double y1 = x1 * w;
+    const double y2 = x2 * w;
+
+    return mean_ + y1 * sigma_;
+  }
+#+END_SRC
+
 * Références                                                  :ignoreheading:
 #+LATEX: \renewcommand{\bibname}{Références}
 
