@@ -140,7 +140,6 @@ touché. On ajoutera donc ce bruit de pixel (entre 1 et 10 pixels bruyants) et o
 de supprimer ce bruit en fonction de critères de cohérence spatiale et/ou
 temporelle.
 
-
 * Références                                                  :ignoreheading:
 #+LATEX: \renewcommand{\bibname}{Références}
 
