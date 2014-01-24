@@ -121,8 +121,7 @@ flux =cout, cin= notamment) sont ainsi définis dans l'espace de noms
 =std=. Ainsi, chaque programme principal débutera généralement par
 
 #+BEGIN_SRC c++
-  #include <iostream> // librairie standard de gestion
-                      // des flux d'entrées/sortie ...
+  #include <iostream> // librairie standard de gestion des flux d'entrées/sortie ...
   using namespace std;
 
   int main () { // corps du programme principal }
