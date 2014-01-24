@@ -1,8 +1,10 @@
 #+TITLE: Test book
 #+AUTHOR: Xavier Garrido
 #+DATE:   23/09/2013
-#+OPTIONS: toc:t ^:{}
+#+OPTIONS: toc:t title:nil
 #+LATEX_HEADER_EXTRA: \renewcommand{\chaptername}{Chapitre}
+#+LATEX_HEADER_EXTRA: \renewcommand{\contentsname}{Tables des matières}
+#+LATEX_HEADER_EXTRA: \renewcommand{\appendixname}{Annexe}
 
 #+LATEX: \chapter{Pointeurs, références & allocation dynamique}
 #+INCLUDE: "./lecture_pointeur.org" :lines "6-" :minlevel 1
@@ -16,18 +18,56 @@
 #+INCLUDE: "./lecture_specificite_c++.org" :lines "6-" :minlevel 1
 #+LATEX: \clearemptydoublepage
 
+#+LATEX: \chapter{Structures et classes}
+#+INCLUDE: "./lecture_struct_class.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
 
+#+LATEX: \chapter{Encapsulation des données}
+#+INCLUDE: "./lecture_encapsulation.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
 
-# #+INCLUDE: "./lecture_struct_class.org"
-# #+INCLUDE: "./lecture_encapsulation.org"
-# #+INCLUDE: "./lecture_constructeur.org"
-# #+INCLUDE: "./lecture_amitie.org"
-# #+INCLUDE: "./lecture_surcharge.org"
-# #+INCLUDE: "./lecture_heritage.org"
-# #+INCLUDE: "./lecture_template.org"
-# #+INCLUDE: "./lecture_librairie_standard.org"
-# #+INCLUDE: "./annexe_compilation.org"
-# #+INCLUDE: "./annexe_convention_ecriture.org"
-# #+INCLUDE: "./annexe_cout_cin.org"
-# #+INCLUDE: "./annexe_variable_statique.org"
-# #+INCLUDE: "./annexe_enum_typedef.org"
+#+LATEX: \chapter{Notions de constructeur et de destructeur}
+#+INCLUDE: "./lecture_constructeur.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Fonctions et classes amies}
+#+INCLUDE: "./lecture_amitie.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Surcharge d'opérateur}
+#+INCLUDE: "./lecture_surcharge.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Héritage}
+#+INCLUDE: "./lecture_heritage.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Notions de patrons de fonctions et de classes}
+#+INCLUDE: "./lecture_template.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Introduction à la librairie standard STL}
+#+INCLUDE: "./lecture_librairie_standard.org" :lines "6-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \appendix
+
+#+LATEX: \chapter{Compilation et directives de préprocesseur}
+#+INCLUDE: "./annexe_compilation.org" :lines "7-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Convention d'écriture et organisation des programmes}
+#+INCLUDE: "./annexe_convention_ecriture.org" :lines "7-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Écriture/lecture sur l'entrée/sortie standard}
+#+INCLUDE: "./annexe_cout_cin.org" :lines "7-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Les membres données statiques}
+#+INCLUDE: "./annexe_variable_statique.org" :lines "7-" :minlevel 1
+#+LATEX: \clearemptydoublepage
+
+#+LATEX: \chapter{Utilisation de enum et de typedef}
+#+INCLUDE: "./annexe_enum_typedef.org" :lines "7-" :minlevel 1
+#+LATEX: \clearemptydoublepage
