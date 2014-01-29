@@ -1,0 +1,52 @@
+#+TITLE:  Jeu d'échecs
+#+AUTHOR: Xavier Garrido
+#+DATE:   29/01/2014
+#+OPTIONS: toc:nil ^:{}
+#+LATEX_HEADER: \setcounter{chapter}{1}
+#+LATEX_HEADER_EXTRA: \renewcommand{\chaptername}{Projet}
+
+Ce projet consiste à programmer un jeu d'échecs en ligne de commande. Il n'est
+évidemment pas question de créer une "intelligence artificielle" : la partie se
+jouera entre humains consentants.
+
+Le programme pourra être conçu dans cet ordre :
+
+- un échiquier,
+- une classe abstraite =Piece= définissant les méthodes de base telles que
+  l'affichage ou le déplacement,
+- des classes filles telles que =Tour=, =Pion=..., héritant de =Piece= et
+  surdéfinissant les méthodes préalablement déclarées,
+- les règles élémentaires telles que la prise de pièce, l'échec et l'échec et
+  mat.
+
+Suggestion de présentation de l'échiquier en ligne de commande ([[http://fr.wikipedia.org/wiki/Echec]])
+#+BEGIN_SRC text
+    +----+----+----+----+----+----+----+----+
+8   | *K |    |    |    |  *R|    |    |    |
+    |----|----|----|----|----|----|----|----|
+7   |    | *P |    |    |    |  Q |    |    |
+    |----|----|----|----|----|----|----|----|
+6   | *P |    |    |    |    |    |    |    |
+    |----|----|----|----|----|----|----|----|
+5   |    | *Q |    |    |    |    | *P |    |
+    |----|----|----|----|----|----|----|----|
+4   |    |    |    |    |    |    |    |    |
+    |----|----|----|----|----|----|----|----|
+3   |  P |    |    |    |    |  P |    |    |
+    |----|----|----|----|----|----|----|----|
+2   |    |  P |    |    |    |    |  P |    |
+    |----|----|----|----|----|----|----|----|
+1   |    |  K |    |    |    |    |    |  R |
+    +----+----+----+----+----+----+----+----+
+      a    b    c    d    e    f    g    h
+#+END_SRC
+
+Accessoirement, on pourra s'intéresser :
+
+- au roque,
+- à la prise en passant,
+- à la promotion du pion.
+
+De même, si la programmation d'une intelligence artificielle dépasse le cadre de
+ce projet, on pourra néanmoins envisager de jouer contre l'ordinateur, ce
+dernier jouant aléatoirement une pièce.
