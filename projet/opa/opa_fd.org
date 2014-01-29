@@ -97,7 +97,7 @@ la gerbe est alors notée $R_p$ tandis que $\chi_0$ est l'angle entre le sol et
 la direction de la gerbe. La génération des événements consiste à tirer
 aléatoirement des valeurs pour les variables précédentes : $R_p$ sera compris
 entre 8 et 12 km, \theta_{SDP} sera tiré uniformément entre 90 et 100 degrés et
-\phi_\text{SDP} entre 60 et 90 degrés. L'angle \chi_{0} variera entre 80 et 100
+\phi_{SDP} entre 60 et 90 degrés. L'angle \chi_{0} variera entre 80 et 100
 degrés.
 
 #+NAME: fig::fd
