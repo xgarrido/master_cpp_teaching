@@ -19,4 +19,4 @@ all: $(files_pdf)
 	@rm -f ../*.sty
 
 clean:
-	@rm -rf	latex.d *.tex *.pdf *.fdb* *~
+	@rm -rf	latex.d *.tex *.pdf *.fdb* *~ *.aux *.toc
