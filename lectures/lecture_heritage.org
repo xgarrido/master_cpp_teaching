@@ -24,6 +24,8 @@ déclaration de la classe, sont requis. Enfin, l'héritage n'est pas limité à 
 seul niveau : une classe dérivée peut devenir à son tour classe de base. La
 notion d'héritage apparaît ainsi comme un outil de spécialisation croissante.
 
+[fn:1] nous préciserons par la suite les limitations liées à un tel accès
+
 * Notion d'héritage simple
 
 La relation d'héritage entre deux classes s'effectue lors de la déclaration de
@@ -125,6 +127,15 @@ résolution d'un problème. Si elle peut sembler de prime abord superflue, elle
 facilite à terme la mise en œuvre puis la maintenance du code. Il faut savoir
 qu'en théorie[fn:4] 30 à 40% du temps consacré à un projet relève de sa
 modélisation, 50% à sa maintenance et seulement 10% à son écriture.
+
+[fn:2] par membre, nous entendons membres et fonction membres /i.e./ méthodes
+
+[fn:3] par composition, on entend qu'une classe possède parmi ses membres une
+instance d'une autre classe
+
+[fn:4] généralement et plus particulièrement en Physique, cette phase de
+modélisation est trop souvent délaissée : la maintenance du code devient, dans
+ces conditions, une tâche extrêmement laborieuse
 
 * Appel des constructeurs et destructeurs
 
@@ -254,6 +265,9 @@ l'héritage multiple a rebuté beaucoup d'utilisateurs et explique la mauvaise
 réputation qu'a acquise ce mécanisme dans une partie de la communauté des
 développeurs.
 
+[fn:5] Java dispose de la notion d'interface, inconnue du \Cpp, qui permet en
+général de traiter plus élégamment les problèmes.
+
 * Liaison dynamique et méthodes virtuelles
 
 Pour illustrer l'intérêt de la liaison dynamique[fn:6], considérons l'exemple
@@ -347,6 +361,16 @@ de type =polygone= puisse pointer vers un objet de type =rectangle= [fn:8],
 l'inverse n'étant pas vrai. L'instruction =rectangle *ptr_rectangle =
 &my_polygone= provoquera une erreur de compilation.
 #+END_REMARK
+
+[fn:6] on parle également de typage dynamique voir de ligature dynamique
+
+[fn:7] à distinguer de la surdéfinition où un symbole a un sens différent selon
+le contexte. Dans la redéfinition, les deux sens du même symbole ont une partie
+en commun, la méthode redéfinie est seulement plus précise
+
+[fn:8] on parle de polymorphisme sachant qu'en biologie, ce terme reflète la
+caractéristique d'un organisme à se présenter sous différentes formes sans
+changer de nature
 
 * Classe abstraite
 
@@ -447,29 +471,3 @@ différent mais néanmoins dérivé de la classe =filtre=.
     return 0;
   }
 #+END_SRC
-
-* Footnotes
-
-[fn:1] nous préciserons par la suite les limitations liées à un tel accès
-
-[fn:2] par membre, nous entendons membres et fonction membres /i.e./ méthodes
-
-[fn:3] par composition, on entend qu'une classe possède parmi ses membres une
-instance d'une autre classe
-
-[fn:4] généralement et plus particulièrement en Physique, cette phase de
-modélisation est trop souvent délaissée : la maintenance du code devient, dans
-ces conditions, une tâche extrêmement laborieuse
-
-[fn:5] Java dispose de la notion d'interface, inconnue du \Cpp, qui permet en
-général de traiter plus élégamment les problèmes.
-
-[fn:6] on parle également de typage dynamique voir de ligature dynamique
-
-[fn:7] à distinguer de la surdéfinition où un symbole a un sens différent selon
-le contexte. Dans la redéfinition, les deux sens du même symbole ont une partie
-en commun, la méthode redéfinie est seulement plus précise
-
-[fn:8] on parle de polymorphisme sachant qu'en biologie, ce terme reflète la
-caractéristique d'un organisme à se présenter sous différentes formes sans
-changer de nature

@@ -47,10 +47,10 @@ doivent *obligatoirement* être les *derniers* dans la liste.
 
 * Surdéfinition de fonction
 
-En \Cpp deux fonctions peuvent porter le même nom[fn:1] à condition qu'elles
-n'aient pas les mêmes arguments. Le compilateur se charge d'appeler la "bonne"
-fonction suivant le contexte c'est-à-dire au vu de la liste d'arguments donnée
-lors de l'appel. Ainsi
+En \Cpp deux fonctions peuvent porter le même nom[fn:1] à condition
+qu'elles n'aient pas les mêmes arguments. Le compilateur se charge d'appeler la
+"bonne" fonction suivant le contexte c'est-à-dire au vu de la liste d'arguments
+donnée lors de l'appel. Ainsi
 #+BEGIN_SRC c++
   double fonction_lambda (int , double , char);
 #+END_SRC
@@ -61,8 +61,9 @@ et
 seront deux fonctions différentes grâce aux différents types d'arguments
 déclarés.
 
-[fn:1] de façon générale, on parle de surdéfinition ou surcharge lorsqu'un même
-symbole peut avoir deux significations différentes en fonction du contexte.
+[fn:1] de façon générale, on parle de surdéfinition ou surcharge
+lorsqu'un même symbole peut avoir deux significations différentes en fonction du
+contexte.
 
 * Fonction =inline=
 
@@ -70,8 +71,8 @@ Généralement en C, l'emploi d'une fonction "courte" pour laquelle le temps
 d'exécution est primordial, amène à définir une macro (malgré les inconvénients
 que cela implique). En \Cpp, il existe dans ce cas une solution plus
 satisfaisante : utiliser une fonction "en ligne". Sans rentrer dans les
-détails[fn:2], la fonction en ligne permet une économie d'exécution mais fait
-perdre de l'espace en mémoire par rapport à une fonction conventionnelle.
+détails[fn:2], la fonction en ligne permet une économie d'exécution mais
+fait perdre de l'espace en mémoire par rapport à une fonction conventionnelle.
 
 La syntaxe dans l'*en-tête* de la fonction est la suivante
 #+BEGIN_SRC c++

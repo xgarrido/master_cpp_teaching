@@ -57,7 +57,7 @@ déclaration suivante
 #+END_SRC
 
 Seul l'entête a changé, le corps de la fonction étant nécessairement indépendant
-du type de paramètres[fn:1] fournis. Ainsi la précédente déclaration précise que
+du type de paramètres fournis[fn:1]. Ainsi la précédente déclaration précise que
 l'on est en présence d'un patron (=template=) dans lequel apparaît un
 "paramètre" de type désigné par la lettre =T=. En d'autres termes, dans la
 définition de la fonction =min=, =T= représente un type quelconque à la fois
@@ -127,6 +127,13 @@ Le couplage entre patron de fonctions et surcharge d'opérateur constitue donc u
 outil puissant qui permet d'obtenir une forme "d'abstraction" en
 s'affranchissant des problèmes de type.
 
+[fn:1] dans le cadre des patrons de fonctions et de classes, on parle
+communément de paramètres et non d'argument. D'autre part, le \Cpp a décidé
+d'employer le mot clé =class= pour préciser que =T= est un paramètre de
+type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
+clé =typename= qui peut se substituer au mot clé =class=. Cependant, son
+utilisation est peu répandue.
+
 *** Remarques
 
 - Le mécanisme même des patrons fait que ces instructions sont utilisées par le
@@ -171,6 +178,11 @@ s'affranchissant des problèmes de type.
     cout << "min(" << i1 << "," << i2 << ") = "
          << min<char>(i1,i2) << endl;
   #+END_SRC
+
+[fn:2] les compilateurs récents permettent l'usage du mot clé =export= lors de
+la définition d'un patron =export template<class T> T min(T a, T b) {...}=. On
+peut alors utiliser ce patron depuis un autre fichier source, en se contentant
+de mentionner sa "déclaration".
 
 * Les patrons de classe
 
@@ -271,18 +283,3 @@ paramètres (de type ou d'expression) différent et ce contrairement aux patrons
 de fonctions. En conséquence, les ambiguïtés évoquées lors de l'instanciation
 d'une classe fonction ne peuvent plus se poser dans le cas de l'instanciation
 d'une classe patron.
-
-
-* Footnotes
-
-[fn:1] dans le cadre des patrons de fonctions et de classes, on parle
-communément de paramètres et non d'argument. D'autre part, le \Cpp a décidé
-d'employer le mot clé =class= pour préciser que =T= est un paramètre de
-type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
-clé =typename= qui peut se substituer au mot clé =class=. Cependant, son
-utilisation est peu répandue.
-
-[fn:2] les compilateurs récents permettent l'usage du mot clé =export= lors de
-la définition d'un patron =export template<class T> T min(T a, T b) {...}=. On
-peut alors utiliser ce patron depuis un autre fichier source, en se contentant
-de mentionner sa "déclaration".

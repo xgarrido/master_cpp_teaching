@@ -5,7 +5,7 @@
 #+LATEX_HEADER: \setcounter{chapter}{3}
 
 Ce chapitre aborde véritablement les possibilités offertes par la programmation
-orientée objet grâce à l'implémentation des classes. Une classe est la
+orientée objet grâce à l'implé\-men\-tation des classes. Une classe est la
 généralisation de la notion de type défini par l'utilisateur, dans lequel se
 trouvent associées aussi bien *des données (membres données)* que *des méthodes*
 (fonctions membres). En règle générale, il existe une nette distinction entre
@@ -43,7 +43,6 @@ chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]] qu'app
 conceptuelles entre les types structure et classe.
 
 * Les structures en C++
-
 ** Rappel : les structures en C
 
 En C, une déclaration telle que
@@ -76,8 +75,8 @@ point (=.=); par exemple, =my_point1.y= désigne le membre =y= de la structure
 
 En \Cpp, il est possible au sein même d'une structure, d'associer aux données
 /i.e./ aux membres, *des méthodes* également appelées "fonction
-membres"[fn:1]. Supposons que nous souhaitions associer à la structure =point=
-précédente, trois fonctions:
+membres"[fn:1]. Supposons que nous souhaitions associer à la structure
+=point= précédente, trois fonctions:
 
 - =initialise= pour attribuer des valeurs aux "coordonnées" d'un point,
 
@@ -102,16 +101,16 @@ De telles méthodes seraient ainsi déclarées
 Outre la déclaration classique des membres de la structure apparaissent les
 déclarations ou prototypes des trois fonctions. Notez bien que la définition de
 ces méthodes ne figure pas à ce niveau de simple déclaration. En revanche, le
-type d'arguments à fournir aux différentes méthodes est précisé[fn:2] bien
-que l'usage de ces variables soit à ce stade de la déclaration inconnu.
+type d'arguments à fournir aux différentes méthodes est précisé[fn:2] bien que
+l'usage de ces variables soit à ce stade de la déclaration inconnu.
 
 [fn:1] d'un point de vue conceptuel, une telle notion ne prendra tout son
 intérêt qu'une fois l'encapsulation des données introduite. Cependant, la
 présentation du concept de méthode prépare à la notion de classe.
+
 [fn:2] l'ajout des noms des variables est facultative. Toutefois, elle facilite
-la lecture et la compréhension du code, /a fortiori/ pour l'utilisateur qui
-n'a, en théorie, accès qu'à la déclaration des méthodes et non à leur
-définition.
+la lecture et la compréhension du code, /a fortiori/ pour l'utilisateur qui n'a,
+en théorie, accès qu'à la déclaration des méthodes et non à leur définition.
 
 ** Définition des méthodes
 :PROPERTIES:

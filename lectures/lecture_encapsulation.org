@@ -11,7 +11,6 @@ données d'un objet, toutes modifications des membres de l'objet se faisant par
 *l'intermédiaire* des méthodes associées.
 
 * Intérêt de l'encapsulation
-
 ** Avantages
 
 - Lors de la programmation et surtout de la réutilisation d'un objet dans un
@@ -86,8 +85,6 @@ et non
 qui sera, quoiqu'il arrive, rejeté par le compilateur en raison de
 l'encapsulation de =m_X=.
 
-Par défaut, les données /i.e./ les membres d'une classe sont privées[fn:3]. Par
-conséquent, le mot clé =private= n'est pas nécessaire dans la déclaration de la
-classe =Point=.
-
-[fn:3] à l'inverse d'une structure où les données sont par défaut publiques.
+Par défaut, les données /i.e./ les membres d'une classe sont privées à l'inverse
+d'une structure où les données sont par défaut publiques. Par conséquent, le mot
+clé =private= n'est pas nécessaire dans la déclaration de la classe =Point=.
