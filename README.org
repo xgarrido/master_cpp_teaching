@@ -33,6 +33,14 @@ different directories.
   (require 'ox-latex)
   (require 'ox-beamer)
 #+END_SRC
+*** Keep LaTeX logfiles
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-remove-logfiles nil)
+#+END_SRC
+*** Changing toc latex command
+#+BEGIN_SRC emacs-lisp
+  (setq org-latex-toc-command "{\\hypersetup{linkcolor=blue}\\tableofcontents}")
+#+END_SRC
 *** Use smart quote when exporting
 #+BEGIN_SRC emacs-lisp
   (setq org-export-with-smart-quotes t)
@@ -125,10 +133,10 @@ We also translate *bold* into beamer =structure= and underline into *bold*.
 We add the option =frame= to footnote to make sure the footnote appears at the
 bottom of the frame.
 #+BEGIN_SRC emacs-lisp
-  (defun sk-beamer-footnote (contents backend info)
+  (defun cpp-beamer-footnote (contents backend info)
     (when (eq backend 'beamer)
       (replace-regexp-in-string "\\`\\\\[A-Za-z0-9]+" "\\\\footnote[frame]" contents)))
-  (add-to-list 'org-export-filter-footnote-reference-functions 'sk-beamer-footnote)
+  (add-to-list 'org-export-filter-footnote-reference-functions 'cpp-beamer-footnote)
 #+END_SRC
 
 We also define a new environment for "colored" box
@@ -150,23 +158,34 @@ We also define a new environment for "colored" box
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("cpp-lecture-book"
+                 "\\documentclass[10pt,a4paper,twoside]{report}
+                  [PACKAGES]
+                  \\usepackage[cpp_teaching_lectures,book]{lecture-style}
+                  [NO-DEFAULT-PACKAGES]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
 
 Add a new tag =ignoreheading= to skip headline tagged as such.
 #+BEGIN_SRC emacs-lisp
-  (defun sk-ignore-headline (contents backend info)
+  (defun cpp-ignore-headline (contents backend info)
     (when (and (org-export-derived-backend-p backend 'latex)
                (string-match "\\`.*ignoreheading.*\n"
                              (downcase contents)))
       (replace-match "" nil nil contents)))
-  (add-to-list 'org-export-filter-headline-functions 'sk-ignore-headline)
+  (add-to-list 'org-export-filter-headline-functions 'cpp-ignore-headline)
 
-  (defun sk-multicolumn-figure (contents backend info)
+  (defun cpp-multicolumn-figure (contents backend info)
     (when (and (org-export-derived-backend-p backend 'latex)
                (string-match "table" contents)
                (string-match "includegraphics" contents))
       (replace-regexp-in-string "table" "figure" contents)))
-  (add-to-list 'org-export-filter-table-functions 'sk-multicolumn-figure)
+  (add-to-list 'org-export-filter-table-functions 'cpp-multicolumn-figure)
 #+END_SRC
 **** Class template
 #+BEGIN_SRC emacs-lisp :results none
@@ -194,7 +213,9 @@ Add a new tag =ignoreheading= to skip headline tagged as such.
 #+BEGIN_SRC emacs-lisp
   (defun cpp-export-lectures ()
     (progn
-      (setq org-latex-default-class "cpp-lecture")
+      (if (string-equal "lecture_book.org" (buffer-name))
+        (setq org-latex-default-class "cpp-lecture-book")
+      (setq org-latex-default-class "cpp-lecture"))
       (org-latex-export-to-pdf)
       ))
 #+END_SRC
@@ -217,14 +238,14 @@ Add a new tag =ignoreheading= to skip headline tagged as such.
 
 *** Set LaTeX command
 #+BEGIN_SRC emacs-lisp
-   (defun sk-latexmk-cmd (backend)
+   (defun cpp-latexmk-cmd (backend)
      "When exporting from .org with latex, automatically run latex,
         pdflatex, or xelatex as appropriate, using latexmk."
      (when (org-export-derived-backend-p backend 'latex)
        (let ((texcmd)))
        (setq texcmd "jobname=$(basename %f | sed 's/\.tex//');latexmk -xelatex -shell-escape -quiet %f && mkdir -p latex.d && mv ${jobname}.* latex.d/. && mv latex.d/${jobname}.{org,tex,pdf,fdb_latexmk,aux,toc} .")
        (setq org-latex-pdf-process (list texcmd))))
-  (org-add-hook 'org-export-before-processing-hook 'sk-latexmk-cmd)
+  (org-add-hook 'org-export-before-processing-hook 'cpp-latexmk-cmd)
 #+END_SRC
 *** LaTeX stylesheets
 **** Org preamble
@@ -331,6 +352,7 @@ each =tikzpicture=. =tikz/external= looks if the pdf exist and if not, export it
   }
   \DeclareBoolOption[false]{nologo}
   \DeclareBoolOption[false]{oldstyle}
+  \DeclareBoolOption[false]{book}
   \DeclareBoolOption[false]{cpp_teaching_lectures}
   \DeclareBoolOption[false]{cpp_teaching_classes}
   \ProcessKeyvalOptions*
@@ -435,7 +457,40 @@ up. Practically, everything can be done within this section.
 ******* Title tweak
 No title
 #+BEGIN_SRC latex
-  \renewcommand*{\maketitle}{}
+  \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
+    \ifthenelse{\boolean{ls@book}}{
+      \renewcommand*{\maketitle}{
+        {\color{blue}
+          \begingroup
+          \hbox{
+            \hspace*{0.2\textwidth}
+            \rule{1.5pt}{\textheight}
+            \hspace*{0.05\textwidth}
+            \parbox[b]{0.75\textwidth}{
+              {\noindent\bf\sffamily\Huge\@title}\\
+              \vspace{0.5\textheight}
+              \begin{flushright}
+                \color{gray}
+                Xavier Garrido$^a$, Yann Leprince$^b$ \& Matthieu Loumaigne$^c$
+                \\[6mm]
+                $^a$ LAL, IN2P3 \& Université Paris-Sud, France\\
+                $^b$ LNAO, CEA Saclay, France\\
+                $^c$ LAC, Université Paris-Sud, France\\
+              \end{flushright}
+          }}
+          \endgroup
+        }
+        \thispagestyle{empty}
+        \clearemptydoublepage
+      }
+      \g@addto@macro\tableofcontents{\clearemptydoublepage}
+    }{
+      \renewcommand*{\maketitle}{}
+    }}
+#+END_SRC
+******* TOC tweak
+#+BEGIN_SRC latex
+  \renewcommand\@dotsep{10000}
 #+END_SRC
 ******* Paragraph indent
 No paragraph indent
@@ -458,11 +513,14 @@ LaTeX hook to automatically add this command at the begin of the document.
     }
   }{}
   \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
-    \renewcommand{\chaptername}{Fiche}
-    \ifthenelse{\boolean{ls@oldstyle}}{
-      \AtBeginDocument{\chapter{\@title}}
-      \AtEndDocument{\clearemptydoublepage}
+    \ifthenelse{\boolean{ls@book}}{
+      \renewcommand{\chaptername}{Chapitre}
+      \renewcommand{\contentsname}{Tables des matières}
+      \renewcommand{\appendixname}{Annexe}
+      %% \AtBeginDocument{\chapter{\@title}}
+      %% \AtEndDocument{\clearemptydoublepage}
     }{
+      \renewcommand{\chaptername}{Fiche}
       \AtBeginDocument{\chapter{\@title}}
       \AtEndDocument{\clearemptydoublepage}
     }
@@ -481,6 +539,10 @@ We change the sections style using =titlesec= package
     \titleformat*{\subsection}{\large\bfseries\sffamily\color{blue!75}}
     \titleformat*{\subsubsection}{\itshape\color{blue!60}}
   }
+  \ifthenelse{\boolean{ls@book}}{
+    \let\stdchapter\chapter
+    \renewcommand\chapter{\ifnum\c@chapter>0{\clearemptydoublepage}\else\fi\stdchapter}
+  }
 #+END_SRC
 ******* Set space line
 #+BEGIN_SRC latex
@@ -495,7 +557,7 @@ We change the sections style using =titlesec= package
 #+BEGIN_SRC latex
   \renewcommand{\footnoterule}{\color{gray}%
     \vskip-\footruleskip\vskip-\footrulewidth%
-    \vspace{10pt}\hrule width\columnwidth height1.5pt \vspace{5pt} \color{gray}}
+    \vspace{10pt}\hrule width\columnwidth height0.0pt \vspace{5pt} \color{gray}}
   \renewcommand{\thefootnote}{\alph{footnote}}
   \interfootnotelinepenalty=10000
 #+END_SRC
