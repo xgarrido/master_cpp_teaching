@@ -107,7 +107,7 @@ for the JavaScript code in this tag.
 <h1 class="title">Structures et classes</h1><hr/>
 <p>
 Ce chapitre aborde véritablement les possibilités offertes par la programmation
-orientée objet grâce à l&rsquo;implémentation des classes. Une classe est la
+orientée objet grâce à l&rsquo;implé&#x00ad;men&#x00ad;tation des classes. Une classe est la
 généralisation de la notion de type défini par l&rsquo;utilisateur, dans lequel se
 trouvent associées aussi bien <b>des données (membres données)</b> que <b>des méthodes</b>
 (fonctions membres). En règle générale, il existe une nette distinction entre
@@ -191,14 +191,15 @@ point (<code>.</code>); par exemple, <code>my_point1.y</code> désigne le membre
 </p>
 </div>
 </div>
+
 <div id="outline-container-ref::declaration" class="outline-3">
-<h3 id="ref::declaration"><a id="sec-1-2" name="sec-1-2"></a>Déclaration d&rsquo;une structure comportant des méthodes ou  fonctions membres</h3>
+<h3 id="ref::declaration"><a id="sec-1-2"></a>Déclaration d&rsquo;une structure comportant des méthodes ou  fonctions membres</h3>
 <div class="outline-text-3" id="text-ref::declaration">
 <p>
 En C++, il est possible au sein même d&rsquo;une structure, d&rsquo;associer aux données
 <i>i.e.</i> aux membres, <b>des méthodes</b> également appelées &ldquo;fonction
-membres"<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>. Supposons que nous souhaitions associer à la structure <code>point</code>
-précédente, trois fonctions:
+membres"<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Supposons que nous souhaitions associer à la structure
+<code>point</code> précédente, trois fonctions:
 </p>
 
 <ul class="org-ul">
@@ -234,13 +235,14 @@ De telles méthodes seraient ainsi déclarées
 Outre la déclaration classique des membres de la structure apparaissent les
 déclarations ou prototypes des trois fonctions. Notez bien que la définition de
 ces méthodes ne figure pas à ce niveau de simple déclaration. En revanche, le
-type d&rsquo;arguments à fournir aux différentes méthodes est précisé<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup> bien
-que l&rsquo;usage de ces variables soit à ce stade de la déclaration inconnu.
+type d&rsquo;arguments à fournir aux différentes méthodes est précisé<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> bien que
+l&rsquo;usage de ces variables soit à ce stade de la déclaration inconnu.
 </p>
 </div>
 </div>
+
 <div id="outline-container-ref::definition" class="outline-3">
-<h3 id="ref::definition"><a id="sec-1-3" name="sec-1-3"></a>Définition des méthodes</h3>
+<h3 id="ref::definition"><a id="sec-1-3"></a>Définition des méthodes</h3>
 <div class="outline-text-3" id="text-ref::definition">
 <p>
 La définition des méthodes se fait comme une fonction à ceci près que le nom de
@@ -289,6 +291,7 @@ fichier source est alors impérative.
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-1-4" class="outline-3">
 <h3 id="sec-1-4">Utilisation d&rsquo;une structure comportant des méthodes</h3>
 <div class="outline-text-3" id="text-1-4">
@@ -331,6 +334,7 @@ méthode quelle est la structure sur laquelle opérer.
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-1-5" class="outline-3">
 <h3 id="sec-1-5">Remarques</h3>
 <div class="outline-text-3" id="text-1-5">
@@ -372,6 +376,7 @@ programme principal; c&rsquo;est ainsi que l&rsquo;on pourra &ldquo;réutiliser&
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2">Notion de classe</h2>
 <div class="outline-text-2" id="text-2">
@@ -396,17 +401,16 @@ précisé dans le chapitre <a href="lecture_encapsulation.html"><i>Encapsulation
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
 d&rsquo;un point de vue conceptuel, une telle notion ne prendra tout son
 intérêt qu&rsquo;une fois l&rsquo;encapsulation des données introduite. Cependant, la
 présentation du concept de méthode prépare à la notion de classe.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
 l&rsquo;ajout des noms des variables est facultative. Toutefois, elle facilite
-la lecture et la compréhension du code, <i>a fortiori</i> pour l&rsquo;utilisateur qui
-n&rsquo;a, en théorie, accès qu&rsquo;à la déclaration des méthodes et non à leur
-définition.
+la lecture et la compréhension du code, <i>a fortiori</i> pour l&rsquo;utilisateur qui n&rsquo;a,
+en théorie, accès qu&rsquo;à la déclaration des méthodes et non à leur définition.
 </p></div>
 
 

@@ -106,10 +106,11 @@ sans perturber pour autant les utilisateurs de la classe.
 <p>
 Vu de &ldquo;l&rsquo;extérieur&rdquo;, un objet se caractérise par les spécifications (noms,
 arguments et rôles) de ses méthodes, la manière dont sont réellement implantées
-les données étant finalement sans importance<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup>.
+les données étant finalement sans importance<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-1-2" class="outline-3">
 <h3 id="sec-1-2">Inconvénients</h3>
 <div class="outline-text-3" id="text-1-2">
@@ -119,11 +120,12 @@ De prime abord, peut paraître inutile et lourd à utiliser
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2">Syntaxe</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Les mots clés sont <code>private</code> et <code>public</code> <sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>.
+Les mots clés sont <code>private</code> et <code>public</code> <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.
 </p>
 
 <div class="org-src-container">
@@ -144,6 +146,7 @@ Les mots clés sont <code>private</code> et <code>public</code> <sup><a id="fnr.
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3">Utilisation</h2>
 <div class="outline-text-2" id="text-3">
@@ -157,7 +160,7 @@ précédent, il s&rsquo;agit de <code>get_x()</code> et <code>get_y()</code>),
 </li>
 
 <li>des méthodes <b>pour modifier</b> les membres (la méthode <code>initialise(int,int)</code>
-permet une telle modification).
+  permet une telle modification).
 </li>
 </ul>
 <p>
@@ -184,9 +187,9 @@ l&rsquo;encapsulation de <code>m_X</code>.
 </p>
 
 <p>
-Par défaut, les données <i>i.e.</i> les membres d&rsquo;une classe sont privées<sup><a id="fnr.3" name="fnr.3" class="footref" href="#fn.3">3</a></sup>. Par
-conséquent, le mot clé <code>private</code> n&rsquo;est pas nécessaire dans la déclaration de la
-classe <code>Point</code>.
+Par défaut, les données <i>i.e.</i> les membres d&rsquo;une classe sont privées à l&rsquo;inverse
+d&rsquo;une structure où les données sont par défaut publiques. Par conséquent, le mot
+clé <code>private</code> n&rsquo;est pas nécessaire dans la déclaration de la classe <code>Point</code>.
 </p>
 </div>
 </div>
@@ -194,18 +197,14 @@ classe <code>Point</code>.
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
 une telle notion est communément appelée &ldquo;abstraction des données&rdquo;
 exprimant le fait que les détails de l&rsquo;implémentation demeurent cachés
 </p></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
 ainsi que <code>protected</code> qui est intermédiaire et qui s&rsquo;utilise pour les
 classes dérivées.
-</p></div>
-
-<div class="footdef"><sup><a id="fn.3" name="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
-à l&rsquo;inverse d&rsquo;une structure où les données sont par défaut publiques.
 </p></div>
 
 

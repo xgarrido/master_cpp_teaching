@@ -170,7 +170,7 @@ déclaration suivante
 
 <p>
 Seul l&rsquo;entête a changé, le corps de la fonction étant nécessairement indépendant
-du type de paramètres<sup><a id="fnr.1" name="fnr.1" class="footref" href="#fn.1">1</a></sup> fournis. Ainsi la précédente déclaration précise que
+du type de paramètres fournis<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Ainsi la précédente déclaration précise que
 l&rsquo;on est en présence d&rsquo;un patron (<code>template</code>) dans lequel apparaît un
 &ldquo;paramètre&rdquo; de type désigné par la lettre <code>T</code>. En d&rsquo;autres termes, dans la
 définition de la fonction <code>min</code>, <code>T</code> représente un type quelconque à la fois
@@ -264,7 +264,7 @@ instructions correspondant à la fonction requise. La définition de patron ne
 peut donc intervenir dans un module objet (fichiers <code>.cc,.cpp</code>,&#x2026;)
 indépendant de l&rsquo;utilisation qui en sera faite. Dans la pratique, les
 définitions de patrons se situent donc dans un fichier d&rsquo;entête de telle sorte
-à être &ldquo;en ligne"<sup><a id="fnr.2" name="fnr.2" class="footref" href="#fn.2">2</a></sup>
+à être &ldquo;en ligne"<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
 
 <li>Un patron de fonctions peut comporter un ou
@@ -313,6 +313,7 @@ cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span 
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2">Les patrons de classe</h2>
 <div class="outline-text-2" id="text-2">
@@ -367,7 +368,7 @@ type. On fournit donc la liste de paramètre sous la forme <code>template&lt;cla
 </li>
 
 <li>le nom du patron concerné. Par exemple, si nous définissons la méthode
-  <code>Affiche</code>, son nom sera <code>Point&lt;T&gt;::Affiche()</code>.
+<code>Affiche</code>, son nom sera <code>Point&lt;T&gt;::Affiche()</code>.
 </li>
 </ul>
 
@@ -447,7 +448,7 @@ d&rsquo;une classe patron.
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" name="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
 dans le cadre des patrons de fonctions et de classes, on parle
 communément de paramètres et non d&rsquo;argument. D&rsquo;autre part, le C++ a décidé
 d&rsquo;employer le mot clé <code>class</code> pour préciser que <code>T</code> est un paramètre de
@@ -456,7 +457,7 @@ clé <code>typename</code> qui peut se substituer au mot clé <code>class</code>
 utilisation est peu répandue.
 </p></div>
 
-<div class="footdef"><sup><a id="fn.2" name="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
 les compilateurs récents permettent l&rsquo;usage du mot clé <code>export</code> lors de
 la définition d&rsquo;un patron <code>export template&lt;class T&gt; T min(T a, T b) {...}</code>. On
 peut alors utiliser ce patron depuis un autre fichier source, en se contentant
