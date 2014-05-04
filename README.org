@@ -1263,7 +1263,8 @@ up. Practically, everything can be done within this section.
   (add-to-list 'org-export-filter-link-functions 'cpp-filter-link)
   (defun cpp-filter-headline (contents backend info)
     (when (eq backend 'html)
-      (replace-regexp-in-string "</h1>" "</h1><hr/>" contents)))
+      (replace-regexp-in-string "</h1>" "</h1><hr/>"
+      (replace-regexp-in-string "Footnotes:" "" contents))))
   (add-to-list 'org-export-filter-final-output-functions 'cpp-filter-headline)
   (defun cpp-filter-empty-field (backend)
     (when (eq backend 'html)
