@@ -1371,6 +1371,22 @@ up. Practically, everything can be done within this section.
       font-size:12px;
   }
 
+  code {
+      display:inline-block;
+      white-space:no-wrap;
+      background:#fff;
+      font-size:.8em;
+      line-height:1.5em;
+      border:1px solid #e5e5e5;
+      -webkit-border-radius:0.4em;
+      -moz-border-radius:0.4em;
+      -ms-border-radius:0.4em;
+      -o-border-radius:0.4em;
+      border-radius:0.4em;
+      padding:0 .3em;
+      margin:-1px 0
+  }
+
   pre {
       padding:8px 15px;
       background: #f8f8f8;

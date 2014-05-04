@@ -18,6 +18,8 @@ html:
 	@$(BATCH) --visit "README.org" --funcall org-publish-cpp > /dev/null 2>&1
 	@rm -f README.el *.sty
 	@find doc -name *.*~ | xargs rm -f
+
+publish: html
 	@tar czvf /tmp/org-cpp-publish.tar.gz index.html doc
 	@git checkout gh-pages
 	@tar xzvf /tmp/org-cpp-publish.tar.gz
