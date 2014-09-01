@@ -4,6 +4,8 @@
 /slides/*.pdf
 /td/*.pdf
 
+*.toc
+*.aux
 *.tex
 *.auxlock
 *.fdb_latexmk
