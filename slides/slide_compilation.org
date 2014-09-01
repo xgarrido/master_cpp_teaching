@@ -143,7 +143,7 @@ compilateur seulement si la condition est vraie (non nulle).
     }
   #+END_SRC
 
-Utilisation :
+Compilation :
 #+BEGIN_PROMPT
 g++ -DDEBUG=1 test_debug.cc -o test_debug
 #+END_PROMPT
@@ -176,7 +176,7 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
     }
   #+END_SRC
 
-Utilisation :
+Compilation :
 #+BEGIN_PROMPT
 g++ dummy.cc test_dummy.cc -o test_dummy
 #+END_PROMPT
