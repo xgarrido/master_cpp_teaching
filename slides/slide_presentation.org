@@ -86,6 +86,6 @@
 
 #+ATTR_LATEX: :options [\linewidth](\bf\large Contacts)
 #+BEGIN_CBOX
+- Hermès Bélusca-Maïto \ding{46} [[hermes.belusca@th.u-psud.fr]]
 - Xavier Garrido \ding{46} [[xavier.garrido@u-psud.fr]]
-- Yann Leprince  \ding{46} [[yann.leprince@u-psud.fr]]
 #+END_CBOX
