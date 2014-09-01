@@ -131,15 +131,15 @@ compilateur seulement si la condition est vraie (non nulle).
     #include <iostream>
     using namespace std;
 
-    int main ()
+    int main()
     {
-      #if (DEBUG == 1)
+    #if (DEBUG == 1)
       cout << "DEBUG: "
            << "Mode debug du programme" << endl;
-      #else
+    #else
       cout << "NOTICE: "
            << "Mode normal du programme" << endl;
-      #endif
+    #endif
     }
   #+END_SRC
 
@@ -157,22 +157,22 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
   #+BEGIN_SRC c++
     #ifndef __dummy_h
     #define __dummy_h 1
-    void dummy ();
+    void dummy();
     #endif
   #+END_SRC
 
 - *=dummy.cc=*
   #+BEGIN_SRC c++
     #include "dummy.h"
-    void dummy () {}
+    void dummy() {}
   #+END_SRC
 
 - *=test_dummy.cc=*
   #+BEGIN_SRC c++
     #include "dummy.h"
-    int main ()
+    int main()
     {
-      dummy ();
+      dummy();
     }
   #+END_SRC
 
