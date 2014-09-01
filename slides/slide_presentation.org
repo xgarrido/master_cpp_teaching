@@ -1,9 +1,10 @@
-#+TITLE:  Présentation & Organisation de l'année 2013 -- 2014
+#+TITLE:  Présentation & Organisation de l'année 2014 -- 2015
 #+AUTHOR: Xavier Garrido
 #+DATE:   14/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: cpp-slide
+#+LATEX_HEADER_EXTRA: \hypersetup{colorlinks=false}
 
 * Déroulement de l'année
 
@@ -28,7 +29,7 @@
 
 - Notions de constructeur et de destructeur (POO)
 
-- Amitié & surcharge d'opérateur (POO)
+- Surcharge d'opérateur (POO)
 
 - Héritage (POO)
 
