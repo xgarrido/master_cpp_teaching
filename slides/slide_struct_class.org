@@ -25,7 +25,6 @@
   #+BEGIN_SRC c++
     class particule
     {
-    public:
       // Déclaration de membres
       double m_masse;
       double m_charge;
@@ -47,7 +46,6 @@
   #+BEGIN_SRC c++
     class particule
     {
-    public:
       // Déclaration de membres
       double m_masse;
       double m_charge;
@@ -66,7 +64,6 @@
   #+BEGIN_SRC c++
     class particule
     {
-    public:
       // Déclaration de membres
       double m_masse;
       double m_charge;
@@ -85,7 +82,6 @@
   #+BEGIN_SRC c++
     class particule
     {
-    public:
       // Déclaration de membres
       double m_masse;
       double m_charge;
