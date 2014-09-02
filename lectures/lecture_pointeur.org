@@ -78,7 +78,7 @@ Exemple
 De même que =free= libérait l'espace alloué par =malloc= en C, =delete[]= libère
 l'espace mémoire alloué par l'opérateur =new=. Ainsi,
 #+BEGIN_SRC c++
-delete[] pt_tableau;
+  delete[] pt_tableau;
 #+END_SRC
 restaurera l'espace mémoire précédemment alloué pour 666 valeurs entières.
 

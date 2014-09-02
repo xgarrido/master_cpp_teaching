@@ -76,7 +76,7 @@ variables
 :BEAMER_OPT: [][lwuc]
 :END:
 #+BEGIN_SRC c++
-  void echange (int * a, int * b)
+  void echange(int * a, int * b)
   {
     int c = *a;
     *a = *b;
@@ -85,7 +85,7 @@ variables
   ...
   int x = 10;
   int y = 20;
-  echange (&x, &y);
+  echange(&x, &y);
 #+END_SRC
 
 #+BEAMER: \pause
@@ -97,7 +97,7 @@ variables
 :BEAMER_OPT: [][lwuc]
 :END:
 #+BEGIN_SRC c++
-  void echange (int & a, int & b)
+  void echange(int & a, int & b)
   {
     int c = a;
     a = b;
@@ -106,7 +106,7 @@ variables
   ...
   int x = 10;
   int y = 20;
-  echange (x, y);
+  echange(x, y);
 #+END_SRC
 
 * Allocation dynamique de mémoire
@@ -153,12 +153,11 @@ mémoire nécessaire à l'allocation (statique).
 :BEAMER_OPT: [][lwuc][\footnotesize]
 :END:
 #+BEGIN_SRC c++
-  for (int i = 0; i < 10; i++)
-    {
-      int k = 0;
-      // À la fin du bloc,
-      // destruction de k
-    }
+  for (int i = 0; i < 10; i++) {
+    int k = 0;
+    // À la fin du bloc,
+    // destruction de k
+   }
 #+END_SRC
 
 #+BEAMER: \pause
@@ -170,12 +169,11 @@ mémoire nécessaire à l'allocation (statique).
 :BEAMER_OPT: [][lwuc][\footnotesize]
 :END:
 #+BEGIN_SRC c++
-  for (int i = 0; i < 10; i++)
-    {
-      int * k = new int (0);
-      // À la fin du bloc,
-      // k existe en mémoire
-    }
+  for (int i = 0; i < 10; i++) {
+    int * k = new int(0);
+    // À la fin du bloc,
+    // k existe en mémoire
+   }
 #+END_SRC
 
 #+ATTR_LATEX: :options [5][lrtuc][\centering][9][11]
@@ -192,12 +190,11 @@ Fuite de mémoire garantie
 :BEAMER_OPT: [][lwuc][\footnotesize]
 :END:
 #+BEGIN_SRC c++
-  for (int i = 0; i < 10; i++)
-    {
-      int k = 0;
-      // À la fin du bloc,
-      // destruction de k
-    }
+  for (int i = 0; i < 10; i++) {
+    int k = 0;
+    // À la fin du bloc,
+    // destruction de k
+   }
 #+END_SRC
 
 ** Durée de vie indépendante du bloc
@@ -207,12 +204,11 @@ Fuite de mémoire garantie
 :BEAMER_OPT: [][lwuc][\footnotesize]
 :END:
 #+BEGIN_SRC c++
-  for (int i = 0; i < 10; i++)
-    {
-      int * k = new int (0);
-      delete k;
+  for (int i = 0; i < 10; i++) {
+    int * k = new int(0);
+    delete k;
 
-    }
+   }
 #+END_SRC
 * Portée & Durée de vie des variables
 

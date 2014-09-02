@@ -7,7 +7,7 @@
 * Syntaxe
 
 #+BEGIN_SRC c++
-  type_retourné nom_fonction (..., type_argument nom_argument, ...)
+  type_retourné nom_fonction(..., type_argument nom_argument, ...)
   {
     // Opérations avec les arguments
     return variable_retournée;
@@ -16,9 +16,9 @@
 
 Exemple :
 #+BEGIN_SRC c++
-  double norme (const double a, const double b)
+  double norme(const double a, const double b)
   {
-    const double resultat = std::sqrt (a*a +b*b);
+    const double resultat = std::sqrt(a*a +b*b);
     return resultat;  // ou directement return std::sqrt (a*a + b*b);
   }
 #+END_SRC
@@ -29,22 +29,22 @@ Le prototype indique au compilateur que la fonction prototypée existe, mais que
 sa définition interviendra après son appel.
 
 #+BEGIN_SRC c++
-  type_retourné nom_fonction (..., type_argument nom_argument, ...);
+  type_retourné nom_fonction(..., type_argument nom_argument, ...);
 #+END_SRC
 
 Exemple:
 #+BEGIN_SRC c++
-  double norme (const double a, const double b); // NB attention au point virgule
+  double norme(const double a, const double b); // NB attention au point virgule
 
-  int main ()
+  int main()
   {
     const double x = 2.5, y = 3.4;
-    cout << norme (x,y) << endl;
+    cout << norme(x,y) << endl;
   }
 
-  double norme (const double a, const double b)
+  double norme(const double a, const double b)
   {
-    const double resultat = std::sqrt (a*a +b*b);
+    const double resultat = std::sqrt(a*a +b*b);
     return resultat;
   }
 #+END_SRC
@@ -72,9 +72,9 @@ variables les adresses utilisées lors de l'appel de la fonction. La fonction
 =norme= se réécrit ainsi
 
 #+BEGIN_SRC c++
-  double norme (const double *a, const double *b)
+  double norme(const double *a, const double *b)
   {
-    double resultat = std::sqrt ((*a)*(*a) + (*b)*(*b));
+    const double resultat = std::sqrt((*a)*(*a) + (*b)*(*b));
     return resultat;
   }
 #+END_SRC
@@ -82,10 +82,10 @@ variables les adresses utilisées lors de l'appel de la fonction. La fonction
 que l'on appelera au sein du programme principal /via/ l'instruction suivante
 
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     const double x = 2.5, y = 3.4;
-    cout << norme (&x, &y) << endl;
+    cout << norme(&x, &y) << endl;
   }
 #+END_SRC
 
@@ -123,23 +123,23 @@ transmettre (une variable ou son adresse).
 L'exemple précédent devient
 
 #+BEGIN_SRC c++
-  double norme (const double &a, const double &b)
+  double norme(const double &a, const double &b)
   {
-    const double resultat = std::sqrt (a*a + b*b);
+    const double resultat = std::sqrt(a*a + b*b);
     return resultat;
   }
 
-  int main ()
+  int main()
   {
     const double x = 2.5, y = 3.4;
-    cout << norme (x,y) << endl;
+    cout << norme(x,y) << endl;
   }
 #+END_SRC
 
 Dans l'instruction
 
 #+BEGIN_SRC c++
-double norme (const double &a, const double &b);
+  double norme(const double &a, const double &b);
 #+END_SRC
 
 la notation =double &a= signifie que =a= est une information de type =double=

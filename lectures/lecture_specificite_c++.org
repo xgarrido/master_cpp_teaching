@@ -28,15 +28,15 @@ est maintenant possible en \Cpp.
 fonctions. Le prototype s'écrit alors :
 
 #+BEGIN_SRC c++
-  type nom_fonction (..., type argument = valeur_par_défaut);
+  type nom_fonction(..., type argument = valeur_par_défaut);
 #+END_SRC
 Soit
 #+BEGIN_SRC c++
-  void initialisation (double abs, double ord = 5.6)
+  void initialisation(double abs, double ord = 5.6)
 #+END_SRC
 que l'on appelera de la façon suivante
 #+BEGIN_SRC c++
-  initialisation (4); // valeur 5.6 par défaut pour ord
+  initialisation(4); // valeur 5.6 par défaut pour ord
 #+END_SRC
 
 *En l'absence de second argument*, le compilateur assigne la valeur 5.6 à la
@@ -52,11 +52,11 @@ qu'elles n'aient pas les mêmes arguments. Le compilateur se charge d'appeler la
 "bonne" fonction suivant le contexte c'est-à-dire au vu de la liste d'arguments
 donnée lors de l'appel. Ainsi
 #+BEGIN_SRC c++
-  double fonction_lambda (int , double , char);
+  double fonction_lambda(int, double, char);
 #+END_SRC
 et
 #+BEGIN_SRC c++
-  double fonction_lambda (double);
+  double fonction_lambda(double);
 #+END_SRC
 seront deux fonctions différentes grâce aux différents types d'arguments
 déclarés.
@@ -80,7 +80,7 @@ La syntaxe dans l'*en-tête* de la fonction est la suivante
 #+END_SRC
 Exemple
 #+BEGIN_SRC c++
-  inline double carre (const double x) { return x*x; }
+  inline double carre(const double x) { return x*x; }
 #+END_SRC
 
 #+BEGIN_REMARK
@@ -125,7 +125,7 @@ flux =cout, cin= notamment) sont ainsi définis dans l'espace de noms
   #include <iostream> // librairie standard de gestion des flux d'entrées/sortie ...
   using namespace std;
 
-  int main () { // corps du programme principal }
+  int main() { // corps du programme principal }
 #+END_SRC
 
 #+BEGIN_REMARK
@@ -180,11 +180,11 @@ Le programme suivant propose quelques utilisations de ces nouveaux opérateurs
   int n = 12;
   const int * ad1 = &n;
   int * ad2;
-  ad2 = (int *) ad1;           // ancienne forme en C
-  ad2 = const_cast<int *> ad1; // nouvelle forme conseillée
+  ad2 = (int *)ad1;           // ancienne forme en C
+  ad2 = const_cast<int *>ad1; // nouvelle forme conseillée
 
   long l = 4;
   int p;
-  p = (int) l;                 // ancienne forme en C
-  p = static_cast<int> (l);    // nouvelle forme conseillée
+  p = (int)l;                 // ancienne forme en C
+  p = static_cast<int>(l);    // nouvelle forme conseillée
 #+END_SRC
