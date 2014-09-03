@@ -25,11 +25,11 @@ surcharger. Le type de la fonction est le type du résultat donné par
 l'opération, et les paramètres, donnés en argument, sont les opérandes. La
 syntaxe est la suivante :
 #+BEGIN_SRC c++
-  type operatorOp (argument)
+  type operatorOp(argument)
 #+END_SRC
 L'écriture =A Op B= où =Op= est, par exemple, =+,=,*==... se traduit par
 #+BEGIN_SRC c++
-  A.operatorOp (B)
+  A.operatorOp(B)
 #+END_SRC
 Le premier opérande est toujours l'objet auquel cette fonction s'applique. Cette
 manière de surcharger les opérateurs est donc particulièrement adaptée pour les
@@ -46,9 +46,9 @@ avec la classe =complexe=
 #+BEGIN_SRC c++
   class complexe {
   public:
-    complexe (const double reel, const double img);
-    complexe& operator+= (const complexe& source);
-    complexe& operator*= (const complexe& source);
+    complexe(const double reel, const double img);
+    complexe & operator+=(const complexe& source);
+    complexe & operator*=(const complexe& source);
     ...
 
     private:
@@ -56,16 +56,18 @@ avec la classe =complexe=
     double m_imaginaire;
   };
 
-  complexe::complexe (const double reel, const double img) :
-    m_reel(reel), m_imaginaire(img) {};
+  complexe::complexe(const double reel, const double img) :
+    m_reel(reel), m_imaginaire(img) {}
 
-  complexe& complexe::operator+= (const complexe& source) {
+  complexe & complexe::operator+=(const complexe & source)
+  {
     m_reel       += source.m_reel;
-    m_imaginaire += source.m_imaginaire();
+    m_imaginaire += source.m_imaginaire;
     return *this;
   }
 
-  complexe& complexe::operator*= (const complexe& source) {
+  complexe & complexe::operator*=(const complexe & source)
+  {
     const double tmp = m_reel*source.m_reel - m_imaginaire*source.m_imaginaire;
     m_imaginaire = m_reel*source.m_imaginaire + m_imaginaire*source.m_reel;
     m_reel = tmp;
@@ -80,7 +82,7 @@ besoins, surcharger l'opérateur /=+==/ de l'exemple précédent en fournissant 
 argument non plus un objet /=Complexe=/ sinon un entier ou un double. La
 définition de la méthode sera
 #+BEGIN_SRC c++
-  complexe& operator+= (const double& a);
+  complexe& operator+=(const double& a);
 #+END_SRC
 #+END_REMARK
 
@@ -110,12 +112,12 @@ la classe dont l'opérateur doit être surchargé. Pour que cette fonction puiss
 accéder aux membres de la classe, elle est généralement définie comme fonction
 amie (=friend=). Le prototype est le suivant
 #+BEGIN_SRC c++
-  friend type operatorOp (argument);
+  friend type operatorOp(argument);
 #+END_SRC
 
 À titre d'exemple, on pourra surcharger l'opérateur =+= de la classe =complexe=
 #+BEGIN_SRC c++
-  complexe operator+ (const complexe& z1, const complexe& z2) const
+  complexe operator+(const complexe & z1, const complexe & z2) const
   {
     return complexe(z1.m_reel + z2.m_reel, z1.m_imaginaire + z2.m_imaginaire);
   }
@@ -125,7 +127,7 @@ amie (=friend=). Le prototype est le suivant
 On notera bien que la surcharge de l'opérateur est extérieure à la classe
 /=complexe=/ : sa déclaration ne fait pas intervenir l'opérateur de portée
 /=::=/. Par ailleurs, la déclaration précédente suppose que la construction
-/=complexe (const double, const double)=/ est envisageable.
+/=complexe(const double, const double)=/ est envisageable.
 #+END_REMARK
 
 L'avantage de cette syntaxe est que l'opérateur est réellement symétrique,
@@ -142,7 +144,7 @@ contrairement au cas où les opérateurs sont définis à l'intérieur de la cla
   transformation =z\longmapsto-z=, la (sur)définition de la fonction ne prend
   pas d'argument. On écrit alors
   #+BEGIN_SRC c++
-    complexe& operator- () const
+    complexe& operator-() const
     {
       return complexe(-m_reel, -m_imaginaire);
     }
@@ -168,16 +170,16 @@ La définition du constructeur de recopie est voisine de celle du constructeur
 par défaut sachant toutefois que le constructeur de recopie possède comme
 argument *une référence vers la classe*. Ainsi, son prototype s'écrit:
 #+BEGIN_SRC c++
-  nom_classe (nom_classe&);
+  nom_classe(nom_classe &);
 #+END_SRC
 tandis que sa déclaration est
 #+BEGIN_SRC c++
-  nom_classe::nom_classe (nom_classe& objet_de_type_nom_classe);
+  nom_classe::nom_classe(nom_classe & objet_de_type_nom_classe);
 #+END_SRC
 
 Exemple:
 #+BEGIN_SRC c++
-  complexe::complexe (const complexe &source)
+  complexe::complexe(const complexe & source)
   {
     m_reel       = source.m_reel;
     m_imaginaire = source.m_imaginaire;
@@ -187,13 +189,12 @@ Exemple:
 L'opérateur d'affectation === se définit comme toute surcharge d'opérateur et sa
 déclaration devient
 #+BEGIN_SRC c++
-  complexe& complexe::operator= (const complexe& source)
+  complexe& complexe::operator=(const complexe & source)
   {
-    if (&source != this)
-      {
-        m_reel       = source.m_reel;
-        m_imaginaire = source.m_imaginaire;
-      }
+    if (&source != this) {
+      m_reel       = source.m_reel;
+      m_imaginaire = source.m_imaginaire;
+    }
     return *this;
   }
 #+END_SRC

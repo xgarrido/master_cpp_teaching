@@ -38,7 +38,7 @@ devient alors
     int m_Y;
 
   public :
-    point (int abs, int ord); // Constructeur de la classe point
+    point(int abs, int ord); // Constructeur de la classe point
   };
 #+END_SRC
 La définition du constructeur reste identique à celle de la méthode
@@ -46,7 +46,7 @@ La définition du constructeur reste identique à celle de la méthode
 au membre =m_X=, respectivement =m_Y=, mais le prototype s'écrit
 
 #+BEGIN_SRC c++
-  point::point (int abs, int ord) { m_X = abs; m_Y = ord; }
+  point::point(int abs, int ord) { m_X = abs; m_Y = ord; }
 #+END_SRC
 
 #+BEGIN_REMARK
@@ -55,7 +55,7 @@ membres au travers du constructeur plutôt que *d'assigner* leurs
 valeurs. Autrement dit, à l'assignation =m_X = abs; m_Y = ord=, on préférera
 l'initialisation suivante
 #+BEGIN_SRC c++
-  point::point (int abs, int ord) : m_X(abs), m_Y(ord) {}
+  point::point(int abs, int ord) : m_X(abs), m_Y(ord) {}
 #+END_SRC
 Cette possibilité devient indispensable en cas :
 
@@ -78,9 +78,9 @@ exemple) à la classe =point=. La déclaration de la classe =point= devient
     char *p_geometry_type;
 
   public :
-    point ();
-    point (int abs, int ord);
-    ~point (); // Destructeur de la classe point
+    point();
+    point(int abs, int ord);
+    ~point(); // Destructeur de la classe point
   };
 #+END_SRC
 tandis que la restitution de la mémoire allouée pour =p_geometry_type= se
@@ -102,7 +102,7 @@ donnée. La classe =point= peut ainsi proposer plusieurs constructeurs, l'appel
 se faisant suivant le contexte, c'est-à-dire suivant l'instanciation d'un objet
 =point=. On pourra imaginer ainsi la déclaration suivante
 #+BEGIN_SRC c++
-  class Point
+  class point
   {
   private :
     int m_X;
@@ -110,22 +110,22 @@ se faisant suivant le contexte, c'est-à-dire suivant l'instanciation d'un objet
     char *p_geometry_type;
 
   public :
-    point ();
-    point (int abs, int ord);
-    point (int abs, int ord, unsigned int n_size);
-    ~point ();
+    point();
+    point(int abs, int ord);
+    point(int abs, int ord, unsigned int n_size);
+    ~point();
   };
 #+END_SRC
 où les constructeurs sont définis ainsi
 #+BEGIN_SRC c++
   // Constructeur par défaut
-  point::point () : m_X(0), m_Y(0), p_geometry_type(0) {}
+  point::point() : m_X(0), m_Y(0), p_geometry_type(0) {}
 
   // Simple initialisation des coordonnées
-  point::point (int abs, int ord) : m_X(abs), m_Y(ord), p_geometry_type(0) {}
+  point::point(int abs, int ord) : m_X(abs), m_Y(ord), p_geometry_type(0) {}
 
   // Initialisation des coordonées et allocation dynamique
-  point::point (int abs, int ord, unsigned int n_size) :
+  point::point(int abs, int ord, unsigned int n_size) :
     m_X(abs), m_Y(ord), p_geometry_type(new char[n_size + 1]) {}
 #+END_SRC
 Selon le besoin, l'utilisateur de la classe choisira l'un des constructeurs
@@ -133,9 +133,9 @@ précédents lors de la création d'un objet =point=. À titre d'exemple, les
 instanciations suivantes seront toutes différentes tout en étant chacune
 valables.
 #+BEGIN_SRC c++
-  point my_point1;             // construction par défaut
-  point my_point2 (1, 2);      // initialisation des coordonnées
-  point my_point3 (1, 2, 256); // allocation dynamique pour le pointeur p_geometry_type
+  point my_point1;            // construction par défaut
+  point my_point2(1, 2);      // initialisation des coordonnées
+  point my_point3(1, 2, 256); // allocation dynamique pour le pointeur p_geometry_type
 #+END_SRC
 
 *** Remarques
@@ -193,10 +193,10 @@ arguments à fournir au constructeur de =point=. Le constructeur suivant
     point  m_centre;
     double m_rayon;
   public:
-    cercle (int abs, int ord, double rayon);
+    cercle(int abs, int ord, double rayon);
   };
 
-  cercle::cercle (int abs, int ord, double rayon) : centre(abs, ord), m_rayon(rayon)
+  cercle::cercle(int abs, int ord, double rayon) : centre(abs, ord), m_rayon(rayon)
   {
     ...
   }
@@ -211,7 +211,7 @@ Il pourrait être envisagé de définir le constructeur de =cercle= de la façon
 suivante:
 
 #+BEGIN_SRC c++
-  cercle::cercle (int abs, int ord, double rayon) : m_rayon(rayon)
+  cercle::cercle(int abs, int ord, double rayon) : m_rayon(rayon)
   {
     centre = point (abs, ord);
     ...
@@ -241,8 +241,8 @@ nature des arguments figurant à la suite de son appel. Ainsi, les déclarations
 suivantes
 
 #+BEGIN_SRC c++
-  point * ptr_point1 = new point ();
-  point * ptr_point2 = new point (2,5);
+  point * ptr_point1 = new point;
+  point * ptr_point2 = new point(2,5);
 #+END_SRC
 
 permettront soit l'appel du constructeur par défaut (premier cas), soit l'appel
@@ -250,7 +250,7 @@ du constructeur initialisant les membres de la classe aux valeurs 2 et 5 (second
 cas).
 
 L'accès aux méthodes de l'objet pointé =ptr_point1= ou =ptr_point2= se fera par
-des appels de la forme =ptr_point1->affiche ();= équivalents aux instructions de
+des appels de la forme =ptr_point1->affiche();= équivalents aux instructions de
 type =(*ptr_point1).affiche();=
 
 Dès lors que l'objet dynamique n'est plus nécessaire, l'utilisation de
@@ -294,11 +294,11 @@ obligatoirement par référence. Son entête doit donc être de l'une de ces deu
 formes :
 
 #+BEGIN_SRC c++
-  point (point& the_point);
+  point(point& the_point);
 #+END_SRC
 ou
 #+BEGIN_SRC c++
-  point (const point& the_point);
+  point(const point& the_point);
 #+END_SRC
 
 C'est à ce constructeur et donc au concepteur de la classe, de prendre en charge
@@ -315,12 +315,12 @@ code suivant fournit un exemple d'implémentation de constructeur de recopie
     char *p_geometry_type;
 
   public :
-    point ();
-    point (const point& the_point);
-    ~point ();
+    point();
+    point(const point& the_point);
+    ~point();
   };
 
-  point::point (const point& the_point)
+  point::point(const point& the_point)
   {
     // Copie superficielle
     m_X = the_point.m_X;
@@ -340,10 +340,10 @@ code suivant fournit un exemple d'implémentation de constructeur de recopie
   transmis par référence ce qui relève d'une logique implacable puisque, dans le
   cas contraire, l'appel du constructeur de recopie impliquerait une
   intialisation par recopie de l'argument et donc un appel du constructeur de
-  recopie qui, lui même, etc etc etc. Quoiqu'il en soit la forme =point (point
+  recopie qui, lui même, etc etc etc. Quoiqu'il en soit la forme =point(point
   the_point);= serait rejetée lors de la compilation.
 
-- Les deux formes précédentes =point (point& the_point)= et =point (const point&
+- Les deux formes précédentes =point(point& the_point)= et =point (const point&
   the_point)= peuvent exister au sein d'une même classe. Dans ce cas, la
   première serait utilisée en cas d'initialisation par un objet quelconque
   tandis que la seconde serait utilisée en cas d'initialisation par un objet

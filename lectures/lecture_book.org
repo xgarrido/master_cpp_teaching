@@ -2,7 +2,7 @@
 #+TITLE: \large Cours du Magistère de Physique Fondamentale d'Orsay
 #+AUTHOR: Xavier Garrido
 #+DATE:   23/09/2013
-#+OPTIONS: toc:1
+#+OPTIONS: toc:1 ^:{}
 
 #+LATEX: \chapter{Les spécificités du C++}
 #+INCLUDE: "./lecture_specificite_c++.org" :lines "6-" :minlevel 1
@@ -43,10 +43,10 @@
 #+INCLUDE: "./annexe_compilation.org" :lines "7-" :minlevel 1
 
 #+LATEX: \chapter{Convention d'écriture et organisation des programmes}
-#+INCLUDE: "./lecture_pointeur.org" :lines "6-" :minlevel 1
+#+INCLUDE: "./annexe_convention_ecriture.org" :lines "7-" :minlevel 1
 
 #+LATEX: \chapter{Écriture/lecture sur l'entrée/sortie standard}
-#+INCLUDE: "./lecture_pointeur.org" :lines "6-" :minlevel 1
+#+INCLUDE: "./annexe_cout_cin.org" :lines "7-" :minlevel 1
 
 #+LATEX: \chapter{Les membres données statiques}
 #+INCLUDE: "./annexe_variable_statique.org" :lines "7-" :minlevel 1

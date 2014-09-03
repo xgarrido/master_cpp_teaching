@@ -237,7 +237,7 @@ remplacées par des déclarations de la forme
 #+END_SRC
 
 De même, les macros telles que =CARRE= c'est-à-dire définissant de simples
-actions deviendront des fonctions en ligne (/cf./ [[file:lecture_spectificite_c++.pdf][Spécificités du C++]])
+actions deviendront des fonctions en ligne (/cf./ [[file:lecture_spectificite_c++.pdf]["Spécificités du C++"]])
 s'écrivant
 
 #+BEGIN_SRC c++

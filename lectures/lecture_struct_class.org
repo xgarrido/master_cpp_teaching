@@ -92,9 +92,9 @@ De telles méthodes seraient ainsi déclarées
     int m_X;
     int m_Y;
     // Déclaration des méthodes ou fonctions membres
-    void initialise (const int abscisse, const int ordonnee);
-    void deplace    (const int new_abscisse, const int new_ordonnee);
-    void affiche    ();
+    void initialise(const int abscisse, const int ordonnee);
+    void deplace(const int new_abscisse, const int new_ordonnee);
+    void affiche();
   };
 #+END_SRC
 
@@ -122,7 +122,7 @@ la structure doit être précisé afin d'évaluer "la portée" de cette fonction
 titre d'exemple, la méthode =initialise= pourra être définie ainsi
 
 #+BEGIN_SRC c++
-  void point::initialise (const int abscisse, const int ordonnee)
+  void point::initialise(const int abscisse, const int ordonnee)
   {
     m_X = abscisse;
     m_Y = ordonnee;
@@ -167,14 +167,14 @@ suivante
 déclare deux structures nommées =my_point1= et =my_point2=, chacune disposant de
 trois méthodes =initialise=, =deplace= et =affiche=. L'accès aux membres =m_X=
 et =m_Y= peut se faire comme en C à savoir =my_point1.m_X = 5;=. Cependant et
-comme nous le verrons au prochain chapitre [[file:lecture_encapsulation.pdf][/Encapsulation des données/]], nous
+comme nous le verrons au prochain chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]], nous
 briserions alors le principe d'encapsulation à savoir que nous accèderions
 directement aux données membres sans passer par l'intermédiaire des
 méthodes. Aussi, on priviligiera la manipulation des membres /via/ les méthodes
 dédiées soit
 
 #+BEGIN_SRC c++
-  mypoint1.initialise (5, 2);
+  mypoint1.initialise(5, 2);
 #+END_SRC
 
 Une telle instruction consiste à appeler la méthode =Initialise= *pour la
@@ -188,7 +188,7 @@ méthode quelle est la structure sur laquelle opérer.
 - Une méthode ne peut être appelée comme une fonction ordinaire. Par exemple,
   l'instruction suivante
   #+BEGIN_SRC c++
-    initialise (5, 2);
+    initialise(5, 2);
   #+END_SRC
   sera rejetée à la compilation (à moins qu'il n'existe, par ailleurs, une
   fonction ordinaire appelée =initialise=).
@@ -220,4 +220,4 @@ structure, il convient d'ajouter le mot clé =public= afin que membres et
 méthodes soient accessibles et manipulables depuis l'extérieur de la classe. Par
 défaut, les membres et méthodes d'une classe sont privés (mot clé =private=)
 alors que ceux d'une structure sont publics. L'ensemble de ces concepts est
-précisé dans le chapitre [[file:lecture_encapsulation.pdf][/Encapsulation des données/]].
+précisé dans le chapitre [[file:lecture_encapsulation.pdf]["Encapsulation des données"]].

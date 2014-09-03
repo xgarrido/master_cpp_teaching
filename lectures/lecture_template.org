@@ -23,17 +23,17 @@ fonction, il s'agit d'écrire une fonction =min= pour chaque type de variable
 rencontrée, soit
 
 #+BEGIN_SRC c++
-  int min (const int a, const int b)
+  int min(const int a, const int b)
   {
     return a < b ? a : b;
   }
 
-  float min (const float a, const float b)
+  float min(const float a, const float b)
   {
     return a < b ? a : b;
   }
 
-  char min (const char a, const char b)
+  char min(const char a, const char b)
   {
     return a < b ? a : b;
   }
@@ -50,7 +50,7 @@ d'être rencontrés par la surdéfinition de fonctions peut se résumer à la
 déclaration suivante
 
 #+BEGIN_SRC c++
-  template<class T> T min (const T a, const T b)
+  template<class T> T min(const T a, const T b)
   {
     return a < b ? a : b;
   }
@@ -69,7 +69,7 @@ deux arguments de même type). Le code suivant illustre quelques appels de cette
 fonction
 
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     const int i1 = 2, i2 = 7;
     const float f1 = 3.4, f2 = 5.6;
@@ -79,6 +79,7 @@ fonction
     cout << "min(" << f1 << "," << f2 << ") = " << min (f1,f2) << endl;
     cout << "min(" << c1 << "," << c2 << ") = " << min (c1,c2) << endl;
     cout << "min(&c1,&c2) = " << min (&c1,&c2) << endl;
+    return 0;
   }
 #+END_SRC
 
@@ -94,32 +95,33 @@ intervenir avant une quelconque utilisation de la fonction. D'autre part, cette
 généralisation dans l'écriture de fonctions s'applique également aux classes
 moyennant la surcharge des opérateurs mis en jeu (ici, l'opérateur =<=). Il est
 parfaitement envisageable d'appeler la fonction =min= avec comme argument la
-désormais célèbre classe =Point=, sous réserve que l'opérateur d'infériorité =<=
+désormais célèbre classe =point=, sous réserve que l'opérateur d'infériorité =<=
 soit surchargé. Ainsi, le programme suivant demeure valable
 
 #+BEGIN_SRC c++
-  class Point
+  class point
   {
   public:
-    Point(const unsigned int abs = 0,
+    point(const unsigned int abs = 0,
           const unsigned int ord = 0) : m_X(abs), m_Y(ord) {}
 
-    unsigned int GetNorme() const { return m_X*m_X+m_Y*m_Y; }
-    friend bool operator<(const Point& p1, const Point& p2);
+    unsigned int get_norme() const { return m_X*m_X+m_Y*m_Y; }
+    friend bool operator<(const point & p1, const point & p2);
   private:
     unsigned int m_X;
     unsigned int m_Y;
   };
 
-  bool operator<(const Point& p1, const Point& p2)
+  bool operator<(const point & p1, const point & p2)
   {
-    return p1.GetNorme() < p2.GetNorme();
+    return p1.get_norme() < p2.get_norme();
   }
 
   int main()
   {
-    Point myPoint1(3,4), myPoint2(5,2);
-    Point myPoint3 = min(myPoint1,myPoint2);
+    point myPoint1(3,4), myPoint2(5,2);
+    point myPoint3 = std::min(myPoint1,myPoint2);
+    return 0;
   }
 #+END_SRC
 
@@ -199,15 +201,15 @@ de la bibliothèque standard.
 
 La syntaxe permettant de définir un patron de classe est similaire à celle qui
 permet de définir des patrons de fonctions. Un exemple de classe template,
-portant sur la structure =Point= pour laquelle la précision de représentation
+portant sur la structure =point= pour laquelle la précision de représentation
 (entiers, entiers non signés, réels,...) est le paramètre type de la classe, est
 
 #+BEGIN_SRC c++
-  template<class T> class Point
+  template<class T> class point
   {
   public:
-    Point(T abs = 0, T ord = 0) : m_X(abs), m_Y(ord) {}
-    void Affiche();
+    point(T abs = 0, T ord = 0) : m_X(abs), m_Y(ord) {}
+    void affiche();
   private:
     T m_X;
     T m_Y;
@@ -218,7 +220,7 @@ Pour complèter la définition de notre patron de classe, il convient de défini
 les méthodes. Selon que l'on souhaite définir la méthode en ligne (/i.e./ à
 l'intérieur de la définition du patron de classe) ou non, la démarche est
 sensiblement différente. Dans le cas de la définition en ligne telle le
-constructeur =Point(T abs = 0, T ord = 0)=, l'utilisation demeure naturelle, la
+constructeur =point(T abs = 0, T ord = 0)=, l'utilisation demeure naturelle, la
 seule contrainte tenant à l'emploi du paramètre de type =T=. En revanche,
 lorsque la méthode est définie en dehors, il est impératif de rappeler au
 compilateur :
@@ -227,11 +229,11 @@ compilateur :
   type. On fournit donc la liste de paramètre sous la forme =template<class T>=,
 
 - le nom du patron concerné. Par exemple, si nous définissons la méthode
-  =Affiche=, son nom sera =Point<T>::Affiche()=.
+  =affiche=, son nom sera =point<T>::affiche()=.
 
-Ainsi, la méthode =Affiche= serait définie de la façon suivante
+Ainsi, la méthode =affiche= serait définie de la façon suivante
 #+BEGIN_SRC c++
-  template<class T> void Point<T>::Affiche()
+  template<class T> void point<T>::affiche()
   {
     cout << "Coordonnées : " << m_X << " " << m_Y << endl;
   }
@@ -240,10 +242,10 @@ Ainsi, la méthode =Affiche= serait définie de la façon suivante
 L'utilisation de patron de classe est similaire à celle des patrons de fonctions
 à ceci près qu'il est nécessaire d'imposer le paramètre de type lors de
 l'instanciation de la classe. Aussi après avoir crée le patron de classe
-=Point=, la déclaration d'instances de =Point= est
+=point=, la déclaration d'instances de =point= est
 #+BEGIN_SRC c++
-  Point<int> myPointWithInteger;
-  Point<double> myPointWithDouble(3.2,4.5);
+  point<int> myPointWithInteger;
+  point<double> myPointWithDouble(3.2,4.5);
 #+END_SRC
 
 Les contraintes d'utilisation de patron de classe sont du même ordre que celles
@@ -258,22 +260,22 @@ Il est également envisageable de fournir un nombre quelconque de paramètre de
 type dans la définition du patron de classe de même que des paramètres
 expressions. L'exemple ci-dessous illustre ces cas
 #+BEGIN_SRC c++
-  template<class T, class U, unsigned int n> class Tableau
+  template<class T, class U, unsigned int n> class tableau
   {
-    T m_Tab[n];
-    U m_Mean;
+    T m_tab[n];
+    U m_mean;
 
   public:
-    Tableau() {}
-    T& operator[](const unsigned int i) const { return m_Tab[i]; }
-    U GetMean() const { return m_Mean; }
+    tableau() {}
+    T& operator[](const unsigned int i) const { return m_tab[i]; }
+    U get_mean() const { return m_mean; }
   };
 
   int main()
   {
-    Tableau<int, float, 5> myTableau1;
-    Tableau<float, float, 10> myTableau2;
-    Tableau<Point<int>, Point<float>, 6> myTableau3;
+    tableau<int, float, 5> myTableau1;
+    tableau<float, float, 10> myTableau2;
+    tableau<point<int>, point<float>, 6> myTableau3;
   }
 #+END_SRC
 

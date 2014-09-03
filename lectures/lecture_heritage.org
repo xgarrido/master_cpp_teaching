@@ -44,7 +44,7 @@ la classe fille. À titre d'exemple, considérons une classe de base nommée
   {
   public :
     // Méthodes propres à la classe rectangle
-    void set_largeur (double largeur);
+    void set_largeur(double largeur);
 
   private :
     // Membres propres à la classe rectangle
@@ -151,7 +151,7 @@ donc écrire
   class polygone
   {
   public:
-    polygone (const unsigned int ordre) : m_ordre (ordre) {}
+    polygone(const unsigned int ordre) : m_ordre(ordre) {}
   protected:
     unsigned int m_ordre;
     ...
@@ -160,8 +160,8 @@ donc écrire
   class rectangle : public polygone
   {
   public:
-    rectangle (const double longueur, const double largeur) :
-      polygone (4), m_longueur (longueur), m_largeur (largeur) {}
+    rectangle(const double longueur, const double largeur) :
+      polygone(4), m_longueur(longueur), m_largeur(largeur) {}
     ...
   };
 #+END_SRC
@@ -277,13 +277,13 @@ suivant :
   class polygone
   {
     ...
-    void affiche ();
+    void affiche();
     ...
   };
   class rectangle : public polygone
   {
     ...
-    void affiche ();
+    void affiche();
     ...
   };
 #+END_SRC
@@ -313,7 +313,7 @@ soit la classe =polygone= dans notre exemple :
   class Polygone
   {
     ...
-    virtual void affiche ();
+    virtual void affiche();
     ...
   };
 #+END_SRC
@@ -394,7 +394,7 @@ La déclaration d'une méthode virtuelle pure se formalise ainsi :
   class polygone
   {
     ...
-    virtual void affiche () = 0;
+    virtual void affiche() = 0;
   };
 #+END_SRC
 la définition de la méthode =affiche= étant donnée dans les classes
@@ -415,7 +415,7 @@ utilisant un pointeur sur une classe abstraite =filtre=.
     double m_facteur_qualite;
 
   public :
-    virtual double process_signal () = 0;
+    virtual double process_signal() = 0;
   };
 #+END_SRC
 
@@ -436,18 +436,18 @@ différent mais néanmoins dérivé de la classe =filtre=.
   {
     ...
     public:
-    double process_signal ();
+    double process_signal();
     ...
   };
 
   // Redéfinition de la méthode process_signal pour la classe filtre_passe_bas
-  double filtre_passe_bas::process_signal ()
+  double filtre_passe_bas::process_signal()
   {
     ...
   }
 
   const unsigned int gnbr_filtre = 3;
-  int main ()
+  int main()
   {
     // Un tableau qui contient des pointeurs vers des filtres
     filtre **tab_filtre = new filtre*[gnbr_filtre];
@@ -463,11 +463,10 @@ différent mais néanmoins dérivé de la classe =filtre=.
     filtre_bande_passe F_BP;
     tab_filtre[2] = &F_BP;
 
-    for (unsigned int ifiltre < 0 ; ifiltre < gnbr_filtre; ifiltre++)
-      {
-        // Chaque élément du tableau va appeller SA propre méthode
-        tab_filtre[ifiltre]->process_signal ();
-      }
+    for (unsigned int ifiltre < 0 ; ifiltre < gnbr_filtre; ifiltre++) {
+      // Chaque élément du tableau va appeller SA propre méthode
+      tab_filtre[ifiltre]->process_signal ();
+    }
     return 0;
   }
 #+END_SRC

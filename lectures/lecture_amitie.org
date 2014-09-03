@@ -25,7 +25,7 @@ figures selon la nature de la fonction
      class A
      {
        ...
-       friend type nom_fonction_extérieure (...);
+       friend type nom_fonction_extérieure(...);
        ...
      };
    #+END_SRC
@@ -36,7 +36,7 @@ figures selon la nature de la fonction
      class A
      {
        ...
-       friend type B::nom_méthode_de_A (...);
+       friend type B::nom_méthode_de_A(...);
        ...
      };
    #+END_SRC
@@ -47,8 +47,7 @@ figures selon la nature de la fonction
      class A { ...  friend class B; ...  };
    #+END_SRC
 
-#+LATEX: \newpage
-#+LATEX: \subsubsection{
+#+LATEX: \newpage\subsubsection{
 Remarques :
 #+LATEX: }
 

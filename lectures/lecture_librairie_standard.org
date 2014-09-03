@@ -68,15 +68,15 @@ classe =vector=
   #include <vector>
   #include <iostream>
 
-  int main ()
+  int main()
   {
     // Déclaration d'un vecteur d'entiers de taille non connue
     std::vector<int> myVector;
 
     // Ajout de trois éléments
-    myVector.push_back (4);
-    myVector.push_back (2);
-    myVector.push_back (5);
+    myVector.push_back(4);
+    myVector.push_back(2);
+    myVector.push_back(5);
 
     // La méthode size précise le nombre d'entrée courante
     for (unsigned int iEntry = 0; iEntry < myVector.size(); ++iEntry)
@@ -93,6 +93,7 @@ classe =vector=
     mySecondVector[4] = 8;
 
     mySecondVector.clear();
+    return 0;
   }
 #+END_SRC
 
@@ -153,13 +154,13 @@ possibilités offertes par cette classe
   #include <string>
   #include <iostream>
 
-  int main ()
+  int main()
   {
     // Assignation/copie de strings
     std::string myString1 = "abcd";
     std::string myString2 = myString1;
     // Initialisation de strings
-    std::string myString3 (myString2);
+    std::string myString3(myString2);
 
     // Concaténation
     myString2 += "abcd";
@@ -171,10 +172,11 @@ possibilités offertes par cette classe
       std::cout << myString1 << " est identique à " << myString2 << std::endl;
 
     // Longueur d'un string
-    unsigned int size = myString1.size ();
+    unsigned int size = myString1.size();
 
     // Recherche dans un string
-    unsigned int pos = myString1.find ("bc");
+    unsigned int pos = myString1.find("bc");
+    return 0;
   }
 #+END_SRC
 
@@ -219,7 +221,7 @@ Appliqué au containers de la STL, on trouve ainsi les méthodes
   #include <vector>
   #include <iostream>
 
-  const std::vector<string> setVector()
+  const std::vector<string> set_vector()
   {
     std::vector<string> v;
     v.push_back("John");
@@ -227,9 +229,9 @@ Appliqué au containers de la STL, on trouve ainsi les méthodes
     return v;
   }
 
-  int main ()
+  int main()
   {
-    const std::vector<string> myVector(setVector());
+    const std::vector<string> myVector(set_vector());
 
     // ne compile pas car myVector est const
     // std::vector<string>::iterator itVector;
@@ -237,6 +239,7 @@ Appliqué au containers de la STL, on trouve ainsi les méthodes
 
     for (itVector = myVector.begin(); itVector != myVector.end(); ++itVector)
       cout << *itVector << endl;
+    return 0;
   }
 #+END_SRC
 

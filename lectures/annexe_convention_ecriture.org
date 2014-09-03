@@ -64,6 +64,9 @@ qui sont indépendantes de l'architecture de la machine comme =m_= pour les
 membres de classe de même que pour la déclaration de variable locale (=i= sera
 notamment utilisé au sein des boucles : =for (unsigned int iRun = 0;...)=).
 
+[fn:1] père des logiciels Word et Excel mais également connu pour ses vols comme
+touriste à bord de la station spatiale internationale en 2007 et 2009
+
 * Déclaration des variables
 
 Le choix des noms de variable (et de méthode) doit être le plus explicite
@@ -86,12 +89,12 @@ premier devant obligatoirement être une lettre (éventuellement un /underscore/
 
 Par ailleurs, le respect de l'orthographe est également à prendre en
 considération. Ainsi, il est préférable d'écrire le nom d'une méthode
-=get_parameters ()= dès lors qu'elle retourne un ensemble de paramètres et
-=get_parameter ()= lorsqu'il s'agira de récupérer la valeur d'un seul paramètre.
+=get_parameters()= dès lors qu'elle retourne un ensemble de paramètres et
+=get_parameter()= lorsqu'il s'agira de récupérer la valeur d'un seul paramètre.
 
 Enfin, on évitera autant que possible les rédondances dans les identifiants qui
 ont tendance à rallonger l'écriture et surchargent la relecture. Par exemple,
-=my_detector.initialize_detector ()= devient =my_detector.initialize ()=.
+=my_detector.initialize_detector()= devient =my_detector.initialize()=.
 
 * Organisation des programmes
 
@@ -117,6 +120,3 @@ Pour atteindre cet objectif, il est indispensable de pouvoir découper un
 programme en sous-programmes indépendants. Pour que chacun puisse travailler sur
 sa partie de programme, il faut que ces morceaux de programme soient dans des
 fichiers séparés.
-
-[fn:1] père des logiciels Word et Excel mais également connu pour ses vols comme
-touriste à bord de la station spatiale internationale en 2007 et 2009
