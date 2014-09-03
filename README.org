@@ -470,7 +470,7 @@ No title
               {\noindent\bf\sffamily\Huge\@title}\\
               \vspace{0.5\textheight}
               \begin{flushright}
-                \color{gray}
+                \color{gray}\sffamily
                 Xavier Garrido$^a$, Yann Leprince$^b$ \& Matthieu Loumaigne$^c$
                 \\[6mm]
                 $^a$ LAL, IN2P3 \& Université Paris-Sud, France\\
