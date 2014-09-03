@@ -5,27 +5,96 @@
 #+LATEX_HEADER: \setcounter{chapter}{2}
 #+LATEX_HEADER: \renewcommand{\chaptername}{annexe}
 
-* Rappel sur l'instruction =printf=
+* Rappel sur les fonction =printf= et =scanf= du C
 
-*** Syntaxe :
+=printf= et =scanf= sont deux fonctions de la bibliothèque standard du langage
+C. Déclarée dans l'entête =<stdio.h>=, =printf= permet l'affichage d'une chaîne
+de caractère à l'écran tandis que =scanf= est utilisée pour la saisie de données
+formatées, qu'il s'agisse de lettres, de chiffres ou de chaînes de caractères.
+
+Les prototypes de ces deux fonctions sont respectivement
 #+BEGIN_SRC c++
-  int printf (const char *format [, arg [, arg]...]);
+  int printf(const char * format,...);
 #+END_SRC
-
+et
+#+BEGIN_SRC c++
+  int scanf(const char * format,...);
+#+END_SRC
 où :
 
-- =const char *format= est une chaîne de caractère,
+- =const char * format= est une chaîne de caractère,
 
-- =arg= sont les arguments qui correspondent aux spécifications de
-  *format* au sein de la chaîne de caractère.
+- =...= signifient que ces fonctions sont variadiques /i.e/ que ces fonctions
+  peuvent un nombre variable de paramètres.
 
-Exemple :
+On peut ainsi écrire =printf= avec un seul paramètre :
 #+BEGIN_SRC c++
-  int i = 5;
-  // %d est la spécification de format pour les entiers, i est son argument
-  printf ("i =\n %d", i);
-#+END_SRC
+  #include <stdio.h>
 
+  int main()
+  {
+    printf("Votre chaine de caractères ici\n");
+    return 0;
+  }
+#+END_SRC
+ou avec plusieurs paramètres
+#+BEGIN_SRC c++
+  #include <stdio.h>
+
+  int main()
+  {
+    int i = 5;
+    printf("i =\n %d\n", i);
+    return 0;
+}
+#+END_SRC
+où =%d= est la spécification de format pour les entiers et =i= est son
+argument. Le tableau [[tab::specPrintf]] présente les différents formats en fonction
+des types de variables.
+
+#+TBLNAME: tab::specPrintf
+#+CAPTION: *Format d'écriture en fonction du type de variable à afficher.*
+|--------------------+----------|
+| Type               | Format   |
+|--------------------+----------|
+| =int=              | =%d=     |
+| =long=             | =%ld=    |
+| =float/double=     | =%f/%lf= |
+| =char=             | =%c=     |
+| string (=char*=)   | =%s=     |
+| pointeur (=void*=) | =%p=     |
+| entier hexadécimal | =%x=     |
+|--------------------+----------|
+
+Pour la fonction =scanf=, la valeur retournée de type entier correspond le
+nombre de variables affectées par la saisie et permet donc de vérifier que la
+saisie s'est correctement passée. En cas d’erreur de lecture, cette fonction
+renvoie =EOF= et indique la raison de l’erreur dans la variable =errno=. Le code
+ci-dessous présente un exemple d'utilisation de la fonction =scanf=
+#+BEGIN_SRC c++
+  #include <stdio.h>
+
+  int main()
+  {
+    int nombre = 0;
+    int res = 0;
+    printf("Entrez une valeur");
+    res = scanf("%d", &nombre);
+    if (res == 1)
+      printf("Votre valeur est %d\n", nombre);
+    else
+      // traitement de l’erreur avec errno ou perror inclus dans errno.h
+    return 0;
+  }
+#+END_SRC
+La fonction =scanf= recopie la saisie de l'utilisateur à une adresse
+mémoire. Cette adresse doit être spécifiée dans la fonction =scanf= : la saisie
+sera ainsi enregistrée à l'adresse de la variable =nombre=, d’où la présence de
+=&= devant =nombre=).
+
+Tout comme =printf= propose différents formats en fonction du type de variable,
+il est possible de capturer plusieurs types de données avec la fonction
+scanf (/cf./ Tableau [[tab::specPrintf]]).
 
 * Les nouvelles possibilités d'entrée/sortie du \Cpp
 
