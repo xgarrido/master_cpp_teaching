@@ -39,6 +39,58 @@
 
 [fn:1] POO : Programmation Orientée Objet
 
+* Notes/transparents de cours, TD, projets
+** Dokeos /tree/
+:PROPERTIES:
+:BEAMER_COL: 0.4
+:END:
+
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[%
+    grow via three points={one child at (0.5,-0.7) and
+      two children at (0.25,-0.7) and (0.25,-1.4)},
+    edge from parent path={([xshift=8pt]\tikzparentnode.south west) |- (\tikzchildnode.west)}]
+
+    %% Font Awesome
+    \newfontfamily{\FA}[Path=/home/garrido/.fonts/Font-Awesome/fonts/]{FontAwesome.otf}
+    \newcommand*{\faicon}[1]{{\FA\csname faicon@#1\endcsname}}
+    \expandafter\def\csname faicon@fa-file-pdf-o\endcsname{\symbol{"F1C1}}\def\faFilePDFO{{\FA\csname faicon@fa-file-pdf-o\endcsname}\xspace}
+    \expandafter\def\csname faicon@fa-folder-o\endcsname{\symbol{"F114}}\def\faClosedDirectory{{\FA\csname faicon@fa-folder-o\endcsname}\xspace}
+    \expandafter\def\csname faicon@fa-folder-open-o\endcsname{\symbol{"F115}}\def\faOpenedDirectory{{\FA\csname faicon@fa-folder-open-o\endcsname}\xspace}
+
+    \newcommand{\closedDirectory}[1]{\faClosedDirectory #1}
+    \newcommand{\openedDirectory}[1]{\faOpenedDirectory #1}
+    \newcommand{\pdfFile}[1]{\faFilePDFO #1}
+
+    \tikzstyle{every node}=[anchor=west]
+    \tikzstyle{selected}=[draw=blue,rounded corners,fill=blue!30,blue]
+    \tikzstyle{optional}=[dashed,fill=gray!50]
+
+    \node {\openedDirectory{Informatique}}
+    child { node {\openedDirectory{cours}}
+      child { node[xshift=-20pt] {\pdfFile{annexe\_compilation}}}
+    }
+    child [missing] {}
+    child { node {\closedDirectory{demos}}}
+    child { node {\closedDirectory{projets}}}
+    child { node {\closedDirectory{td}}}
+    child { node[] {\closedDirectory{transparents}}
+      child { node[xshift=-35pt,optional] {\pdfFile{slide\_presentation}}}
+    };
+  \end{tikzpicture}
+#+END_SRC
+
+** Ressources Dokeos
+:PROPERTIES:
+:BEAMER_COL: 0.7
+:END:
+#+ATTR_LATEX: :options [][][\centering]
+#+BEGIN_CBOX
+_Ressources disponibles sur dokeos[fn:2] [[http://formation.u-psud.fr][http://formation.u-psud.fr]]_
+#+END_CBOX
+
+[fn:2] pour ceux n'ayant pas encore de compte, contactez le secrétariat
+
 * Bibliographie
 :PROPERTIES:
 :BEAMER_ENV: fullframe

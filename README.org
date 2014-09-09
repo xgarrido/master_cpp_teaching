@@ -323,7 +323,7 @@ customize the highlighted source code output using =fancyvrb=.
 ****** [[http://www.texample.net/tikz/][tikz]] package
 #+BEGIN_SRC latex
   \RequirePackage{tikz}
-  \usetikzlibrary{positioning,arrows,decorations,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy}
+  \usetikzlibrary{positioning,arrows,decorations,backgrounds,patterns,matrix,shapes,fit,calc,shadows,plotmarks,spy,trees}
 #+END_SRC
 
 We use the external library from =tikz= to cache i.e. produce a =pdf= file of
@@ -333,6 +333,10 @@ each =tikzpicture=. =tikz/external= looks if the pdf exist and if not, export it
   \input "|mkdir -p /tmp/latex.d"
 #+END_SRC
 
+****** [[http://www.ctan.org/pkg/xspace][xspace]] package
+#+BEGIN_SRC latex
+  \RequirePackage{xspace}
+#+END_SRC
 **** Lectures/class style
 :PROPERTIES:
 :TANGLE: lecture-style.sty
