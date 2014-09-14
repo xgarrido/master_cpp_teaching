@@ -11,7 +11,7 @@ Compiler le code suivant, sans puis avec les options de "warnings"
   #include <iostream>
   using namespace std;
 
-  int main ()
+  int main()
   {
     unsigned int entierNonSigne;
     int entierSigne = entierNonSigne;
@@ -47,10 +47,10 @@ instructions C suivantes :
 #+BEGIN_SRC c++
   double * pt_tabular;
   int n_value;
-  printf ("Combien de valeurs souhaitez vous allouer en mémoire ?");
-  scanf ("%d", &n_value);
-  pt_tabular = (double *) malloc (sizeof (double) * n_value);
-  free (pt_tabular);
+  printf("Combien de valeurs souhaitez vous allouer en mémoire ?");
+  scanf("%d", &n_value);
+  pt_tabular = (double *) malloc (sizeof(double) * n_value);
+  free(pt_tabular);
 #+END_SRC
 
 * Fonction & références

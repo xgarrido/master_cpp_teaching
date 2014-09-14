@@ -490,7 +490,10 @@ No title
       \g@addto@macro\tableofcontents{\clearemptydoublepage}
     }{
       \renewcommand*{\maketitle}{}
-    }}
+    }
+  }{
+    \renewcommand*{\maketitle}{}
+  }
 #+END_SRC
 ******* TOC tweak
 #+BEGIN_SRC latex
