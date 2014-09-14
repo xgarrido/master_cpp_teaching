@@ -71,11 +71,11 @@
       child { node[xshift=-20pt] {\pdfFile{annexe\_compilation}}}
     }
     child [missing] {}
-    child { node {\closedDirectory{demos}}}
     child { node {\closedDirectory{projets}}}
     child { node {\closedDirectory{td}}}
     child { node[] {\closedDirectory{transparents}}
-      child { node[xshift=-35pt,optional] {\pdfFile{slide\_presentation}}}
+      child { node[xshift=-28pt,optional] {\pdfFile{slide\_presentation}}}
+      child { node[xshift=-28pt] {\pdfFile{slide\_compilation}}}
     };
   \end{tikzpicture}
 #+END_SRC
