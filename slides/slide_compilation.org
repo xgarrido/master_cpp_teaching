@@ -65,8 +65,12 @@
   compilateur recherche ces fichiers localement et dans le répertoire
   =/usr/include=,
 
+#+BEAMER: \pause
+
 - *l'option =-W=* permet l'activation des messages de mise en garde. Différents
   niveaux sont accessibles, le plus complet étant =-Wall -Wextra=,
+
+#+BEAMER: \pause
 
 - *l'option =-Didentificateur=* permet la définition d'identificateur à fournir
   lors du processus de précompilation. L'activation des directives de
@@ -176,6 +180,7 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
     }
   #+END_SRC
 
+#+BEAMER: \pause
 Compilation :
 #+BEGIN_PROMPT
 g++ dummy.cc test_dummy.cc -o test_dummy

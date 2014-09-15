@@ -31,11 +31,11 @@
 
 - Surcharge d'opérateur (POO)
 
-- Héritage (POO)
+- Héritage & Interface (POO)
 
 - Notions de patrons de fonctions et de classes (POO)
 
-- Introduction à la librairie standard STL
+- Introduction à la librairie standard STL (POO)
 
 [fn:1] POO : Programmation Orientée Objet
 
@@ -73,7 +73,7 @@
     child [missing] {}
     child { node {\closedDirectory{projets}}}
     child { node {\closedDirectory{td}}}
-    child { node[] {\closedDirectory{transparents}}
+    child { node[] {\openedDirectory{transparents}}
       child { node[xshift=-28pt,optional] {\pdfFile{slide\_presentation}}}
       child { node[xshift=-28pt] {\pdfFile{slide\_compilation}}}
     };
