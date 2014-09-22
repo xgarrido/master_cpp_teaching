@@ -57,7 +57,7 @@ somme des couples de lapins lors des deux moins précédents.
   que le compilateur permette l'exécution du programme.
 
 - Insérer la fonction récursive =rfibonacci=, renommée en =fibonacci=, dans deux
-  fichiers distincts : un premier fichier d'en-tête nommé =fibonacci.hh=
+  fichiers distincts : un premier fichier d'en-tête nommé =fibonacci.h=
   comprenant la déclaration (prototype) de la fonction et un second,
   =fibonacci.cc=, définissant cette fonction. Modifier le programme principal
   afin d'utiliser cette fonction (on commentera provisoirement la précédente
