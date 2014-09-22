@@ -23,10 +23,10 @@ Compiler le code suivant, sans puis avec les options de "warnings"
   }
 #+END_SRC
 
-Avant exécution, corriger les "erreurs" puis tester le programme. Ajouter
-finalement une directive de préprocesseur d'identificateur =DEBUG= permettant
-l'affichage ou non des différentes valeurs d'entier et compiler suivant les deux
-cas. S'assurer du résultat en précompilant le code source.
+Après exécution, corriger les "erreurs". Ajouter finalement une directive de
+préprocesseur d'identificateur =DEBUG= permettant l'affichage ou non des
+différentes valeurs d'entier et compiler suivant les deux cas. S'assurer du
+résultat en précompilant le code source.
 
 * Pointeurs & références
 
