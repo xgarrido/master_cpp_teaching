@@ -958,7 +958,7 @@ Add special footline with a slick progress bar
         \defbeamertemplate{footline}{cbfootline}{%
           \usebeamerfont{page number in head/foot}
           \hspace{1em}\inserttitle\hfill
-          \insertpagenumber
+          \insertframenumber
           \kern1em\vskip2pt
           \color{generic3}% to color the progressbar
           \hspace*{-\beamer@leftmargin}%
