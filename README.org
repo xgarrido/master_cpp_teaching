@@ -145,6 +145,15 @@ We also define a new environment for "colored" box
                '("cbox" "c" "\\begin{cbox}%o(%h)" "\\end{cbox}"))
 #+END_SRC
 
+Since 26/09/2014, it seems that fragment block are not "lowercased" anymore so
+we execute a hook before parsing file to change =CBOX= into =cbox=.
+#+BEGIN_SRC emacs-lisp
+  (defun cpp-beamer-cbox (backend)
+    (when (eq backend 'beamer)
+      (replace-regexp "CBOX" "cbox")))
+  (add-to-list 'org-export-before-parsing-hook 'cpp-beamer-cbox)
+#+END_SRC
+
 **** Lecture template
 #+BEGIN_SRC emacs-lisp :results none
   (add-to-list 'org-latex-classes
