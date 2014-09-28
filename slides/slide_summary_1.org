@@ -56,9 +56,9 @@
 #+BEGIN_SRC c++ -n
   #ifndef __dummy_h__
   #define __dummy_h__ 1
-  void dummy ();
-  void dummy (int i_);
-  void dummy (int & i_, double & a_, char & c_);
+  void dummy();
+  void dummy(int i_);
+  void dummy(int & i_, double & a_, char & c_);
   #endif
 #+END_SRC
 
@@ -71,9 +71,9 @@
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  void dummy () {}
-  void dummy (int i_) {}
-  void dummy (int & i_, double & a_, char & c_) {}
+  void dummy() {}
+  void dummy(int i_) {}
+  void dummy(int & i_, double & a_, char & c_) {}
 #+END_SRC
 
 #+BEAMER: \vspace{-0.7cm}
@@ -85,11 +85,11 @@
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  int main ()
+  int main()
   {
-    dummy ();
+    dummy();
     int i = 10; double a = 2.0; char c = 'a';
-    dummy (i, a, c);
+    dummy(i, a, c);
   }
 #+END_SRC
 
@@ -111,9 +111,9 @@ Transmission par référence
 #+BEGIN_SRC c++ -n
   #ifndef __dummy_h__
   #define __dummy_h__ 1
-  void dummy ();
-  void dummy (int i_);
-  void dummy (int & i_, double & a_, char & c_);
+  void dummy();
+  void dummy(int i_);
+  void dummy(int & i_, double & a_, char & c_);
   #endif
 #+END_SRC
 #+BEGIN_SRC latex
@@ -135,9 +135,9 @@ Transmission par référence
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  void dummy () {}
-  void dummy (int i_) {}
-  void dummy (int & i_, double & a_, char & c_) {}
+  void dummy() {}
+  void dummy(int i_) {}
+  void dummy(int & i_, double & a_, char & c_) {}
 #+END_SRC
 #+BEGIN_SRC latex
   \begin{tikzpicture}[remember picture,overlay]
@@ -158,11 +158,11 @@ Transmission par référence
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  int main ()
+  int main()
   {
-    dummy ();
+    dummy();
     int i = 10; double a = 2.0; char c = 'a';
-    dummy (i, a, c);
+    dummy(i, a, c);
   }
 #+END_SRC
 #+BEGIN_SRC latex
@@ -192,9 +192,9 @@ Surdéfinition de fonction
 #+BEGIN_SRC c++ -n
   #ifndef __dummy_h__
   #define __dummy_h__ 1
-  void dummy ();
-  void dummy (int i_);
-  void dummy (int & i_, double & a_, char & c_);
+  void dummy();
+  void dummy(int i_);
+  void dummy(int & i_, double & a_, char & c_);
   #endif
 #+END_SRC
 #+BEGIN_SRC latex
@@ -216,9 +216,9 @@ Surdéfinition de fonction
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  void dummy () {}
-  void dummy (int i_) {}
-  void dummy (int & i_, double & a_, char & c_) {}
+  void dummy() {}
+  void dummy(int i_) {}
+  void dummy(int & i_, double & a_, char & c_) {}
 #+END_SRC
 #+BEGIN_SRC latex
   \begin{tikzpicture}[remember picture,overlay]
@@ -239,11 +239,11 @@ Surdéfinition de fonction
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  int main ()
+  int main()
   {
-    dummy ();
+    dummy();
     int i = 10; double a = 2.0; char c = 'a';
-    dummy (i, a, c);
+    dummy(i, a, c);
   }
 #+END_SRC
 #+BEGIN_SRC latex
@@ -280,9 +280,9 @@ Directives de préprocesseur
 #+BEGIN_SRC c++ -n
   #ifndef __dummy_h__
   #define __dummy_h__ 1
-  void dummy ();
-  void dummy (int i_);
-  void dummy (int & i_, double & a_, char & c_);
+  void dummy();
+  void dummy(int i_);
+  void dummy(int & i_, double & a_, char & c_);
   #endif
 #+END_SRC
 #+BEGIN_SRC latex
@@ -305,9 +305,9 @@ Directives de préprocesseur
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  void dummy () {}
-  void dummy (int i_) {}
-  void dummy (int & i_, double & a_, char & c_) {}
+  void dummy() {}
+  void dummy(int i_) {}
+  void dummy(int & i_, double & a_, char & c_) {}
 #+END_SRC
 #+BEGIN_SRC latex
   \begin{tikzpicture}[remember picture,overlay]
@@ -326,11 +326,11 @@ Directives de préprocesseur
 :END:
 #+BEGIN_SRC c++ -n
   #include "dummy.h"
-  int main ()
+  int main()
   {
-    dummy ();
+    dummy();
     int i = 10; double a = 2.0; char c = 'a';
-    dummy (i, a, c);
+    dummy(i, a, c);
   }
 #+END_SRC
 #+BEGIN_SRC latex
