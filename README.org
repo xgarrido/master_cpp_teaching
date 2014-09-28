@@ -763,7 +763,6 @@ called within =postamble= part of [[Template settings]]
 ****** Font
 #+BEGIN_SRC latex
   \setmonofont[Scale=0.9]{Inconsolata}
-  \newfontfamily{\Handwritten}{Gunny Handwriting}
   \setbeamerfont{page number in head/foot}{size=\tiny}
 #+END_SRC
 ****** Beamer options
