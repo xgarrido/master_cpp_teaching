@@ -69,8 +69,8 @@
       double m_charge;
 
       // Déclaration des méthodes
-      void initialise (const double masse_, const double charge_);
-      void affiche () const;
+      void initialise(const double masse_, const double charge_);
+      void affiche() const;
     };
   #+END_SRC
 
@@ -87,11 +87,11 @@
       double m_charge;
 
       // Déclaration des méthodes
-      void initialise (const double masse_, const double charge_);
-      void affiche () const;
+      void initialise(const double masse_, const double charge_);
+      void affiche() const;
     };
 
-    void particule::initialise (const double masse_, const double charge_)
+    void particule::initialise(const double masse_, const double charge_)
     {
       m_masse  = masse_;
       m_charge = charge_;
@@ -103,14 +103,14 @@
 
 #+BEGIN_SRC c++
   #include "particule.h"
-  int main ()
+  int main()
   {
     // Instanciation d'objets de type particule
     particule particule1, particule2;
 
     // Accès aux membres
-    particule1.initialise (0.511, -1.6e-19);
-    particule2.initialise (938.0, +1.6e-19);
+    particule1.initialise(0.511, -1.6e-19);
+    particule2.initialise(938.0, +1.6e-19);
   }
 #+END_SRC
 
@@ -118,15 +118,15 @@
 
 #+BEGIN_SRC c++
   #include "particule.h"
-  int main ()
+  int main()
   {
     // Instanciation d'objets de type particule
     particule * particule1 = new particule;
     particule * particule2 = new particule;
 
     // Accès aux membres
-    particule1->initialise (0.511, -1.6e-19);
-    particule2->initialise (938.0, +1.6e-19);
+    particule1->initialise(0.511, -1.6e-19);
+    particule2->initialise(938.0, +1.6e-19);
 
     ...
     delete particule1;

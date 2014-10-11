@@ -35,10 +35,10 @@
   {
   public:
     // Constructeur par défaut
-    particule ();
+    particule();
 
     // Surdéfinition de constructeur
-    particule (const double masse_, const double charge_);
+    particule(const double masse_, const double charge_);
 
   private:
     // Déclaration de membres
@@ -53,18 +53,18 @@
   #include "particule.h"
 
   // Initialisation des membres à une valeur par défaut
-  particule::particule ()
-    : m_masse (0.0), m_charge (0.0)
+  particule::particule()
+    : m_masse(0.0), m_charge(0.0)
   {
   }
 
-  particule::particule (const double masse_, const double charge_)
-    : m_masse (masse_), m_charge (charge_)
+  particule::particule(const double masse_, const double charge_)
+    : m_masse(masse_), m_charge(charge_)
   {
   }
   ...
   particule my_particule1; // Constructeur par défaut
-  particule my_particule2 (0.511, 1.6e-19);
+  particule my_particule2(0.511, 1.6e-19);
 #+END_SRC
 
 * Destructeur de classe
@@ -89,10 +89,10 @@
   {
     public:
     // Constructeur par défaut
-    particule ();
+    particule();
 
     // Destructeur
-    ~particule ();
+    ~particule();
 
     private:
     // Déclaration de membres
@@ -106,13 +106,13 @@
   #include "particule.h"
 
   // Initialisation
-  particule::particule ()
-    : m_nom (new char[256])
+  particule::particule()
+    : m_nom(new char[256])
   {
   }
 
   // Destruction
-  particule::~particule ()
+  particule::~particule()
   {
     delete[] m_nom;
   }

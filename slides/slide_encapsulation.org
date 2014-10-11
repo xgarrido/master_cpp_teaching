@@ -43,11 +43,11 @@ toutes fonctions extérieures à la classe
   {
   public:
     // Déclaration des méthodes d'accès
-    double get_masse  () const;
-    double get_charge () const;
+    double get_masse() const;
+    double get_charge() const;
 
-    void set_masse  (const double masse_);
-    void set_charge (const double charge_);
+    void set_masse(const double masse_);
+    void set_charge(const double charge_);
 
   private:
     // Déclaration de membres
@@ -60,19 +60,19 @@ toutes fonctions extérieures à la classe
 
 #+BEGIN_SRC c++
   // Définition des méthodes
-  double particule::get_masse () const
+  double particule::get_masse() const
   {
     return m_masse;
   }
 
-  void particule::set_masse (double masse_)
+  void particule::set_masse(double masse_)
   {
     m_masse = masse_;
   }
   ...
   particule electron;
-  electron.set_masse (0.511);
-  const double electron_masse = electron.get_masse ();
+  electron.set_masse(0.511);
+  const double electron_masse = electron.get_masse();
 #+END_SRC
 
 * Intérêts de l'encapsulation
@@ -119,8 +119,8 @@ La création de chaque nouvelle classe =exemple_classe= se décompose en trois
   class exemple_classe
   {
   public:
-    void   set_dummy (const double dummy_);
-    double get_dummy () const;
+    void set_dummy(const double dummy_);
+    double get_dummy() const;
   private:
     double m_dummy;
   };
@@ -133,12 +133,12 @@ La création de chaque nouvelle classe =exemple_classe= se décompose en trois
 #+BEGIN_SRC c++
   #include "exemple_classe.h"
 
-  void exemple_classe::set_dummy (const double dummy_)
+  void exemple_classe::set_dummy(const double dummy_)
   {
     m_dummy = dummy_;
   }
 
-  double exemple_class::get_dummy () const
+  double exemple_class::get_dummy() const
   {
     return m_dummy;
   }
@@ -150,16 +150,19 @@ La création de chaque nouvelle classe =exemple_classe= se décompose en trois
 #+BEGIN_SRC c++
   #include "exemple_classe.h"
 
-  int main ()
+  int main()
   {
     exemple_classe my_exemple_classe;
-    my_exemple_classe.set_dummy (666);
-    const double my_dummy = my_example_class.get_dummy ();
+    my_exemple_classe.set_dummy(666);
+    const double my_dummy = my_example_class.get_dummy();
+    return 0;
   }
 #+END_SRC
 
 #+BEAMER: \pause
 ** Compilation
 #+BEGIN_CENTER
-=$ g++ exemple_class.cc test_exemple_classe.cc= \\ =-o test_exemple_classe.exe=
+=$ g++ exemple_class.cc test_exemple_classe.cc=
+
+=-o test_exemple_classe.exe=
 #+END_CENTER
