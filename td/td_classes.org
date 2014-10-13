@@ -47,8 +47,8 @@ faire un programme test remplissant cette classe. Définissez une méthode qui
 calculera le périmètre d'un polygone.
 
 Déclarer par la suite un tableau de trois éléments de type =Polygone=. Remplir
-chacune des trois instances puis faire une fonction qui renverra le nom de celui
-ayant le plus grand périmètre.
+chacune des trois instances puis faire une fonction qui renverra l'indice de
+celui ayant le plus grand périmètre.
 
 [fn:1] pour les plus téméraires, substituer au tableau statique un tableau
 dynamique (pointeur de classe =Point= alloué avec =new=) dont le nombre
