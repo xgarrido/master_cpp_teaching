@@ -138,7 +138,7 @@ De prime abord, peut paraître inutile et lourd à employer
 #+BEAMER: \pause
 #+ATTR_LATEX: :options [6][lbtuc][\centering\small][9][5]
 #+BEGIN_CBOX
-\ding{42} Ces méthodes ne peuvent modifier les membres de la classe
+\ding{42} Ces méthodes ne peuvent pas modifier les membres de la classe
 #+END_CBOX
 
 
