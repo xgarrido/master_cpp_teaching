@@ -96,6 +96,52 @@ toutes fonctions extérieures à la classe
 
 De prime abord, peut paraître inutile et lourd à employer
 
+* Aparté : Méthodes constantes
+#+COMMENT: Special latex tweaks for these slides
+#+BEGIN_SRC latex
+  \tikzexternaldisable
+  \def\theFancyVerbLine{%
+    \color{white}\sffamily\tiny\arabic{FancyVerbLine}%
+          {\tikz[remember picture,overlay]\node(minted-\arabic{FancyVerbLine}){};}%
+  }
+  \tikzset{codeblock/.style={color=#1!50,rounded corners=0.5ex, opacity=0.2, fill}}
+#+END_SRC
+
+#+BEGIN_SRC c++ -n
+  class particule
+  {
+  public:
+    // Déclaration des méthodes d'accès
+    double get_masse() const;
+    double get_charge() const;
+
+  private:
+    // Déclaration de membres
+    double m_masse;
+    double m_charge;
+  };
+#+END_SRC
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[codeblock=blue]
+    ([yshift=-0.75ex,xshift=20ex]minted-5) rectangle
+    ([yshift=+1.50ex,xshift=24ex]minted-5);
+    \draw[codeblock=blue]
+    ([yshift=-0.75ex,xshift=20.5ex]minted-6) rectangle
+    ([yshift=+1.50ex,xshift=25ex]minted-6);
+  \end{tikzpicture}
+#+END_SRC
+
+- Les méthodes =get_masse()= et =get_charge()= sont déclarées comme *constantes*
+  vis-à-vis des membres de la classe /i.e./ =m_masse= et =m_charge=
+
+#+BEAMER: \pause
+#+ATTR_LATEX: :options [6][lbtuc][\centering\small][9][5]
+#+BEGIN_CBOX
+\ding{42} Ces méthodes ne peuvent modifier les membres de la classe
+#+END_CBOX
+
+
 * Quelques règles élémentaires
 
 La création de chaque nouvelle classe =exemple_classe= se décompose en trois
