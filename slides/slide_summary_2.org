@@ -54,11 +54,11 @@
   {
     // Non encapsulé
   public:
-    double get_masse  () const;
-    double get_charge () const;
+    double get_masse() const;
+    double get_charge() const;
 
-    void set_masse  (const double masse_);
-    void set_charge (const double charge_);
+    void set_masse(const double masse_);
+    void set_charge(const double charge_);
 
   private:
     double m_masse;
@@ -77,9 +77,9 @@
   {
     // Non encapsulé
   public:
-    particule  ();
-    particule  (const double masse_, const double charge_);
-    ~particule ();
+    particule();
+    particule(const double masse_, const double charge_);
+    ~particule();
 
     ...
 
@@ -97,19 +97,19 @@
   #include "particule.h"
 
   // Constructeur par défaut
-  particule::particule () :
-    m_masse  (0.0), m_charge (0.0)
+  particule::particule() :
+    m_masse(0.0), m_charge(0.0)
   {
   }
 
   // Surdéfinition du constructeur
-  particule::particule (const double masse_, const double charge_)
-    : m_masse (masse_), m_charge (charge_)
+  particule::particule(const double masse_, const double charge_)
+    : m_masse(masse_), m_charge(charge_)
   {
   }
 
   // Destructeur
-  particule::~particule ()
+  particule::~particule()
   {
   }
 #+END_SRC
@@ -118,22 +118,22 @@
 
 ** Fichier =particule.cc=
 #+BEGIN_SRC c++
-  double particule::get_masse () const
+  double particule::get_masse() const
   {
     return m_masse;
   }
 
-  double particule::get_charge () const
+  double particule::get_charge() const
   {
     return m_charge;
   }
 
-  void particule::set_masse (const double masse_)
+  void particule::set_masse(const double masse_)
   {
     m_masse = masse_;
   }
 
-  void particule::set_charge (const double charge_)
+  void particule::set_charge(const double charge_)
   {
     m_charge = charge_;
   }
@@ -145,9 +145,9 @@
 #+BEGIN_SRC c++
   #include "particule.h"
 
-  int main ()
+  int main()
   {
-    particule my_particule1 (0.511, 1.6e-19);
+    particule my_particule1(0.511, 1.6e-19);
     particule my_particule2;
   }
 #+END_SRC
