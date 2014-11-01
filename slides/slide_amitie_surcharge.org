@@ -5,7 +5,7 @@
 #+STARTUP:     beamer
 #+LATEX_CLASS: cpp-slide
 
-* Fonctions et classes amies                                       :noexport:
+* COMMENT Fonctions et classes amies
 
 - Du fait du principe d'encapsulation des données, les fonctions extérieures à
   la classe n'ont pas accès aux membres privées de cette classe...
@@ -15,7 +15,7 @@
 - Utilité : quasi nulle sauf pour quelques opérations (dont la surcharge
   d'opérateur)
 
-* Exemple de fonction amie d'une classe                            :noexport:
+* COMMENT Exemple de fonction amie d'une classe
 
 #+BEGIN_SRC c++
   // Déclaration avec friend
@@ -40,7 +40,7 @@
   }
 #+END_SRC
 
-* Classe amie d'une autre classe                                   :noexport:
+* COMMENT Classe amie d'une autre classe
 
 - Méthode d'une classe =B=, amie d'une autre classe =A=
 
@@ -82,10 +82,11 @@
   class point
   {
   public:
-    point (const double x, const double y);
-    double x () const;
-    double y () const;
-    point & operator+= (const point & point_);
+    point();
+    point(const double x_, const double y_);
+    double x() const;
+    double y() const;
+    point & operator+=(const point & point_);
 
   private:
     double m_x;
@@ -93,7 +94,7 @@
   };
 #+END_SRC
 
-* Example de surcharge de l'opérateur unaire =+==
+* Exemple de surcharge de l'opérateur unaire =+==
 
 #+BEGIN_SRC c++
   // Déclaration
@@ -103,10 +104,10 @@
   };
 
   // Définition
-  point & point::operator+= (const point & point_)
+  point & point::operator+=(const point & point_)
   {
-    m_x += point_.x ();
-    m_y += point_.y ();
+    m_x += point_.x();
+    m_y += point_.y();
     return *this;
   }
 #+END_SRC
@@ -120,18 +121,18 @@
 
 #+BEGIN_SRC c++
   // Définition
-  point & point::operator+= (const point & point_)
+  point & point::operator+=(const point & point_)
   {
-    m_x += point_.x ();
-    m_y += point_.y ();
+    m_x += point_.x();
+    m_y += point_.y();
     return *this;
   }
   ...
   // Utilisation
-  int main ()
+  int main()
   {
-    point my_point1 (2, 3);
-    point my_point2 (4, 5);
+    point my_point1(2, 3);
+    point my_point2(4, 5);
     my_point1 += my_point2;
   }
 #+END_SRC
@@ -140,17 +141,23 @@
 
 #+BEGIN_SRC c++
   // Déclaration
-  point operator+ (const point & point1_, const point & point2_);
-
+  class point
+  {
+    ...
+  };
+  point operator+(const point & point1_, const point & point2_);
+#+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC c++
   // Définition
-  point operator+ (const point & point1_, const point & point2_)
+  point operator+(const point & point1_, const point & point2_)
   {
-    return point (point1_.x () + point2_.x (), point1_.y () + point2_.y ());
+    return point(point1_.x() + point2_.x(), point1_.y() + point2_.y());
   }
-  int main ()
+  int main()
   {
-    point my_point1 (2, 3);
-    point my_point2 (4, 5);
+    point my_point1(2, 3);
+    point my_point2(4, 5);
     point my_point3 = my_point1 + my_point2;
   }
 #+END_SRC
@@ -166,12 +173,12 @@
     // Déclaration
     class point
     {
-      point & operator= (const point & point_);
+      point & operator=(const point & point_);
     };
 
     // Utilisation
-    point my_point1 (2, 3);
-    point my_point2 (3, 4);
+    point my_point1(2, 3);
+    point my_point2(3, 4);
     my_point2 = my_point1;
   #+END_SRC
 
@@ -189,7 +196,7 @@
 
   #+BEGIN_SRC c++
     // Définition
-    point & point::operator= (const point & point_)
+    point & point::operator=(const point & point_)
     {
       if (&point_ != this) // garde-fou
         {
@@ -208,16 +215,16 @@
   #+BEGIN_SRC c++
     class point
     {
-      point (const point & point_);
+      point(const point & point_);
     };
 
-    point::point (const point & point_)
+    point::point(const point & point_)
     {
-      m_x = point_.x ();
-      m_y = point_.y ();
+      m_x = point_.x();
+      m_y = point_.y();
     }
 
-    point my_point1 (2, 3);
+    point my_point1(2, 3);
     point my_point2 = my_point1;
   #+END_SRC
 
@@ -226,7 +233,7 @@
 - \Cpp fournit par défaut le constructeur par recopie et l'opérateur
   d'affectation === (de même pour le constructeur et le destructeur)
 
-- Lorsque ces versions triviales ne suffisent pas (cas de l'*allocation
+- Lorsque ces versions triviales ne suffisent pas (cas de *l'allocation
   dynamique*) il faut choisir entre deux solutions :
 
   - Écrire une version correcte,
@@ -238,7 +245,7 @@
       class pas_de_copie
       {
       private:
-        pas_de_copie (const pas_de_copie&);
-        pas_de_copie & operator= (const pas_de_copie&);
+        pas_de_copie(const pas_de_copie&);
+        pas_de_copie & operator=(const pas_de_copie&);
       };
     #+END_SRC
