@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \setcounter{chapter}{4}
 
-* Constructeur de la classe =Complexe=
+* COMMENT Constructeur de la classe =Complexe=
 
 - Reprendre l'exercice précédent sur la classe =Complexe= en remplaçant la
   méthode =Initialise= par un constructeur.
