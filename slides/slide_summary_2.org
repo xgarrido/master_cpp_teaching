@@ -38,7 +38,7 @@
   {
     // Encapsulation
   private:
-    double m_masse;
+    double m_spin;
     double m_charge;
   };
   #endif
@@ -54,14 +54,14 @@
   {
     // Non encapsulé
   public:
-    double get_masse() const;
+    double get_spin() const;
     double get_charge() const;
 
-    void set_masse(const double masse_);
+    void set_spin(const double spin_);
     void set_charge(const double charge_);
 
   private:
-    double m_masse;
+    double m_spin;
     double m_charge;
   };
   #endif
@@ -78,13 +78,13 @@
     // Non encapsulé
   public:
     particule();
-    particule(const double masse_, const double charge_);
+    particule(const double spin_, const double charge_);
     ~particule();
 
     ...
 
   private:
-    double m_masse;
+    double m_spin;
     double m_charge;
   };
   #endif
@@ -98,13 +98,13 @@
 
   // Constructeur par défaut
   particule::particule() :
-    m_masse(0.0), m_charge(0.0)
+    m_spin(0.0), m_charge(0.0)
   {
   }
 
   // Surdéfinition du constructeur
-  particule::particule(const double masse_, const double charge_)
-    : m_masse(masse_), m_charge(charge_)
+  particule::particule(const double spin_, const double charge_)
+    : m_spin(spin_), m_charge(charge_)
   {
   }
 
@@ -118,9 +118,9 @@
 
 ** Fichier =particule.cc=
 #+BEGIN_SRC c++
-  double particule::get_masse() const
+  double particule::get_spin() const
   {
-    return m_masse;
+    return m_spin;
   }
 
   double particule::get_charge() const
@@ -128,9 +128,9 @@
     return m_charge;
   }
 
-  void particule::set_masse(const double masse_)
+  void particule::set_spin(const double spin_)
   {
-    m_masse = masse_;
+    m_spin = spin_;
   }
 
   void particule::set_charge(const double charge_)
@@ -147,7 +147,7 @@
 
   int main()
   {
-    particule my_particule1(0.511, 1.6e-19);
+    particule my_particule1(1/2., 1.6e-19);
     particule my_particule2;
   }
 #+END_SRC
