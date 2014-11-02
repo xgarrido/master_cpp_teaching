@@ -141,7 +141,7 @@ contrairement au cas où les opérateurs sont définis à l'intérieur de la cla
   fonction =inline=
 
 - Dans le cas d'opérateur unaire tel que l'opérateur =-()= qui effectue la
-  transformation =z\longmapsto-z=, la (sur)définition de la fonction ne prend
+  transformation $z\mapsto-z$, la (sur)définition de la fonction ne prend
   pas d'argument. On écrit alors
   #+BEGIN_SRC c++
     complexe& operator-() const
