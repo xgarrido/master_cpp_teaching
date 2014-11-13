@@ -4,6 +4,10 @@
 /slides/*.pdf
 /td/*.pdf
 
+*.log
+*.out
+*.nav
+*.snm
 *.toc
 *.aux
 *.tex
