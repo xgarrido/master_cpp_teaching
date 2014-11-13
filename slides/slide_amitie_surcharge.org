@@ -230,8 +230,8 @@
 
 * Constructeur de recopie et opérateur d'affectation ===
 
-- \Cpp fournit par défaut le constructeur par recopie et l'opérateur
-  d'affectation === (de même pour le constructeur et le destructeur)
+- \Cpp fournit par défaut le constructeur de recopie et l'opérateur
+  d'affectation ===
 
 - Lorsque ces versions triviales ne suffisent pas (cas de *l'allocation
   dynamique*) il faut choisir entre deux solutions :
