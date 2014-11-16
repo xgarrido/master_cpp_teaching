@@ -107,8 +107,7 @@
   class polygone
   {
   public:
-    polygone(const unsigned int nbr_segment_) :
-      m_nombre_segment(nbr_segment_) {}
+    polygone(const unsigned int nbr_segment_);
   protected:
     unsigned int m_nombre_segment;
   };
@@ -116,10 +115,28 @@
   class rectangle : public polygone
   {
   public:
-    rectangle(const double longueur_, const double largeur_) :
-      polygone(4),
-      m_longueur(longueur_), m_largeur(largeur_) {}
+    rectangle(const double longueur_, const double largeur_);
+  private:
+    double m_longueur;
+    double m_largeur;
   };
+#+END_SRC
+
+* Appels des constructeurs et destructeurs
+
+#+BEGIN_SRC c++
+  polygone::polygone(const unsigned int nbr_segment_)
+    : m_nombre_segment(nbr_segment_)
+  {
+  }
+#+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  rectangle::rectangle(const double longueur_, const double largeur_)
+    : polygone(4),
+      m_longueur(longueur_), m_largeur(largeur_)
+  {
+  }
 #+END_SRC
 
 * Appels des constructeurs et destructeurs
