@@ -296,19 +296,19 @@ que l'on utilise dans un programme principal de cette manière :
   polygone *ptr_polygone2 = &my_rectangle;
 #+END_SRC
 
-L'instruction =ptr_polygone1->affiche ();= appelle la méthode =affiche= de la
-classe =polygone=. Or, si nous exécutons l'instruction =ptr_polygone2->affiche
-();= cette dernière fait également appel à la méthode =affiche= de la classe
-=polygone= et non à celle définie pour la classe =rectangle=. Ce comportement
-est du au choix de la méthode qui a lieu lors de la compilation du programme :
-=ptr_polygone2= étant un pointeur de type =polygone=, le compilateur lui a
-attribué l'ensemble des méthodes de la classe =polygone= et non celle de la
-classe =rectangle=. On parle alors de "ligature statique".
+L'instruction =ptr_polygone1->affiche();= appelle la méthode =affiche= de la
+classe =polygone=. Or, si nous exécutons l'instruction
+=ptr_polygone2->affiche();= cette dernière fait également appel à la méthode
+=affiche= de la classe =polygone= et non à celle définie pour la classe
+=rectangle=. Ce comportement est du au choix de la méthode qui a lieu lors de la
+compilation du programme : =ptr_polygone2= étant un pointeur de type =polygone=,
+le compilateur lui a attribué l'ensemble des méthodes de la classe =polygone= et
+non celle de la classe =rectangle=. On parle alors de "ligature statique".
 
 Pour pallier cette limitation et préserver les liaisons entre classes et
 méthodes, le \Cpp propose le mécanisme de fonctions virtuelles. Il suffit de
-déclarer "virtuelle" (mot clé =virtual=) la méthode =affiche= de la classe mère
-soit la classe =polygone= dans notre exemple :
+déclarer "virtuelle" (mot clé =virtual=) la méthode =affiche= de la classe
+mère. La classe =polygone= de notre exemple devient :
 #+BEGIN_SRC c++
   class Polygone
   {
@@ -322,7 +322,7 @@ Cette instruction indique au compilateur que les éventuels appels de la fonctio
 =affiche= doivent utiliser une liaison dynamique et non plus statique. Autrement
 dit, lorsque le compilateur rencontrera un appel tel que :
 #+BEGIN_SRC c++
-  ptr_polygone2->affiche ();
+  ptr_polygone2->affiche();
 #+END_SRC
 il ne décidera pas de la procédure à appeler. Il se contentera de mettre en
 place un dispositif permettant de n'effectuer le choix de la méthode qu'au
@@ -465,7 +465,7 @@ différent mais néanmoins dérivé de la classe =filtre=.
 
     for (unsigned int ifiltre < 0 ; ifiltre < gnbr_filtre; ifiltre++) {
       // Chaque élément du tableau va appeller SA propre méthode
-      tab_filtre[ifiltre]->process_signal ();
+      tab_filtre[ifiltre]->process_signal();
     }
     return 0;
   }

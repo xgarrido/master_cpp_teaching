@@ -102,14 +102,13 @@ soit surchargé. Ainsi, le programme suivant demeure valable
   class point
   {
   public:
-    point(const unsigned int abs = 0,
-          const unsigned int ord = 0) : m_X(abs), m_Y(ord) {}
+    point(const unsigned int abs = 0, const unsigned int ord = 0)
+      : m_x(abs), m_y(ord) {}
 
     unsigned int get_norme() const { return m_X*m_X+m_Y*m_Y; }
-    friend bool operator<(const point & p1, const point & p2);
   private:
-    unsigned int m_X;
-    unsigned int m_Y;
+    unsigned int m_x;
+    unsigned int m_y;
   };
 
   bool operator<(const point & p1, const point & p2)
@@ -208,11 +207,11 @@ portant sur la structure =point= pour laquelle la précision de représentation
   template<class T> class point
   {
   public:
-    point(T abs = 0, T ord = 0) : m_X(abs), m_Y(ord) {}
+    point(T abs = 0, T ord = 0) : m_x(abs), m_y(ord) {}
     void affiche();
   private:
-    T m_X;
-    T m_Y;
+    T m_x;
+    T m_y;
   };
 #+END_SRC
 
@@ -235,7 +234,7 @@ Ainsi, la méthode =affiche= serait définie de la façon suivante
 #+BEGIN_SRC c++
   template<class T> void point<T>::affiche()
   {
-    cout << "Coordonnées : " << m_X << " " << m_Y << endl;
+    cout << "Coordonnées : " << m_x << " " << m_y << endl;
   }
 #+END_SRC
 
