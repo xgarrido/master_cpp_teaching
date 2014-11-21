@@ -7,12 +7,23 @@
 #+LATEX_HEADER:\newcommand{\ttb}[1]{\textcolor{black}{#1}}
 #+LATEX_HEADER:\newcommand{\ttg}[1]{\textcolor{green}{#1}}
 
+#+COMMENT: Special latex tweaks for these slides
+#+BEGIN_SRC latex
+  \tikzexternaldisable
+  \def\theFancyVerbLine{%
+    \color{white}\sffamily\tiny\arabic{FancyVerbLine}%
+          {\tikz[remember picture,overlay]\node(minted-\arabic{FancyVerbLine}){};}%
+  }
+  \tikzset{codeblock/.style={color=#1!50,rounded corners=0.5ex, opacity=0.2, fill}}
+#+END_SRC
 
 * Rappel sur l'héritage simple
 
-#+BEGIN_SRC c++
+#+BEGIN_SRC c++ -n
   class polygone
   {
+  public:
+    polygone(const unsigned int nbr_segment_);
   protected:
     unsigned int m_nombre_segment;
   };
@@ -20,41 +31,72 @@
   class rectangle : public polygone
   {
   public:
-    void set_largeur (const double largeur_);
-
+    rectangle(const double longueur_, const double largeur_);
   private:
     double m_longueur;
     double m_largeur;
   };
 #+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[codeblock=blue]
+    ([yshift=-0.75ex,xshift=17ex]minted-9) rectangle
+    ([yshift=+1.50ex,xshift=30.5ex]minted-9);
+    \node[] (t) [xshift=+5.6cm, yshift=+0.4ex, right=of minted-10.east]{
+      \textcolor{blue}{\scriptsize Relation d'héritage}};
+    \draw[->, blue] (t.west) to [out=180, in=0]
+    ([xshift=31ex, yshift=+0.4ex]minted-9.east);
+  \end{tikzpicture}
+#+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[codeblock=blue]
+    ([yshift=-0.75ex,xshift=2ex]minted-5) rectangle
+    ([yshift=+1.50ex,xshift=11ex]minted-5);
+    \node[] (t) [xshift=+5.6cm, yshift=+0.4ex, right=of minted-6.east,
+      text width=4cm]{
+      \textcolor{blue}{\scriptsize Encapsulation des données pour les classes dérivées}};
+    \draw[->, blue] (t.west) to [out=180, in=0]
+    ([xshift=20ex, yshift=+0.4ex]minted-5.east) --
+    ([xshift=12ex, yshift=+0.4ex]minted-5.east);
+  \end{tikzpicture}
+#+END_SRC
 
-- La relation d'héritage est matérialisée par l'usage de la directive *=public
-  polygone=*
+# - La relation d'héritage est matérialisée par l'usage de la directive *=public
+#   polygone=*
 
-- Le mot-clé *=protected=* autorise la classe dérivée (ici =rectangle=) à
-  accéder aux membres de la classe de base (ici =polygone=)
+# - Le mot-clé *=protected=* autorise la classe dérivée (ici =rectangle=) à
+#   accéder aux membres de la classe de base (ici =polygone=)
 
 * Rappel sur l'héritage simple
 
-#+BEGIN_SRC c++
-  class polygone
+#+BEGIN_SRC c++ -n
+  polygone::polygone(const unsigned int nbr_segment_) :
+    m_nombre_segment(nbr_segment_)
   {
-  public:
-    polygone (const unsigned int nbr_segment_) :
-      m_nombre_segment (nbr_segment_) {}
-  protected:
-    unsigned int m_nombre_segment;
-  };
+  }
 
-  class rectangle : public polygone
+  rectangle::rectangle(const double longueur_, const double largeur_) :
+    polygone(4),
+    m_longueur(longueur_), m_largeur(largeur_)
   {
-  public:
-    rectangle (const double longueur_, const double largeur_) :
-      polygone (4),
-      m_longueur (longueur_), m_largeur (largeur_) {}
-  };
+  }
 #+END_SRC
-* Liaisons dynamiques & Méthodes virtuelles
+#+BEGIN_SRC latex
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[codeblock=blue]
+    ([yshift=-0.75ex,xshift=3ex]minted-7) rectangle
+    ([yshift=+1.50ex,xshift=14ex]minted-7);
+    \node[] (t) [xshift=+6.6cm, yshift=+0.4ex, right=of minted-9.east, text width=3.5cm, align=center]{
+      \textcolor{blue}{\scriptsize Appel au constructeur de la classe de base}};
+    \draw[->, blue] (t.west) to [out=180, in=0]
+    ([xshift=40ex, yshift=+0.4ex]minted-7.east) --
+    ([xshift=15ex, yshift=+0.4ex]minted-7.east);
+  \end{tikzpicture}
+#+END_SRC
+* Liaisons statiques
 
 ** Classe =polygone=
 :PROPERTIES:
@@ -64,7 +106,7 @@
   class polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -76,7 +118,7 @@
   class rectangle : public polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -91,12 +133,12 @@
 :BEAMER_COL: 0.5
 :END:
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     polygone  my_polygone;
     rectangle my_rectangle;
-    my_polygone.affiche  ();
-    my_rectangle.affiche ();
+    my_polygone.affiche();
+    my_rectangle.affiche();
   }
 #+END_SRC
 
@@ -110,7 +152,7 @@
  type d'objet instancié*
 #+END_CENTER
 
-* Liaisons dynamiques & Méthodes virtuelles
+* Liaisons statiques
 
 ** Classe =polygone=
 :PROPERTIES:
@@ -120,7 +162,7 @@
   class polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -132,7 +174,7 @@
   class rectangle : public polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -147,16 +189,16 @@
 :BEAMER_COL: 0.5
 :END:
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     polygone  my_polygone;
     rectangle my_rectangle;
-    my_polygone.affiche  ();
-    my_rectangle.polygone::affiche ();
+    my_polygone.affiche();
+    my_rectangle.polygone::affiche();
   }
 #+END_SRC
 
-* Liaisons dynamiques & Méthodes virtuelles
+* Liaisons statiques
 
 ** Classe =polygone=
 :PROPERTIES:
@@ -166,7 +208,7 @@
   class polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -178,7 +220,7 @@
   class rectangle : public polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -193,12 +235,12 @@
 :BEAMER_COL: 0.5
 :END:
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     polygone * ptr_polygone1 = new polygone;
     polygone * ptr_polygone2 = new rectangle;
-    ptr_polygone1->affiche ();
-    ptr_polygone2->affiche ();
+    ptr_polygone1->affiche();
+    ptr_polygone2->affiche();
   }
 #+END_SRC
 
@@ -223,7 +265,7 @@
   class polygone
   {
   public:
-    virtual void affiche () const;
+    virtual void affiche() const;
     ...
   };
 #+END_SRC
@@ -235,7 +277,7 @@
   class rectangle : public polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 #+END_SRC
@@ -250,12 +292,12 @@
 :BEAMER_COL: 0.5
 :END:
 #+BEGIN_SRC c++
-  int main ()
+  int main()
   {
     polygone * ptr_polygone1 = new polygone;
     polygone * ptr_polygone2 = new rectangle;
-    ptr_polygone1->affiche ();
-    ptr_polygone2->affiche ();
+    ptr_polygone1->affiche();
+    ptr_polygone2->affiche();
   }
 #+END_SRC
 
@@ -284,11 +326,11 @@ la finalité de la classe fille
   class polygone
   {
   public:
-    virtual void affiche () const;
+    virtual void affiche() const;
     ...
   };
 
-  void polygone::affiche () const
+  void polygone::affiche() const
   {
     cout << "Nombre de segment = "
          << m_nombre_segment << endl;
@@ -304,14 +346,14 @@ la finalité de la classe fille
   class rectangle : public polygone
   {
   public:
-    void affiche () const;
+    void affiche() const;
     ...
   };
 
-  void rectangle::affiche () const
+  void rectangle::affiche() const
   {
     polygone::affiche ();
-    cout << "Longueur = " << m_longeur << endl;
+    cout << "Longueur = " << m_longueur << endl;
          << "Largeur  = " << m_largeur << endl;
   }
 #+END_SRC
@@ -350,7 +392,7 @@ Exemple du jeu d'échec :
 #+END_SRC
 
 - La classe =piece= est par construction *une classe abstraite* : elle déclare
-  des méthodes =affiche ()=, =deplacement ()= mais ne les définit pas
+  des méthodes =affiche()=, =deplacement()= mais ne les définit pas
 
 - La définition n'intervient que dans les classes dérivées qui spécialisent les
   méthodes en fonction de leur besoin
@@ -370,14 +412,14 @@ Exemple du jeu d'échec :
     \path (0,0) node(a) [punkt] {
       class \ttb{piece}\\
       \{\\
-      ~~virtual void \ttb{affiche} () const = 0;\\
-      ~~virtual bool \ttb{deplacement} ()~~~= 0;\\
+      ~~virtual void \ttb{affiche()} const = 0;\\
+      ~~virtual bool \ttb{deplacement()}~~~= 0;\\
       \};
     }
     (-3.5,-4.5) node(b) [punkt] {
       class \ttb{pion}\\
       \{\\
-      ~~void \ttb{pion::affiche} () const\\
+      ~~void \ttb{pion::affiche()} const\\
       ~~\{\\
       ~~~~\ttb{cout <<} \ttg{"P"} \ttb{<< endl;}\\
       ~~\}\\
@@ -386,7 +428,7 @@ Exemple du jeu d'échec :
     (+3.5,-4.5) node(c) [punkt] {
       class \ttb{tour}\\
       \{\\
-      ~~void \ttb{tour::affiche} () const\\
+      ~~void \ttb{tour::affiche()} const\\
       ~~\{\\
       ~~~~\ttb{cout <<} \ttg{"T"} \ttb{<< endl;}\\
       ~~\}\\
@@ -402,17 +444,17 @@ Exemple du jeu d'échec :
 #+BEGIN_SRC c++
   #include "pion.h"
   #include "tour.h"
-  int main ()
+  int main()
   {
     const size_t nbr_pieces = 2;
     piece * pieces[nbr_pieces];
 
-    pieces[0] = new pion ();
-    pieces[1] = new tour ();
+    pieces[0] = new pion;
+    pieces[1] = new tour;
 
     for (size_t i = 0; i < nbr_pieces; ++i)
     {
-      pieces[i]->affiche ();
+      pieces[i]->affiche();
     }
   }
 #+END_SRC

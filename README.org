@@ -27,6 +27,12 @@ different directories.
 :PROPERTIES:
 :TANGLE: README.el
 :END:
+** General settings
+*** Timestamp location
+#+BEGIN_SRC emacs-lisp
+  (setq org-publish-timestamp-directory "/tmp/org-timestamps")
+#+END_SRC
+
 ** Settings for =org= to =pdf= conversion
 *** Requirements
 #+BEGIN_SRC emacs-lisp
