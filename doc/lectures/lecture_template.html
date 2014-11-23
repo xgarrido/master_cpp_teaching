@@ -117,9 +117,9 @@ au même algorithme. Dans ce cadre, les notions de surdéfinition de fonction et
 de patron de fonctions répondent chacune à un besoin différent.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Les patrons de fonction</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Les patrons de fonction</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <p>
 Pour tenter d&rsquo;illustrer l&rsquo;intérêt des patrons de fonctions et leurs différences
 vis-à-vis de la surdéfinition de fonction, considérons le cas scolaire de la
@@ -130,17 +130,17 @@ rencontrée, soit
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">b</span>)
 {
   <span class="org-keyword">return</span> a &lt; b ? a : b;
 }
 
-<span class="org-type">float</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">b</span>)
+<span class="org-type">float</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">b</span>)
 {
   <span class="org-keyword">return</span> a &lt; b ? a : b;
 }
 
-<span class="org-type">char</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">b</span>)
+<span class="org-type">char</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">b</span>)
 {
   <span class="org-keyword">return</span> a &lt; b ? a : b;
 }
@@ -161,7 +161,7 @@ déclaration suivante
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">T</span> <span class="org-function-name">min</span> (<span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">T</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">b</span>)
 {
   <span class="org-keyword">return</span> a &lt; b ? a : b;
 }
@@ -186,7 +186,7 @@ fonction
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">i1</span> = 2, <span class="org-variable-name">i2</span> = 7;
   <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">f1</span> = 3.4, <span class="org-variable-name">f2</span> = 5.6;
@@ -196,6 +196,7 @@ fonction
   cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; f1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; f2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (f1,f2) &lt;&lt; endl;
   cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; c1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; c2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (c1,c2) &lt;&lt; endl;
   cout &lt;&lt; <span class="org-string">"min(&amp;c1,&amp;c2) = "</span> &lt;&lt; min (&amp;c1,&amp;c2) &lt;&lt; endl;
+  <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>
@@ -215,34 +216,34 @@ intervenir avant une quelconque utilisation de la fonction. D&rsquo;autre part, 
 généralisation dans l&rsquo;écriture de fonctions s&rsquo;applique également aux classes
 moyennant la surcharge des opérateurs mis en jeu (ici, l&rsquo;opérateur <code>&lt;</code>). Il est
 parfaitement envisageable d&rsquo;appeler la fonction <code>min</code> avec comme argument la
-désormais célèbre classe <code>Point</code>, sous réserve que l&rsquo;opérateur d&rsquo;infériorité <code>&lt;</code>
+désormais célèbre classe <code>point</code>, sous réserve que l&rsquo;opérateur d&rsquo;infériorité <code>&lt;</code>
 soit surchargé. Ainsi, le programme suivant demeure valable
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">Point</span>
+<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">point</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-function-name">Point</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">abs</span> = 0,
-        <span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">ord</span> = 0) : m_X(abs), m_Y(ord) {}
+  <span class="org-function-name">point</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">abs</span> = 0, <span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">ord</span> = 0)
+    : m_x(abs), <span class="org-type">m_y</span>(<span class="org-variable-name">ord</span>) {}
 
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-function-name">GetNorme</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_X*m_X+m_Y*m_Y; }
-  <span class="org-keyword">friend</span> <span class="org-type">bool</span> <span class="org-keyword">operator</span><span class="org-function-name">&lt;</span>(<span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p1</span>, <span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p2</span>);
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-function-name">get_norme</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_X*m_X+m_Y*m_Y; }
 <span class="org-keyword">private</span>:
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_X</span>;
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_Y</span>;
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_x</span>;
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_y</span>;
 };
 
-<span class="org-type">bool</span> <span class="org-keyword">operator</span><span class="org-function-name">&lt;</span>(<span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p1</span>, <span class="org-keyword">const</span> <span class="org-type">Point</span>&amp; <span class="org-variable-name">p2</span>)
+<span class="org-type">bool</span> <span class="org-keyword">operator</span><span class="org-function-name">&lt;</span>(<span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">p1</span>, <span class="org-keyword">const</span> <span class="org-type">point</span> &amp; <span class="org-variable-name">p2</span>)
 {
-  <span class="org-keyword">return</span> p1.GetNorme() &lt; p2.GetNorme();
+  <span class="org-keyword">return</span> p1.get_norme() &lt; p2.get_norme();
 }
 
 <span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
-  <span class="org-type">Point</span> <span class="org-variable-name">myPoint1</span>(3,4), <span class="org-variable-name">myPoint2</span>(5,2);
-  <span class="org-type">Point</span> <span class="org-variable-name">myPoint3</span> = min(myPoint1,myPoint2);
+  <span class="org-type">point</span> <span class="org-variable-name">myPoint1</span>(3,4), <span class="org-variable-name">myPoint2</span>(5,2);
+  <span class="org-type">point</span> <span class="org-variable-name">myPoint3</span> = <span class="org-constant">std</span>::min(myPoint1,myPoint2);
+  <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>
@@ -254,9 +255,9 @@ s&rsquo;affranchissant des problèmes de type.
 </p>
 </div>
 
-<div id="outline-container-sec-1-0-1" class="outline-4">
-<h4 id="sec-1-0-1">Remarques</h4>
-<div class="outline-text-4" id="text-1-0-1">
+<div id="outline-container-unnumbered-2" class="outline-4">
+<h4 id="unnumbered-2">Remarques</h4>
+<div class="outline-text-4" id="text-unnumbered-2">
 <ul class="org-ul">
 <li>Le mécanisme même des patrons fait que ces instructions sont utilisées par le
 compilateur pour enregistrer chaque fois qu&rsquo;il est nécessaire, les
@@ -267,9 +268,11 @@ définitions de patrons se situent donc dans un fichier d&rsquo;entête de telle
 à être &ldquo;en ligne"<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
 </li>
 
-<li>Un patron de fonctions peut comporter un ou
+<li><p>
+Un patron de fonctions peut comporter un ou
 plusieurs paramètres de type, chacun devant être précédé du mot clé
 <code>class</code> :
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>...&gt; <span class="org-type">void</span> <span class="org-function-name">fct</span>(<span class="org-type">T</span> <span class="org-variable-name">t</span>, <span class="org-type">U</span> <span class="org-variable-name">u</span>, ...)
@@ -281,12 +284,14 @@ apparaisse au moins une fois dans l&rsquo;entête du patron.
 </p>
 </li>
 
-<li>Dans l&rsquo;hypothèse où la fonction <code>min</code> est appelée avec des arguments de type
+<li><p>
+Dans l&rsquo;hypothèse où la fonction <code>min</code> est appelée avec des arguments de type
 différents (<code>char</code> et <code>int</code>, par exemple), il y aura une erreur de compilation
 du fait que le C++ impose une correspondance absolue des types. Il est
 cependant possible d&rsquo;intervenir sur ce mécanisme d&rsquo;identification de type, en
 imposant le type des arguments lors de l&rsquo;appel de la fonction. Ainsi, les
 instructions suivantes sont toutes valables
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i1</span> = 2;
@@ -314,9 +319,9 @@ cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span 
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Les patrons de classe</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-3" class="outline-2">
+<h2 id="unnumbered-3">Les patrons de classe</h2>
+<div class="outline-text-2" id="text-unnumbered-3">
 <p>
 Le précédent paragraphe a montré comment C++ permettait, grâce à la notion de
 patron de fonction, de définir une famille de fonctions paramétrées par un ou
@@ -333,20 +338,20 @@ de la bibliothèque standard.
 <p>
 La syntaxe permettant de définir un patron de classe est similaire à celle qui
 permet de définir des patrons de fonctions. Un exemple de classe template,
-portant sur la structure <code>Point</code> pour laquelle la précision de représentation
+portant sur la structure <code>point</code> pour laquelle la précision de représentation
 (entiers, entiers non signés, réels,&#x2026;) est le paramètre type de la classe, est
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-keyword">class</span> <span class="org-type">Point</span>
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-keyword">class</span> <span class="org-type">point</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-function-name">Point</span>(<span class="org-type">T</span> <span class="org-variable-name">abs</span> = 0, <span class="org-type">T</span> <span class="org-variable-name">ord</span> = 0) : m_X(abs), m_Y(ord) {}
-  <span class="org-type">void</span> <span class="org-function-name">Affiche</span>();
+  <span class="org-function-name">point</span>(<span class="org-type">T</span> <span class="org-variable-name">abs</span> = 0, <span class="org-type">T</span> <span class="org-variable-name">ord</span> = 0) : m_x(abs), <span class="org-type">m_y</span>(<span class="org-variable-name">ord</span>) {}
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>();
 <span class="org-keyword">private</span>:
-  <span class="org-type">T</span> <span class="org-variable-name">m_X</span>;
-  <span class="org-type">T</span> <span class="org-variable-name">m_Y</span>;
+  <span class="org-type">T</span> <span class="org-variable-name">m_x</span>;
+  <span class="org-type">T</span> <span class="org-variable-name">m_y</span>;
 };
 </pre>
 </div>
@@ -356,7 +361,7 @@ Pour complèter la définition de notre patron de classe, il convient de défini
 les méthodes. Selon que l&rsquo;on souhaite définir la méthode en ligne (<i>i.e.</i> à
 l&rsquo;intérieur de la définition du patron de classe) ou non, la démarche est
 sensiblement différente. Dans le cas de la définition en ligne telle le
-constructeur <code>Point(T abs = 0, T ord = 0)</code>, l&rsquo;utilisation demeure naturelle, la
+constructeur <code>point(T abs = 0, T ord = 0)</code>, l&rsquo;utilisation demeure naturelle, la
 seule contrainte tenant à l&rsquo;emploi du paramètre de type <code>T</code>. En revanche,
 lorsque la méthode est définie en dehors, il est impératif de rappeler au
 compilateur :
@@ -368,18 +373,18 @@ type. On fournit donc la liste de paramètre sous la forme <code>template&lt;cla
 </li>
 
 <li>le nom du patron concerné. Par exemple, si nous définissons la méthode
-<code>Affiche</code>, son nom sera <code>Point&lt;T&gt;::Affiche()</code>.
+<code>affiche</code>, son nom sera <code>point&lt;T&gt;::affiche()</code>.
 </li>
 </ul>
 
 <p>
-Ainsi, la méthode <code>Affiche</code> serait définie de la façon suivante
+Ainsi, la méthode <code>affiche</code> serait définie de la façon suivante
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">void</span> <span class="org-constant">Point</span>&lt;<span class="org-type">T</span>&gt;::<span class="org-function-name">Affiche</span>()
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">void</span> <span class="org-constant">point</span>&lt;<span class="org-type">T</span>&gt;::<span class="org-function-name">affiche</span>()
 {
-  cout &lt;&lt; <span class="org-string">"Coordonn&#233;es : "</span> &lt;&lt; m_X &lt;&lt; <span class="org-string">" "</span> &lt;&lt; m_Y &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"Coordonn&#233;es : "</span> &lt;&lt; m_x &lt;&lt; <span class="org-string">" "</span> &lt;&lt; m_y &lt;&lt; endl;
 }
 </pre>
 </div>
@@ -388,12 +393,12 @@ Ainsi, la méthode <code>Affiche</code> serait définie de la façon suivante
 L&rsquo;utilisation de patron de classe est similaire à celle des patrons de fonctions
 à ceci près qu&rsquo;il est nécessaire d&rsquo;imposer le paramètre de type lors de
 l&rsquo;instanciation de la classe. Aussi après avoir crée le patron de classe
-<code>Point</code>, la déclaration d&rsquo;instances de <code>Point</code> est
+<code>point</code>, la déclaration d&rsquo;instances de <code>point</code> est
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">Point</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">myPointWithInteger</span>;
-<span class="org-type">Point</span>&lt;<span class="org-type">double</span>&gt; <span class="org-function-name">myPointWithDouble</span>(3.2,4.5);
+<pre class="src src-c++"><span class="org-type">point</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">myPointWithInteger</span>;
+<span class="org-type">point</span>&lt;<span class="org-type">double</span>&gt; <span class="org-function-name">myPointWithDouble</span>(3.2,4.5);
 </pre>
 </div>
 
@@ -414,22 +419,22 @@ expressions. L&rsquo;exemple ci-dessous illustre ces cas
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n</span>&gt; <span class="org-keyword">class</span> <span class="org-type">Tableau</span>
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n</span>&gt; <span class="org-keyword">class</span> <span class="org-type">tableau</span>
 {
-  <span class="org-type">T</span> <span class="org-variable-name">m_Tab</span>[n];
-  <span class="org-type">U</span> <span class="org-variable-name">m_Mean</span>;
+  <span class="org-type">T</span> <span class="org-variable-name">m_tab</span>[n];
+  <span class="org-type">U</span> <span class="org-variable-name">m_mean</span>;
 
 <span class="org-keyword">public</span>:
-  <span class="org-function-name">Tableau</span>() {}
-  <span class="org-type">T</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">[]</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span>) <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_Tab[i]; }
-  <span class="org-type">U</span> <span class="org-function-name">GetMean</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_Mean; }
+  <span class="org-function-name">tableau</span>() {}
+  <span class="org-type">T</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">[]</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span>) <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_tab[i]; }
+  <span class="org-type">U</span> <span class="org-function-name">get_mean</span>() <span class="org-keyword">const</span> { <span class="org-keyword">return</span> m_mean; }
 };
 
 <span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
-  <span class="org-type">Tableau</span>&lt;<span class="org-type">int</span>, <span class="org-type">float</span>, 5&gt; <span class="org-variable-name">myTableau1</span>;
-  <span class="org-type">Tableau</span>&lt;<span class="org-type">float</span>, <span class="org-type">float</span>, 10&gt; <span class="org-variable-name">myTableau2</span>;
-  <span class="org-type">Tableau</span>&lt;<span class="org-type">Point</span>&lt;<span class="org-type">int</span>&gt;, <span class="org-type">Point</span>&lt;<span class="org-type">float</span>&gt;, 6&gt; <span class="org-variable-name">myTableau3</span>;
+  <span class="org-type">tableau</span>&lt;<span class="org-type">int</span>, <span class="org-type">float</span>, 5&gt; <span class="org-variable-name">myTableau1</span>;
+  <span class="org-type">tableau</span>&lt;<span class="org-type">float</span>, <span class="org-type">float</span>, 10&gt; <span class="org-variable-name">myTableau2</span>;
+  <span class="org-type">tableau</span>&lt;<span class="org-type">point</span>&lt;<span class="org-type">int</span>&gt;, <span class="org-type">point</span>&lt;<span class="org-type">float</span>&gt;, 6&gt; <span class="org-variable-name">myTableau3</span>;
 }
 </pre>
 </div>

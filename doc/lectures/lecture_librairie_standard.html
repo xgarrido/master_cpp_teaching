@@ -153,9 +153,9 @@ STL à l&rsquo;adresse suivante :
 </p>
 </div>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Principales classes de la STL</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Principales classes de la STL</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <p>
 Les types de données disponibles sont multiples; cependant, les trois
 fréquemment utilisés sont le vecteur, la liste et la table associative. Pour
@@ -169,9 +169,9 @@ implémentation.
 </p>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1">La classe <code>vector</code></h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-unnumbered-2" class="outline-3">
+<h3 id="unnumbered-2">La classe <code>vector</code></h3>
+<div class="outline-text-3" id="text-unnumbered-2">
 <p>
 La classe <code>vector</code> est proche du tableau du C. Tous les éléments contenus dans
 le <code>vector</code> sont adjacents en mémoire, ce qui permet d&rsquo;accéder immédiatement à
@@ -194,15 +194,15 @@ classe <code>vector</code>
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;vector&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration d'un vecteur d'entiers de taille non connue</span>
   <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">myVector</span>;
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Ajout de trois &#233;l&#233;ments</span>
-  myVector.push_back (4);
-  myVector.push_back (2);
-  myVector.push_back (5);
+  myVector.push_back(4);
+  myVector.push_back(2);
+  myVector.push_back(5);
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">La m&#233;thode size pr&#233;cise le nombre d'entr&#233;e courante</span>
   <span class="org-keyword">for</span> (<span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">iEntry</span> = 0; iEntry &lt; myVector.size(); ++iEntry)
@@ -219,6 +219,7 @@ classe <code>vector</code>
   mySecondVector[4] = 8;
 
   mySecondVector.clear();
+  <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>
@@ -251,7 +252,7 @@ qu&rsquo;un <code>segmentation fault</code> en précisant l&rsquo;origine de l&r
 <code>clear</code> permet de vider le vecteur de sa substance en ramenant sa taille à 0.
 </p>
 
-<div class="remark">
+<div class="REMARK">
 <p>
 Il ne faut pas perdre de vue qu&rsquo;une réallocation mémoire est coûteuse en terme
 de temps de calcul. Aussi, si la taille d&rsquo;un vecteur est connue par avance, il
@@ -262,9 +263,9 @@ faut autant que possible le créer directement à cette taille.
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2">La classe <code>string</code></h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-unnumbered-3" class="outline-3">
+<h3 id="unnumbered-3">La classe <code>string</code></h3>
+<div class="outline-text-3" id="text-unnumbered-3">
 <p>
 Il est possible en C++ d&rsquo;utiliser les chaînes de caractères héritées du
 C. Celui-ci ne disposant pas de type &ldquo;chaîne&rdquo; primitif (c&rsquo;est à dire intégré au
@@ -299,13 +300,13 @@ possibilités offertes par cette classe
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">Assignation/copie de strings</span>
   <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">myString1</span> = <span class="org-string">"abcd"</span>;
   <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">myString2</span> = myString1;
   <span class="org-comment-delimiter">// </span><span class="org-comment">Initialisation de strings</span>
-  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">myString3</span> (myString2);
+  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">myString3</span>(myString2);
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Concat&#233;nation</span>
   myString2 += <span class="org-string">"abcd"</span>;
@@ -317,10 +318,11 @@ possibilités offertes par cette classe
     <span class="org-constant">std</span>::cout &lt;&lt; myString1 &lt;&lt; <span class="org-string">" est identique &#224; "</span> &lt;&lt; myString2 &lt;&lt; <span class="org-constant">std</span>::endl;
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Longueur d'un string</span>
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">size</span> = myString1.size ();
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">size</span> = myString1.size();
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Recherche dans un string</span>
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">pos</span> = myString1.find (<span class="org-string">"bc"</span>);
+  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">pos</span> = myString1.find(<span class="org-string">"bc"</span>);
+  <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>
@@ -345,9 +347,9 @@ myStringVector</code>.
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Les itérateurs</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-4" class="outline-2">
+<h2 id="unnumbered-4">Les itérateurs</h2>
+<div class="outline-text-2" id="text-unnumbered-4">
 <p>
 Un <code>iterator</code> (et sa version constante <code>const_iterator</code>) permet de parcourir un
 container du début à la fin en renvoyant un pointeur vers l&rsquo;objet
@@ -386,7 +388,7 @@ passer à l&rsquo;élément suivant.
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;vector&gt;</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
 
-<span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">string</span>&gt; <span class="org-function-name">setVector</span>()
+<span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">string</span>&gt; <span class="org-function-name">set_vector</span>()
 {
   <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">string</span>&gt; <span class="org-variable-name">v</span>;
   v.push_back(<span class="org-string">"John"</span>);
@@ -394,9 +396,9 @@ passer à l&rsquo;élément suivant.
   <span class="org-keyword">return</span> v;
 }
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
-  <span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">string</span>&gt; <span class="org-variable-name">myVector</span>(<span class="org-type">setVector</span>());
+  <span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">string</span>&gt; <span class="org-variable-name">myVector</span>(<span class="org-type">set_vector</span>());
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">ne compile pas car myVector est const</span>
   <span class="org-comment-delimiter">// </span><span class="org-comment">std::vector&lt;string&gt;::iterator itVector;</span>
@@ -404,6 +406,7 @@ passer à l&rsquo;élément suivant.
 
   <span class="org-keyword">for</span> (itVector = myVector.begin(); itVector != myVector.end(); ++itVector)
     cout &lt;&lt; *itVector &lt;&lt; endl;
+  <span class="org-keyword">return</span> 0;
 }
 </pre>
 </div>

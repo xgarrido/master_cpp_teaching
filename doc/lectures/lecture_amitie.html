@@ -87,35 +87,41 @@ figures selon la nature de la fonction
 </p>
 
 <ol class="org-ol">
-<li>Fonction extérieure amie d&rsquo;une classe <code>A</code>
+<li><p>
+Fonction extérieure amie d&rsquo;une classe <code>A</code>
+</p>
 
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
 {
   ...
-  <span class="org-keyword">friend</span> type nom_fonction_ext&#233;rieure (...);
+  <span class="org-keyword">friend</span> type nom_fonction_ext&#233;rieure(...);
   ...
 };
 </pre>
 </div>
 </li>
 
-<li>Fonction membre d&rsquo;une classe <code>B</code>, amie de la classe <code>A</code>
+<li><p>
+Fonction membre d&rsquo;une classe <code>B</code>, amie de la classe <code>A</code>
+</p>
 
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span>
 {
   ...
-  <span class="org-keyword">friend</span> type <span class="org-constant">B</span>::nom_m&#233;thode_de_A (...);
+  <span class="org-keyword">friend</span> type <span class="org-constant">B</span>::nom_m&#233;thode_de_A(...);
   ...
 };
 </pre>
 </div>
 </li>
 
-<li>Toutes les méthodes d&rsquo;une classe <code>B</code> sont amies de la classe <code>A</code>
+<li><p>
+Toutes les méthodes d&rsquo;une classe <code>B</code> sont amies de la classe <code>A</code>
+</p>
 
 <div class="org-src-container">
 

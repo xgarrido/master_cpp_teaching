@@ -64,16 +64,18 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Compilation &amp; Directives de Préprocesseur</h1><hr/>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Mécanismes de compilation</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <ol class="org-ol">
-<li><b>Précompilation :</b> consiste à traiter, à <i>parser</i> les fichiers sources
+<li><p>
+<b>Précompilation :</b> consiste à traiter, à <i>parser</i> les fichiers sources
 avant compilation (résolution des directives de préprocesseur
 <i>i.e.</i> remplacement de macros, suppression de texte, inclusion de
 fichiers&#x2026;)
+</p>
 
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ -E fichier_source.cc
 </p>
@@ -84,14 +86,16 @@ g++ -E fichier_source.cc
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Mécanismes de compilation</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
 <ol class="org-ol">
 <li><b>Précompilation</b>
 </li>
-<li><b>Compilation séparée :</b> traduction du code en langage machine.
-<div class="prompt">
+<li><p>
+<b>Compilation séparée :</b> traduction du code en langage machine.
+</p>
+<div class="PROMPT">
 <p>
 g++ -c fichier_source.cc
 </p>
@@ -106,19 +110,21 @@ Cette opération conduit à la création d&rsquo;un <b>fichier objet</b> d&rsquo
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Mécanismes de compilation</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-unnumbered-3" class="outline-2">
+<h2 id="unnumbered-3">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-3">
 <ol class="org-ol">
 <li><b>Précompilation</b>
 </li>
 <li><b>Compilation séparée</b>
 </li>
-<li><b>Édition de liens :</b> consiste à regrouper la totalité des données de même que
+<li><p>
+<b>Édition de liens :</b> consiste à regrouper la totalité des données de même que
 les fichiers objets et les bibliothèques (fonctions de la bibliothèque
 standard et des autres bibliothèques externes) ainsi qu&rsquo;à résoudre les
 références inter-fichiers.
-<div class="prompt">
+</p>
+<div class="PROMPT">
 <p>
 g++ fichier_source1.o fichier_source2.o&#x2026; -o&nbsp;fichier_executable
 </p>
@@ -129,15 +135,17 @@ g++ fichier_source1.o fichier_source2.o&#x2026; -o&nbsp;fichier_executable
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Mécanismes de compilation</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-unnumbered-4" class="outline-2">
+<h2 id="unnumbered-4">Mécanismes de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-4">
 <ul class="org-ul">
-<li>Les trois précédentes étapes peuvent être réalisées en une seule opération via
+<li><p>
+Les trois précédentes étapes peuvent être réalisées en une seule opération via
 la commande
+</p>
 
-<div class="cbox">
-<div class="prompt">
+<div class="CBOX">
+<div class="PROMPT">
 <p>
 g++ fichier_source1.cc fichier_source2.cc&#x2026; -o&nbsp;fichier_executable
 </p>
@@ -147,11 +155,13 @@ g++ fichier_source1.cc fichier_source2.cc&#x2026; -o&nbsp;fichier_executable
 </div>
 </li>
 
-<li>Le binaire ainsi généré <code>fichier_executable</code> peut alors être exécuté depuis le
+<li><p>
+Le binaire ainsi généré <code>fichier_executable</code> peut alors être exécuté depuis le
 répertoire local
+</p>
 
-<div class="cbox">
-<div class="prompt">
+<div class="CBOX">
+<div class="PROMPT">
 <p>
 ./fichier_executable
 </p>
@@ -164,20 +174,24 @@ répertoire local
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">Options de compilation</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-unnumbered-5" class="outline-2">
+<h2 id="unnumbered-5">Options de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-5">
 <ul class="org-ul">
 <li><b>l&rsquo;option <code>-Ichemin</code></b> indique au compilateur où sont localisés les fichiers
 d&rsquo;en-têtes nécessaires à la compilation séparée du programme. Par défaut, le
 compilateur recherche ces fichiers localement et dans le répertoire
 <code>/usr/include</code>,
 </li>
+</ul>
 
+<ul class="org-ul">
 <li><b>l&rsquo;option <code>-W</code></b> permet l&rsquo;activation des messages de mise en garde. Différents
 niveaux sont accessibles, le plus complet étant <code>-Wall -Wextra</code>,
 </li>
+</ul>
 
+<ul class="org-ul">
 <li><b>l&rsquo;option <code>-Didentificateur</code></b> permet la définition d&rsquo;identificateur à fournir
 lors du processus de précompilation. L&rsquo;activation des directives de
 préprocesseur peut se faire par ce biais.
@@ -186,15 +200,15 @@ préprocesseur peut se faire par ce biais.
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">Démystifier la command <code>ccc</code></h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-unnumbered-6" class="outline-2">
+<h2 id="unnumbered-6">Démystifier la command <code>ccc</code></h2>
+<div class="outline-text-2" id="text-unnumbered-6">
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">Directives de préprocesseur</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-unnumbered-7" class="outline-2">
+<h2 id="unnumbered-7">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-unnumbered-7">
 <p>
 Le préprocesseur recherche des directives de compilation repérées en début de
 ligne par le symbole <code>#</code> et se terminant avec la fin de la ligne.
@@ -219,9 +233,9 @@ Par exemple,
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">Utilisation de directives de condition</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-unnumbered-8" class="outline-2">
+<h2 id="unnumbered-8">Utilisation de directives de condition</h2>
+<div class="outline-text-2" id="text-unnumbered-8">
 <p>
 Il est possible de contrôler ce qui sera compilé effectivement ou non, avec les
 clauses de condition :
@@ -242,25 +256,27 @@ compilateur seulement si la condition est vraie (non nulle).
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Exemple (1/2)</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-unnumbered-9" class="outline-2">
+<h2 id="unnumbered-9">Exemple (1/2)</h2>
+<div class="outline-text-2" id="text-unnumbered-9">
 <ul class="org-ul">
-<li><b><code>test_debug.cc</code></b>
+<li><p>
+<b><code>test_debug.cc</code></b>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;iostream&gt;</span>
 <span class="org-keyword">using</span> <span class="org-keyword">namespace</span> <span class="org-constant">std</span>;
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
-<span class="org-preprocessor">  #if</span> (DEBUG == 1)
+<span class="org-preprocessor">#if</span> (DEBUG == 1)
   cout &lt;&lt; <span class="org-string">"DEBUG: "</span>
        &lt;&lt; <span class="org-string">"Mode debug du programme"</span> &lt;&lt; endl;
-<span class="org-preprocessor">  #else</span>
+<span class="org-preprocessor">#else</span>
   cout &lt;&lt; <span class="org-string">"NOTICE: "</span>
        &lt;&lt; <span class="org-string">"Mode normal du programme"</span> &lt;&lt; endl;
-<span class="org-preprocessor">  #endif</span>
+<span class="org-preprocessor">#endif</span>
 }
 </pre>
 </div>
@@ -268,9 +284,9 @@ compilateur seulement si la condition est vraie (non nulle).
 </ul>
 
 <p>
-Utilisation :
+Compilation :
 </p>
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ -DDEBUG=1 test_debug.cc -o test_debug
 </p>
@@ -279,37 +295,43 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">Exemple (2/2)</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-unnumbered-10" class="outline-2">
+<h2 id="unnumbered-10">Exemple (2/2)</h2>
+<div class="outline-text-2" id="text-unnumbered-10">
 <ul class="org-ul">
-<li><b><code>dummy.h</code></b>
+<li><p>
+<b><code>dummy.h</code></b>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h
 <span class="org-preprocessor">#define</span> <span class="org-variable-name">__dummy_h</span> 1
-<span class="org-type">void</span> <span class="org-function-name">dummy</span> ();
+<span class="org-type">void</span> <span class="org-function-name">dummy</span>();
 <span class="org-preprocessor">#endif</span>
 </pre>
 </div>
 </li>
 
-<li><b><code>dummy.cc</code></b>
+<li><p>
+<b><code>dummy.cc</code></b>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
-<span class="org-type">void</span> <span class="org-function-name">dummy</span> () {}
+<span class="org-type">void</span> <span class="org-function-name">dummy</span>() {}
 </pre>
 </div>
 </li>
 
-<li><b><code>test_dummy.cc</code></b>
+<li><p>
+<b><code>test_dummy.cc</code></b>
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
-  dummy ();
+  dummy();
 }
 </pre>
 </div>
@@ -317,9 +339,9 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
 </ul>
 
 <p>
-Utilisation :
+Compilation :
 </p>
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ dummy.cc test_dummy.cc -o test_dummy
 </p>

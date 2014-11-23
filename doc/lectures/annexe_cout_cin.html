@@ -106,49 +106,175 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Écriture/lecture sur l&rsquo;entrée/sortie standard</h1><hr/>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Rappel sur l&rsquo;instruction <code>printf</code></h2>
-<div class="outline-text-2" id="text-1">
-</div><div id="outline-container-sec-1-0-1" class="outline-4">
-<h4 id="sec-1-0-1">Syntaxe :</h4>
-<div class="outline-text-4" id="text-1-0-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Rappel sur les fonction <code>printf</code> et <code>scanf</code> du C</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
+<p>
+<code>printf</code> et <code>scanf</code> sont deux fonctions de la bibliothèque standard du langage
+C. Déclarée dans l&rsquo;entête <code>&lt;stdio.h&gt;</code>, <code>printf</code> permet l&rsquo;affichage d&rsquo;une chaîne
+de caractère à l&rsquo;écran tandis que <code>scanf</code> est utilisée pour la saisie de données
+formatées, qu&rsquo;il s&rsquo;agisse de lettres, de chiffres ou de chaînes de caractères.
+</p>
+
+<p>
+Les prototypes de ces deux fonctions sont respectivement
+</p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">printf</span> (<span class="org-keyword">const</span> <span class="org-type">char</span> *<span class="org-variable-name">format</span> [, arg [, arg]...]);
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">printf</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> * <span class="org-variable-name">format</span>,...);
 </pre>
 </div>
+<p>
+et
+</p>
+<div class="org-src-container">
 
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">scanf</span>(<span class="org-keyword">const</span> <span class="org-type">char</span> * <span class="org-variable-name">format</span>,...);
+</pre>
+</div>
 <p>
 où :
 </p>
 
 <ul class="org-ul">
-<li><code>const char *format</code> est une chaîne de caractère,
+<li><code>const char * format</code> est une chaîne de caractère,
 </li>
 
-<li><code>arg</code> sont les arguments qui correspondent aux spécifications de
-<b>format</b> au sein de la chaîne de caractère.
+<li><code>...</code> signifient que ces fonctions sont variadiques <i>i.e</i> que ces fonctions
+peuvent un nombre variable de paramètres.
 </li>
 </ul>
 
 <p>
-Exemple :
+On peut ainsi écrire <code>printf</code> avec un seul paramètre :
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-variable-name">i</span> = 5;
-<span class="org-comment-delimiter">// </span><span class="org-comment">%d est la sp&#233;cification de format pour les entiers, i est son argument</span>
-printf (<span class="org-string">"i =\n %d"</span>, i);
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+  printf(<span class="org-string">"Votre chaine de caract&#232;res ici\n"</span>);
+  <span class="org-keyword">return</span> 0;
+}
 </pre>
 </div>
+<p>
+ou avec plusieurs paramètres
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">  #include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+  <span class="org-type">int</span> <span class="org-function-name">main</span>()
+  {
+    <span class="org-type">int</span> <span class="org-variable-name">i</span> = 5;
+    printf(<span class="org-string">"i =\n %d\n"</span>, i);
+    <span class="org-keyword">return</span> 0;
+}
+</pre>
 </div>
+<p>
+où <code>%d</code> est la spécification de format pour les entiers et <code>i</code> est son
+argument. Le tableau <a href="#tab::specPrintf">1</a> présente les différents formats en fonction
+des types de variables.
+</p>
+
+<table id="tab::specPrintf" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> <b>Format d&rsquo;écriture en fonction du type de variable à afficher.</b></caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>int</code></td>
+<td class="left"><code>%d</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>long</code></td>
+<td class="left"><code>%ld</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>float/double</code></td>
+<td class="left"><code>%f/%lf</code></td>
+</tr>
+
+<tr>
+<td class="left"><code>char</code></td>
+<td class="left"><code>%c</code></td>
+</tr>
+
+<tr>
+<td class="left">string (<code>char*</code>)</td>
+<td class="left"><code>%s</code></td>
+</tr>
+
+<tr>
+<td class="left">pointeur (<code>void*</code>)</td>
+<td class="left"><code>%p</code></td>
+</tr>
+
+<tr>
+<td class="left">entier hexadécimal</td>
+<td class="left"><code>%x</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Pour la fonction <code>scanf</code>, la valeur retournée de type entier correspond le
+nombre de variables affectées par la saisie et permet donc de vérifier que la
+saisie s&rsquo;est correctement passée. En cas d’erreur de lecture, cette fonction
+renvoie <code>EOF</code> et indique la raison de l’erreur dans la variable <code>errno</code>. Le code
+ci-dessous présente un exemple d&rsquo;utilisation de la fonction <code>scanf</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;stdio.h&gt;</span>
+
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
+{
+  <span class="org-type">int</span> <span class="org-variable-name">nombre</span> = 0;
+  <span class="org-type">int</span> <span class="org-variable-name">res</span> = 0;
+  printf(<span class="org-string">"Entrez une valeur"</span>);
+  res = scanf(<span class="org-string">"%d"</span>, &amp;nombre);
+  <span class="org-keyword">if</span> (res == 1)
+    printf(<span class="org-string">"Votre valeur est %d\n"</span>, nombre);
+  <span class="org-keyword">else</span>
+    <span class="org-comment-delimiter">// </span><span class="org-comment">traitement de l&#8217;erreur avec errno ou perror inclus dans errno.h</span>
+  <span class="org-keyword">return</span> 0;
+}
+</pre>
+</div>
+<p>
+La fonction <code>scanf</code> recopie la saisie de l&rsquo;utilisateur à une adresse
+mémoire. Cette adresse doit être spécifiée dans la fonction <code>scanf</code> : la saisie
+sera ainsi enregistrée à l&rsquo;adresse de la variable <code>nombre</code>, d’où la présence de
+<code>&amp;</code> devant <code>nombre</code>).
+</p>
+
+<p>
+Tout comme <code>printf</code> propose différents formats en fonction du type de variable,
+il est possible de capturer plusieurs types de données avec la fonction
+scanf (<i>cf.</i> Tableau <a href="#tab::specPrintf">1</a>).
+</p>
 </div>
 </div>
 
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Les nouvelles possibilités d&rsquo;entrée/sortie du C++</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Les nouvelles possibilités d&rsquo;entrée/sortie du C++</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
 <p>
 Les commandes d&rsquo;entrée sortie <code>cout</code> / <code>cin</code> du C++ n&rsquo;ont <b>pas besoin de
 spécification de format</b>, elles prennent en charge le formatage des variables à
@@ -156,9 +282,9 @@ afficher ou à affecter par l&rsquo;utilisateur.
 </p>
 </div>
 
-<div id="outline-container-sec-2-0-1" class="outline-4">
-<h4 id="sec-2-0-1">Syntaxe</h4>
-<div class="outline-text-4" id="text-2-0-1">
+<div id="outline-container-unnumbered-3" class="outline-4">
+<h4 id="unnumbered-3">Syntaxe</h4>
+<div class="outline-text-4" id="text-unnumbered-3">
 <div class="org-src-container">
 
 <pre class="src src-c++">cout &lt;&lt; VariableAfficherNum1 &lt;&lt; VariableAfficherNum2 &lt;&lt;  ... ;
@@ -190,9 +316,9 @@ cin &gt;&gt; j ;
 </div>
 
 
-<div id="outline-container-sec-2-0-2" class="outline-4">
-<h4 id="sec-2-0-2">Remarques</h4>
-<div class="outline-text-4" id="text-2-0-2">
+<div id="outline-container-unnumbered-4" class="outline-4">
+<h4 id="unnumbered-4">Remarques</h4>
+<div class="outline-text-4" id="text-unnumbered-4">
 <ul class="org-ul">
 <li>La bibliothèque qui contient entre autre <code>cout</code> et <code>cin</code>
 est <code>iostream</code>, il faut donc l&rsquo;inclure dans le programme par
@@ -200,7 +326,9 @@ est <code>iostream</code>, il faut donc l&rsquo;inclure dans le programme par
 <code>stdio.h</code> utilisée en langage&nbsp;C.
 </li>
 
-<li>Il est nécessaire d&rsquo;ajouter au début du code la commande suivante
+<li><p>
+Il est nécessaire d&rsquo;ajouter au début du code la commande suivante
+</p>
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">using</span> <span class="org-keyword">namespace</span> <span class="org-constant">std</span>;

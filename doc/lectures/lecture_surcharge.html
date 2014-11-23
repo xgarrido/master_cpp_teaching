@@ -117,9 +117,9 @@ précédentes. Par exemple, surdéfinir l&rsquo;opérateur <code>+</code> permet
 ou si l&rsquo;addition porte sur deux objets de la classe <code>point</code>.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Surcharge des opérateurs internes</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Surcharge des opérateurs internes</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <p>
 Une première méthode pour surcharger les opérateurs consiste à les considérer
 comme des méthodes de la classe sur laquelle ils s&rsquo;appliquent. Le nom de ces
@@ -130,7 +130,7 @@ syntaxe est la suivante :
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">type</span> <span class="org-function-name">operatorOp</span> (argument)
+<pre class="src src-c++"><span class="org-type">type</span> <span class="org-function-name">operatorOp</span>(argument)
 </pre>
 </div>
 <p>
@@ -138,7 +138,7 @@ L&rsquo;écriture <code>A Op B</code> où <code>Op</code> est, par exemple, <cod
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">A.operatorOp (B)
+<pre class="src src-c++">A.operatorOp(B)
 </pre>
 </div>
 <p>
@@ -161,26 +161,28 @@ avec la classe <code>complexe</code>
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">complexe</span> {
 <span class="org-keyword">public</span>:
-  <span class="org-function-name">complexe</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">reel</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">img</span>);
-  <span class="org-type">complexe</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">+=</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>);
-  <span class="org-type">complexe</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">*=</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>);
+  <span class="org-function-name">complexe</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">reel</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">img</span>);
+  <span class="org-type">complexe</span> &amp; <span class="org-keyword">operator</span><span class="org-function-name">+=</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>);
+  <span class="org-type">complexe</span> &amp; <span class="org-keyword">operator</span><span class="org-function-name">*=</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>);
   ...
 
   <span class="org-keyword">private</span>:
-  <span class="org-type">double</span> m_reel;
+  <span class="org-type">double</span> <span class="org-variable-name">m_reel</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_imaginaire</span>;
 };
 
-<span class="org-constant">complexe</span>::<span class="org-function-name">complexe</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">reel</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">img</span>) :
-  m_reel(reel), m_imaginaire(img) {};
+<span class="org-constant">complexe</span>::<span class="org-function-name">complexe</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">reel</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">img</span>) :
+  m_reel(reel), m_imaginaire(img) {}
 
-<span class="org-type">complexe</span>&amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">+=</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>) {
+<span class="org-type">complexe</span> &amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">+=</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">source</span>)
+{
   m_reel       += source.m_reel;
-  m_imaginaire += source.m_imaginaire();
+  m_imaginaire += source.m_imaginaire;
   <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
 }
 
-<span class="org-type">complexe</span>&amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">*=</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>) {
+<span class="org-type">complexe</span> &amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">*=</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">source</span>)
+{
   <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">tmp</span> = m_reel*source.m_reel - m_imaginaire*source.m_imaginaire;
   m_imaginaire = m_reel*source.m_imaginaire + m_imaginaire*source.m_reel;
   m_reel = tmp;
@@ -189,7 +191,7 @@ avec la classe <code>complexe</code>
 </pre>
 </div>
 
-<div class="remark">
+<div class="REMARK">
 <p>
 Comme pour toute surdéfinition de fonction, le compilateur choisit, selon le
 contexte, quelle surcharge d&rsquo;opérateur utiliser. Ainsi, on pourra, selon les
@@ -199,7 +201,7 @@ définition de la méthode sera
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">complexe&amp; <span class="org-keyword">operator</span>+= (<span class="org-keyword">const</span> <span class="org-type">double</span>&amp; <span class="org-variable-name">a</span>);
+<pre class="src src-c++">complexe&amp; <span class="org-keyword">operator</span>+=(<span class="org-keyword">const</span> <span class="org-type">double</span>&amp; <span class="org-variable-name">a</span>);
 </pre>
 </div>
 
@@ -207,9 +209,9 @@ définition de la méthode sera
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Surcharge des opérateurs en externe</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Surcharge des opérateurs en externe</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
 <p>
 La définition de l&rsquo;opérateur ne se fait plus dans la classe qui l&rsquo;utilise, mais
 en dehors de celle-ci par surcharge d&rsquo;un opérateur de l&rsquo;espace de
@@ -220,7 +222,7 @@ amie (<code>friend</code>). Le prototype est le suivant
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">friend</span> <span class="org-type">type</span> <span class="org-function-name">operatorOp</span> (argument);
+<pre class="src src-c++"><span class="org-keyword">friend</span> <span class="org-type">type</span> <span class="org-function-name">operatorOp</span>(argument);
 </pre>
 </div>
 
@@ -229,19 +231,19 @@ amie (<code>friend</code>). Le prototype est le suivant
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">complexe</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">z1</span>, <span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">z2</span>) <span class="org-keyword">const</span>
+<pre class="src src-c++"><span class="org-type">complexe</span> <span class="org-keyword">operator</span><span class="org-function-name">+</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">z1</span>, <span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">z2</span>) <span class="org-keyword">const</span>
 {
   <span class="org-keyword">return</span> complexe(z1.m_reel + z2.m_reel, z1.m_imaginaire + z2.m_imaginaire);
 }
 </pre>
 </div>
 
-<div class="remark">
+<div class="REMARK">
 <p>
 On notera bien que la surcharge de l&rsquo;opérateur est extérieure à la classe
 <i><code>complexe</code></i> : sa déclaration ne fait pas intervenir l&rsquo;opérateur de portée
 <i><code>::</code></i>. Par ailleurs, la déclaration précédente suppose que la construction
-<i><code>complexe (const double, const double)</code></i> est envisageable.
+<i><code>complexe(const double, const double)</code></i> est envisageable.
 </p>
 
 </div>
@@ -252,9 +254,9 @@ contrairement au cas où les opérateurs sont définis à l&rsquo;intérieur de 
 </p>
 </div>
 
-<div id="outline-container-sec-2-0-1" class="outline-4">
-<h4 id="sec-2-0-1">Remarques importantes</h4>
-<div class="outline-text-4" id="text-2-0-1">
+<div id="outline-container-unnumbered-3" class="outline-4">
+<h4 id="unnumbered-3">Remarques importantes</h4>
+<div class="outline-text-4" id="text-unnumbered-3">
 <ul class="org-ul">
 <li>Lorsque l&rsquo;on surdéfinit un opérateur, c&rsquo;est à priori pour l&rsquo;utiliser à
 plusieurs reprises. Il faut donc apporter un soin particulier à l&rsquo;optimisation
@@ -262,12 +264,14 @@ du code. En conséquence, il est important de savoir si l&rsquo;on déclare ou n
 fonction <code>inline</code>
 </li>
 
-<li>Dans le cas d&rsquo;opérateur unaire tel que l&rsquo;opérateur <code>-()</code> qui effectue la
-transformation <code>z\longmapsto-z</code>, la (sur)définition de la fonction ne prend
+<li><p>
+Dans le cas d&rsquo;opérateur unaire tel que l&rsquo;opérateur <code>-()</code> qui effectue la
+transformation \(z\mapsto-z\), la (sur)définition de la fonction ne prend
 pas d&rsquo;argument. On écrit alors
+</p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">complexe</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">-</span> () <span class="org-keyword">const</span>
+<pre class="src src-c++"><span class="org-type">complexe</span>&amp; <span class="org-keyword">operator</span><span class="org-function-name">-</span>() <span class="org-keyword">const</span>
 {
   <span class="org-keyword">return</span> complexe(-m_reel, -m_imaginaire);
 }
@@ -287,9 +291,9 @@ modifiés de manière inopportune.
 </div>
 
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-unnumbered-4" class="outline-2">
+<h2 id="unnumbered-4">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-unnumbered-4">
 <p>
 L&rsquo;opérateur d&rsquo;affectation <code>=</code> peut lui aussi être redéfini. Cependant, son rôle
 peut parfois interférer avec celui du constructeur de recopie. De même que le
@@ -306,7 +310,7 @@ argument <b>une référence vers la classe</b>. Ainsi, son prototype s&rsquo;éc
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++">nom_classe (<span class="org-type">nom_classe</span>&amp;);
+<pre class="src src-c++">nom_classe(<span class="org-type">nom_classe</span> &amp;);
 </pre>
 </div>
 <p>
@@ -314,7 +318,7 @@ tandis que sa déclaration est
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-constant">nom_classe</span>::nom_classe (nom_classe&amp; objet_de_type_nom_classe);
+<pre class="src src-c++"><span class="org-constant">nom_classe</span>::nom_classe(nom_classe &amp; objet_de_type_nom_classe);
 </pre>
 </div>
 
@@ -323,7 +327,7 @@ Exemple:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-constant">complexe</span>::<span class="org-function-name">complexe</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp;<span class="org-variable-name">source</span>)
+<pre class="src src-c++"><span class="org-constant">complexe</span>::<span class="org-function-name">complexe</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">source</span>)
 {
   m_reel       = source.m_reel;
   m_imaginaire = source.m_imaginaire;
@@ -337,13 +341,12 @@ déclaration devient
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">complexe</span>&amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">=</span> (<span class="org-keyword">const</span> <span class="org-type">complexe</span>&amp; <span class="org-variable-name">source</span>)
+<pre class="src src-c++"><span class="org-type">complexe</span>&amp; <span class="org-constant">complexe</span>::<span class="org-keyword">operator</span><span class="org-function-name">=</span>(<span class="org-keyword">const</span> <span class="org-type">complexe</span> &amp; <span class="org-variable-name">source</span>)
 {
-  <span class="org-keyword">if</span> (&amp;source != <span class="org-keyword">this</span>)
-    {
-      m_reel       = source.m_reel;
-      m_imaginaire = source.m_imaginaire;
-    }
+  <span class="org-keyword">if</span> (&amp;source != <span class="org-keyword">this</span>) {
+    m_reel       = source.m_reel;
+    m_imaginaire = source.m_imaginaire;
+  }
   <span class="org-keyword">return</span> *<span class="org-keyword">this</span>;
 }
 </pre>
@@ -389,9 +392,9 @@ défaut.
 </p>
 </div>
 
-<div id="outline-container-sec-3-0-1" class="outline-4">
-<h4 id="sec-3-0-1">Remarques générales</h4>
-<div class="outline-text-4" id="text-3-0-1">
+<div id="outline-container-unnumbered-5" class="outline-4">
+<h4 id="unnumbered-5">Remarques générales</h4>
+<div class="outline-text-4" id="text-unnumbered-5">
 <ul class="org-ul">
 <li>l&rsquo;opérateur <code>()</code> est intéressant car il est &ldquo;n-unaire&rdquo;.
 </li>

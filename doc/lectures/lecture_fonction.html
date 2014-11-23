@@ -106,12 +106,12 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Rappels sur les fonctions</h1><hr/>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Syntaxe</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Syntaxe</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">type_retourn&#233;</span> <span class="org-function-name">nom_fonction</span> (..., <span class="org-type">type_argument</span> <span class="org-variable-name">nom_argument</span>, ...)
+<pre class="src src-c++"><span class="org-type">type_retourn&#233;</span> <span class="org-function-name">nom_fonction</span>(..., <span class="org-type">type_argument</span> <span class="org-variable-name">nom_argument</span>, ...)
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">Op&#233;rations avec les arguments</span>
   <span class="org-keyword">return</span> variable_retourn&#233;e;
@@ -124,9 +124,9 @@ Exemple :
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>)
 {
-  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt (a*a +b*b);
+  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt(a*a +b*b);
   <span class="org-keyword">return</span> resultat;  <span class="org-comment-delimiter">// </span><span class="org-comment">ou directement return std::sqrt (a*a + b*b);</span>
 }
 </pre>
@@ -134,9 +134,9 @@ Exemple :
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Prototype de fonction</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Prototype de fonction</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
 <p>
 Le prototype indique au compilateur que la fonction prototypée existe, mais que
 sa définition interviendra après son appel.
@@ -144,7 +144,7 @@ sa définition interviendra après son appel.
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">type_retourn&#233;</span> <span class="org-function-name">nom_fonction</span> (..., <span class="org-type">type_argument</span> <span class="org-variable-name">nom_argument</span>, ...);
+<pre class="src src-c++"><span class="org-type">type_retourn&#233;</span> <span class="org-function-name">nom_fonction</span>(..., <span class="org-type">type_argument</span> <span class="org-variable-name">nom_argument</span>, ...);
 </pre>
 </div>
 
@@ -153,17 +153,17 @@ Exemple:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>); <span class="org-comment-delimiter">// </span><span class="org-comment">NB attention au point virgule</span>
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>); <span class="org-comment-delimiter">// </span><span class="org-comment">NB attention au point virgule</span>
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x</span> = 2.5, <span class="org-variable-name">y</span> = 3.4;
-  cout &lt;&lt; norme (x,y) &lt;&lt; endl;
+  cout &lt;&lt; norme(x,y) &lt;&lt; endl;
 }
 
-<span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>)
+<span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">b</span>)
 {
-  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt (a*a +b*b);
+  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt(a*a +b*b);
   <span class="org-keyword">return</span> resultat;
 }
 </pre>
@@ -171,9 +171,9 @@ Exemple:
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Modification de variables via l&rsquo;utilisation d&rsquo;une fonction</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-unnumbered-3" class="outline-2">
+<h2 id="unnumbered-3">Modification de variables via l&rsquo;utilisation d&rsquo;une fonction</h2>
+<div class="outline-text-2" id="text-unnumbered-3">
 <p>
 Une fonction en C/C++, dans son utilisation la plus commune <i>i.e.</i> argument
 transmis par valeur comme dans l&rsquo;exemple précédent, <b>ne modifie aucune variable
@@ -189,9 +189,9 @@ valeurs</b> de x et y; ainsi utilisée, elle ne pourra jamais modifier <code>x</
 </p>
 </div>
 
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">Argument transmis par adresse</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-unnumbered-4" class="outline-3">
+<h3 id="unnumbered-4">Argument transmis par adresse</h3>
+<div class="outline-text-3" id="text-unnumbered-4">
 <p>
 Imaginons qu&rsquo;au lieu de transmettre des valeurs à la fonction, on transmette des
 adresses ou des pointeurs qui contiennent une adresse. La fonction crée toujours
@@ -202,9 +202,9 @@ variables les adresses utilisées lors de l&rsquo;appel de la fonction. La fonct
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> *<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> *<span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> *<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> *<span class="org-variable-name">b</span>)
 {
-  <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt ((*a)*(*a) + (*b)*(*b));
+  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt((*a)*(*a) + (*b)*(*b));
   <span class="org-keyword">return</span> resultat;
 }
 </pre>
@@ -216,10 +216,10 @@ que l&rsquo;on appelera au sein du programme principal <i>via</i> l&rsquo;instru
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x</span> = 2.5, <span class="org-variable-name">y</span> = 3.4;
-  cout &lt;&lt; norme (&amp;x, &amp;y) &lt;&lt; endl;
+  cout &lt;&lt; norme(&amp;x, &amp;y) &lt;&lt; endl;
 }
 </pre>
 </div>
@@ -254,9 +254,9 @@ Le C++ permet de résoudre ces problèmes à l&rsquo;aide des références
 </div>
 </div>
 
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">Argument transmis par référence</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-unnumbered-5" class="outline-3">
+<h3 id="unnumbered-5">Argument transmis par référence</h3>
+<div class="outline-text-3" id="text-unnumbered-5">
 <p>
 Comme nous venons de le rappeler, en langage C, les arguments et la valeur de
 retour d&rsquo;une fonction sont transmis par valeur y compris lors de la transmission
@@ -276,16 +276,16 @@ L&rsquo;exemple précédent devient
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">b</span>)
 {
-  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt (a*a + b*b);
+  <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">resultat</span> = <span class="org-constant">std</span>::sqrt(a*a + b*b);
   <span class="org-keyword">return</span> resultat;
 }
 
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">x</span> = 2.5, <span class="org-variable-name">y</span> = 3.4;
-  cout &lt;&lt; norme (x,y) &lt;&lt; endl;
+  cout &lt;&lt; norme(x,y) &lt;&lt; endl;
 }
 </pre>
 </div>
@@ -296,7 +296,7 @@ Dans l&rsquo;instruction
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">b</span>);
+<pre class="src src-c++"><span class="org-type">double</span> <span class="org-function-name">norme</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> &amp;<span class="org-variable-name">b</span>);
 </pre>
 </div>
 

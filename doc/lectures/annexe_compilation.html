@@ -106,9 +106,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Compilation et directives de préprocesseur</h1><hr/>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Description détaillée du processus de compilation</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Description détaillée du processus de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <p>
 Le processus de compilation se décompose en différentes phases conduisant à la
 construction d&rsquo;un fichier binaire exécutable. Ces phases ne sont, en général,
@@ -126,7 +126,7 @@ suppression de texte, inclusion de fichiers&#x2026;). Le résultat de la
 précompilation peut s&rsquo;obtenir <i>via</i> la commande suivante
 </p>
 
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ -E fichier_source.cc
 </p>
@@ -145,7 +145,7 @@ objets. Pour ce qui concerne le C++, la commande nécessaire à la compilation
 séparée s&rsquo;écrit :
 </p>
 
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ -c fichier_source.cc
 </p>
@@ -170,7 +170,7 @@ exécutables et les bibliothèques dynamiques sont des exemples de fichiers
 images. La commande relative à ce mécanisme est la suivante:
 </p>
 
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ fichier_source1.o fichier_source2.o &#x2026; -o fichier_executable
 </p>
@@ -184,7 +184,7 @@ peut ainsi compiler séparément l&rsquo;ensemble des fichiers sources et réali
 l&rsquo;édition de liens <i>via</i> la commande
 </p>
 
-<div class="prompt">
+<div class="PROMPT">
 <p>
 g++ fichier_source1.cc fichier_source2.cc &#x2026; -o fichier_executable
 </p>
@@ -193,14 +193,14 @@ g++ fichier_source1.cc fichier_source2.cc &#x2026; -o fichier_executable
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Options de compilation</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Options de compilation</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
 <p>
 Le compilateur C++ autorise l&rsquo;utilisation d&rsquo;une multitude d&rsquo;options concernant
 aussi bien l&rsquo;optimisation du processus de compilation que la compréhension et la
 résolution des éventuels conflits. L&rsquo;ensemble des options disponibles pour la
-commande <code>g++</code> peut être obtenu à l&rsquo;aide de l&rsquo;instruction =man g++=<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Parmi
+commande <code>g++</code> peut être obtenu à l&rsquo;aide de l&rsquo;instruction <code>man g++</code><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Parmi
 les multiples options disponibles<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, la liste ci-dessous recense les plus
 couramment utilisées:
 </p>
@@ -246,9 +246,9 @@ répartissant la charge de compilation sur <code>n</code> cœurs.
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Directives de préprocesseur</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-unnumbered-3" class="outline-2">
+<h2 id="unnumbered-3">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-unnumbered-3">
 <p>
 Comme nous l&rsquo;avons rappelé en introduction à cette annexe, la compilation d&rsquo;un
 programme se déroule en trois phases. La première est exécutée par le
@@ -422,7 +422,7 @@ remplacées par des déclarations de la forme
 
 <p>
 De même, les macros telles que <code>CARRE</code> c&rsquo;est-à-dire définissant de simples
-actions deviendront des fonctions en ligne (<i>cf.</i> <a href="lecture_spectificite_c++.html">Spécificités du C++</a>)
+actions deviendront des fonctions en ligne (<i>cf.</i> <a href="lecture_spectificite_c++.html">&ldquo;Spécificités du C++&rdquo;</a>)
 s&rsquo;écrivant
 </p>
 

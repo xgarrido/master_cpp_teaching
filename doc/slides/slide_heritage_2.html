@@ -106,94 +106,79 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Héritage (Partie 2) : Méthodes virtuelles &amp; Classes abstraites</h1><hr/>
 
-
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1">Rappel sur l&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-unnumbered-1" class="outline-2">
+<h2 id="unnumbered-1">Rappel sur l&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-unnumbered-1">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
-{
-<span class="org-keyword">protected</span>:
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_nombre_segment</span>;
-};
-
-<span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
-{
-<span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">set_largeur</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">largeur_</span>);
-
-<span class="org-keyword">private</span>:
-  <span class="org-type">double</span> <span class="org-variable-name">m_longueur</span>;
-  <span class="org-type">double</span> <span class="org-variable-name">m_largeur</span>;
-};
-</pre>
-</div>
-
-<ul class="org-ul">
-<li>La relation d&rsquo;héritage est matérialisée par l&rsquo;usage de la directive <b><code>public
-  polygone</code></b>
-</li>
-
-<li>Le mot-clé <b><code>protected</code></b> autorise la classe dérivée (ici <code>rectangle</code>) à
-accéder aux membres de la classe de base (ici <code>polygone</code>)
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2">Rappel sur l&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-2">
-<div class="org-src-container">
-
-<pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
-{
-<span class="org-keyword">public</span>:
-  <span class="org-function-name">polygone</span> (<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">nbr_segment_</span>) :
-    m_nombre_segment (nbr_segment_) {}
-<span class="org-keyword">protected</span>:
-  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_nombre_segment</span>;
-};
-
-<span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
-{
-<span class="org-keyword">public</span>:
-  <span class="org-function-name">rectangle</span> (<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">longueur_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">largeur_</span>) :
-    polygone (4),
-    m_longueur (longueur_), m_largeur (largeur_) {}
-};
+<pre class="src src-c++"><span class="linenr"> 1: </span><span class="org-keyword">class</span> <span class="org-type">polygone</span>
+<span class="linenr"> 2: </span>{
+<span class="linenr"> 3: </span><span class="org-keyword">public</span>:
+<span class="linenr"> 4: </span>  <span class="org-function-name">polygone</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">nbr_segment_</span>);
+<span class="linenr"> 5: </span><span class="org-keyword">protected</span>:
+<span class="linenr"> 6: </span>  <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">m_nombre_segment</span>;
+<span class="linenr"> 7: </span>};
+<span class="linenr"> 8: </span>
+<span class="linenr"> 9: </span><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
+<span class="linenr">10: </span>{
+<span class="linenr">11: </span><span class="org-keyword">public</span>:
+<span class="linenr">12: </span>  <span class="org-function-name">rectangle</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">longueur_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">largeur_</span>);
+<span class="linenr">13: </span><span class="org-keyword">private</span>:
+<span class="linenr">14: </span>  <span class="org-type">double</span> <span class="org-variable-name">m_longueur</span>;
+<span class="linenr">15: </span>  <span class="org-type">double</span> <span class="org-variable-name">m_largeur</span>;
+<span class="linenr">16: </span>};
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-3">
-</div><div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-3-1">
+
+<div id="outline-container-unnumbered-2" class="outline-2">
+<h2 id="unnumbered-2">Rappel sur l&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-unnumbered-2">
+<div class="org-src-container">
+
+<pre class="src src-c++"><span class="linenr"> 1: </span><span class="org-constant">polygone</span>::<span class="org-function-name">polygone</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">nbr_segment_</span>) :
+<span class="linenr"> 2: </span>  m_nombre_segment(nbr_segment_)
+<span class="linenr"> 3: </span>{
+<span class="linenr"> 4: </span>}
+<span class="linenr"> 5: </span>
+<span class="linenr"> 6: </span><span class="org-constant">rectangle</span>::<span class="org-function-name">rectangle</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">longueur_</span>, <span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">largeur_</span>) :
+<span class="linenr"> 7: </span>  polygone(4),
+<span class="linenr"> 8: </span>  m_longueur(longueur_), m_largeur(largeur_)
+<span class="linenr"> 9: </span>{
+<span class="linenr">10: </span>}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-unnumbered-3" class="outline-2">
+<h2 id="unnumbered-3">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-unnumbered-3">
+</div><div id="outline-container-unnumbered-4" class="outline-3">
+<h3 id="unnumbered-4">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-unnumbered-4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-unnumbered-5" class="outline-3">
+<h3 id="unnumbered-5">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-unnumbered-5">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
@@ -201,17 +186,17 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">Programme principal</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-unnumbered-6" class="outline-3">
+<h3 id="unnumbered-6">Programme principal</h3>
+<div class="outline-text-3" id="text-unnumbered-6">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-type">polygone</span>  <span class="org-variable-name">my_polygone</span>;
   <span class="org-type">rectangle</span> <span class="org-variable-name">my_rectangle</span>;
-  my_polygone.affiche  ();
-  my_rectangle.affiche ();
+  my_polygone.affiche();
+  my_rectangle.affiche();
 }
 </pre>
 </div>
@@ -226,33 +211,33 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-unnumbered-7" class="outline-2">
+<h2 id="unnumbered-7">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-unnumbered-7">
+</div><div id="outline-container-unnumbered-8" class="outline-3">
+<h3 id="unnumbered-8">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-unnumbered-8">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-unnumbered-9" class="outline-3">
+<h3 id="unnumbered-9">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-unnumbered-9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
@@ -260,17 +245,17 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3">Programme principal</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-unnumbered-10" class="outline-3">
+<h3 id="unnumbered-10">Programme principal</h3>
+<div class="outline-text-3" id="text-unnumbered-10">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-type">polygone</span>  <span class="org-variable-name">my_polygone</span>;
   <span class="org-type">rectangle</span> <span class="org-variable-name">my_rectangle</span>;
-  my_polygone.affiche  ();
-  my_rectangle.<span class="org-constant">polygone</span>::affiche ();
+  my_polygone.affiche();
+  my_rectangle.<span class="org-constant">polygone</span>::affiche();
 }
 </pre>
 </div>
@@ -278,33 +263,33 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-5">
-</div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-unnumbered-11" class="outline-2">
+<h2 id="unnumbered-11">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-unnumbered-11">
+</div><div id="outline-container-unnumbered-12" class="outline-3">
+<h3 id="unnumbered-12">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-unnumbered-12">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-unnumbered-13" class="outline-3">
+<h3 id="unnumbered-13">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-unnumbered-13">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
@@ -312,17 +297,17 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3">Programme principal</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-unnumbered-14" class="outline-3">
+<h3 id="unnumbered-14">Programme principal</h3>
+<div class="outline-text-3" id="text-unnumbered-14">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
   <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
-  ptr_polygone1-&gt;affiche ();
-  ptr_polygone2-&gt;affiche ();
+  ptr_polygone1-&gt;affiche();
+  ptr_polygone2-&gt;affiche();
 }
 </pre>
 </div>
@@ -337,33 +322,33 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-6">
-</div><div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-unnumbered-15" class="outline-2">
+<h2 id="unnumbered-15">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-unnumbered-15">
+</div><div id="outline-container-unnumbered-16" class="outline-3">
+<h3 id="unnumbered-16">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-unnumbered-16">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-keyword">virtual</span> <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-keyword">virtual</span> <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-unnumbered-17" class="outline-3">
+<h3 id="unnumbered-17">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-unnumbered-17">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 </pre>
@@ -371,17 +356,17 @@ accéder aux membres de la classe de base (ici <code>polygone</code>)
 </div>
 </div>
 
-<div id="outline-container-sec-6-3" class="outline-3">
-<h3 id="sec-6-3">Programme principal</h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-unnumbered-18" class="outline-3">
+<h3 id="unnumbered-18">Programme principal</h3>
+<div class="outline-text-3" id="text-unnumbered-18">
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone1</span> = <span class="org-keyword">new</span> <span class="org-type">polygone</span>;
   <span class="org-type">polygone</span> * <span class="org-variable-name">ptr_polygone2</span> = <span class="org-keyword">new</span> <span class="org-type">rectangle</span>;
-  ptr_polygone1-&gt;affiche ();
-  ptr_polygone2-&gt;affiche ();
+  ptr_polygone1-&gt;affiche();
+  ptr_polygone2-&gt;affiche();
 }
 </pre>
 </div>
@@ -396,9 +381,9 @@ compilateur que le choix de la méthode ne s&rsquo;effectuera qu&rsquo;à l&rsqu
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-unnumbered-19" class="outline-2">
+<h2 id="unnumbered-19">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-unnumbered-19">
 <div class="center">
 <p>
 Le processus de virtualisation permet ainsi de <b>redéfinir</b> des méthodes suivant
@@ -407,19 +392,19 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-unnumbered-20" class="outline-3">
+<h3 id="unnumbered-20">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-unnumbered-20">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-keyword">virtual</span> <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-keyword">virtual</span> <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 
-<span class="org-type">void</span> <span class="org-constant">polygone</span>::<span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>
+<span class="org-type">void</span> <span class="org-constant">polygone</span>::<span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>
 {
   cout &lt;&lt; <span class="org-string">"Nombre de segment = "</span>
        &lt;&lt; m_nombre_segment &lt;&lt; endl;
@@ -430,22 +415,22 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-unnumbered-21" class="outline-3">
+<h3 id="unnumbered-21">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-unnumbered-21">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
 {
 <span class="org-keyword">public</span>:
-  <span class="org-type">void</span> <span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>;
+  <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
   ...
 };
 
-<span class="org-type">void</span> <span class="org-constant">rectangle</span>::<span class="org-function-name">affiche</span> () <span class="org-keyword">const</span>
+<span class="org-type">void</span> <span class="org-constant">rectangle</span>::<span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>
 {
   <span class="org-constant">polygone</span>::affiche ();
-  cout &lt;&lt; <span class="org-string">"Longueur = "</span> &lt;&lt; m_longeur &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"Longueur = "</span> &lt;&lt; m_longueur &lt;&lt; endl;
        &lt;&lt; <span class="org-string">"Largeur  = "</span> &lt;&lt; m_largeur &lt;&lt; endl;
 }
 </pre>
@@ -454,9 +439,9 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8">Classes abstraites</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-unnumbered-22" class="outline-2">
+<h2 id="unnumbered-22">Classes abstraites</h2>
+<div class="outline-text-2" id="text-unnumbered-22">
 <ul class="org-ul">
 <li>La notion de liaison dynamique permet de redéfinir une méthode au sein de
 classes filles : on parle de <b>méthodes virtuelles</b>
@@ -469,15 +454,15 @@ méthodes dont <b>la définition n&rsquo;est pas donnée</b>
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9">Classes abstraites</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-unnumbered-23" class="outline-2">
+<h2 id="unnumbered-23">Classes abstraites</h2>
+<div class="outline-text-2" id="text-unnumbered-23">
 <p>
 Exemple du jeu d&rsquo;échec :
 </p>
 <ul class="org-ul">
 <li>La classe <code>piece</code> est par construction <b>une classe abstraite</b> : elle déclare
-des méthodes <code>affiche ()</code>, <code>deplacement ()</code> mais ne les définit pas
+des méthodes <code>affiche()</code>, <code>deplacement()</code> mais ne les définit pas
 </li>
 
 <li>La définition n&rsquo;intervient que dans les classes dérivées qui spécialisent les
@@ -487,30 +472,30 @@ méthodes en fonction de leur besoin
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10">Classes abstraites</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-unnumbered-24" class="outline-2">
+<h2 id="unnumbered-24">Classes abstraites</h2>
+<div class="outline-text-2" id="text-unnumbered-24">
 </div>
 </div>
 
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11">Classes abstraites</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-unnumbered-25" class="outline-2">
+<h2 id="unnumbered-25">Classes abstraites</h2>
+<div class="outline-text-2" id="text-unnumbered-25">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"pion.h"</span>
 <span class="org-preprocessor">#include</span> <span class="org-string">"tour.h"</span>
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-keyword">const</span> <span class="org-type">size_t</span> <span class="org-variable-name">nbr_pieces</span> = 2;
   piece * pieces[nbr_pieces];
 
-  pieces[0] = <span class="org-keyword">new</span> <span class="org-type">pion</span> ();
-  pieces[1] = <span class="org-keyword">new</span> <span class="org-type">tour</span> ();
+  pieces[0] = <span class="org-keyword">new</span> <span class="org-type">pion</span>;
+  pieces[1] = <span class="org-keyword">new</span> <span class="org-type">tour</span>;
 
   <span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; nbr_pieces; ++i)
   {
-    pieces[i]-&gt;affiche ();
+    pieces[i]-&gt;affiche();
   }
 }
 </pre>
