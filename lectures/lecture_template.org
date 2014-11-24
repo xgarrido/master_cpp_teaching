@@ -75,10 +75,10 @@ fonction
     const float f1 = 3.4, f2 = 5.6;
     const char c1 = 'd', c2 = 'z';
 
-    cout << "min(" << i1 << "," << i2 << ") = " << min (i1,i2) << endl;
-    cout << "min(" << f1 << "," << f2 << ") = " << min (f1,f2) << endl;
-    cout << "min(" << c1 << "," << c2 << ") = " << min (c1,c2) << endl;
-    cout << "min(&c1,&c2) = " << min (&c1,&c2) << endl;
+    cout << "min(" << i1 << "," << i2 << ") = " << min(i1,i2) << endl;
+    cout << "min(" << f1 << "," << f2 << ") = " << min(f1,f2) << endl;
+    cout << "min(" << c1 << "," << c2 << ") = " << min(c1,c2) << endl;
+    cout << "min(&c1,&c2) = " << min(&c1,&c2) << endl;
     return 0;
   }
 #+END_SRC
