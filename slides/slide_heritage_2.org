@@ -352,7 +352,7 @@ la finalité de la classe fille
 
   void rectangle::affiche() const
   {
-    polygone::affiche ();
+    polygone::affiche();
     cout << "Longueur = " << m_longueur << endl;
          << "Largeur  = " << m_largeur << endl;
   }
