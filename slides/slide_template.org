@@ -62,8 +62,31 @@
     cout << "min(c1,c2)   = " << min(c1,c2) << endl;
     cout << "min(&c1,&c2) = " << min(&c1, &c2) << endl;
   }
-
 #+END_SRC
+
+* Illustration de l'illustration de fonction patron
+
+- \Cpp permettant la surcharge des opérateurs, la fonction patron =min= peut
+  donc s'utiliser avec des objets plus complexes
+
+#+BEGIN_SRC c++
+  class Point {
+  public:
+    double norme() const;
+  private:
+    double m_x;
+    double m_y;
+  };
+
+  bool operator<(const Point & p1_, const Point & p2_)
+  {
+    return p1_.norme() < p2_.norme();
+  }
+  ...
+  Point my_point1(1,1), my_point2(2,2);
+  cout << "min(p1,p2) =" << min(my_point1, my_point2) << endl;
+#+END_SRC
+
 * Utilisation de patron de classe
 
 La classe n'étant qu'une généralisation de la notion de type, il est par
@@ -73,10 +96,10 @@ conséquent possible de définir des patrons de classe
   template<class T> class point
   {
   public:
-    point(T abs_ = 0, T ord_ = 0) : m_X(abs_), m_Y(ord_) {}
+    point(T abs_ = 0, T ord_ = 0) : m_x(abs_), m_y(ord_) {}
   private:
-    T m_X;
-    T m_Y;
+    T m_x;
+    T m_y;
   };
 
   int main()
