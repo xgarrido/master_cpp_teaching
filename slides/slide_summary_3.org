@@ -24,17 +24,6 @@ composition:
 - Héritage :: relation de type *_est un_*; la classe =rectangle= est un
               =polygone=
 
-* Conception d'un programme
-
-De manière générale en POO, le développeur procède de la façon suivante:
-
-1. *Répertorier* les objets nécessaires à la description du problème,
-
-2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
-   héritage),
-
-3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
-
 * Héritage vs. Interface
 
 Si l'héritage est une notion relativement puissante en POO, il faut néanmoins
@@ -69,5 +58,16 @@ De manière générale en POO, le développeur procède de la façon suivante:
 
 3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
 
-4. *Créer* des instances de ces objets et *utiliser* leurs méthodes pour
+* Conception d'un programme
+
+De manière générale en POO, le développeur procède de la façon suivante:
+
+1. *Répertorier* les objets nécessaires à la description du problème,
+
+2. *Réfléchir* aux liens logiques entre ces objets (composition, amitié,
+   héritage),
+
+3. *Implémenter* ces objets /i.e./ déclarer les méthodes puis les définir,
+
+4. *Créer* des instance-tests de ces objets et *utiliser* leurs méthodes pour
    répondre au problème posé.
