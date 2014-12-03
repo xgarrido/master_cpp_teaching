@@ -1,0 +1,36 @@
+#+TITLE:  Classes
+#+AUTHOR: Xavier Garrido
+#+DATE:   03/12/2014
+#+OPTIONS: toc:nil
+#+LATEX_HEADER: \setcounter{chapter}{7}
+
+* Utilisation de patron de fonction
+
+Créer un patron de fonction permettant de calculer la somme des éléments d'un
+tableau de type quelconque. Le nombre d'éléments du tableau sera un des
+paramètres de la fonction. On testera cette fonction en fournissant un tableau
+d'entiers, de nombres flottants ainsi qu'un tableau de chaîne de caractères en
+utilisant la classe =string= de la librairie standard. Sous quelles conditions,
+l'utilisation d'objet de type =string= peut fonctionner ?
+
+* Classe =Point= générique
+
+- Reprendre la classe =Point= de l'exercice 3 et modifier sa déclaration afin de
+  "choisir" le type de coordonnées.
+
+- Ajouter un constructeur qui initialisera l'abscisse et l'ordonnée selon le
+  type de coordonnées utilisées.
+
+- Ajouter ou conserver la méthode d'affichage des coordonnées.
+
+- Tester la nouvelle implémentation de la classe =Point= pour des coordonnées
+  entières et des nombres flottants. Utiliser également cette classe avec des
+  coordonnées de type complexe (vous aurez besoin de la classe =Complexe=
+  développée lors de l'exercice 4). Faire en sorte que la méthode =affiche= de
+  =Point= fonctionne également pour des objets de type =Complexe= en
+  surchargeant l'opérateur =<<= pour cette classe =Complexe=. Pour se faire, on
+  déclarera le prototype de fonction externe suivant
+
+  #+BEGIN_SRC c++
+    friend std::ostream & operator<<(std::ostream & out_, const Complexe & z_);
+  #+END_SRC
