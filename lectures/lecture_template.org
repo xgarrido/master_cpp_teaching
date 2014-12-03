@@ -50,7 +50,7 @@ d'être rencontrés par la surdéfinition de fonctions peut se résumer à la
 déclaration suivante
 
 #+BEGIN_SRC c++
-  template<class T> T min(const T a, const T b)
+  template<typename T> T min(const T & a, const T & b)
   {
     return a < b ? a : b;
   }
@@ -129,11 +129,12 @@ outil puissant qui permet d'obtenir une forme "d'abstraction" en
 s'affranchissant des problèmes de type.
 
 [fn:1] dans le cadre des patrons de fonctions et de classes, on parle
-communément de paramètres et non d'argument. D'autre part, le \Cpp a décidé
-d'employer le mot clé =class= pour préciser que =T= est un paramètre de
-type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
-clé =typename= qui peut se substituer au mot clé =class=. Cependant, son
-utilisation est peu répandue.
+communément de paramètres et non d'argument.
+# D'autre part, le \Cpp a décidé
+# d'employer le mot clé =class= pour préciser que =T= est un paramètre de
+# type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
+# clé =typename= qui peut se substituer au mot clé =class=. Cependant, son
+# utilisation est peu répandue.
 
 *** Remarques
 
@@ -149,7 +150,7 @@ utilisation est peu répandue.
   plusieurs paramètres de type, chacun devant être précédé du mot clé
   =class= :
   #+BEGIN_SRC c++
-    template<class T, class U...> void fct(T t, U u, ...)
+    template<typename T, typename U...> void fct(T t, U u, ...)
   #+END_SRC
   Dans tous les cas, il est nécessaire que chaque paramètre de type
   apparaisse au moins une fois dans l'entête du patron.
@@ -204,7 +205,7 @@ portant sur la structure =point= pour laquelle la précision de représentation
 (entiers, entiers non signés, réels,...) est le paramètre type de la classe, est
 
 #+BEGIN_SRC c++
-  template<class T> class point
+  template<typename T> class point
   {
   public:
     point(T abs = 0, T ord = 0) : m_x(abs), m_y(ord) {}
@@ -232,7 +233,7 @@ compilateur :
 
 Ainsi, la méthode =affiche= serait définie de la façon suivante
 #+BEGIN_SRC c++
-  template<class T> void point<T>::affiche()
+  template<typename T> void point<T>::affiche()
   {
     cout << "Coordonnées : " << m_x << " " << m_y << endl;
   }
@@ -259,7 +260,7 @@ Il est également envisageable de fournir un nombre quelconque de paramètre de
 type dans la définition du patron de classe de même que des paramètres
 expressions. L'exemple ci-dessous illustre ces cas
 #+BEGIN_SRC c++
-  template<class T, class U, unsigned int n> class tableau
+  template<typename T, typename U, unsigned int n> class tableau
   {
     T m_tab[n];
     U m_mean;
