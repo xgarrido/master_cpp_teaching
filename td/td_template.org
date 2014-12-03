@@ -15,18 +15,18 @@ l'utilisation d'objet de type =string= peut fonctionner ?
 
 * Classe =Point= générique
 
-- Reprendre la classe =Point= de l'exercice 3 et modifier sa déclaration afin de
+- Reprendre la classe =Point= de l'exercice [[file:td_classes.org][3]] et modifier sa déclaration afin de
   "choisir" le type de coordonnées.
 
 - Ajouter un constructeur qui initialisera l'abscisse et l'ordonnée selon le
-  type de coordonnées utilisées.
+  type de coordonnées utilisé.
 
 - Ajouter ou conserver la méthode d'affichage des coordonnées.
 
 - Tester la nouvelle implémentation de la classe =Point= pour des coordonnées
   entières et des nombres flottants. Utiliser également cette classe avec des
   coordonnées de type complexe (vous aurez besoin de la classe =Complexe=
-  développée lors de l'exercice 4). Faire en sorte que la méthode =affiche= de
+  développée lors de l'exercice [[file:td_classe_complexe.org][4]]). Faire en sorte que la méthode =affiche= de
   =Point= fonctionne également pour des objets de type =Complexe= en
   surchargeant l'opérateur =<<= pour cette classe =Complexe=. Pour se faire, on
   déclarera le prototype de fonction externe suivant
