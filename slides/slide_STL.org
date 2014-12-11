@@ -49,16 +49,15 @@ Utilisation de la classe =string= en \Cpp
 
 #+BEGIN_SRC c++
   #include <string>
-  int main ()
+  int main()
   {
     // Assignation/copie de strings
     std::string my_string1 = "abcd";
     std::string my_string2 = my_string1;
 
     // Initialisation de strings
-    std::string my_string3 (my_string2);
+    std::string my_string3(my_string2);
     ...
-  }
 #+END_SRC
 
 * La classe =string=
@@ -70,15 +69,14 @@ Utilisation de la classe =string= en \Cpp
 
   // Comparaison
   const bool are_equal = (my_string1 == my_string2);
-  if (are_equal)
-    {
-      std::cout << my_string1 << " est identique à " << my_string2 << std::endl;
-    }
+  if (are_equal) {
+    std::cout << my_string1 << " est identique à " << my_string2 << std::endl;
+  }
 
   // Longueur d'une string
-  size_t size = my_string1.size ();
+  size_t size = my_string1.size();
   // Recherche dans une string
-  size_t pos = my_string1.find ("bc");
+  size_t pos = my_string1.find("bc");
 #+END_SRC
 
 * La classe =vector=
@@ -111,12 +109,12 @@ Utilisation de la classe =string= en \Cpp
     std::vector<int> my_vector1;
 
     // Ajout de trois elements
-    my_vector1.push_back (4);
-    my_vector1.push_back (2);
-    my_vector1.push_back (5);
+    my_vector1.push_back(4);
+    my_vector1.push_back(2);
+    my_vector1.push_back(5);
 
     // La méthode size précise le nombre d'entrée courante
-    for (size_t i = 0; i < my_vector1.size (); ++i)
+    for (size_t i = 0; i < my_vector1.size(); ++i)
       std::cout << i << " " << my_vector1[i] << std::endl;
   }
 #+END_SRC
@@ -125,7 +123,7 @@ Utilisation de la classe =string= en \Cpp
 
 #+BEGIN_SRC c++
   // Création d'un vecteur d'entier contenant 70,70,70,70,70
-  std::vector<int> my_vector2 (5, 70);
+  std::vector<int> my_vector2(5, 70);
 
   // Réassignation des valeurs de ce vecteur
   my_vector2[0] = 5;
@@ -135,7 +133,7 @@ Utilisation de la classe =string= en \Cpp
   my_vector2[4] = 8;
 
   // Nettoyage de l'espace mémoire
-  my_vector2.clear ();
+  my_vector2.clear();
 #+END_SRC
 
 * La classe =vector=
@@ -145,12 +143,11 @@ Utilisation de la classe =string= en \Cpp
   std::vector<particule> my_particles;
 
   // Création d'un ensemble de particule
-  for (size_t i = 0; i < 10; ++i)
-    {
-      particule my_particle (0.511*i, -1.6e-19*i);
-      my_particles.push_back (my_particle);
+  for (size_t i = 0; i < 10; ++i) {
+    particule my_particle(0.511*i, -1.6e-19*i);
+    my_particles.push_back(my_particle);
 
-      // Affiche la dernière particule
-      my_particles.back ().affiche ();
-    }
+    // Affiche la dernière particule
+    my_particles.back().affiche();
+  }
 #+END_SRC
