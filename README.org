@@ -194,7 +194,10 @@ Add a new tag =ignoreheading= to skip headline tagged as such.
                              (downcase contents)))
       (replace-match "" nil nil contents)))
   (add-to-list 'org-export-filter-headline-functions 'cpp-ignore-headline)
+#+END_SRC
 
+Interpret figures within table environment as figure side-by-side.
+#+BEGIN_SRC emacs-lisp
   (defun cpp-multicolumn-figure (contents backend info)
     (when (and (org-export-derived-backend-p backend 'latex)
                (string-match "table" contents)
