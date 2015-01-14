@@ -270,7 +270,7 @@ d'écart-type \sigma ([[http://fr.wikipedia.org/wiki/M%C3%A9thode_de_Box-Muller]
 * Références                                                  :ignoreheading:
 #+LATEX: \renewcommand{\bibname}{Références}
 
-#+BEGIN_BIBLIOGRAPHY
+#+BEGIN_bibliography
 \bibitem{kirk1} S. Kirkpatrick, C. D. Gelatt and M. P. Vecchi, /Optimization by
 Simulated Annealing/, Science, vol. 220, pp. 671-680 (1983)
 
@@ -299,7 +299,7 @@ X.-L. Meng, eds.
 
 \bibitem{roberts} G. O. Roberts and J. S. Rosenthal, /Examples of Adaptive
 MCMC/, to be print
-#+END_BIBLIOGRAPHY
+#+END_bibliography
 
 * Footnotes
 

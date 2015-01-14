@@ -143,7 +143,7 @@ temporelle.
 * Références                                                  :ignoreheading:
 #+LATEX: \renewcommand{\bibname}{Références}
 
-#+BEGIN_bibliography
+#+begin_bibliography
 \bibitem{linsley} J. Linsley, /Evidence for a Primary Cosmic-Ray Particle with
 Energy 10^{20} eV/, Physical Review Letters, vol. 10, pp 146-148 (1963)
 
@@ -153,4 +153,4 @@ Review Letters, vol. 16, pp 748-750 (1966)
 \bibitem{zatsepin} G. T. Zatsepin and V. A. Kuz'min, /Upper Limit of the
 Spectrum of Cosmic Rays/, Soviet Journal of Experimental and Theoretical Physics
 Letters, vol. 4, pp 78 (1966)
-#+END_bibliography
+#+end_bibliography
