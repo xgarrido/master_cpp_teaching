@@ -37,8 +37,8 @@ Créer une classe =Vendeur= dérivant de =commercial= avec :
 
 - un constructeur,
 - un destructeur,
-- définir le salaire \emph{via} la méthode virtuelle =CalculerSalaire=. Par
-  exemple, une base fixe à 1000 euros + 20\% du =ChiffreAffaire=,
+- définir le salaire /via/ la méthode virtuelle =CalculerSalaire=. Par
+  exemple, une base fixe à 1000 euros + 20% du =ChiffreAffaire=,
 - redéfinir =GetNom= en mettant en en-tête "Le vendeur :" puis le nom.
 
 Créer une classe =Representant= héritant de =Commercial= avec :
