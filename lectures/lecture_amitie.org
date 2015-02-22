@@ -4,7 +4,7 @@
 #+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{6}
 
-De part l'encapsulation des données, les fonctions extérieures à une classe
+De par l'encapsulation des données, les fonctions extérieures à une classe
 n'ont pas accès aux membres privés de cette classe... à l'exception *des
 fonctions amies*.
 
