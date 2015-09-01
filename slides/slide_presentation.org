@@ -1,6 +1,6 @@
-#+TITLE:  Présentation & Organisation de l'année 2014 -- 2015
+#+TITLE:  Présentation & Organisation de l'année 2015 -- 2016
 #+AUTHOR: Xavier Garrido
-#+DATE:   14/09/2013
+#+DATE:   01/09/2015
 #+OPTIONS: toc:nil ^:{}
 #+STARTUP:     beamer
 #+LATEX_CLASS: cpp-slide
@@ -15,7 +15,7 @@
 
 - *début Janvier à début Mars :* réalisation du projet info.
 
-- *début Avril :* soutenance de projet
+- *fin Mars :* soutenance de projet
 
 * Programme du cours de \Cpp
 
@@ -139,6 +139,7 @@ _Ressources disponibles sur dokeos[fn:2] [[http://formation.u-psud.fr][http://fo
 
 #+ATTR_LATEX: :options [\linewidth](\bf\large Contacts)
 #+BEGIN_CBOX
-- Hermès Bélusca-Maïto \ding{46} [[mailto:hermes.belusca@th.u-psud.fr][hermes.belusca@th.u-psud.fr]]
+- Clarisse Hamadache \ding{46} [[mailto:clarisse.hamadache@csnsm.in2p3.fr][clarisse.hamadache@csnsm.in2p3.fr]]
 - Xavier Garrido \ding{46} [[mailto:xavier.garrido@u-psud.fr][xavier.garrido@u-psud.fr]]
+- Frédéric Combes \ding{46} [[mailto:frederic.combes@u-psud.fr][frederic.combes@u-psud.fr]] (projets)
 #+END_CBOX
