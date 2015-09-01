@@ -1,6 +1,7 @@
 #+TITLE: Master 1 & Magistère 2 -- Informatique
 #+LATEX_HEADER: \usepackage[hmargin=1cm, vmargin=0.5cm, landscape]{geometry}
 #+LATEX_HEADER: \usepackage[english,frenchb]{babel}
+#+LATEX_HEADER: \usepackage{lmodern}
 #+LATEX_HEADER_EXTRA: \renewcommand*{\maketitle}{}
 #+OPTIONS: toc:nil
 
@@ -25,11 +26,11 @@ Rappel d'organisation pour les Projets Informatique C++
 #+LATEX: \huge
 #+ATTR_LATEX: :align >{\color{blue}}r>{\color{gray}}l
 | 2 dernières séances de Décembre | Présentation des sujets                                |
-| 5 -- 9 Janvier 2015             | Indication aux enseignants du projet choisi            |
+| 11 -- 15 Janvier 2016           | Indication aux enseignants du projet choisi            |
 |                                 | (par retour d'un questionnaire envoyé aux étudiants)   |
-| 9 -- 13 Mars 2015               | Remise des programmes aux Enseignants (/par courriel/) |
+| 29 Février -- 4 Mars 2016       | Remise des programmes aux Enseignants (/par courriel/) |
 |                                 | et Remise des rapports au Secrétariat                  |
-| 30 Mars au 3 Avril 2015         | Soutenances des Projets Informatique C++               |
+| 21 -- 25 Mars 2016              | Soutenances des Projets Informatique C++               |
 
 * Footer                                                      :ignoreheading:
 
