@@ -139,6 +139,6 @@ _Ressources disponibles sur dokeos[fn:2] [[http://formation.u-psud.fr][http://fo
 
 #+ATTR_LATEX: :options [\linewidth](\bf\large Contacts)
 #+BEGIN_CBOX
-- Hermès Bélusca-Maïto \ding{46} [[hermes.belusca@th.u-psud.fr]]
-- Xavier Garrido \ding{46} [[xavier.garrido@u-psud.fr]]
+- Hermès Bélusca-Maïto \ding{46} [[mailto:hermes.belusca@th.u-psud.fr][hermes.belusca@th.u-psud.fr]]
+- Xavier Garrido \ding{46} [[mailto:xavier.garrido@u-psud.fr][xavier.garrido@u-psud.fr]]
 #+END_CBOX
