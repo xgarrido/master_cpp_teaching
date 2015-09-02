@@ -101,7 +101,7 @@
 * Directives de préprocesseur
 
 Le préprocesseur recherche des directives de compilation repérées en début de
-ligne par le symbole =#= et se terminant avec la fin de la ligne.
+ligne par le symbole =#= et se terminant avec la fin de la ligne
 
 #+BEGIN_SRC c++
   #directive [paramètre]
@@ -159,8 +159,8 @@ g++ -DDEBUG=1 test_debug.cc -o test_debug
 
 - *=dummy.h=*
   #+BEGIN_SRC c++
-    #ifndef __dummy_h
-    #define __dummy_h 1
+    #ifndef _dummy_h_
+    #define _dummy_h_ 1
     void dummy();
     #endif
   #+END_SRC
