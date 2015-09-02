@@ -153,11 +153,25 @@ We also define a new environment for "colored" box
 
 Since 26/09/2014, it seems that fragment block are not "lowercased" anymore so
 we execute a hook before parsing file to change =CBOX= into =cbox=.
-#+BEGIN_SRC emacs-lisp :tangle no
-  (defun cpp-beamer-cbox (backend)
-    (when (eq backend 'beamer)
-      (replace-regexp "CBOX" "cbox")))
-  (add-to-list 'org-export-before-processing-hook 'cpp-beamer-cbox)
+#+BEGIN_SRC emacs-lisp
+  (defun latex::downcase-begin-filter (contents backend info)
+    (when (org-export-derived-backend-p backend 'latex)
+      (replace-regexp-in-string "\\\\begin{CBOX}"     "\\\\begin{cbox}"
+      (replace-regexp-in-string "\\\\begin{QUESTION}" "\\\\begin{question}"
+      (replace-regexp-in-string "\\\\begin{REMARK}"   "\\\\begin{remark}"
+      (replace-regexp-in-string "\\\\begin{ABSTRACT}" "\\\\begin{abstract}"
+      (replace-regexp-in-string "\\\\begin{PROMPT}"   "\\\\begin{prompt}"
+                              contents)))))))
+  (defun latex::downcase-end-filter (contents backend info)
+    (when (org-export-derived-backend-p backend 'latex)
+      (replace-regexp-in-string "\\\\end{CBOX}"     "\\\\end{cbox}"
+      (replace-regexp-in-string "\\\\end{QUESTION}" "\\\\end{question}"
+      (replace-regexp-in-string "\\\\end{REMARK}"   "\\\\end{remark}"
+      (replace-regexp-in-string "\\\\end{ABSTRACT}" "\\\\end{abstract}"
+      (replace-regexp-in-string "\\\\end{PROMPT}"   "\\\\end{prompt}"
+                              contents)))))))
+  (add-to-list 'org-export-filter-final-output-functions 'latex::downcase-begin-filter)
+  (add-to-list 'org-export-filter-final-output-functions 'latex::downcase-end-filter)
 #+END_SRC
 
 **** Lecture template
@@ -884,18 +898,6 @@ environment, otherwise a =minipage= is defined.
   \newcommand{\IfNoValueOrEmptyTF}[3]{\IfNoValueTF{#1}{#2}{\if\relax\detokenize{#1}\relax#2\else#3\fi}}
   \RequirePackage{xparse}
   \NewDocumentEnvironment{cbox}{o o o o o d()}{
-    \IfNoValueOrEmptyTF{#4}{
-      \begin{center}
-        \begin{minipage}[c]{\IfNoValueOrEmptyTF{#1}{0.9\linewidth}{#1}}}{
-      \begin{textblock}{\IfNoValueOrEmptyTF{#1}{10}{#1}}(#4,#5)}
-    \begin{beamerboxesrounded}[upper=\IfNoValueOrEmptyTF{#2}{lbtuc}{#2}, lower=\IfNoValueOrEmptyTF{#2}{lbtuc}{#2}, shadow=false]
-      {\IfNoValueOrEmptyTF{#3}{}{#3}\IfNoValueOrEmptyTF{#6}{}{#6}}
-      \IfNoValueOrEmptyTF{#3}{}{#3}
-  }{
-    \end{beamerboxesrounded}
-    \IfNoValueOrEmptyTF{#4}{\end{minipage}\end{center}}{\end{textblock}}
-  }
-  \NewDocumentEnvironment{CBOX}{o o o o o d()}{
     \IfNoValueOrEmptyTF{#4}{
       \begin{center}
         \begin{minipage}[c]{\IfNoValueOrEmptyTF{#1}{0.9\linewidth}{#1}}}{
