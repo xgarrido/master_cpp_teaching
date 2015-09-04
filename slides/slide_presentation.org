@@ -89,7 +89,8 @@
 _Ressources disponibles sur dokeos[fn:2] [[http://formation.u-psud.fr][http://formation.u-psud.fr]]_
 #+END_CBOX
 
-[fn:2] pour ceux n'ayant pas encore de compte, contactez le secrétariat
+[fn:2] pour ceux n'ayant pas encore de compte, contactez le secrétariat ou
+consultez l'adresse suivante https://goo.gl/YGJ3tW
 
 * Bibliographie
 :PROPERTIES:
