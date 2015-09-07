@@ -233,7 +233,7 @@ remplacées par des déclarations de la forme
 
 #+BEGIN_SRC c++
   const double Pi = 3.141592;
-  const string ErrMsg = "Une erreur s'est produite.\n";
+  const std::string ErrMsg = "Une erreur s'est produite";
 #+END_SRC
 
 De même, les macros telles que =CARRE= c'est-à-dire définissant de simples
@@ -241,7 +241,7 @@ actions deviendront des fonctions en ligne (/cf./ [[file:lecture_spectificite_c+
 s'écrivant
 
 #+BEGIN_SRC c++
-  inline long Carre(const long l) { return l*l; }
+  inline int Carre(const int i) { return i*i; }
   inline double Carre(const double d) { return d*d; }
 #+END_SRC
 qui vérifient, en outre, les types de leurs paramètres.
