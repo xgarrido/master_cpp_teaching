@@ -781,6 +781,7 @@ called within =postamble= part of [[Template settings]]
   \setbeamercolor{louc}{fg=white,bg=orange!10}
   \setbeamercolor{lotuc}{fg=orange,bg=orange!10}
   \setbeamercolor{lwuc}{fg=blue,bg=white}
+  \setbeamercolor{hidden}{fg=white,bg=white}
 #+END_SRC
 
 ****** Font
