@@ -10,7 +10,7 @@
 :END:
 
 - Tout objet manipulé par l'ordinateur est stocké en mémoire. Selon la nature de
-  l'objet, l'espace en mémoire alloué varie : par ex., entier = 32 ou 64 bits
+  l'objet, l'espace en mémoire alloué varie : par exemple, entier = 32 ou 64 bits
 
 - *L'adresse* est l'endroit où se trouve la variable en mémoire. Elle s'obtient
   via la syntaxe suivante : =&NomDeLaVariable=
@@ -206,12 +206,11 @@ Fuite de mémoire garantie
 #+BEGIN_SRC c++
   for (int i = 0; i < 10; i++) {
     int * k = new int(0);
+    ...
     delete k;
-
-   }
+  }
 #+END_SRC
 * Portée & Durée de vie des variables
-
 ** Allocation sur la pile (“stack”)
 :PROPERTIES:
 :BEAMER_COL: 0.6
@@ -222,7 +221,7 @@ Fuite de mémoire garantie
   int * pointeur_dix()
   {
     int a = 10;
-    return &a;  // incorrect !
+    return &a;
   }
 
   int main()
@@ -234,7 +233,37 @@ Fuite de mémoire garantie
   }
 #+END_SRC
 
-#+ATTR_LATEX: :options [5][lrtuc][\centering][1.5][13]
+** Allocation sur le tas (“heap”)
+:PROPERTIES:
+:BEAMER_COL: 0.6
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][hidden][\footnotesize]
+:END:
+
+* Portée & Durée de vie des variables
+** Allocation sur la pile (“stack”)
+:PROPERTIES:
+:BEAMER_COL: 0.6
+:BEAMER_ENV: cbox
+:BEAMER_OPT: [][lwuc][\footnotesize]
+:END:
+#+BEGIN_SRC c++
+  int * pointeur_dix()
+  {
+    int a = 10;
+    return &a;
+  }
+
+  int main()
+  {
+    int * pb = pointeur_dix();
+    cout << *pb << endl;
+
+    return 0;
+  }
+#+END_SRC
+
+#+ATTR_LATEX: :options [5][lrtuc][\centering][3.5][7]
 #+BEGIN_CBOX
 Le pointeur retourné contient une adresse obsolète
 #+END_CBOX
