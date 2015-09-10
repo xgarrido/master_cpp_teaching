@@ -37,8 +37,7 @@
 #+BEAMER: \vskip +10pt
 - Possibilité de déclarer les variables locales quel que soit l'endroit
 #+BEGIN_SRC c++
-  for (unsigned int i = 0 ; i < 10 ; i++)
-    {...}
+  for (unsigned int i = 0 ; i < 10 ; i++) {...}
 #+END_SRC
 
 * Arguments par défaut de fonctions
@@ -112,10 +111,9 @@ Ce nouveau type est naturellement formé de deux valeurs notées =true= et =fals
 
 #+BEGIN_SRC c++
   bool is_ok = true;
-  if (is_ok)
-    {
-      ...
-    }
+  if (is_ok) {
+    ...
+  }
 
   bool is_java_idiom = false;
   bool is_c_idiom = is_ok && !is_java_idiom;
