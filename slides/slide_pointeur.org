@@ -116,7 +116,7 @@ objet (ou sa nature) n'est connue que lors de l'exécution du programme. La
 déclaration
 
 #+BEGIN_SRC c++
-  unsigned int n;
+  unsigned int n = 0;
   std::cin >> n;
   double tableau[n];
 #+END_SRC
@@ -134,7 +134,7 @@ mémoire nécessaire à l'allocation (statique).
   - =new= alloue une certaine quantité de mémoire et renvoie un pointeur sur le
     début du tableau :
     #+BEGIN_SRC c++
-      unsigned int n;
+      unsigned int n = 0;
       std::cin >> n;
       double * tableau = new double[n];
     #+END_SRC
