@@ -35,8 +35,8 @@
 
 #+BEAMER: \pause
 
-- Les macros telles qu'utilisées en C sont à éviter (/cf./ [[http://www.parashift.com/c++-faq/inline-vs-macros.html][evil#1]], [[http://www.parashift.com/c++-faq/macros-with-if.html][evil#2]],
-  [[http://www.parashift.com/c++-faq/macros-with-multi-stmts.html][evil#3]], [[http://www.parashift.com/c++-faq/macros-with-token-pasting.html][evil#4]]). Les seules véritables directives de préprocesseur à
+- Les macros telles qu'utilisées en C sont à éviter (/cf./ [[https://isocpp.org/wiki/faq/inline-functions#inline-vs-macros][evil#1]], [[https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-if][evil#2]],
+  [[https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-multi-stmts][evil#3]], [[https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-token-pasting][evil#4]]). Les seules véritables directives de préprocesseur à
   utiliser sont *=#include=, =#ifndef= / =#define=*
 
   #+BEGIN_CENTER
