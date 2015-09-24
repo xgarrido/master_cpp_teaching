@@ -32,8 +32,8 @@ toutes fonctions extérieures à la classe
 *Conséquence :*
 
 #+BEGIN_SRC c++
-  particule electron;
-  electron.m_masse = 0.511; // erreur de compilation
+  particule my_electron;
+  my_electron.m_masse = 0.511; // erreur de compilation
 #+END_SRC
 
 * Exemple complet (1/2)
@@ -70,9 +70,9 @@ toutes fonctions extérieures à la classe
     m_masse = masse_;
   }
   ...
-  particule electron;
-  electron.set_masse(0.511);
-  const double electron_masse = electron.get_masse();
+  particule my_electron;
+  my_electron.set_masse(0.511);
+  const double electron_masse = my_electron.get_masse();
 #+END_SRC
 
 * Intérêts de l'encapsulation

@@ -25,7 +25,7 @@
   #+BEGIN_SRC c++
     class particule
     {
-      // Déclaration de membres
+      // Déclaration de données membres
       double m_masse;
       double m_charge;
       ...
@@ -46,7 +46,7 @@
   #+BEGIN_SRC c++
     class particule
     {
-      // Déclaration de membres
+      // Déclaration de données membres
       double m_masse;
       double m_charge;
       ...
@@ -64,7 +64,7 @@
   #+BEGIN_SRC c++
     class particule
     {
-      // Déclaration de membres
+      // Déclaration de données membres
       double m_masse;
       double m_charge;
 
@@ -82,7 +82,7 @@
   #+BEGIN_SRC c++
     class particule
     {
-      // Déclaration de membres
+      // Déclaration de données membres
       double m_masse;
       double m_charge;
 
@@ -106,11 +106,11 @@
   int main()
   {
     // Instanciation d'objets de type particule
-    particule particule1, particule2;
+    particule my_electron, my_proton;
 
-    // Accès aux membres
-    particule1.initialise(0.511, -1.6e-19);
-    particule2.initialise(938.0, +1.6e-19);
+    // Accès aux données membres
+    my_electron.initialise(0.511, -1.6e-19);
+    my_proton.initialise(938.0, +1.6e-19);
   }
 #+END_SRC
 
@@ -121,16 +121,16 @@
   int main()
   {
     // Instanciation d'objets de type particule
-    particule * particule1 = new particule;
-    particule * particule2 = new particule;
+    particule * ptr_electron = new particule;
+    particule * ptr_proton = new particule;
 
-    // Accès aux membres
-    particule1->initialise(0.511, -1.6e-19);
-    particule2->initialise(938.0, +1.6e-19);
+    // Accès aux données membres
+    ptr_electron->initialise(0.511, -1.6e-19);
+    ptr_proton->initialise(938.0, +1.6e-19);
 
     ...
-    delete particule1;
-    delete particule2;
+    delete ptr_electron;
+    delete ptr_proton;
   }
 #+END_SRC
 
@@ -146,16 +146,16 @@
   #+BEGIN_SRC c++
     struct particule
     {
-      // Déclaration de membres
+      // Déclaration de données membres
       double m_masse;
       double m_charge;
       ...
     };
 
     // Instanciation d'objet de type particule
-    particule particule1, particule2;
+    particule my_electron, my_proton;
 
-    // Accès aux membres
-    particule1.m_masse  = 0.511;
-    particule1.m_charge = -1.6e-19;
+    // Accès aux données membres
+    my_electron.m_masse  = 0.511;
+    my_proton.m_charge = -1.6e-19;
   #+END_SRC
