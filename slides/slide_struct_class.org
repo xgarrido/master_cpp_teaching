@@ -53,7 +53,7 @@
     };
     ...
     // Instanciation d'objets de type particule
-    particule particule1, particule2;
+    particule my_electron, my_proton;
   #+END_SRC
 
 * Accès aux membres de la classe en \Cpp
