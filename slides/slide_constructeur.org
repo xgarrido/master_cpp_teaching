@@ -14,7 +14,7 @@
   - le destructeur est appelé à la destruction d'un objet.
 
 - constructeur \equiv *initialisation des membres* (gestion de l'allocation
-  dynamique de mémoire)
+  dynamique de mémoire, par exemple)
 
 - destructeur \equiv *ultimes opérations* (désallocation de la mémoire
   précédemment allouée)
@@ -63,8 +63,8 @@
   {
   }
   ...
-  particule my_particule1; // Constructeur par défaut
-  particule my_particule2(0.511, 1.6e-19);
+  particule my_electron; // Constructeur par défaut
+  particule my_positron(0.511, 1.6e-19);
 #+END_SRC
 
 * Destructeur de classe
