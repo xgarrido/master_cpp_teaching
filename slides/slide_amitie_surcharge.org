@@ -5,75 +5,47 @@
 #+STARTUP:     beamer
 #+LATEX_CLASS: cpp-slide
 
-* COMMENT Fonctions et classes amies
-
-- Du fait du principe d'encapsulation des données, les fonctions extérieures à
-  la classe n'ont pas accès aux membres privées de cette classe...
-
-- ... à l'exception des fonctions amies
-
-- Utilité : quasi nulle sauf pour quelques opérations (dont la surcharge
-  d'opérateur)
-
-* COMMENT Exemple de fonction amie d'une classe
-
-#+BEGIN_SRC c++
-  // Déclaration avec friend
-  class particule
-  {
-    friend void stupid_thing (particule & particule_);
-    ...
-  };
-  ...
-  // Définition
-  void stupid_thing (particule & particule_)
-  {
-    particule_.m_mass = 0.511;
-  }
-  ...
-  // Utilisation
-  int main ()
-  {
-    particule my_muon (105.6, -1.6e-19);
-    stupid_thing (my_muon);
-    // muon $\equiv$ électron ?? wtf !!
-  }
-#+END_SRC
-
-* COMMENT Classe amie d'une autre classe
-
-- Méthode d'une classe =B=, amie d'une autre classe =A=
-
-  #+BEGIN_SRC c++
-    class A
-    {
-      ...
-      friend void B::methode_de_B (A & A_);
-      ...
-    };
-   #+END_SRC
-
-- Classe =B= amie d'une autre classe =A=
-
-  #+BEGIN_SRC c++
-    class A
-    {
-      ...
-      friend class B;
-      ...
-    };
-   #+END_SRC
-
 * Surcharge d'opérateur
 
-- \Cpp permet de *surdéfinir les opérateurs* tels que ===, =+==, =++=, =<<=,
-  =new=...
+- \Cpp permet de *surdéfinir les opérateurs* tels que =+=, ===, =+==, =++=,
+  =<<=, =new=...
 
 - Fondamentalement, l'appel à un opérateur est identique à l'appel d'une
   fonction *\rightarrow possibilité de surdéfinir*
 
 - Le but est de définir ces "fonctions" pour des classes dépourvues de ces
   opérateurs
+* Exemple de surcharge de l'opérateur unaire =+==
+
+*Objectif* : réaliser ce type d'opération logique
+
+#+BEGIN_SRC c++
+  int main()
+  {
+    point my_point1(2, 3);
+    point my_point2(4, 5);
+    my_point1 += my_point2;
+  }
+#+END_SRC
+
+* Exemple de surcharge de l'opérateur unaire =+==
+
+#+BEGIN_SRC c++
+  // Déclaration
+  class point
+  {
+  public:
+    point();
+    point(const double x_, const double y_);
+    double x() const;
+    double y() const;
+
+
+  private:
+    double m_x;
+    double m_y;
+  };
+#+END_SRC
 
 * Exemple de surcharge de l'opérateur unaire =+==
 
@@ -97,12 +69,6 @@
 * Exemple de surcharge de l'opérateur unaire =+==
 
 #+BEGIN_SRC c++
-  // Déclaration
-  class point
-  {
-    ...
-  };
-
   // Définition
   point & point::operator+=(const point & point_)
   {
@@ -112,10 +78,12 @@
   }
 #+END_SRC
 
+#+BEGIN_CBOX
 #+BEGIN_CENTER
-*\rightarrow utilisation du pointeur =this= qui retourne* \\
-*l'adresse de l'objet courant*
+*\rightarrow utilisation du pointeur =this= qui retourne l'adresse de l'objet
+ courant*
 #+END_CENTER
+#+END_CBOX
 
 * Exemple de surcharge de l'opérateur unaire =+==
 
@@ -137,23 +105,16 @@
   }
 #+END_SRC
 
+#+BEGIN_CBOX
+#+BEGIN_CENTER
+*\rightarrow équivalent à l'usage d'une méthode =ajoute= s'utilisant de la façon
+ suivante =my_point1.ajoute(my_point2);=*
+#+END_CENTER
+#+END_CBOX
+
 * Exemple de surcharge de l'opérateur binaire =+=
 
 #+BEGIN_SRC c++
-  // Déclaration
-  class point
-  {
-    ...
-  };
-  point operator+(const point & point1_, const point & point2_);
-#+END_SRC
-#+BEAMER: \pause
-#+BEGIN_SRC c++
-  // Définition
-  point operator+(const point & point1_, const point & point2_)
-  {
-    return point(point1_.x() + point2_.x(), point1_.y() + point2_.y());
-  }
   int main()
   {
     point my_point1(2, 3);
@@ -161,11 +122,35 @@
     point my_point3 = my_point1 + my_point2;
   }
 #+END_SRC
+#+BEAMER: \pause
+#+BEGIN_SRC c++
+  // Déclaration
+  class point
+  {
+    ...
+  };
+  point operator+(const point & point1_, const point & point2_);
 
-* Opérateur d'affectation ===
+  // Définition
+  point operator+(const point & point1_, const point & point2_)
+  {
+    return point(point1_.x() + point2_.x(), point1_.y() + point2_.y());
+  }
+#+END_SRC
+
+* Opérateur d affectation ===
 
 - L'opérateur d'affectation === permet d'affecter une nouvelle valeur à un objet
   *déjà existant*
+
+  #+BEGIN_SRC c++
+    int main()
+    {
+      point my_point1(2, 3);
+      point my_point2(3, 4);
+      my_point2 = my_point1;
+    }
+  #+END_SRC
 
 - Sa surcharge se fait comme pour n'importe quel opérateur
 
@@ -175,16 +160,11 @@
     {
       point & operator=(const point & point_);
     };
-
-    // Utilisation
-    point my_point1(2, 3);
-    point my_point2(3, 4);
-    my_point2 = my_point1;
   #+END_SRC
 
 * Opérateur d'affectation ===
 
-- Rien n'empêche d'affecter un objet à lui-même
+- Rien n'empêche toutefois d'affecter un objet à lui-même
 
   #+BEGIN_SRC c++
     Point a;
@@ -213,6 +193,14 @@
   vers un autre objet du même type
 
   #+BEGIN_SRC c++
+    int main()
+    {
+      point my_point1(2, 3);
+      point my_point2 = my_point1;
+    }
+  #+END_SRC
+  #+BEAMER: \pause
+  #+BEGIN_SRC c++
     class point
     {
       point(const point & point_);
@@ -223,9 +211,6 @@
       m_x = point_.x();
       m_y = point_.y();
     }
-
-    point my_point1(2, 3);
-    point my_point2 = my_point1;
   #+END_SRC
 
 * Constructeur de recopie et opérateur d'affectation ===
@@ -249,3 +234,69 @@
         pas_de_copie & operator=(const pas_de_copie&);
       };
     #+END_SRC
+* Annexes
+:PROPERTIES:
+:BEAMER_OPT: plain
+:BEAMER_ENV: fullframe
+:END:
+
+#+BEAMER: \partpage
+
+* Fonctions et classes amies
+
+- Du fait du principe d'encapsulation des données, les fonctions extérieures à
+  la classe n'ont pas accès aux membres privées de cette classe...
+
+- ... à l'exception des fonctions amies
+
+- Utilité : quasi nulle sauf pour quelques opérations (dont la surcharge
+  d'opérateur)
+
+* Exemple de fonction amie d'une classe
+
+#+BEGIN_SRC c++
+  // Déclaration avec friend
+  class particule
+  {
+    friend void stupid_thing(particule & particule_);
+    ...
+  };
+  ...
+  // Définition
+  void stupid_thing(particule & particule_)
+  {
+    particule_.m_mass = 0.511;
+  }
+  ...
+  // Utilisation
+  int main()
+  {
+    particule my_muon(105.6, -1.6e-19);
+    stupid_thing(my_muon);
+    // muon $\equiv$ électron ?? wtf !!
+  }
+#+END_SRC
+
+* Classe amie d'une autre classe
+
+- Méthode d'une classe =B=, amie d'une autre classe =A=
+
+  #+BEGIN_SRC c++
+    class A
+    {
+      ...
+      friend void B::methode_de_B(A & A_);
+      ...
+    };
+   #+END_SRC
+
+- Classe =B= amie d'une autre classe =A=
+
+  #+BEGIN_SRC c++
+    class A
+    {
+      ...
+      friend class B;
+      ...
+    };
+   #+END_SRC
