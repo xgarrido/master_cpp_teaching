@@ -9,7 +9,7 @@ BATCH=$(EMACS) --batch --no-init-file						\
 		--eval '(org-babel-load-file "../README.org")'                  \
 		--eval '(org-babel-tangle-file "../README.org")'
 
-files_org = $(wildcard *.org)
+files_org = $(filter-out slide_book.org, $(wildcard *.org))
 files_pdf = $(files_org:.org=.pdf)
 
 all: $(files_pdf)
