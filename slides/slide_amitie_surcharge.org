@@ -167,8 +167,8 @@
 - Rien n'empêche toutefois d'affecter un objet à lui-même
 
   #+BEGIN_SRC c++
-    Point a;
-    a = a;
+    point my_point;
+    my_point = my_point;
   #+END_SRC
 
 - Lorsque cette "affectation" risque de corrompre l'objet, utiliser un
@@ -179,8 +179,8 @@
     point & point::operator=(const point & point_)
     {
       if (&point_ != this) { // garde-fou
-        m_x = p.x();
-        m_y = p.y();
+        m_x = point_.x();
+        m_y = point_.y();
       }
       return *this;
     }
