@@ -138,7 +138,7 @@
   }
 #+END_SRC
 
-* Opérateur d affectation ===
+* Opérateur d'affectation ===
 
 - L'opérateur d'affectation === permet d'affecter une nouvelle valeur à un objet
   *déjà existant*
