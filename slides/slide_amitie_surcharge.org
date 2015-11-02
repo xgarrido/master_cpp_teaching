@@ -178,11 +178,10 @@
     // Définition
     point & point::operator=(const point & point_)
     {
-      if (&point_ != this) // garde-fou
-        {
-          m_x = p.x();
-          m_y = p.y();
-        }
+      if (&point_ != this) { // garde-fou
+        m_x = p.x();
+        m_y = p.y();
+      }
       return *this;
     }
   #+END_SRC
