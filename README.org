@@ -1292,23 +1292,24 @@ up. Practically, everything can be done within this section.
 #+END_SRC
 *** Markup filters
 #+BEGIN_SRC emacs-lisp
-  (defun cpp-filter-latex-fragment (contents backend info)
+  (defun html::cpp-filter-latex-fragment (contents backend info)
     (when (eq backend 'html)
       (replace-regexp-in-string "\\\\Cpp" "C++" contents)))
-  (add-to-list 'org-export-filter-latex-fragment-functions 'cpp-filter-latex-fragment)
-  (defun cpp-filter-link (contents backend info)
+  (add-to-list 'org-export-filter-latex-fragment-functions 'html::cpp-filter-latex-fragment)
+  (defun html::cpp-filter-link (contents backend info)
     (when (eq backend 'html)
       (replace-regexp-in-string ".pdf" ".html" contents)))
-  (add-to-list 'org-export-filter-link-functions 'cpp-filter-link)
-  (defun cpp-filter-headline (contents backend info)
+  (add-to-list 'org-export-filter-link-functions 'html::cpp-filter-link)
+  (defun html::cpp-filter-headline (contents backend info)
     (when (eq backend 'html)
       (replace-regexp-in-string "</h1>" "</h1><hr/>"
-      (replace-regexp-in-string "Footnotes:" "" contents))))
-  (add-to-list 'org-export-filter-final-output-functions 'cpp-filter-headline)
-  (defun cpp-filter-empty-field (backend)
+      (replace-regexp-in-string "class=\"PROMPT\"" "class=\"prompt\""
+      (replace-regexp-in-string "Footnotes:" "Notes :" contents)))))
+  (add-to-list 'org-export-filter-final-output-functions 'html::cpp-filter-headline)
+  (defun html::cpp-filter-empty-field (backend)
     (when (eq backend 'html)
       (delete-matching-lines "<empty>")))
-  (add-to-list 'org-export-before-parsing-hook 'cpp-filter-empty-field)
+  (add-to-list 'org-export-before-parsing-hook 'html::cpp-filter-empty-field)
 #+END_SRC
 *** Publish =cpp= project
 #+BEGIN_SRC emacs-lisp
