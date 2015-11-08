@@ -1326,7 +1326,9 @@ up. Practically, everything can be done within this section.
   (require 'cl)
   (setq org-babel-latex-htlatex "htlatex")
   (defmacro by-backend (&rest body)
-    `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
+    `(case org-export-current-backend ,@body))
+  ;; (defmacro by-backend (&rest body)
+  ;;   `(case (if (boundp 'backend) (org-export-backend-name backend) nil) ,@body))
 #+END_SRC
 *** CSS stylesheets
 **** Main stylesheets
