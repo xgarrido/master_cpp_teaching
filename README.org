@@ -1489,6 +1489,10 @@ up. Practically, everything can be done within this section.
       margin-right:auto;
   }
 
+  .figure {
+      text-align: center;
+  }
+
   header {
       width:270px;
       float:left;
