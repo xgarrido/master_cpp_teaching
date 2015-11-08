@@ -3,7 +3,9 @@
 org_path="/home/garrido/Teachdir/C++"
 org_file="${org_path}/notes/notes.org"
 org_date="2015/2016"
-
+if [ ! -z $1 ]; then
+    org_date=$1
+fi
 
 function generate_header ()
 {

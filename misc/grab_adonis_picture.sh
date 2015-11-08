@@ -3,6 +3,9 @@
 org_path="/home/garrido/Teachdir/C++"
 org_file="${org_path}/notes/notes.org"
 org_date="2015/2016"
+if [ ! -z $1 ]; then
+    org_date=$1
+fi
 
 adonis_http="http://adonis.u-psud.fr/users"
 adonis_pics_path="${org_path}/misc/pictures/${org_date/\//_}"
