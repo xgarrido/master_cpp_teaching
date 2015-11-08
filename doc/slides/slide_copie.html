@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Copie d&rsquo;objets</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Copie d&rsquo;objets</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -64,12 +65,12 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Copie d&rsquo;objets</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Rappel : passage par valeur, par référence</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
-</div><div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">Passage par valeur</h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Rappel : passage par valeur, par référence</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Passage par valeur</h3>
+<div class="outline-text-3" id="text-orgheadline1">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">f</span>(<span class="org-type">int</span> <span class="org-variable-name">i</span>)
@@ -97,9 +98,9 @@ main : 0
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Passage par référence</h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Passage par référence</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">g</span>(<span class="org-type">int</span>&amp; <span class="org-variable-name">i</span>)
@@ -129,12 +130,12 @@ main : 10
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Passage d&rsquo;objets par valeur, par référence</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
-</div><div id="outline-container-unnumbered-5" class="outline-3">
-<h3 id="unnumbered-5">Passage par valeur</h3>
-<div class="outline-text-3" id="text-unnumbered-5">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Passage d&rsquo;objets par valeur, par référence</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Passage par valeur</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">f</span>(<span class="org-type">Complexe</span> <span class="org-variable-name">z</span>)
@@ -164,9 +165,9 @@ main : (1 + 0.5i)
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-6" class="outline-3">
-<h3 id="unnumbered-6">Passage par référence</h3>
-<div class="outline-text-3" id="text-unnumbered-6">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Passage par référence</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">g</span>(<span class="org-type">Complexe</span>&amp; <span class="org-variable-name">z</span>)
@@ -198,13 +199,13 @@ main : (2 + 3i)
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Passage d&rsquo;objets par valeur, par référence</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Passage d&rsquo;objets par valeur, par référence</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 </div>
-<div id="outline-container-unnumbered-8" class="outline-3">
-<h3 id="unnumbered-8">Passage par valeur</h3>
-<div class="outline-text-3" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Passage par valeur</h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">f</span>(<span class="org-type">Complexe</span> <span class="org-variable-name">z</span>)
@@ -230,9 +231,9 @@ L&rsquo;objet est copié
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-9" class="outline-3">
-<h3 id="unnumbered-9">Passage par référence constante</h3>
-<div class="outline-text-3" id="text-unnumbered-9">
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Passage par référence constante</h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">void</span> <span class="org-function-name">g</span>(<span class="org-keyword">const</span> <span class="org-type">Complexe</span>&amp; <span class="org-variable-name">z</span>)
@@ -260,9 +261,9 @@ Une copie inutile est évitée
 </div>
 </div>
 
-<div id="outline-container-unnumbered-10" class="outline-2">
-<h2 id="unnumbered-10">Objets constants</h2>
-<div class="outline-text-2" id="text-unnumbered-10">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Objets constants</h2>
+<div class="outline-text-2" id="text-orgheadline10">
 <p>
 Le mot-clé <code>const</code> interdit la modification de l&rsquo;objet auquel il s&rsquo;applique.
 </p>
@@ -290,9 +291,9 @@ Le compilateur doit savoir quelles méthodes modifient l&rsquo;objet.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-11" class="outline-2">
-<h2 id="unnumbered-11">Méthodes et &ldquo;<code>const</code>-correctness&rdquo;</h2>
-<div class="outline-text-2" id="text-unnumbered-11">
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Méthodes et &ldquo;<code>const</code>-correctness&rdquo;</h2>
+<div class="outline-text-2" id="text-orgheadline11">
 <p>
 Le prototype d&rsquo;une méthode doit se terminer par <code>const</code> si celle-ci ne
 modifie pas l&rsquo;objet :
@@ -312,19 +313,17 @@ modifie pas l&rsquo;objet :
 </div>
 
 <ul class="org-ul">
-<li>Par défaut les méthodes peuvent modifier l&rsquo;objet.
-</li>
+<li>Par défaut les méthodes peuvent modifier l&rsquo;objet.</li>
 
 <li>En cas d&rsquo;oubli de <code>const</code>, la méthode ne peut donc pas être utilisée sur des
-objets constants.
-</li>
+objets constants.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-12" class="outline-2">
-<h2 id="unnumbered-12">Copier un objet</h2>
-<div class="outline-text-2" id="text-unnumbered-12">
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">Copier un objet</h2>
+<div class="outline-text-2" id="text-orgheadline12">
 <p>
 La copie est la création d&rsquo;un nouvel objet ayant la même valeur qu&rsquo;un objet
 existant.
@@ -347,9 +346,9 @@ existant.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-13" class="outline-2">
-<h2 id="unnumbered-13">Copier un objet : le constructeur de copie</h2>
-<div class="outline-text-2" id="text-unnumbered-13">
+<div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">Copier un objet : le constructeur de copie</h2>
+<div class="outline-text-2" id="text-orgheadline13">
 <p>
 Exemple de définition d&rsquo;un constructeur de copie :
 </p>
@@ -370,19 +369,17 @@ Exemple de définition d&rsquo;un constructeur de copie :
 
 <ul class="org-ul">
 <li>En l&rsquo;absence de constructeur de copie le compilateur en génère un
-automatiquement : il copie une à une les valeurs des membres.
-</li>
+automatiquement : il copie une à une les valeurs des membres.</li>
 
 <li>Lorsqu&rsquo;une classe gère de la mémoire allouée dynamiquement, un constructeur de
-copie est donc <b>indispensable</b>.
-</li>
+copie est donc <b>indispensable</b>.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-14" class="outline-2">
-<h2 id="unnumbered-14">Exemple de copie inévitable</h2>
-<div class="outline-text-2" id="text-unnumbered-14">
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Exemple de copie inévitable</h2>
+<div class="outline-text-2" id="text-orgheadline14">
 <p>
 Parfois on ne peut pas éviter de copier un objet :
 </p>
@@ -406,17 +403,17 @@ La valeur de retour de <code>f</code> est copiée dans le nouvel objet <code>z</
 </div>
 </div>
 
-<div id="outline-container-unnumbered-15" class="outline-2">
-<h2 id="unnumbered-15">Exemple de copie évitable</h2>
-<div class="outline-text-2" id="text-unnumbered-15">
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">Exemple de copie évitable</h2>
+<div class="outline-text-2" id="text-orgheadline15">
 <p>
 Mais on peut souvent éviter des copies inutiles :
 </p>
 </div>
 
-<div id="outline-container-unnumbered-16" class="outline-3">
-<h3 id="unnumbered-16">Copie inutile</h3>
-<div class="outline-text-3" id="text-unnumbered-16">
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Copie inutile</h3>
+<div class="outline-text-3" id="text-orgheadline16">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">Complexe</span> <span class="org-function-name">f</span>()
@@ -436,9 +433,9 @@ fonction.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-17" class="outline-3">
-<h3 id="unnumbered-17">Sans copie inutile</h3>
-<div class="outline-text-3" id="text-unnumbered-17">
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Sans copie inutile</h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">Complexe</span> <span class="org-function-name">f</span>()

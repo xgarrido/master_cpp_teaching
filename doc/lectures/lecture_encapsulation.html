@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Encapsulation des données</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Encapsulation des données</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -68,20 +69,19 @@ L&rsquo;encapsulation, littéralement la mise sous capsule, consiste à interdir
 l&rsquo;accès de certains membres d&rsquo;une classe à toutes fonctions extérieures à la
 classe. En d&rsquo;autres termes, il n&rsquo;est pas possible d&rsquo;agir <b>directement</b> sur les
 données d&rsquo;un objet, toutes modifications des membres de l&rsquo;objet se faisant par
-<b>l&rsquo;intermédiaire</b> des méthodes associées.
+<b>l'intermédiaire</b> des méthodes associées.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Intérêt de l&rsquo;encapsulation</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
-</div><div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">Avantages</h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Intérêt de l&rsquo;encapsulation</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Avantages</h3>
+<div class="outline-text-3" id="text-orgheadline1">
 <ul class="org-ul">
 <li>Lors de la programmation et surtout de la réutilisation d&rsquo;un objet dans un
 autre programme, l&rsquo;encapsulation empêche la modification non voulu des données
-membres,
-</li>
+membres,</li>
 
 <li>L&rsquo;objet, vu de l&rsquo;extérieur, n&rsquo;est caractérisé que par ses méthodes. La manière
 dont elles fonctionnent (<i>i.e.</i> les rouages à l&rsquo;intérieur de l&rsquo;objet) n&rsquo;a
@@ -89,18 +89,14 @@ pas d&rsquo;importance. Ainsi :
 
 <ol class="org-ol">
 <li>l&rsquo;objet est plus facile à utiliser pour quelqu&rsquo;un d&rsquo;extérieur, il lui
-suffit d&rsquo;utiliser les méthodes.
-</li>
+suffit d&rsquo;utiliser les méthodes.</li>
 
 <li>la maintenance et l&rsquo;amélioration de l&rsquo;objet est grandement facilitée. Tant
 que la finalité des méthodes ne change pas, on peut modifier les rouages
-sans perturber pour autant les utilisateurs de la classe.
-</li>
+sans perturber pour autant les utilisateurs de la classe.</li>
 
-<li>l&rsquo;objet est facilement réutilisable.
-</li>
-</ol>
-</li>
+<li>l&rsquo;objet est facilement réutilisable.</li>
+</ol></li>
 </ul>
 
 <p>
@@ -111,9 +107,9 @@ les données étant finalement sans importance<sup><a id="fnr.1" class="footref"
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Inconvénients</h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Inconvénients</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 De prime abord, peut paraître inutile et lourd à utiliser
 </p>
@@ -121,9 +117,9 @@ De prime abord, peut paraître inutile et lourd à utiliser
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Syntaxe</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Syntaxe</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 Les mots clés sont <code>private</code> et <code>public</code> <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.
 </p>
@@ -147,21 +143,19 @@ Les mots clés sont <code>private</code> et <code>public</code> <sup><a id="fnr.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Utilisation</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Utilisation</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Tout objet bien conçu doit encapsuler ses membres. En pratique cela nécessite :
 </p>
 
 <ul class="org-ul">
 <li>des méthodes <b>pour accéder</b> aux valeurs des membres encapsulés (dans l&rsquo;exemple
-précédent, il s&rsquo;agit de <code>get_x()</code> et <code>get_y()</code>),
-</li>
+précédent, il s&rsquo;agit de <code>get_x()</code> et <code>get_y()</code>),</li>
 
 <li>des méthodes <b>pour modifier</b> les membres (la méthode <code>initialise(int,int)</code>
-  permet une telle modification).
-</li>
+  permet une telle modification).</li>
 </ul>
 <p>
 Dans l&rsquo;exemple précédent, pour accéder au membre <code>m_X</code> on écrira
@@ -194,18 +188,18 @@ clé <code>private</code> n&rsquo;est pas nécessaire dans la déclaration de la
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 une telle notion est communément appelée &ldquo;abstraction des données&rdquo;
 exprimant le fait que les détails de l&rsquo;implémentation demeurent cachés
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 ainsi que <code>protected</code> qui est intermédiaire et qui s&rsquo;utilise pour les
 classes dérivées.
-</p></div>
+</p></div></div>
 
 
 </div>

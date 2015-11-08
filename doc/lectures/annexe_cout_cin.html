@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Écriture/lecture sur l&rsquo;entrée/sortie standard</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Écriture/lecture sur l&rsquo;entrée/sortie standard</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Écriture/lecture sur l&rsquo;entrée/sortie standard</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Rappel sur les fonction <code>printf</code> et <code>scanf</code> du C</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Rappel sur les fonction <code>printf</code> et <code>scanf</code> du C</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 <code>printf</code> et <code>scanf</code> sont deux fonctions de la bibliothèque standard du langage
 C. Déclarée dans l&rsquo;entête <code>&lt;stdio.h&gt;</code>, <code>printf</code> permet l&rsquo;affichage d&rsquo;une chaîne
@@ -137,12 +118,10 @@ où :
 </p>
 
 <ul class="org-ul">
-<li><code>const char * format</code> est une chaîne de caractère,
-</li>
+<li><code>const char * format</code> est une chaîne de caractère,</li>
 
 <li><code>...</code> signifient que ces fonctions sont variadiques <i>i.e</i> que ces fonctions
-peuvent un nombre variable de paramètres.
-</li>
+peuvent un nombre variable de paramètres.</li>
 </ul>
 
 <p>
@@ -176,58 +155,58 @@ ou avec plusieurs paramètres
 </div>
 <p>
 où <code>%d</code> est la spécification de format pour les entiers et <code>i</code> est son
-argument. Le tableau <a href="#tab::specPrintf">1</a> présente les différents formats en fonction
+argument. Le tableau <a href="#orgtable1">1</a> présente les différents formats en fonction
 des types de variables.
 </p>
 
-<table id="tab::specPrintf" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption class="t-above"><span class="table-number">Table 1:</span> <b>Format d&rsquo;écriture en fonction du type de variable à afficher.</b></caption>
+<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> <b>Format d'écriture en fonction du type de variable à afficher.</b></caption>
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">Type</th>
-<th scope="col" class="left">Format</th>
+<th scope="col" class="org-left">Type</th>
+<th scope="col" class="org-left">Format</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left"><code>int</code></td>
-<td class="left"><code>%d</code></td>
+<td class="org-left"><code>int</code></td>
+<td class="org-left"><code>%d</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>long</code></td>
-<td class="left"><code>%ld</code></td>
+<td class="org-left"><code>long</code></td>
+<td class="org-left"><code>%ld</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>float/double</code></td>
-<td class="left"><code>%f/%lf</code></td>
+<td class="org-left"><code>float/double</code></td>
+<td class="org-left"><code>%f/%lf</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>char</code></td>
-<td class="left"><code>%c</code></td>
+<td class="org-left"><code>char</code></td>
+<td class="org-left"><code>%c</code></td>
 </tr>
 
 <tr>
-<td class="left">string (<code>char*</code>)</td>
-<td class="left"><code>%s</code></td>
+<td class="org-left">string (<code>char*</code>)</td>
+<td class="org-left"><code>%s</code></td>
 </tr>
 
 <tr>
-<td class="left">pointeur (<code>void*</code>)</td>
-<td class="left"><code>%p</code></td>
+<td class="org-left">pointeur (<code>void*</code>)</td>
+<td class="org-left"><code>%p</code></td>
 </tr>
 
 <tr>
-<td class="left">entier hexadécimal</td>
-<td class="left"><code>%x</code></td>
+<td class="org-left">entier hexadécimal</td>
+<td class="org-left"><code>%x</code></td>
 </tr>
 </tbody>
 </table>
@@ -267,14 +246,14 @@ sera ainsi enregistrée à l&rsquo;adresse de la variable <code>nombre</code>, d
 <p>
 Tout comme <code>printf</code> propose différents formats en fonction du type de variable,
 il est possible de capturer plusieurs types de données avec la fonction
-scanf (<i>cf.</i> Tableau <a href="#tab::specPrintf">1</a>).
+scanf (<i>cf.</i> Tableau <a href="#orgtable1">1</a>).
 </p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Les nouvelles possibilités d&rsquo;entrée/sortie du C++</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Les nouvelles possibilités d&rsquo;entrée/sortie du C++</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Les commandes d&rsquo;entrée sortie <code>cout</code> / <code>cin</code> du C++ n&rsquo;ont <b>pas besoin de
 spécification de format</b>, elles prennent en charge le formatage des variables à
@@ -282,9 +261,9 @@ afficher ou à affecter par l&rsquo;utilisateur.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-4">
-<h4 id="unnumbered-3">Syntaxe</h4>
-<div class="outline-text-4" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Syntaxe</h4>
+<div class="outline-text-4" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++">cout &lt;&lt; VariableAfficherNum1 &lt;&lt; VariableAfficherNum2 &lt;&lt;  ... ;
@@ -316,15 +295,14 @@ cin &gt;&gt; j ;
 </div>
 
 
-<div id="outline-container-unnumbered-4" class="outline-4">
-<h4 id="unnumbered-4">Remarques</h4>
-<div class="outline-text-4" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Remarques</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 <ul class="org-ul">
 <li>La bibliothèque qui contient entre autre <code>cout</code> et <code>cin</code>
 est <code>iostream</code>, il faut donc l&rsquo;inclure dans le programme par
 <code>#include &lt;iostream&gt;</code>. Elle remplace la librairie standard
-<code>stdio.h</code> utilisée en langage&nbsp;C.
-</li>
+<code>stdio.h</code> utilisée en langage&nbsp;C.</li>
 
 <li><p>
 Il est nécessaire d&rsquo;ajouter au début du code la commande suivante
@@ -336,18 +314,16 @@ Il est nécessaire d&rsquo;ajouter au début du code la commande suivante
 </div>
 <p>
 pour utiliser les entrées-sorties directement via <code>cout=/=cin</code>. Sinon, il faut
-utiliser l&rsquo;opérateur de portée <code>::</code> pour écrire <code>std::cout</code> (<i>cf.</i> <a href="lecture_specificite_c++.html">&ldquo;Fiches sur
-les spécificités du C++&rdquo;</a>).
-</p>
-</li>
+utiliser l&rsquo;opérateur de portée <code>::</code> pour écrire <code>std::cout</code> (<i>cf.</i> <a href="lecture_specificite_c++.html">"Fiches sur
+les spécificités du C++"</a>).
+</p></li>
 
 <li>Le saut de ligne caractérisé par la commande <code>\n</code> peut également être remplacé
 par l&rsquo;opérateur <code>endl</code>. L&rsquo;utilisation de <code>endl</code> apporte une plus grande
 lisibilité au code. Par ailleurs, la grande majorité des opérations liées à la
 présentation (<code>\t</code> pour tabulation &#x2026;) sont regroupées dans la librairie
 <code>iomanip</code>, la synthaxe propre au langage C restant, en tout état de cause,
-valable.
-</li>
+valable.</li>
 </ul>
 </div>
 </div>

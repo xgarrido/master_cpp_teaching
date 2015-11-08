@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Héritage (Partie 2) : Méthodes virtuelles &amp; Classes abstraites</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Héritage (Partie 2) : Méthodes virtuelles &amp; Classes abstraites</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Héritage (Partie 2) : Méthodes virtuelles &amp; Classes abstraites</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Rappel sur l&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Rappel sur l&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr"> 1: </span><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -132,9 +113,11 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Rappel sur l&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Rappel sur l&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr"> 1: </span><span class="org-constant">polygone</span>::<span class="org-function-name">polygone</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">nbr_segment_</span>) :
@@ -152,12 +135,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Liaisons statiques</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
-</div><div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -170,9 +153,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-5" class="outline-3">
-<h3 id="unnumbered-5">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-unnumbered-5">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
@@ -183,12 +166,16 @@ for the JavaScript code in this tag.
 };
 </pre>
 </div>
+
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-3">
-<h3 id="unnumbered-6">Programme principal</h3>
-<div class="outline-text-3" id="text-unnumbered-6">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Programme principal</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
@@ -201,22 +188,26 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 
-<div class="center">
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
+
+<div class="org-center">
 <p>
 <b>Comportement souhaité car le compilateur connait, lors de la compilation, le
- type d&rsquo;objet instancié</b>
+ type d'objet instancié</b>
 </p>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Liaisons statiques</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
-</div><div id="outline-container-unnumbered-8" class="outline-3">
-<h3 id="unnumbered-8">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-8">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+</div><div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -229,9 +220,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-9" class="outline-3">
-<h3 id="unnumbered-9">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-unnumbered-9">
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
@@ -242,12 +233,16 @@ for the JavaScript code in this tag.
 };
 </pre>
 </div>
+
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-10" class="outline-3">
-<h3 id="unnumbered-10">Programme principal</h3>
-<div class="outline-text-3" id="text-unnumbered-10">
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Programme principal</h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
@@ -263,12 +258,12 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-11" class="outline-2">
-<h2 id="unnumbered-11">Liaisons statiques</h2>
-<div class="outline-text-2" id="text-unnumbered-11">
-</div><div id="outline-container-unnumbered-12" class="outline-3">
-<h3 id="unnumbered-12">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-12">
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Liaisons statiques</h2>
+<div class="outline-text-2" id="text-orgheadline14">
+</div><div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline11">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -281,9 +276,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-13" class="outline-3">
-<h3 id="unnumbered-13">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-unnumbered-13">
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-orgheadline12">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
@@ -294,12 +289,16 @@ for the JavaScript code in this tag.
 };
 </pre>
 </div>
+
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-14" class="outline-3">
-<h3 id="unnumbered-14">Programme principal</h3>
-<div class="outline-text-3" id="text-unnumbered-14">
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Programme principal</h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
@@ -312,22 +311,26 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 
-<div class="center">
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
+
+<div class="org-center">
 <p>
 <b>Comportement non souhaité car le compilateur ne connait pas, lors de la
- compilation, le type d&rsquo;objet alloué : <span class="underline">liaison statique</span></b>
+ compilation, le type d'objet alloué : <span class="underline">liaison statique</span></b>
 </p>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-15" class="outline-2">
-<h2 id="unnumbered-15">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-unnumbered-15">
-</div><div id="outline-container-unnumbered-16" class="outline-3">
-<h3 id="unnumbered-16">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-16">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-orgheadline18">
+</div><div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline15">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -340,9 +343,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-17" class="outline-3">
-<h3 id="unnumbered-17">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-unnumbered-17">
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-orgheadline16">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
@@ -353,12 +356,16 @@ for the JavaScript code in this tag.
 };
 </pre>
 </div>
+
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-18" class="outline-3">
-<h3 id="unnumbered-18">Programme principal</h3>
-<div class="outline-text-3" id="text-unnumbered-18">
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Programme principal</h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">int</span> <span class="org-function-name">main</span>()
@@ -371,20 +378,24 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 
-<div class="center">
 <p>
-<b>L&rsquo;utilisation d&rsquo;une liaison dynamique via le mot-clé <code>virtual</code> indique au
-compilateur que le choix de la méthode ne s&rsquo;effectuera qu&rsquo;à l&rsquo;exécution du code</b>
+:BEAMER_ENV: ignoreheading
+</p>
+
+<div class="org-center">
+<p>
+<b>L'utilisation d'une liaison dynamique via le mot-clé <code>virtual</code> indique au
+compilateur que le choix de la méthode ne s'effectuera qu'à l'exécution du code</b>
 </p>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-19" class="outline-2">
-<h2 id="unnumbered-19">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-unnumbered-19">
-<div class="center">
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Liaisons dynamiques &amp; Méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-orgheadline19">
+<div class="org-center">
 <p>
 Le processus de virtualisation permet ainsi de <b>redéfinir</b> des méthodes suivant
 la finalité de la classe fille
@@ -392,9 +403,9 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-unnumbered-20" class="outline-3">
-<h3 id="unnumbered-20">Classe <code>polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-20">
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20">Classe <code>polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline20">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -415,9 +426,9 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-unnumbered-21" class="outline-3">
-<h3 id="unnumbered-21">Classe <code>rectangle</code></h3>
-<div class="outline-text-3" id="text-unnumbered-21">
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21">Classe <code>rectangle</code></h3>
+<div class="outline-text-3" id="text-orgheadline21">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">rectangle</span> : <span class="org-keyword">public</span> <span class="org-type">polygone</span>
@@ -429,7 +440,7 @@ la finalité de la classe fille
 
 <span class="org-type">void</span> <span class="org-constant">rectangle</span>::<span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>
 {
-  <span class="org-constant">polygone</span>::affiche ();
+  <span class="org-constant">polygone</span>::affiche();
   cout &lt;&lt; <span class="org-string">"Longueur = "</span> &lt;&lt; m_longueur &lt;&lt; endl;
        &lt;&lt; <span class="org-string">"Largeur  = "</span> &lt;&lt; m_largeur &lt;&lt; endl;
 }
@@ -439,48 +450,44 @@ la finalité de la classe fille
 </div>
 </div>
 
-<div id="outline-container-unnumbered-22" class="outline-2">
-<h2 id="unnumbered-22">Classes abstraites</h2>
-<div class="outline-text-2" id="text-unnumbered-22">
+<div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22">Classes abstraites</h2>
+<div class="outline-text-2" id="text-orgheadline22">
 <ul class="org-ul">
 <li>La notion de liaison dynamique permet de redéfinir une méthode au sein de
-classes filles : on parle de <b>méthodes virtuelles</b>
-</li>
+classes filles : on parle de <b>méthodes virtuelles</b></li>
 
 <li>C++ permet la déclaration de <b>méthodes virtuelles pures</b> c&rsquo;est-à-dire des
-méthodes dont <b>la définition n&rsquo;est pas donnée</b>
-</li>
+méthodes dont <b>la définition n'est pas donnée</b></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-23" class="outline-2">
-<h2 id="unnumbered-23">Classes abstraites</h2>
-<div class="outline-text-2" id="text-unnumbered-23">
+<div id="outline-container-orgheadline23" class="outline-2">
+<h2 id="orgheadline23">Classes abstraites</h2>
+<div class="outline-text-2" id="text-orgheadline23">
 <p>
 Exemple du jeu d&rsquo;échec :
 </p>
 <ul class="org-ul">
 <li>La classe <code>piece</code> est par construction <b>une classe abstraite</b> : elle déclare
-des méthodes <code>affiche()</code>, <code>deplacement()</code> mais ne les définit pas
-</li>
+des méthodes <code>affiche()</code>, <code>deplacement()</code> mais ne les définit pas</li>
 
 <li>La définition n&rsquo;intervient que dans les classes dérivées qui spécialisent les
-méthodes en fonction de leur besoin
-</li>
+méthodes en fonction de leur besoin</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-24" class="outline-2">
-<h2 id="unnumbered-24">Classes abstraites</h2>
-<div class="outline-text-2" id="text-unnumbered-24">
+<div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24">Classes abstraites</h2>
+<div class="outline-text-2" id="text-orgheadline24">
 </div>
 </div>
 
-<div id="outline-container-unnumbered-25" class="outline-2">
-<h2 id="unnumbered-25">Classes abstraites</h2>
-<div class="outline-text-2" id="text-unnumbered-25">
+<div id="outline-container-orgheadline25" class="outline-2">
+<h2 id="orgheadline25">Classes abstraites</h2>
+<div class="outline-text-2" id="text-orgheadline25">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"pion.h"</span>
@@ -501,7 +508,7 @@ méthodes en fonction de leur besoin
 </pre>
 </div>
 
-<div class="center">
+<div class="org-center">
 <p>
 Étant donné le canevas fourni par la déclaration de la classe <code>piece</code>, libre à
 chacun de développer, de façon indépendante, sa propre implémentation de <code>piece</code>

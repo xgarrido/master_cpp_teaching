@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Introduction à la librairie standard</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Introduction à la librairie standard</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Introduction à la librairie standard</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">La librairie standard STL</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">La librairie standard STL</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 La librairie standard STL (<i>Standard Template Library</i>) du C++ fournit <b>un
 ensemble de containers</b> en exploitant très largement les mécanismes étendus du
@@ -117,14 +98,11 @@ C++ par rapport au C
 
 <ul class="org-ul">
 <li>l&rsquo;approche objet et les capacités d&rsquo;abstraction en particulier sur les
-opérateurs,
-</li>
+opérateurs,</li>
 
-<li>la surdéfinition des opérateurs,
-</li>
+<li>la surdéfinition des opérateurs,</li>
 
-<li>les patrons ou templates.
-</li>
+<li>les patrons ou templates.</li>
 </ul>
 
 <p>
@@ -133,7 +111,7 @@ manipulation aisée de ces nouveaux containers (initialisation, recherche de
 valeurs &#x2026;)
 </p>
 
-<div class="center">
+<div class="org-center">
 <p>
 <a href="http://www.sgi.com/tech/stl/table_of_contents.html">http://www.sgi.com/tech/stl/table_of_contents.html</a>
 </p>
@@ -141,9 +119,9 @@ valeurs &#x2026;)
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">La classe <code>string</code></h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 En C, une chaîne de caractère se présente sous la forme d&rsquo;un tableau
 de caractères
@@ -168,9 +146,9 @@ mémoire).
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">La classe <code>string</code></h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Utilisation de la classe <code>string</code> en C++
 </p>
@@ -178,24 +156,23 @@ Utilisation de la classe <code>string</code> en C++
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;string&gt;</span>
-<span class="org-type">int</span> <span class="org-function-name">main</span> ()
+<span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">Assignation/copie de strings</span>
   <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string1</span> = <span class="org-string">"abcd"</span>;
   <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string2</span> = my_string1;
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Initialisation de strings</span>
-  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string3</span> (my_string2);
+  <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">my_string3</span>(my_string2);
   ...
-}
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">La classe <code>string</code></h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">La classe <code>string</code></h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Concat&#233;nation</span>
@@ -204,50 +181,44 @@ my_string2 += <span class="org-string">"abcd"</span>;
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">Comparaison</span>
 <span class="org-keyword">const</span> <span class="org-type">bool</span> <span class="org-variable-name">are_equal</span> = (my_string1 == my_string2);
-<span class="org-keyword">if</span> (are_equal)
-  {
-    <span class="org-constant">std</span>::cout &lt;&lt; my_string1 &lt;&lt; <span class="org-string">" est identique &#224; "</span> &lt;&lt; my_string2 &lt;&lt; <span class="org-constant">std</span>::endl;
-  }
+<span class="org-keyword">if</span> (are_equal) {
+  <span class="org-constant">std</span>::cout &lt;&lt; my_string1 &lt;&lt; <span class="org-string">" est identique &#224; "</span> &lt;&lt; my_string2 &lt;&lt; <span class="org-constant">std</span>::endl;
+}
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">Longueur d'une string</span>
-<span class="org-type">size_t</span> <span class="org-variable-name">size</span> = my_string1.size ();
+<span class="org-type">size_t</span> <span class="org-variable-name">size</span> = my_string1.size();
 <span class="org-comment-delimiter">// </span><span class="org-comment">Recherche dans une string</span>
-<span class="org-type">size_t</span> <span class="org-variable-name">pos</span> = my_string1.find (<span class="org-string">"bc"</span>);
+<span class="org-type">size_t</span> <span class="org-variable-name">pos</span> = my_string1.find(<span class="org-string">"bc"</span>);
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">La classe <code>vector</code></h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <ul class="org-ul">
-<li>La classe <code>vector</code> est proche par son utilisation du tableau défini en C,
-</li>
+<li>La classe <code>vector</code> est proche par son utilisation du tableau défini en C,</li>
 
 <li>L&rsquo;avantage majeur de la classe <code>vector</code> tient en trois points :
 
 <ol class="org-ol">
 <li>l&rsquo;utilisation de la notion de patron lui permet de manipuler n&rsquo;importe quel
-type de données,
-</li>
+type de données,</li>
 
 <li>sa capacité à réallouer automatiquement l&rsquo;espace mémoire nécessaire via la
-méthode <code>push_back</code>,
-</li>
+méthode <code>push_back</code>,</li>
 
 <li>la désallocation de mémoire est automatique grâce à l&rsquo;implémentation d&rsquo;un
-destructeur.
-</li>
-</ol>
-</li>
+destructeur.</li>
+</ol></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">La classe <code>vector</code></h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">&lt;vector&gt;</span>
@@ -259,12 +230,12 @@ destructeur.
   <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-variable-name">my_vector1</span>;
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">Ajout de trois elements</span>
-  my_vector1.push_back (4);
-  my_vector1.push_back (2);
-  my_vector1.push_back (5);
+  my_vector1.push_back(4);
+  my_vector1.push_back(2);
+  my_vector1.push_back(5);
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">La m&#233;thode size pr&#233;cise le nombre d'entr&#233;e courante</span>
-  <span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; my_vector1.size (); ++i)
+  <span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; my_vector1.size(); ++i)
     <span class="org-constant">std</span>::cout &lt;&lt; i &lt;&lt; <span class="org-string">" "</span> &lt;&lt; my_vector1[i] &lt;&lt; <span class="org-constant">std</span>::endl;
 }
 </pre>
@@ -272,13 +243,13 @@ destructeur.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">La classe <code>vector</code></h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un vecteur d'entier contenant 70,70,70,70,70</span>
-<span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">my_vector2</span> (5, 70);
+<span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;<span class="org-type">int</span>&gt; <span class="org-function-name">my_vector2</span>(5, 70);
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">R&#233;assignation des valeurs de ce vecteur</span>
 my_vector2[0] = 5;
@@ -288,29 +259,28 @@ my_vector2[3] = 4;
 my_vector2[4] = 8;
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">Nettoyage de l'espace m&#233;moire</span>
-my_vector2.clear ();
+my_vector2.clear();
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-8" class="outline-2">
-<h2 id="unnumbered-8">La classe <code>vector</code></h2>
-<div class="outline-text-2" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">La classe <code>vector</code></h2>
+<div class="outline-text-2" id="text-orgheadline8">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un vecteur de particule</span>
 <span class="org-constant">std</span>::<span class="org-type">vector</span>&lt;particule&gt; <span class="org-variable-name">my_particles</span>;
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">Cr&#233;ation d'un ensemble de particule</span>
-<span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; 10; ++i)
-  {
-    <span class="org-type">particule</span> <span class="org-variable-name">my_particle</span> (0.511*i, -1.6e-19*i);
-    my_particles.push_back (my_particle);
+<span class="org-keyword">for</span> (<span class="org-type">size_t</span> <span class="org-variable-name">i</span> = 0; i &lt; 10; ++i) {
+  <span class="org-type">particule</span> <span class="org-variable-name">my_particle</span>(0.511*i, -1.6e-19*i);
+  my_particles.push_back(my_particle);
 
-    <span class="org-comment-delimiter">// </span><span class="org-comment">Affiche la derni&#232;re particule</span>
-    my_particles.back ().affiche ();
-  }
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Affiche la derni&#232;re particule</span>
+  my_particles.back().affiche();
+}
 </pre>
 </div>
 </div>

@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>L&rsquo;énumération <code>enum</code> &amp; Utilisation de <code>typedef</code></title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>L&rsquo;énumération <code>enum</code> &amp; Utilisation de <code>typedef</code></title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">L&rsquo;énumération <code>enum</code> &amp; Utilisation de <code>typedef</code></h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Énumération <code>enum</code></h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Énumération <code>enum</code></h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Une énumération est une collection finie d&rsquo;entiers auxquels on a donné à chacun
 un nom explicite. Une variable de cette énumération ne peut posséder qu&rsquo;un
@@ -122,12 +103,10 @@ des valeurs constantes par un nom plus lisible (pour un humain&#x2026;). L&rsquo
 </p>
 
 <ul class="org-ul">
-<li>améliore la lisibilité du code,
-</li>
+<li>améliore la lisibilité du code,</li>
 
 <li>rajoute un niveau de sécurité dans les valeurs saisies par
-l&rsquo;utilisateur. Seuls les entiers appartenant à l&rsquo;énumération seront valides.
-</li>
+l&rsquo;utilisateur. Seuls les entiers appartenant à l&rsquo;énumération seront valides.</li>
 </ul>
 
 <p>
@@ -150,9 +129,9 @@ Le mot clé est <code>enum</code>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-4">
-<h4 id="unnumbered-2">Exemple:</h4>
-<div class="outline-text-4" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Exemple:</h4>
+<div class="outline-text-4" id="text-orgheadline2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">enum</span> <span class="org-type">Simpson</span> {
@@ -177,9 +156,9 @@ La déclaration se fait <i>via</i> <code>nom_enumeration instance_enum</code>, s
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Utilisation de <code>typedef</code></h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Utilisation de <code>typedef</code></h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 <code>typedef</code> permet de créer son propre type en se calquant sur un type
 existant (<code>int</code>, <code>double</code>, <code>char</code>&#x2026;). <code>typedef</code> ne crée pas de nouveau type, il
@@ -187,12 +166,10 @@ construit une forme d&rsquo;alias. Cette fonctionnalité du C++ permet ainsi
 </p>
 
 <ul class="org-ul">
-<li>d&rsquo;améliorer la lisibilité du code,
-</li>
+<li>d&rsquo;améliorer la lisibilité du code,</li>
 
 <li>au début d&rsquo;un projet, de définir un nouveau type <i>via</i> <code>typedef</code>, modifier cet
-alias sans avoir à changer l&rsquo;appel vers les variables usant de ce type.
-</li>
+alias sans avoir à changer l&rsquo;appel vers les variables usant de ce type.</li>
 </ul>
 
 <p>
@@ -202,9 +179,9 @@ habitué à <code>int</code> et non à <code>MonTypedefEntierQueJaimeBien</code>
 </p>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-4">
-<h4 id="unnumbered-4">Exemple :</h4>
-<div class="outline-text-4" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Exemple :</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">typedef</span> <span class="org-type">int</span> <span class="org-type">mon_typedef_entier</span>;

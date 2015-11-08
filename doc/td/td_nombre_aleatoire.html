@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Classe &ldquo;aléatoire&rdquo;</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Classe &ldquo;aléatoire&rdquo;</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,44 +87,37 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Classe &ldquo;aléatoire&rdquo;</h1><hr/>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Jeux de hasard et loi de probabilité</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
-</div><div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Déclaration de la classe <code>Hasard</code></h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Jeux de hasard et loi de probabilité</h2>
+<div class="outline-text-2" id="text-orgheadline5">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Déclaration de la classe <code>Hasard</code></h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <ul class="org-ul">
 <li>Écrire une classe <code>Hasard</code> possédant les membres suivants :
 
 <ul class="org-ul">
 <li>deux entiers constants non signés, l&rsquo;un définissant un nombre maximal de
 valeurs à tirer aléatoirement, l&rsquo;autre la valeur maximale pouvant être
-générée aléatoirement (<i>cf. <a href="#unnumbered-5">Addendum 1</a></i> relatif aux générateurs aléatoires),
-</li>
+générée aléatoirement (<i>cf. <a href="#orgheadline1">Addendum 1</a></i> relatif aux générateurs aléatoires),</li>
 
 <li>un tableau dynamique de valeurs entières non signées qui sauvegardera les
-résultats des tirages aléatoires successifs.
-</li>
-</ul>
-</li>
+résultats des tirages aléatoires successifs.</li>
+</ul></li>
 
 <li>Déclarer un constructeur qui initialisera les membres de la classe en
 attachant une attention particulière à allouer correctement l&rsquo;espace mémoire
-nécessaire.
-</li>
+nécessaire.</li>
 
 <li>Déclarer un destructeur de classe qui restituera l&rsquo;espace mémoire alloué
-dynamiquement.
-</li>
+dynamiquement.</li>
 
 <li>Surdéfinir une méthode permettant d&rsquo;afficher soit l&rsquo;ensemble des tirages
-aléatoires soit le \(i\)<sup>ème</sup> tirage.
-</li>
+aléatoires soit le \(i\)<sup>ème</sup> tirage.</li>
 
 <li>Définir une méthode de comparaison de deux instances de <code>Hasard</code> retournant un
 booléen dont la valeur sera soit <code>true</code> soit <code>false</code> selon que les deux
-instances sont identiques ou pas.
-</li>
+instances sont identiques ou pas.</li>
 </ul>
 
 <p>
@@ -154,11 +128,11 @@ nouvelle série de valeurs aléatoires.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Décompte du nombre d&rsquo;instanciation de la classe <code>Hasard</code></h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Décompte du nombre d&rsquo;instanciation de la classe <code>Hasard</code></h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
-En utilisant un membre statique (<i>cf. <a href="#unnumbered-6">Addendum 2</a></i>), déterminer le nombre
+En utilisant un membre statique (<i>cf. <a href="#orgheadline3">Addendum 2</a></i>), déterminer le nombre
 d&rsquo;objets créés au cours de l&rsquo;exécution du programme.
 </p>
 
@@ -168,9 +142,9 @@ d&rsquo;occurences de la valeur 0.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-4">
-<h4 id="unnumbered-5">Addendum 1</h4>
-<div class="outline-text-4" id="text-unnumbered-5">
+<div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1">Addendum 1</h4>
+<div class="outline-text-4" id="text-orgheadline1">
 <p>
 La librairie standard <code>cstdlib</code> du C++ fournit un générateur de nombre
 pseudo-aléatoire <code>rand()</code> retournant une valeur entière comprise entre 0 et
@@ -191,9 +165,9 @@ reste identique.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-4">
-<h4 id="unnumbered-6">Addendum 2</h4>
-<div class="outline-text-4" id="text-unnumbered-6">
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Addendum 2</h4>
+<div class="outline-text-4" id="text-orgheadline3">
 <p>
 Les différentes instances d&rsquo;une classe ont toutes les mêmes méthodes. Mais
 chaque instance a ses propres membres. Un membre statique est, par définition,

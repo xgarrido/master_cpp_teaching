@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Surdéfinition d&rsquo;opérateur</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Surdéfinition d&rsquo;opérateur</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -117,9 +98,9 @@ précédentes. Par exemple, surdéfinir l&rsquo;opérateur <code>+</code> permet
 ou si l&rsquo;addition porte sur deux objets de la classe <code>point</code>.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Surcharge des opérateurs internes</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Surcharge des opérateurs internes</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Une première méthode pour surcharger les opérateurs consiste à les considérer
 comme des méthodes de la classe sur laquelle ils s&rsquo;appliquent. Le nom de ces
@@ -134,7 +115,7 @@ syntaxe est la suivante :
 </pre>
 </div>
 <p>
-L&rsquo;écriture <code>A Op B</code> où <code>Op</code> est, par exemple, <code>+,=,*=</code>&#x2026; se traduit par
+L&rsquo;écriture <code>A Op B</code> où <code>Op</code> est, par exemple, <code>+,</code>,*==&#x2026; se traduit par
 </p>
 <div class="org-src-container">
 
@@ -209,9 +190,11 @@ définition de la méthode sera
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Surcharge des opérateurs en externe</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Surcharge des opérateurs en externe</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 La définition de l&rsquo;opérateur ne se fait plus dans la classe qui l&rsquo;utilise, mais
 en dehors de celle-ci par surcharge d&rsquo;un opérateur de l&rsquo;espace de
@@ -254,15 +237,14 @@ contrairement au cas où les opérateurs sont définis à l&rsquo;intérieur de 
 </p>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-4">
-<h4 id="unnumbered-3">Remarques importantes</h4>
-<div class="outline-text-4" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Remarques importantes</h4>
+<div class="outline-text-4" id="text-orgheadline3">
 <ul class="org-ul">
 <li>Lorsque l&rsquo;on surdéfinit un opérateur, c&rsquo;est à priori pour l&rsquo;utiliser à
 plusieurs reprises. Il faut donc apporter un soin particulier à l&rsquo;optimisation
 du code. En conséquence, il est important de savoir si l&rsquo;on déclare ou non la
-fonction <code>inline</code>
-</li>
+fonction <code>inline</code></li>
 
 <li><p>
 Dans le cas d&rsquo;opérateur unaire tel que l&rsquo;opérateur <code>-()</code> qui effectue la
@@ -276,24 +258,22 @@ pas d&rsquo;argument. On écrit alors
   <span class="org-keyword">return</span> complexe(-m_reel, -m_imaginaire);
 }
 </pre>
-</div>
-</li>
+</div></li>
 
 <li>De manière générale, si une méthode ne modifie pas les membres de la classe,
 on ajoute à la fin de sa définition, le mot clé <code>const</code> (<i>cf.</i> exemple
 précédent). Cette remarque prend toute son importance lorsque l&rsquo;on manipule
 les opérateurs permettant ainsi de s&rsquo;assurer que les membres ne sont pas
-modifiés de manière inopportune.
-</li>
+modifiés de manière inopportune.</li>
 </ul>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Constructeur de recopie et opérateur d&rsquo;affectation <code>=</code></h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 L&rsquo;opérateur d&rsquo;affectation <code>=</code> peut lui aussi être redéfini. Cependant, son rôle
 peut parfois interférer avec celui du constructeur de recopie. De même que le
@@ -392,34 +372,29 @@ défaut.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-4">
-<h4 id="unnumbered-5">Remarques générales</h4>
-<div class="outline-text-4" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Remarques générales</h4>
+<div class="outline-text-4" id="text-orgheadline5">
 <ul class="org-ul">
-<li>l&rsquo;opérateur <code>()</code> est intéressant car il est &ldquo;n-unaire&rdquo;.
-</li>
+<li>l&rsquo;opérateur <code>()</code> est intéressant car il est &ldquo;n-unaire&rdquo;.</li>
 
 <li>il est aussi possible de surdéfinir :
 <ul class="org-ul">
-<li>les opérateurs de transtypage (ou de casting)
-</li>
-<li>les opérateurs de déférencement <code>*</code> et d&rsquo;indirection <code>&amp;</code>
-</li>
-<li><code>new</code> et <code>delete</code>
-</li>
-</ul>
-</li>
+<li>les opérateurs de transtypage (ou de casting)</li>
+<li>les opérateurs de déférencement <code>*</code> et d&rsquo;indirection <code>&amp;</code></li>
+<li><code>new</code> et <code>delete</code></li>
+</ul></li>
 </ul>
 </div>
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 on parle également de surcharge d&rsquo;opérateur
-</p></div>
+</p></div></div>
 
 
 </div>

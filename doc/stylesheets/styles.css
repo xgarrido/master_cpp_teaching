@@ -146,6 +146,10 @@ img {
     margin-right:auto;
 }
 
+.figure {
+    text-align: center;
+}
+
 header {
     width:270px;
     float:left;

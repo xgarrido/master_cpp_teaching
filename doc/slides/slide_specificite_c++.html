@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Spécificités du C++ (indépendantes de la POO)</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spécificités du C++ (indépendantes de la POO)</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,18 +87,17 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Spécificités du C++ (indépendantes de la POO)</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Librairies standards &amp; Déclaration de variables</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Librairies standards &amp; Déclaration de variables</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
-<li>Les librairies du C ont été optimisées aux besoins du C++
-</li>
+<li>Les librairies du C ont été optimisées aux besoins du C++</li>
 </ul>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">Inclusion en C</h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Inclusion en C</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Inclusion en C</span>
@@ -128,9 +108,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Inclusion en C++</h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Inclusion en C++</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">Inclusion en C++</span>
@@ -139,23 +119,25 @@ for the JavaScript code in this tag.
 </pre>
 </div>
 
+<p>
+:BEAMER_ENV: ignoreheading
+</p>
+
 <ul class="org-ul">
-<li>Possibilité de déclarer les variables locales quel que soit l&rsquo;endroit
-</li>
+<li>Possibilité de déclarer les variables locales quel que soit l&rsquo;endroit</li>
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">for</span> (<span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span> = 0 ; i &lt; 10 ; i++)
-  {...}
+<pre class="src src-c++"><span class="org-keyword">for</span> (<span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">i</span> = 0 ; i &lt; 10 ; i++) {...}
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Arguments par défaut de fonctions</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Arguments par défaut de fonctions</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 C++ autorise l&rsquo;utilisation de valeurs par défaut dans <b>les prototypes de
   fonction</b>
@@ -178,19 +160,17 @@ C++ autorise l&rsquo;utilisation de valeurs par défaut dans <b>les prototypes d
 
 <ul class="org-ul">
 <li>En l&rsquo;absence de second argument, le compilateur assigne la valeur 0.0 à la
-variable <code>ord</code>
-</li>
+variable <code>ord</code></li>
 
 <li>Les arguments concernés doivent <b>obligatoirement</b> être les <b>derniers</b> dans la
-liste.
-</li>
+liste.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Surdéfinition (surcharge) de fonctions</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Surdéfinition (surcharge) de fonctions</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 En C++ deux fonctions peuvent porter le même nom dès lors qu&rsquo;elles n&rsquo;ont pas
 les mêmes types d&rsquo;argument
@@ -222,9 +202,9 @@ Le compilateur se charge d&rsquo;appeler la &ldquo;bonne&rdquo; fonction par rap
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Fonction <code>inline</code></h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Fonction <code>inline</code></h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
 <b>Les fonctions en ligne</b> remplacent (avantageusement) les macros utilisées en C
 tout en conservant un temps d&rsquo;exécution plus court
@@ -251,9 +231,9 @@ par
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Le type <code>bool</code></h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Le type <code>bool</code></h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <p>
 Ce nouveau type est naturellement formé de deux valeurs notées <code>true</code> et <code>false</code>
 </p>
@@ -261,10 +241,9 @@ Ce nouveau type est naturellement formé de deux valeurs notées <code>true</cod
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">bool</span> <span class="org-variable-name">is_ok</span> = <span class="org-constant">true</span>;
-<span class="org-keyword">if</span> (is_ok)
-  {
-    ...
-  }
+<span class="org-keyword">if</span> (is_ok) {
+  ...
+}
 
 <span class="org-type">bool</span> <span class="org-variable-name">is_java_idiom</span> = <span class="org-constant">false</span>;
 <span class="org-type">bool</span> <span class="org-variable-name">is_c_idiom</span> = is_ok &amp;&amp; <span class="org-negation-char">!</span>is_java_idiom;
@@ -273,9 +252,9 @@ Ce nouveau type est naturellement formé de deux valeurs notées <code>true</cod
 </div>
 </div>
 
-<div id="outline-container-unnumbered-8" class="outline-2">
-<h2 id="unnumbered-8">Les espaces de noms</h2>
-<div class="outline-text-2" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Les espaces de noms</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 <p>
 Les espaces de noms sont des zones de déclaration qui permettent de délimiter la
 recherche des noms des identificateurs par le compilateur.
@@ -298,9 +277,9 @@ parties d&rsquo;un projet.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-9" class="outline-2">
-<h2 id="unnumbered-9">Les espaces de noms</h2>
-<div class="outline-text-2" id="text-unnumbered-9">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">Les espaces de noms</h2>
+<div class="outline-text-2" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">namespace</span> <span class="org-constant">utl</span>

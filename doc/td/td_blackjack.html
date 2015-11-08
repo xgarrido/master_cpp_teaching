@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Jeu du blackjack</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jeu du blackjack</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -71,18 +72,18 @@ lentement possible son argent au casino.
 </p>
 </blockquote>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Règles du jeu</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Règles du jeu</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Chaque joueur joue contre le croupier, (qui représente la banque, ou le casino)
 et non contre les autres joueurs.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">But du jeu</h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">But du jeu</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 Après avoir reçu deux cartes, le joueur tire des cartes pour s&rsquo;approcher de la
 valeur 21 sans la dépasser.  Le but du joueur est d&rsquo;obtenir un total de points
@@ -91,9 +92,9 @@ supérieur à celui du donneur sans dépasser 21.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Valeurs des cartes au blackjack</h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Valeurs des cartes au blackjack</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 Chaque carte numérotée de 2 à 10, a sa valeur nominale (égale au numéro sur la
 carte). Les valets, les dames et les rois (les figures), ont une valeur de 10
@@ -106,9 +107,9 @@ paiement se fait automatiquement à 3:2, le joueur emporte 1,5 fois sa mise.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Le jeu de blackjack</h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Le jeu de blackjack</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 Les joueurs placent leurs mises avant que le croupier ne distribue les
 cartes. Le donneur distribue deux cartes visibles à chaque joueur et deux cartes
@@ -152,21 +153,18 @@ ou que les mises ont été encaissées, une nouvelle donne peut avoir lieu.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Programmation</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Programmation</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Créer une classe <code>Banquier</code> qui possède comme membres:
 </p>
 
 <ul class="org-ul">
-<li>un entier <code>PremiereCarte</code>,
-</li>
-<li>un entier <code>Score</code>,
-</li>
+<li>un entier <code>PremiereCarte</code>,</li>
+<li>un entier <code>Score</code>,</li>
 <li>un pointeur de double qui contiendra un tableau de l&rsquo;évolution des gains ou
-des pertes de la banque,
-</li>
+des pertes de la banque,</li>
 </ul>
 
 <p>
@@ -174,21 +172,14 @@ ainsi que :
 </p>
 
 <ul class="org-ul">
-<li>un constructeur,
-</li>
-<li>un destructeur,
-</li>
-<li>les méthodes <code>Get</code> et <code>Set</code> nécessaire,
-</li>
-<li>une méthode pour générer une nouvelle partie,
-</li>
-<li>une méthode débutant la partie et en inspectant les blackjacks,
-</li>
-<li>une méthode demandant à chaque joueur de tirer des cartes ou non,
-</li>
+<li>un constructeur,</li>
+<li>un destructeur,</li>
+<li>les méthodes <code>Get</code> et <code>Set</code> nécessaire,</li>
+<li>une méthode pour générer une nouvelle partie,</li>
+<li>une méthode débutant la partie et en inspectant les blackjacks,</li>
+<li>une méthode demandant à chaque joueur de tirer des cartes ou non,</li>
 <li>une méthode simulant la fin de partie où la banque joue puis répartit les
-gains.
-</li>
+gains.</li>
 </ul>
 
 <p>
@@ -200,17 +191,12 @@ Créer une classe <code>Joueur</code> qui possède :
 </p>
 
 <ul class="org-ul">
-<li>un entier <code>Score</code>,
-</li>
+<li>un entier <code>Score</code>,</li>
 <li>un pointeur de double qui contiendra un tableau de l&rsquo;évolution des gains ou
-des pertes du joueur,
-</li>
-<li>un entier <code>Mise</code>,
-</li>
-<li>un booléen <code>EnJeu</code>,
-</li>
-<li>une énumeration qui répertoriera plusieurs types de jeu possibles <i>i.e.</i> <code>enum TypeDeJeu{PRUDENT, NORMAL, RISQUE}</code>,
-</li>
+des pertes du joueur,</li>
+<li>un entier <code>Mise</code>,</li>
+<li>un booléen <code>EnJeu</code>,</li>
+<li>une énumeration qui répertoriera plusieurs types de jeu possibles <i>i.e.</i> <code>enum TypeDeJeu{PRUDENT, NORMAL, RISQUE}</code>,</li>
 </ul>
 
 <p>
@@ -218,18 +204,13 @@ et devra disposer des méthodes suivantes :
 </p>
 
 <ul class="org-ul">
-<li>un constructeur,
-</li>
-<li>un destructeur,
-</li>
-<li>les méthodes <code>Get</code> et <code>Set</code> nécessaires,
-</li>
+<li>un constructeur,</li>
+<li>un destructeur,</li>
+<li>les méthodes <code>Get</code> et <code>Set</code> nécessaires,</li>
 <li>une méthode <code>Mise</code> qui selon le <code>TypeDeJeu</code> du joueur mise une somme au
-départ,
-</li>
+départ,</li>
 <li>une méthode <code>Jeu</code> qui selon le <code>TypeDeJeu</code> du joueur et ce que la banque à
-tirer comme première carte décide de tirer ou non des cartes supplémentaires.
-</li>
+tirer comme première carte décide de tirer ou non des cartes supplémentaires.</li>
 </ul>
 </div>
 </div>

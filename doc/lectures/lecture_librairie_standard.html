@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Introduction à la librairie standard STL</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Introduction à la librairie standard STL</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -120,14 +101,11 @@ par rapport à C, que sont :
 
 <ul class="org-ul">
 <li>l&rsquo;approche objet et les capacités d&rsquo;abstraction en particulier sur les
-opérateurs,
-</li>
+opérateurs,</li>
 
-<li>les patrons de classe,
-</li>
+<li>les patrons de classe,</li>
 
-<li>la surdéfinition des opérateurs.
-</li>
+<li>la surdéfinition des opérateurs.</li>
 </ul>
 
 <p>
@@ -147,15 +125,15 @@ d&rsquo;exemples courants d&rsquo;utilisation. On pourra trouver le détail des 
 STL à l&rsquo;adresse suivante :
 </p>
 
-<div class="center">
+<div class="org-center">
 <p>
 <a href="http://www.sgi.com/tech/stl/table_of_contents.html">http://www.sgi.com/tech/stl/table_of_contents.html</a>
 </p>
 </div>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Principales classes de la STL</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Principales classes de la STL</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Les types de données disponibles sont multiples; cependant, les trois
 fréquemment utilisés sont le vecteur, la liste et la table associative. Pour
@@ -169,9 +147,9 @@ implémentation.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">La classe <code>vector</code></h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">La classe <code>vector</code></h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 La classe <code>vector</code> est proche du tableau du C. Tous les éléments contenus dans
 le <code>vector</code> sont adjacents en mémoire, ce qui permet d&rsquo;accéder immédiatement à
@@ -263,9 +241,9 @@ faut autant que possible le créer directement à cette taille.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">La classe <code>string</code></h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">La classe <code>string</code></h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 Il est possible en C++ d&rsquo;utiliser les chaînes de caractères héritées du
 C. Celui-ci ne disposant pas de type &ldquo;chaîne&rdquo; primitif (c&rsquo;est à dire intégré au
@@ -347,9 +325,9 @@ myStringVector</code>.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Les itérateurs</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Les itérateurs</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 Un <code>iterator</code> (et sa version constante <code>const_iterator</code>) permet de parcourir un
 container du début à la fin en renvoyant un pointeur vers l&rsquo;objet
@@ -368,15 +346,12 @@ Appliqué au containers de la STL, on trouve ainsi les méthodes
 </p>
 
 <ul class="org-ul">
-<li><code>begin()</code> qui retourne un <code>iterator</code> pointant sur le premier élément,
-</li>
+<li><code>begin()</code> qui retourne un <code>iterator</code> pointant sur le premier élément,</li>
 
-<li><code>end()</code> qui retourne un <code>iterator</code> pointant juste &ldquo;après&rdquo; le dernier élément,
-</li>
+<li><code>end()</code> qui retourne un <code>iterator</code> pointant juste &ldquo;après&rdquo; le dernier élément,</li>
 
 <li>l&rsquo;opérateur <code>++</code> qui permet d&rsquo;incrémenter l&rsquo;<code>iterator</code> en le faisant
-passer à l&rsquo;élément suivant.
-</li>
+passer à l&rsquo;élément suivant.</li>
 </ul>
 
 <p>

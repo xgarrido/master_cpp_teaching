@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Spécificités du C++</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spécificités du C++</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Spécificités du C++</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Suite de Fibonacci : le calcul numérique appliqué à la procréation des lapins</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Suite de Fibonacci : le calcul numérique appliqué à la procréation des lapins</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 La suite de Fibonacci est une suite d&rsquo;entiers devant son nom au mathématicien
 italien du XIII<sup>ème</sup> siècle Leonardo Fibonacci qui, dans un problème
@@ -142,18 +123,15 @@ défaut, cette fonction fournira le nombre de Fibonacci pour \(n=10\). En outre,
 vous déclarerez deux fonctions <code>fibonacci</code> prenant comme argument
 respectivement un entier court non signé <code>unsigned short</code> et un entier non
 signé <code>unsigned int</code>. Tester l&rsquo;appel de chacune des fonctions suivant le type
-d&rsquo;argument fourni.
-</li>
+d&rsquo;argument fourni.</li>
 
 <li>Au sein du programme principal, réaliser \(N\gg1\) fois le calcul de la fonction
 de Fibonacci et estimer le temps d&rsquo;exécution nécessaire au programme <i>via</i> la
-commande unix <code>time ./nom_executable</code>.
-</li>
+commande unix <code>time ./nom_executable</code>.</li>
 
 <li>Modifier les précédentes fonctions afin de les rendre &ldquo;en ligne&rdquo;. Comparer et
 commenter le temps d&rsquo;exécution dans ce mode par rapport aux précédentes
-déclarations.
-</li>
+déclarations.</li>
 
 <li>Concevoir et implémenter une fonction <code>rfibonacci</code> proposant une solution
 récursive au calcul de la suite de Fibonacci. À partir de cette fonction,
@@ -161,23 +139,20 @@ déduire une macro équivalente, l&rsquo;implémenter et expliquer le résultat 
 compilation. Rendre la fonction <code>rfibonacci</code> &ldquo;en ligne&rdquo;, compiler et, sachant
 que la notion de fonction en ligne est équivalente à la définition de macro du
 point de vue du remplacement littéral des expressions, interpréter le fait
-que le compilateur permette l&rsquo;exécution du programme.
-</li>
+que le compilateur permette l&rsquo;exécution du programme.</li>
 
 <li>Insérer la fonction récursive <code>rfibonacci</code>, renommée en <code>fibonacci</code>, dans deux
 fichiers distincts : un premier fichier d&rsquo;en-tête nommé <code>fibonacci.h</code>
 comprenant la déclaration (prototype) de la fonction et un second,
 <code>fibonacci.cc</code>, définissant cette fonction. Modifier le programme principal
 afin d&rsquo;utiliser cette fonction (on commentera provisoirement la précédente
-fonction <code>fibonacci</code>), compiler et tester l&rsquo;exécution.
-</li>
+fonction <code>fibonacci</code>), compiler et tester l&rsquo;exécution.</li>
 
 <li>Finalement, décommenter la version &ldquo;locale&rdquo; de <code>fibonacci</code> <i>i.e.</i> celle
 contenue dans le programme principal et définie au début de cette
 exercice. Chercher à résoudre l&rsquo;erreur de compilation en utilisant un espace
 de nom <code>local</code> et tester le programme en forçant le choix de fonction à
-utiliser <i>via</i> l&rsquo;opérateur de portée <code>local::</code>.
-</li>
+utiliser <i>via</i> l&rsquo;opérateur de portée <code>local::</code>.</li>
 </ul>
 </div>
 </div>

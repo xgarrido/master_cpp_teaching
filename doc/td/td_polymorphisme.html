@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Polymorphisme</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Polymorphisme</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,20 +87,17 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Polymorphisme</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Classe <code>Employe</code></h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Classe <code>Employe</code></h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Créer une classe abstraite <code>Employe</code> contenant :
 </p>
 
 <ul class="org-ul">
-<li>un nom de type <code>string</code> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,
-</li>
-<li>un prénom de type <code>string</code>,
-</li>
-<li>un entier correspondant à l&rsquo;âge.
-</li>
+<li>un nom de type <code>string</code> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,</li>
+<li>un prénom de type <code>string</code>,</li>
+<li>un entier correspondant à l&rsquo;âge.</li>
 </ul>
 
 <p>
@@ -127,14 +105,10 @@ On définira également les méthodes suivantes :
 </p>
 
 <ul class="org-ul">
-<li>un constructeur,
-</li>
-<li>un destructeur (virtuel),
-</li>
-<li>une méthode purement virtuelle <code>CalculerSalaire</code>,
-</li>
-<li>une méthode virtuelle <code>GetNom</code> qui sera redéfinie dans les classes filles.
-</li>
+<li>un constructeur,</li>
+<li>un destructeur (virtuel),</li>
+<li>une méthode purement virtuelle <code>CalculerSalaire</code>,</li>
+<li>une méthode virtuelle <code>GetNom</code> qui sera redéfinie dans les classes filles.</li>
 </ul>
 
 <p>
@@ -144,9 +118,9 @@ tableau de pointeur d&rsquo;<code>Employe</code> appelé <code>Entreprise</code>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Branche <code>Commercial</code></h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Branche <code>Commercial</code></h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Créer une classe <code>Commercial</code> qui hérite d&rsquo;<code>Employe</code>. Cette classe a un membre
 de plus qu&rsquo;<code>Employe</code> : un entier <code>ChiffreAffaire</code>. Dans la mesure où elle
@@ -159,15 +133,11 @@ Créer une classe <code>Vendeur</code> dérivant de <code>commercial</code> avec
 </p>
 
 <ul class="org-ul">
-<li>un constructeur,
-</li>
-<li>un destructeur,
-</li>
-<li>définir le salaire \emph{via} la méthode virtuelle <code>CalculerSalaire</code>. Par
-exemple, une base fixe à 1000 euros + 20\% du <code>ChiffreAffaire</code>,
-</li>
-<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le vendeur :&rdquo; puis le nom.
-</li>
+<li>un constructeur,</li>
+<li>un destructeur,</li>
+<li>définir le salaire <i>via</i> la méthode virtuelle <code>CalculerSalaire</code>. Par
+exemple, une base fixe à 1000 euros + 20% du <code>ChiffreAffaire</code>,</li>
+<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le vendeur :&rdquo; puis le nom.</li>
 </ul>
 
 <p>
@@ -175,14 +145,10 @@ Créer une classe <code>Representant</code> héritant de <code>Commercial</code>
 </p>
 
 <ul class="org-ul">
-<li>un constructeur,
-</li>
-<li>un destructeur,
-</li>
-<li>définir le salaire \emph{via} la méthode virtuelle <code>CalculerSalaire</code>,
-</li>
-<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le représentant :&rdquo; puis le nom.
-</li>
+<li>un constructeur,</li>
+<li>un destructeur,</li>
+<li>définir le salaire \emph{via} la méthode virtuelle <code>CalculerSalaire</code>,</li>
+<li>redéfinir <code>GetNom</code> en mettant en en-tête &ldquo;Le représentant :&rdquo; puis le nom.</li>
 </ul>
 
 <p>
@@ -192,14 +158,14 @@ l&rsquo;adresse d&rsquo;un <code>Vendeur</code> et d&rsquo;un <code>Representant
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 la classe <code>string</code> fait partie de la librairie standard et facilite la
 gestion et la manipulation des chaînes de caractères. Pour pouvoir l&rsquo;utiliser,
 il conviendra d&rsquo;inclure le fichier d&rsquo;en-tête <code>string</code>.
-</p></div>
+</p></div></div>
 
 
 </div>

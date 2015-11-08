@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Notions de constructeur et de destructeur</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notions de constructeur et de destructeur</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -118,9 +99,9 @@ pointeurs correspondants à <code>0</code> (ou <code>NULL</code>). À la destruc
 de restituer la mémoire éventuellement allouée.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Définition des constructeurs et des destructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Définition des constructeurs et des destructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Le constructeur se définit comme une méthode à part entière. Cependant, pour que
 le compilateur puisse la considérer en tant que telle, les deux conditions
@@ -128,11 +109,9 @@ suivantes doivent être validées :
 </p>
 
 <ul class="org-ul">
-<li>le constructeur doit porter <b>le même nom</b> que la classe,
-</li>
+<li>le constructeur doit porter <b>le même nom</b> que la classe,</li>
 
-<li>le constructeur ne doit avoir <b>aucun type</b>, <code>void</code> compris.
-</li>
+<li>le constructeur ne doit avoir <b>aucun type</b>, <code>void</code> compris.</li>
 </ul>
 
 <p>
@@ -169,8 +148,8 @@ au membre <code>m_X</code>, respectivement <code>m_Y</code>, mais le prototype s
 
 <div class="REMARK">
 <p>
-Lors de la construction d&rsquo;un objet, il est recommandé <b>d&rsquo;initialiser</b> les
-membres au travers du constructeur plutôt que <b>d&rsquo;assigner</b> leurs
+Lors de la construction d&rsquo;un objet, il est recommandé <b>d'initialiser</b> les
+membres au travers du constructeur plutôt que <b>d'assigner</b> leurs
 valeurs. Autrement dit, à l&rsquo;assignation <code>m_X = abs; m_Y = ord</code>, on préférera
 l&rsquo;initialisation suivante
 </p>
@@ -184,10 +163,8 @@ Cette possibilité devient indispensable en cas :
 </p>
 
 <ul class="org-ul">
-<li>d&rsquo;initialisation d&rsquo;un membre constant,
-</li>
-<li>d&rsquo;initialisation d&rsquo;un membre qui est une référence.
-</li>
+<li>d&rsquo;initialisation d&rsquo;un membre constant,</li>
+<li>d&rsquo;initialisation d&rsquo;un membre qui est une référence.</li>
 </ul>
 
 </div>
@@ -288,15 +265,14 @@ valables.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-4">
-<h4 id="unnumbered-2">Remarques</h4>
-<div class="outline-text-4" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Remarques</h4>
+<div class="outline-text-4" id="text-orgheadline2">
 <ul class="org-ul">
 <li>Lorsqu&rsquo;un constructeur se contente d&rsquo;attribuer des valeurs initiales aux
 données membres, le destructeur est rarement indispensable. En revanche, il le
 devient dés lors que l&rsquo;objet est amené (par le biais de son constructeur ou
-d&rsquo;autres fonctions membres) à allouer dynamiquement de la mémoire.
-</li>
+d&rsquo;autres fonctions membres) à allouer dynamiquement de la mémoire.</li>
 
 <li>En théorie, constructeurs et destructeurs peuvent être publics ou privés. En
 pratique, à moins d&rsquo;avoir de bonnes raisons de faire le contraire, il vaut
@@ -309,16 +285,15 @@ possibilité de déclarer le constructeur par défaut (celui sans argument) comm
 privé, afin d&rsquo;interdire l&rsquo;utilisation d&rsquo;un objet sans avoir explicitement
 initialiser ces valeurs membres. Cette condition assure une plus grande
 robustesse au programme, l&rsquo;utilisateur devant nécessairement préciser les
-valeurs initiales de chacun des membres de l&rsquo;objet.
-</li>
+valeurs initiales de chacun des membres de l&rsquo;objet.</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Objets membres</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Objets membres</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Il est tout à fait possible qu&rsquo;une classe possède un membre donnée lui-même de
 type classe. Par exemple, la classe <code>point</code> préalablement définie, pourra être
@@ -341,7 +316,7 @@ un membre d&rsquo;une classe <code>cercle</code> ainsi définie
 La situation d&rsquo;objets membres correspond à une relation entre classes du type
 relation de possession. Effectivement, on peut dire qu&rsquo;un cercle possède un
 centre (de type <code>point</code>). Ce type de relation s&rsquo;oppose à la relation de type
-&ldquo;relation est&rdquo; inhérente à la notion d&rsquo;héritage (<i>cf.</i> Chapitre <a href="lecture_heritage.html">&ldquo;Héritage&rdquo;</a>).
+&ldquo;relation est&rdquo; inhérente à la notion d&rsquo;héritage (<i>cf.</i> Chapitre <a href="lecture_heritage.html">"Héritage"</a>).
 </p>
 
 <p>
@@ -377,9 +352,9 @@ l&rsquo;ordre inverse.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-4">
-<h4 id="unnumbered-4">Remarques</h4>
-<div class="outline-text-4" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Remarques</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 <p>
 Il pourrait être envisagé de définir le constructeur de <code>cercle</code> de la façon
 suivante:
@@ -402,15 +377,15 @@ la classe impliquée est de taille conséquente). En outre, si la classe <code>p
 dispose de membres dynamiques, <code>p_geometry_type</code> par exemple, seules les valeurs
 des pointeurs seront recopiées et non leurs emplacements mémoire. Il conviendra
 alors de surcharger l&rsquo;opérateur d&rsquo;affectation <code>=</code> de telle sorte que les membres
-pointeurs soient également affectés (<i>cf.</i> Chapitre <a href="lecture_surcharge_operateur.html">&ldquo;Surcharge d&rsquo;opérateur&rdquo;</a>).
+pointeurs soient également affectés (<i>cf.</i> Chapitre <a href="lecture_surcharge_operateur.html">"Surcharge d'opérateur"</a>).
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Les objets dynamiques</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Les objets dynamiques</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Les objets dynamiques, par opposition aux objets automatiques dont la durée de
 vie se limite à l&rsquo;appel d&rsquo;une fonction ou à la taille d&rsquo;un bloc (boucle <code>for</code>,
@@ -452,9 +427,9 @@ l&rsquo;appel du destructeur de classe.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Constructeur de recopie</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Constructeur de recopie</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
 Nous venons de voir que le C++ garantissait l&rsquo;appel d&rsquo;un constructeur pour un
 objet créé par une déclaration ou par un <code>new</code>. Ce point est fondamental
@@ -549,17 +524,16 @@ code suivant fournit un exemple d&rsquo;implémentation de constructeur de recop
 </div>
 
 
-<div id="outline-container-unnumbered-7" class="outline-4">
-<h4 id="unnumbered-7">Remarques</h4>
-<div class="outline-text-4" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Remarques</h4>
+<div class="outline-text-4" id="text-orgheadline7">
 <ul class="org-ul">
 <li>Le C++ impose au constructeur par recopie que son unique argument soit
 transmis par référence ce qui relève d&rsquo;une logique implacable puisque, dans le
 cas contraire, l&rsquo;appel du constructeur de recopie impliquerait une
 intialisation par recopie de l&rsquo;argument et donc un appel du constructeur de
 recopie qui, lui même, etc etc etc. Quoiqu&rsquo;il en soit la forme <code>point(point
-  the_point);</code> serait rejetée lors de la compilation.
-</li>
+  the_point);</code> serait rejetée lors de la compilation.</li>
 
 <li>Les deux formes précédentes <code>point(point&amp; the_point)</code> et <code>point (const point&amp;
   the_point)</code> peuvent exister au sein d&rsquo;une même classe. Dans ce cas, la
@@ -568,15 +542,13 @@ tandis que la seconde serait utilisée en cas d&rsquo;initialisation par un obje
 constant. En général, comme un tel constructeur de recopie n&rsquo;a logiquement
 aucune raison de vouloir modifier l&rsquo;objet reçu en argument, il est conseillé
 de ne définir que la seconde forme qui restera ainsi applicable aux deux
-situations évoquées.
-</li>
+situations évoquées.</li>
 
 <li>Bien que l&rsquo;initialisation par recopie et l&rsquo;affectation présente un traitement
 par défaut semblable (copie superficielle), la prise en compte d&rsquo;une copie
 profonde passe par des mécanismes différents : définition d&rsquo;un constructeur de
 recopie pour l&rsquo;initialisation, surdéfinition de l&rsquo;opérateur <code>=</code> pour
-l&rsquo;affectation (<i>cf.</i> Chapitre <a href="lecture_surcharge.html">&ldquo;Surcharge d&rsquo;opérateur&rdquo;</a>).
-</li>
+l&rsquo;affectation (<i>cf.</i> Chapitre <a href="lecture_surcharge.html">"Surcharge d'opérateur"</a>).</li>
 </ul>
 </div>
 </div>

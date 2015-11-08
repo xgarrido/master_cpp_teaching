@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Rappels sur les fonctions</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rappels sur les fonctions</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Rappels sur les fonctions</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Syntaxe</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Syntaxe</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-type">type_retourn&#233;</span> <span class="org-function-name">nom_fonction</span>(..., <span class="org-type">type_argument</span> <span class="org-variable-name">nom_argument</span>, ...)
@@ -134,9 +115,9 @@ Exemple :
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Prototype de fonction</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Prototype de fonction</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Le prototype indique au compilateur que la fonction prototypée existe, mais que
 sa définition interviendra après son appel.
@@ -171,9 +152,9 @@ Exemple:
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Modification de variables via l&rsquo;utilisation d&rsquo;une fonction</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Modification de variables via l&rsquo;utilisation d&rsquo;une fonction</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Une fonction en C/C++, dans son utilisation la plus commune <i>i.e.</i> argument
 transmis par valeur comme dans l&rsquo;exemple précédent, <b>ne modifie aucune variable
@@ -189,9 +170,9 @@ valeurs</b> de x et y; ainsi utilisée, elle ne pourra jamais modifier <code>x</
 </p>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Argument transmis par adresse</h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Argument transmis par adresse</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 Imaginons qu&rsquo;au lieu de transmettre des valeurs à la fonction, on transmette des
 adresses ou des pointeurs qui contiennent une adresse. La fonction crée toujours
@@ -238,14 +219,12 @@ La solution proposée présente néanmoins quelques inconvénients
 
 <ul class="org-ul">
 <li>d&rsquo;une part, la syntaxe est lourde en raison de l&rsquo;emploi de l&rsquo;opérateur <code>*</code>
-  devant les paramètres,
-</li>
+  devant les paramètres,</li>
 
 <li>d&rsquo;autre part, la syntaxe est dangereuse lors de l&rsquo;appel de la fonction,
 puisqu&rsquo;il faut systématiquement penser à utiliser l&rsquo;opérateur <code>&amp;</code> devant les
 paramètres. Un oubli devant une variable de type entier et la valeur de
-l&rsquo;entier est utilisée à la place de son adresse dans la fonction appelée.
-</li>
+l&rsquo;entier est utilisée à la place de son adresse dans la fonction appelée.</li>
 </ul>
 
 <p>
@@ -254,9 +233,9 @@ Le C++ permet de résoudre ces problèmes à l&rsquo;aide des références
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-3">
-<h3 id="unnumbered-5">Argument transmis par référence</h3>
-<div class="outline-text-3" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Argument transmis par référence</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <p>
 Comme nous venons de le rappeler, en langage C, les arguments et la valeur de
 retour d&rsquo;une fonction sont transmis par valeur y compris lors de la transmission

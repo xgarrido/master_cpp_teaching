@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Encapsulation des données</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Encapsulation des données</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,21 +87,19 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Encapsulation des données</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Définition</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Définition</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 L&rsquo;encapsulation consiste à interdire l&rsquo;accès de certains membres d&rsquo;une classe à
 toutes fonctions extérieures à la classe
 </p>
 
 <ul class="org-ul">
-<li>il n&rsquo;est plus possible d&rsquo;agir <b>directement</b> sur les données d&rsquo;un objet
-</li>
+<li>il n&rsquo;est plus possible d&rsquo;agir <b>directement</b> sur les données d&rsquo;un objet</li>
 
-<li>la modification des membres de l&rsquo;objet se fait par <b>l&rsquo;intermédiaire de
-méthodes associées</b>
-</li>
+<li>la modification des membres de l&rsquo;objet se fait par <b>l'intermédiaire de
+méthodes associées</b></li>
 </ul>
 
 <p>
@@ -129,9 +108,9 @@ méthodes associées</b>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Exemple</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Exemple</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
@@ -150,16 +129,16 @@ méthodes associées</b>
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-type">particule</span> <span class="org-variable-name">electron</span>;
-electron.m_masse = 0.511; <span class="org-comment-delimiter">// </span><span class="org-comment">erreur de compilation</span>
+<pre class="src src-c++"><span class="org-type">particule</span> <span class="org-variable-name">my_electron</span>;
+my_electron.m_masse = 0.511; <span class="org-comment-delimiter">// </span><span class="org-comment">erreur de compilation</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Exemple complet (1/2)</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Exemple complet (1/2)</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
@@ -182,9 +161,9 @@ electron.m_masse = 0.511; <span class="org-comment-delimiter">// </span><span cl
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Exemple complet (2/2)</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Exemple complet (2/2)</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;finition des m&#233;thodes</span>
@@ -198,54 +177,49 @@ electron.m_masse = 0.511; <span class="org-comment-delimiter">// </span><span cl
   m_masse = masse_;
 }
 ...
-particule electron;
-electron.set_masse(0.511);
-<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">electron_masse</span> = electron.get_masse();
+particule my_electron;
+my_electron.set_masse(0.511);
+<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">electron_masse</span> = my_electron.get_masse();
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Intérêts de l&rsquo;encapsulation</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Intérêts de l&rsquo;encapsulation</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <ul class="org-ul">
 <li>Lors de la programmation et surtout de la réutilisation d&rsquo;un objet dans un
 autre programme, l&rsquo;encapsulation empêche la modification non voulue des données
-membres,
-</li>
+membres,</li>
 
-<li>L&rsquo;objet, vu de l&rsquo;extérieur, <b>n&rsquo;est caractérisé que par ses méthodes</b> :
+<li>L&rsquo;objet, vu de l&rsquo;extérieur, <b>n'est caractérisé que par ses méthodes</b> :
 
 <ol class="org-ol">
 <li>l&rsquo;objet est plus facile à utiliser pour quelqu&rsquo;un d&rsquo;extérieur : il lui
-suffit d&rsquo;utiliser les méthodes.
-</li>
+suffit d&rsquo;utiliser les méthodes.</li>
 <li>la maintenance et l&rsquo;amélioration de l&rsquo;objet sont grandement
 facilitées. Tant que la finalité des méthodes ne change pas, on peut
 modifier les rouages sans perturber pour autant les utilisateurs de la
-classe.
-</li>
-<li>l&rsquo;objet est facilement réutilisable.
-</li>
-</ol>
-</li>
+classe.</li>
+<li>l&rsquo;objet est facilement réutilisable.</li>
+</ol></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Inconvénients de l&rsquo;encapsulation</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Inconvénients de l&rsquo;encapsulation</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
 De prime abord, peut paraître inutile et lourd à employer
 </p>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Aparté : Méthodes constantes</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Aparté : Méthodes constantes</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr"> 1: </span><span class="org-keyword">class</span> <span class="org-type">particule</span>
@@ -264,8 +238,7 @@ De prime abord, peut paraître inutile et lourd à employer
 </div>
 <ul class="org-ul">
 <li>Les méthodes <code>get_masse()</code> et <code>get_charge()</code> sont déclarées comme <b>constantes</b>
-  vis-à-vis des membres de la classe <i>i.e.</i> <code>m_masse</code> et <code>m_charge</code>
-</li>
+  vis-à-vis des membres de la classe <i>i.e.</i> <code>m_masse</code> et <code>m_charge</code></li>
 </ul>
 
 <div class="CBOX">
@@ -278,9 +251,9 @@ De prime abord, peut paraître inutile et lourd à employer
 </div>
 
 
-<div id="outline-container-unnumbered-8" class="outline-2">
-<h2 id="unnumbered-8">Quelques règles élémentaires</h2>
-<div class="outline-text-2" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Quelques règles élémentaires</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 <p>
 La création de chaque nouvelle classe <code>exemple_classe</code> se décompose en trois
 étapes :
@@ -288,26 +261,23 @@ La création de chaque nouvelle classe <code>exemple_classe</code> se décompose
 
 <ol class="org-ol">
 <li>création d&rsquo;un fichier <code>exemple_classe.h</code> qui contient <b>la déclaration</b> de la
-classe,
-</li>
+classe,</li>
 
 <li>création d&rsquo;un fichier <code>exemple_classe.cc</code> qui contient <b>les définitions</b> des
-méthodes de la classe,
-</li>
+méthodes de la classe,</li>
 
 <li>création d&rsquo;un programme test <code>test_exemple_classe.cc</code> qui contient <b>le
-programme principal</b> <i>i.e</i> le bloc d&rsquo;appel <code>main</code>.
-</li>
+programme principal</b> <i>i.e</i> le bloc d&rsquo;appel <code>main</code>.</li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-9" class="outline-2">
-<h2 id="unnumbered-9">Déclaration de la classe</h2>
-<div class="outline-text-2" id="text-unnumbered-9">
-</div><div id="outline-container-unnumbered-10" class="outline-3">
-<h3 id="unnumbered-10">Fichier <code>exemple_classe.h</code></h3>
-<div class="outline-text-3" id="text-unnumbered-10">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Déclaration de la classe</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+</div><div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Fichier <code>exemple_classe.h</code></h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __exemple_classe_h__
@@ -327,12 +297,12 @@ programme principal</b> <i>i.e</i> le bloc d&rsquo;appel <code>main</code>.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-11" class="outline-2">
-<h2 id="unnumbered-11">Définition de la classe</h2>
-<div class="outline-text-2" id="text-unnumbered-11">
-</div><div id="outline-container-unnumbered-12" class="outline-3">
-<h3 id="unnumbered-12">Fichier <code>exemple_classe.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-12">
+<div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">Définition de la classe</h2>
+<div class="outline-text-2" id="text-orgheadline12">
+</div><div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Fichier <code>exemple_classe.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline11">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"exemple_classe.h"</span>
@@ -352,12 +322,12 @@ programme principal</b> <i>i.e</i> le bloc d&rsquo;appel <code>main</code>.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-13" class="outline-2">
-<h2 id="unnumbered-13">Utilisation de la classe</h2>
-<div class="outline-text-2" id="text-unnumbered-13">
-</div><div id="outline-container-unnumbered-14" class="outline-3">
-<h3 id="unnumbered-14">Fichier <code>text_exemple_classe.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-14">
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">Utilisation de la classe</h2>
+<div class="outline-text-2" id="text-orgheadline15">
+</div><div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Fichier <code>text_exemple_classe.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"exemple_classe.h"</span>
@@ -373,10 +343,10 @@ programme principal</b> <i>i.e</i> le bloc d&rsquo;appel <code>main</code>.
 </div>
 </div>
 </div>
-<div id="outline-container-unnumbered-15" class="outline-3">
-<h3 id="unnumbered-15">Compilation</h3>
-<div class="outline-text-3" id="text-unnumbered-15">
-<div class="center">
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Compilation</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<div class="org-center">
 <p>
 <code>$ g++ exemple_class.cc test_exemple_classe.cc</code>
 </p>

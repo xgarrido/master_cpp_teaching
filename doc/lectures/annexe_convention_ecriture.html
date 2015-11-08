@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Convention d&rsquo;écriture et organisation des programmes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Convention d&rsquo;écriture et organisation des programmes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -114,9 +95,9 @@ informatique lisible et compréhensible. Libre à chacun de suivre ou non ces
 quelques recommendations&#x2026;
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Principales règles d&rsquo;écriture</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Principales règles d&rsquo;écriture</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Historiquement, le besoin de &ldquo;normaliser&rdquo; l&rsquo;écriture de programme informatique a
 naturellement conduit leurs auteurs à définir certaines règles
@@ -124,90 +105,90 @@ naturellement conduit leurs auteurs à définir certaines règles
 d&rsquo;écriture baptisée notation hongroise (Charles Simonyi en plus d&rsquo;être touriste
 spatial est hongrois) qui permet de préciser la nature d&rsquo;une variable en
 ajoutant à son nom, un préfixe relatif au type de la variable. Les principales
-règles issues de cette notation sont listées dans le Tableau <a href="#tab::hunNota">1</a>.
+règles issues de cette notation sont listées dans le Tableau <a href="#orgtable1">1</a>.
 </p>
 
-<table id="tab::hunNota" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> <b>Notation hongroise telle que définie par Charles Simonyi.</b> Une variable entière se voit ainsi précéder de la lettre <code>i</code> en référence au type <code>integer</code> alors que la déclaration d&rsquo;un pointeur se fera à l&rsquo;aide de la lettre <code>p</code></caption>
 
 <colgroup>
-<col  class="left" />
+<col  class="org-left" />
 
-<col  class="left" />
+<col  class="org-left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">Préfixe</th>
-<th scope="col" class="left">Description</th>
+<th scope="col" class="org-left">Préfixe</th>
+<th scope="col" class="org-left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="left"><code>i</code></td>
-<td class="left"><code>integer</code></td>
+<td class="org-left"><code>i</code></td>
+<td class="org-left"><code>integer</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>f</code></td>
-<td class="left"><code>float</code></td>
+<td class="org-left"><code>f</code></td>
+<td class="org-left"><code>float</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>d</code></td>
-<td class="left"><code>double</code></td>
+<td class="org-left"><code>d</code></td>
+<td class="org-left"><code>double</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>c</code></td>
-<td class="left"><code>character</code></td>
+<td class="org-left"><code>c</code></td>
+<td class="org-left"><code>character</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>b</code></td>
-<td class="left"><code>boolean</code></td>
+<td class="org-left"><code>b</code></td>
+<td class="org-left"><code>boolean</code></td>
 </tr>
 
 <tr>
-<td class="left"><code>by</code> ou <code>byte</code></td>
-<td class="left"><code>byte</code></td>
+<td class="org-left"><code>by</code> ou <code>byte</code></td>
+<td class="org-left"><code>byte</code></td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="left"><code>str</code></td>
-<td class="left">C++ <code>string</code> object</td>
+<td class="org-left"><code>str</code></td>
+<td class="org-left">C++ <code>string</code> object</td>
 </tr>
 
 <tr>
-<td class="left"><code>v</code></td>
-<td class="left">C++ <code>vector</code> object</td>
+<td class="org-left"><code>v</code></td>
+<td class="org-left">C++ <code>vector</code> object</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="left"><code>p</code></td>
-<td class="left">pointeur vers</td>
+<td class="org-left"><code>p</code></td>
+<td class="org-left">pointeur vers</td>
 </tr>
 
 <tr>
-<td class="left"><code>r</code></td>
-<td class="left">référence à</td>
+<td class="org-left"><code>r</code></td>
+<td class="org-left">référence à</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
-<td class="left"><code>m_</code></td>
-<td class="left">variable membre</td>
+<td class="org-left"><code>m_</code></td>
+<td class="org-left">variable membre</td>
 </tr>
 
 <tr>
-<td class="left"><code>g_</code></td>
-<td class="left">variable globale</td>
+<td class="org-left"><code>g_</code></td>
+<td class="org-left">variable globale</td>
 </tr>
 
 <tr>
-<td class="left"><code>s_</code></td>
-<td class="left">variable statique</td>
+<td class="org-left"><code>s_</code></td>
+<td class="org-left">variable statique</td>
 </tr>
 </tbody>
 </table>
@@ -236,9 +217,9 @@ notamment utilisé au sein des boucles : <code>for (unsigned int iRun = 0;...)</
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Déclaration des variables</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Déclaration des variables</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Le choix des noms de variable (et de méthode) doit être le plus explicite
 possible. Des déclarations telles que <code>nb</code> sont à proscrire étant donné qu&rsquo;elles
@@ -256,13 +237,11 @@ premier devant obligatoirement être une lettre (éventuellement un <i>underscor
 <ul class="org-ul">
 <li>pour les variables membres d&rsquo;une classe, la variable est préfixé par le champ
 <code>m_</code>. Chaque mot est écrit en minuscule, les mots étant séparés par le
-caractère <code>_</code> (ex : <code>m_radius_detector</code>),
-</li>
+caractère <code>_</code> (ex : <code>m_radius_detector</code>),</li>
 
 <li>pour des variables locales, seule le préfixe est substitué par toute autre
 identificateur, la syntaxe respectant la première règle (ex :
-<code>my_radius_detetector</code>).
-</li>
+<code>my_radius_detetector</code>).</li>
 </ul>
 
 <p>
@@ -280,25 +259,22 @@ ont tendance à rallonger l&rsquo;écriture et surchargent la relecture. Par exe
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Organisation des programmes</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Organisation des programmes</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Au niveau de l&rsquo;écriture du code, la modularité du programme est une donnée
 essentielle. Les idées qui en sont à la base sont les suivantes :
 </p>
 
 <ul class="org-ul">
-<li>diviser le travail en plusieurs équipes,
-</li>
+<li>diviser le travail en plusieurs équipes,</li>
 
 <li>créer des programmes indépendants de la problématique globale, donc
-réutilisables par d&rsquo;autres logiciels,
-</li>
+réutilisables par d&rsquo;autres logiciels,</li>
 
 <li>limiter les risques d&rsquo;erreurs liés à la reprogrammation de certaines parties
-du code.
-</li>
+du code.</li>
 </ul>
 
 <p>
@@ -319,13 +295,13 @@ fichiers séparés.
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 père des logiciels Word et Excel mais également connu pour ses vols comme
 touriste à bord de la station spatiale internationale en 2007 et 2009
-</p></div>
+</p></div></div>
 
 
 </div>

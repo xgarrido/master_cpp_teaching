@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Structure &amp; Classes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Structure &amp; Classes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,33 +87,29 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Structure &amp; Classes</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Notion de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Notion de classe</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
 <li>Langage objet : analyse du problème en termes <b>de nature et de structure des
 données</b> &ne; programmation impérative (en C ou fortran) qui relève plus de
-l&rsquo;aglorithmie
-</li>
+l&rsquo;aglorithmie</li>
 
 <li>Une classe est
 
 <ol class="org-ol">
-<li><b>une généralisation de la notion de type (<code>int</code>, <code>double</code>,&#x2026;)</b>
-</li>
+<li><b>une généralisation de la notion de type (<code>int</code>, <code>double</code>,&#x2026;)</b></li>
 
-<li><b>une association de données membres et d&rsquo;opérations s&rsquo;y rapportant
-(méthodes ou fonctions membres)</b>
-</li>
-</ol>
-</li>
+<li><b>une association de données membres et d'opérations s'y rapportant
+(méthodes ou fonctions membres)</b></li>
+</ol></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Déclaration de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Déclaration de classe</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <ul class="org-ul">
 <li><p>
 Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <code>double</code>,&#x2026;)
@@ -142,14 +119,13 @@ Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <c
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
 {
-  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de donn&#233;es membres</span>
   <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
   ...
 };
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 
 <div class="CBOX">
@@ -161,9 +137,9 @@ Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <c
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Déclaration de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Déclaration de classe</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <ul class="org-ul">
 <li><p>
 Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <code>double</code>,&#x2026;)
@@ -173,24 +149,23 @@ Classe <b>&rarr; généralisation de la notion de type</b> (<code>int</code>, <c
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
 {
-  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de donn&#233;es membres</span>
   <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
   ...
 };
 ...
 <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
-particule particule1, particule2;
+particule my_electron, my_proton;
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Accès aux membres de la classe en C++</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Accès aux membres de la classe en C++</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <ul class="org-ul">
 <li><p>
 Classe <b>&rarr; association de données membres et de méthodes (fonctions
@@ -201,7 +176,7 @@ membres)</b>
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
 {
-  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de donn&#233;es membres</span>
   <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
 
@@ -210,15 +185,14 @@ membres)</b>
   <span class="org-type">void</span> <span class="org-function-name">affiche</span>() <span class="org-keyword">const</span>;
 };
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Définition de méthodes de classes</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Définition de méthodes de classes</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <ul class="org-ul">
 <li><p>
 Identique à la définition d&rsquo;une fonction mais préfixée du nom de la classe et
@@ -229,7 +203,7 @@ de l&rsquo;opérateur de portée <code>::</code>
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
 {
-  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de donn&#233;es membres</span>
   <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
 
@@ -245,66 +219,65 @@ de l&rsquo;opérateur de portée <code>::</code>
 }
 ...
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
 <span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
-  <span class="org-type">particule</span> <span class="org-variable-name">particule1</span>, <span class="org-variable-name">particule2</span>;
+  <span class="org-type">particule</span> <span class="org-variable-name">my_electron</span>, <span class="org-variable-name">my_proton</span>;
 
-  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
-  particule1.initialise(0.511, -1.6e-19);
-  particule2.initialise(938.0, +1.6e-19);
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux donn&#233;es membres</span>
+  my_electron.initialise(0.511, -1.6e-19);
+  my_proton.initialise(938.0, +1.6e-19);
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Exemple d&rsquo;utilisation de la classe <code>particule</code></h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
 <span class="org-type">int</span> <span class="org-function-name">main</span>()
 {
   <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objets de type particule</span>
-  <span class="org-type">particule</span> * <span class="org-variable-name">particule1</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
-  <span class="org-type">particule</span> * <span class="org-variable-name">particule2</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
+  <span class="org-type">particule</span> * <span class="org-variable-name">ptr_electron</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
+  <span class="org-type">particule</span> * <span class="org-variable-name">ptr_proton</span> = <span class="org-keyword">new</span> <span class="org-type">particule</span>;
 
-  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
-  particule1-&gt;initialise(0.511, -1.6e-19);
-  particule2-&gt;initialise(938.0, +1.6e-19);
+  <span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux donn&#233;es membres</span>
+  ptr_electron-&gt;initialise(0.511, -1.6e-19);
+  ptr_proton-&gt;initialise(938.0, +1.6e-19);
 
   ...
-  <span class="org-keyword">delete</span> particule1;
-  <span class="org-keyword">delete</span> particule2;
+  <span class="org-keyword">delete</span> ptr_electron;
+  <span class="org-keyword">delete</span> ptr_proton;
 }
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-8" class="outline-2">
-<h2 id="unnumbered-8">Annexes</h2>
-<div class="outline-text-2" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Annexes</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 </div>
 </div>
 
-<div id="outline-container-unnumbered-9" class="outline-2">
-<h2 id="unnumbered-9">Accès aux membres d&rsquo;une structure</h2>
-<div class="outline-text-2" id="text-unnumbered-9">
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">Accès aux membres d&rsquo;une structure</h2>
+<div class="outline-text-2" id="text-orgheadline9">
 <ul class="org-ul">
 <li><p>
 L&rsquo;accès aux membres se fait par l&rsquo;intermédiaire de l&rsquo;opérateur point <code>.</code>
@@ -314,21 +287,20 @@ L&rsquo;accès aux membres se fait par l&rsquo;intermédiaire de l&rsquo;opérat
 
 <pre class="src src-c++"><span class="org-keyword">struct</span> <span class="org-type">particule</span>
 {
-  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de membres</span>
+  <span class="org-comment-delimiter">// </span><span class="org-comment">D&#233;claration de donn&#233;es membres</span>
   <span class="org-type">double</span> <span class="org-variable-name">m_masse</span>;
   <span class="org-type">double</span> <span class="org-variable-name">m_charge</span>;
   ...
 };
 
 <span class="org-comment-delimiter">// </span><span class="org-comment">Instanciation d'objet de type particule</span>
-<span class="org-type">particule</span> <span class="org-variable-name">particule1</span>, <span class="org-variable-name">particule2</span>;
+<span class="org-type">particule</span> <span class="org-variable-name">my_electron</span>, <span class="org-variable-name">my_proton</span>;
 
-<span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux membres</span>
-particule1.m_masse  = 0.511;
-particule1.m_charge = -1.6e-19;
+<span class="org-comment-delimiter">// </span><span class="org-comment">Acc&#232;s aux donn&#233;es membres</span>
+my_electron.m_masse  = 0.511;
+my_proton.m_charge = -1.6e-19;
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>

@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Fraction de nombres complexes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fraction de nombres complexes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -64,9 +65,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Fraction de nombres complexes</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Classe <code>Complexe</code></h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Classe <code>Complexe</code></h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Écrire une classe <code>Complexe</code>, possédant :
 </p>
@@ -75,28 +76,20 @@ for the JavaScript code in this tag.
 <li>Deux membres de type <code>double</code> :
 
 <ul class="org-ul">
-<li>Partie réelle,
-</li>
-<li>Partie imaginaire;
-</li>
-</ul>
-</li>
+<li>Partie réelle,</li>
+<li>Partie imaginaire;</li>
+</ul></li>
 
-<li>Un ou plusieurs constructeurs;
-</li>
+<li>Un ou plusieurs constructeurs;</li>
 
-<li>Une méthode <code>affiche</code> pour les tests;
-</li>
+<li>Une méthode <code>affiche</code> pour les tests;</li>
 
-<li>Des méthodes d&rsquo;accès : partie réelle, partie imaginaire, module, argument;
-</li>
+<li>Des méthodes d&rsquo;accès : partie réelle, partie imaginaire, module, argument;</li>
 
 <li>Des méthodes de modification : <code>set_real_imag(double, double)</code> et
-<code>set_mod_arg(double, double)</code>;
-</li>
+<code>set_mod_arg(double, double)</code>;</li>
 
-<li>Une méthode retournant le conjugué.
-</li>
+<li>Une méthode retournant le conjugué.</li>
 </ul>
 
 
@@ -114,19 +107,17 @@ division, suivant ce prototype :
 </div>
 
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Évolution de la classe <code>Complexe</code></h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Évolution de la classe <code>Complexe</code></h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Faire évoluer la classe <code>Complexe</code>, <b>sans changer son interface publique</b>, en y
 ajoutant deux membres de données :
 </p>
 
 <ul class="org-ul">
-<li>Module,
-</li>
-<li>Argument.
-</li>
+<li>Module,</li>
+<li>Argument.</li>
 </ul>
 
 <p>
@@ -143,9 +134,9 @@ préservent la synchronisation entre les quatre valeurs stockées.
 </div>
 
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Classe <code>Fraction</code></h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Classe <code>Fraction</code></h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Sur le même modèle, écrire une classe <code>Fraction</code>, possédant :
 </p>
@@ -154,34 +145,24 @@ Sur le même modèle, écrire une classe <code>Fraction</code>, possédant :
 <li>Deux membres entiers :
 
 <ul class="org-ul">
-<li>Numérateur,
-</li>
-<li>Dénominateur;
-</li>
-</ul>
-</li>
+<li>Numérateur,</li>
+<li>Dénominateur;</li>
+</ul></li>
 
-<li>Un ou plusieurs constructeurs;
-</li>
+<li>Un ou plusieurs constructeurs;</li>
 
 <li>Une méthode <code>affiche</code> pour les tests (qui affiche la fraction sous la forme
-Numérateur/Dénominateur <i>e.g.</i> 4/3);
-</li>
+Numérateur/Dénominateur <i>e.g.</i> 4/3);</li>
 
-<li>Des méthodes d&rsquo;accès;
-</li>
+<li>Des méthodes d&rsquo;accès;</li>
 
-<li>Une méthode de modification;
-</li>
+<li>Une méthode de modification;</li>
 
-<li>Une méthode retournant la fraction inverse (dénominateur / numérateur);
-</li>
+<li>Une méthode retournant la fraction inverse (dénominateur / numérateur);</li>
 
-<li>Une méthode <code>reduire</code> : qui réduit la fraction <i>i.e.</i> 28/6 devient 14/3;
-</li>
+<li>Une méthode <code>reduire</code> : qui réduit la fraction <i>i.e.</i> 28/6 devient 14/3;</li>
 
-<li><code>approx</code> : qui retourne la valeur approchée de la fraction par un <code>double</code>.
-</li>
+<li><code>approx</code> : qui retourne la valeur approchée de la fraction par un <code>double</code>.</li>
 </ul>
 </div>
 </div>

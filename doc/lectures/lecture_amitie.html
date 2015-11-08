@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Fonctions amies</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fonctions amies</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -100,8 +101,7 @@ Fonction extérieure amie d&rsquo;une classe <code>A</code>
   ...
 };
 </pre>
-</div>
-</li>
+</div></li>
 
 <li><p>
 Fonction membre d&rsquo;une classe <code>B</code>, amie de la classe <code>A</code>
@@ -116,8 +116,7 @@ Fonction membre d&rsquo;une classe <code>B</code>, amie de la classe <code>A</co
   ...
 };
 </pre>
-</div>
-</li>
+</div></li>
 
 <li><p>
 Toutes les méthodes d&rsquo;une classe <code>B</code> sont amies de la classe <code>A</code>
@@ -127,8 +126,7 @@ Toutes les méthodes d&rsquo;une classe <code>B</code> sont amies de la classe <
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">A</span> { ...  <span class="org-keyword">friend</span> <span class="org-keyword">class</span> <span class="org-type">B</span>; ...  };
 </pre>
-</div>
-</li>
+</div></li>
 </ol>
 
 <p>
@@ -136,19 +134,16 @@ Remarques :
 </p>
 <ul class="org-ul">
 <li>On déclare souvent une fonction amie d&rsquo;une classe <code>A</code> lorsque la fonction amie
-renvoie un objet de la classe <code>A</code>
-</li>
+renvoie un objet de la classe <code>A</code></li>
 
 <li>Il est parfois nécessaire d&rsquo;indiquer au compilateur que la déclaration de la
 classe n&rsquo;interviendra que plus loin dans le code. Dans ce cas, il faut user
 d&rsquo;une déclaration &ldquo;en amont&rdquo; (<i>forward declaration</i> en anglais) <i>via</i>
-l&rsquo;instruction <code>class nom_classe;</code>
-</li>
+l'instruction <code>class nom_classe;</code></li>
 
 <li>Si deux classes <code>A</code> et <code>B</code> sont amies, les objet de <code>A</code> ne peuvent pas accéder
 aux membres de <code>B</code>. Ce sont les méthodes de <code>A</code> qui peuvent accéder aux
-membres de <code>B</code>
-</li>
+membres de <code>B</code></li>
 </ul>
 </div>
 </body>

@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Compilation et directives de préprocesseur</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compilation et directives de préprocesseur</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Compilation et directives de préprocesseur</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Description détaillée du processus de compilation</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Description détaillée du processus de compilation</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Le processus de compilation se décompose en différentes phases conduisant à la
 construction d&rsquo;un fichier binaire exécutable. Ces phases ne sont, en général,
@@ -126,7 +107,7 @@ suppression de texte, inclusion de fichiers&#x2026;). Le résultat de la
 précompilation peut s&rsquo;obtenir <i>via</i> la commande suivante
 </p>
 
-<div class="PROMPT">
+<div class="prompt">
 <p>
 g++ -E fichier_source.cc
 </p>
@@ -145,7 +126,7 @@ objets. Pour ce qui concerne le C++, la commande nécessaire à la compilation
 séparée s&rsquo;écrit :
 </p>
 
-<div class="PROMPT">
+<div class="prompt">
 <p>
 g++ -c fichier_source.cc
 </p>
@@ -170,7 +151,7 @@ exécutables et les bibliothèques dynamiques sont des exemples de fichiers
 images. La commande relative à ce mécanisme est la suivante:
 </p>
 
-<div class="PROMPT">
+<div class="prompt">
 <p>
 g++ fichier_source1.o fichier_source2.o &#x2026; -o fichier_executable
 </p>
@@ -184,7 +165,7 @@ peut ainsi compiler séparément l&rsquo;ensemble des fichiers sources et réali
 l&rsquo;édition de liens <i>via</i> la commande
 </p>
 
-<div class="PROMPT">
+<div class="prompt">
 <p>
 g++ fichier_source1.cc fichier_source2.cc &#x2026; -o fichier_executable
 </p>
@@ -193,9 +174,9 @@ g++ fichier_source1.cc fichier_source2.cc &#x2026; -o fichier_executable
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Options de compilation</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Options de compilation</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Le compilateur C++ autorise l&rsquo;utilisation d&rsquo;une multitude d&rsquo;options concernant
 aussi bien l&rsquo;optimisation du processus de compilation que la compréhension et la
@@ -209,23 +190,20 @@ couramment utilisées:
 <li>l&rsquo;option <code>-Ichemin</code> indique au compilateur où sont localisés les fichiers
 d&rsquo;entêtes nécessaires à la compilation séparée du programme. Par défaut, le
 compilateur recherche ces fichiers localement et dans le répertoire
-<code>/usr/include</code>,
-</li>
+<code>/usr/include</code>,</li>
 
 <li>l&rsquo;option <code>-Lchemin</code> est essentiel lors du processus d&rsquo;édition de liens afin
 d&rsquo;indiquer au compilateur où se situent les librairies externes. Soit le
 chemin d&rsquo;accès est complet et pointe donc vers la librairie concernée, soit le
 chemin d&rsquo;accès indique uniquement le répertoire où sont localisées les
 librairies, auquel cas il est nécessaire de préciser le nom de la librairie à
-utiliser <i>via</i> l&rsquo;option <code>-lnom_librairie</code>,
-</li>
+utiliser <i>via</i> l&rsquo;option <code>-lnom_librairie</code>,</li>
 
 <li>l&rsquo;option <code>-W</code> permet l&rsquo;activation des messages de mise en garde (le <code>W</code> se
 référant à l&rsquo;expression <i>warning</i>). Ces <i>warnings</i> n&rsquo;empècheront pas
 l&rsquo;exécution du programme final mais fournissent des indications voir des
 conseils en relation avec certaines parties du code. Différents niveaux de
-mise en garde sont accessibles, le plus complet étant <code>-Wall -Wextra</code>,
-</li>
+mise en garde sont accessibles, le plus complet étant <code>-Wall -Wextra</code>,</li>
 
 <li>l&rsquo;option <code>-Didentificateur</code> permet la définition d&rsquo;identificateur à fournir
 lors du processus de précompilation. L&rsquo;activation des directives de
@@ -235,20 +213,18 @@ directive. À titre d&rsquo;exemple, il pourra s&rsquo;avérer utile lors d&rsqu
 débogage d&rsquo;un programme, de définir un identificateur <code>__DEBUG__</code> qui
 affichera des informations complémentaires lors de l&rsquo;exécution du
 programme. Afin d&rsquo;inclure ces instructions supplémentaires au sein du code, la
-commande de compilation deviendra <code>g++ -D__DEBUG__ ...</code>,
-</li>
+commande de compilation deviendra <code>g++ -D__DEBUG__ ...</code>,</li>
 
 <li>afin de profiter des processeurs multi-cœurs présents dans les machines
 récentes, l&rsquo;option <code>-On</code> permet l&rsquo;optimisation de la compilation en
-répartissant la charge de compilation sur <code>n</code> cœurs.
-</li>
+répartissant la charge de compilation sur <code>n</code> cœurs.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Directives de préprocesseur</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Comme nous l&rsquo;avons rappelé en introduction à cette annexe, la compilation d&rsquo;un
 programme se déroule en trois phases. La première est exécutée par le
@@ -416,19 +392,19 @@ remplacées par des déclarations de la forme
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">Pi</span> = 3.141592;
-<span class="org-keyword">const</span> <span class="org-type">string</span> <span class="org-variable-name">ErrMsg</span> = <span class="org-string">"Une erreur s'est produite.\n"</span>;
+<span class="org-keyword">const</span> <span class="org-constant">std</span>::<span class="org-type">string</span> <span class="org-variable-name">ErrMsg</span> = <span class="org-string">"Une erreur s'est produite"</span>;
 </pre>
 </div>
 
 <p>
 De même, les macros telles que <code>CARRE</code> c&rsquo;est-à-dire définissant de simples
-actions deviendront des fonctions en ligne (<i>cf.</i> <a href="lecture_spectificite_c++.html">&ldquo;Spécificités du C++&rdquo;</a>)
+actions deviendront des fonctions en ligne (<i>cf.</i> <a href="lecture_spectificite_c++.html">"Spécificités du C++"</a>)
 s&rsquo;écrivant
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">inline</span> <span class="org-type">long</span> <span class="org-function-name">Carre</span>(<span class="org-keyword">const</span> <span class="org-type">long</span> <span class="org-variable-name">l</span>) { <span class="org-keyword">return</span> l*l; }
+<pre class="src src-c++"><span class="org-keyword">inline</span> <span class="org-type">int</span> <span class="org-function-name">Carre</span>(<span class="org-keyword">const</span> <span class="org-type">int</span> <span class="org-variable-name">i</span>) { <span class="org-keyword">return</span> i*i; }
 <span class="org-keyword">inline</span> <span class="org-type">double</span> <span class="org-function-name">Carre</span>(<span class="org-keyword">const</span> <span class="org-type">double</span> <span class="org-variable-name">d</span>) { <span class="org-keyword">return</span> d*d; }
 </pre>
 </div>
@@ -438,20 +414,20 @@ qui vérifient, en outre, les types de leurs paramètres.
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 <code>man</code>, pour <i>manual</i>, constitue l&rsquo;instruction
 unix permettant de connaître les différents modes de fonctionnement
 d&rsquo;une commande donnée
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 pour plus d&rsquo;informations, le site internet
 <a href="http://www.antoarts.com/the-most-useful-gcc-options-and-extensions/">http://www.antoarts.com/the-most-useful-gcc-options-and-extensions/</a> propose une
 liste des options de <code>g++</code> les plus utiles.
-</p></div>
+</p></div></div>
 
 
 </div>

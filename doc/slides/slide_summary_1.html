@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Résumé sur les spécificités du C++ hors POO</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Résumé sur les spécificités du C++ hors POO</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,21 +87,20 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Résumé sur les spécificités du C++ hors POO</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Principales notions</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Principales notions</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
 <li><p>
 Le C++ introduit la notion de référence afin de faciliter la manipulation des
 variables notamment au sein des fonctions
 </p>
 
-<div class="center">
+<div class="org-center">
 <p>
 <b>&rarr; transmission des arguments par référence</b>
 </p>
-</div>
-</li>
+</div></li>
 </ul>
 
 <ul class="org-ul">
@@ -129,39 +109,37 @@ En C++ plusieurs fonctions peuvent porter le même nom dès lors qu&rsquo;elles 
 pas le même contexte d&rsquo;appel
 </p>
 
-<div class="center">
+<div class="org-center">
 <p>
 <b>&rarr; surdéfinition ou surcharge de fonction</b>
 </p>
-</div>
-</li>
+</div></li>
 </ul>
 
 <ul class="org-ul">
 <li><p>
-Les macros telles qu&rsquo;utilisées en C sont à éviter (<i>cf.</i> <a href="http://www.parashift.com/c++-faq/inline-vs-macros.html">evil#1</a>, <a href="http://www.parashift.com/c++-faq/macros-with-if.html">evil#2</a>,
-<a href="http://www.parashift.com/c++-faq/macros-with-multi-stmts.html">evil#3</a>, <a href="http://www.parashift.com/c++-faq/macros-with-token-pasting.html">evil#4</a>). Les seules véritables directives de préprocesseur à
+Les macros telles qu&rsquo;utilisées en C sont à éviter (<i>cf.</i> <a href="https://isocpp.org/wiki/faq/inline-functions#inline-vs-macros">evil#1</a>, <a href="https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-if">evil#2</a>,
+<a href="https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-multi-stmts">evil#3</a>, <a href="https://isocpp.org/wiki/faq/misc-technical-issues#macros-with-token-pasting">evil#4</a>). Les seules véritables directives de préprocesseur à
 utiliser sont <b><code>#include</code>, <code>#ifndef</code> / <code>#define</code></b>
 </p>
 
-<div class="center">
+<div class="org-center">
 <p>
 <b>&rarr; compilation séparée</b>
 </p>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Transmission par référence</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Transmission par référence</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3"><code>dummy.h</code></h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
@@ -175,9 +153,9 @@ utiliser sont <b><code>#include</code>, <code>#ifndef</code> / <code>#define</co
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4"><code>dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -189,9 +167,9 @@ utiliser sont <b><code>#include</code>, <code>#ifndef</code> / <code>#define</co
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-3">
-<h3 id="unnumbered-5"><code>test_dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -207,9 +185,9 @@ utiliser sont <b><code>#include</code>, <code>#ifndef</code> / <code>#define</co
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Transmission par référence</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Transmission par référence</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <div class="CBOX">
 <p>
 Transmission par référence
@@ -218,9 +196,9 @@ Transmission par référence
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-3">
-<h3 id="unnumbered-7"><code>dummy.h</code></h3>
-<div class="outline-text-3" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
@@ -234,9 +212,9 @@ Transmission par référence
 </div>
 </div>
 
-<div id="outline-container-unnumbered-8" class="outline-3">
-<h3 id="unnumbered-8"><code>dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -248,9 +226,9 @@ Transmission par référence
 </div>
 </div>
 
-<div id="outline-container-unnumbered-9" class="outline-3">
-<h3 id="unnumbered-9"><code>test_dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-9">
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -266,9 +244,9 @@ Transmission par référence
 </div>
 </div>
 
-<div id="outline-container-unnumbered-10" class="outline-2">
-<h2 id="unnumbered-10">Surdéfinition de fonction</h2>
-<div class="outline-text-2" id="text-unnumbered-10">
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Surdéfinition de fonction</h2>
+<div class="outline-text-2" id="text-orgheadline10">
 <div class="CBOX">
 <p>
 Surdéfinition de fonction
@@ -277,9 +255,9 @@ Surdéfinition de fonction
 </div>
 </div>
 
-<div id="outline-container-unnumbered-11" class="outline-3">
-<h3 id="unnumbered-11"><code>dummy.h</code></h3>
-<div class="outline-text-3" id="text-unnumbered-11">
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-orgheadline11">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
@@ -293,9 +271,9 @@ Surdéfinition de fonction
 </div>
 </div>
 
-<div id="outline-container-unnumbered-12" class="outline-3">
-<h3 id="unnumbered-12"><code>dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-12">
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline12">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -307,9 +285,9 @@ Surdéfinition de fonction
 </div>
 </div>
 
-<div id="outline-container-unnumbered-13" class="outline-3">
-<h3 id="unnumbered-13"><code>test_dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-13">
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -325,9 +303,9 @@ Surdéfinition de fonction
 </div>
 </div>
 
-<div id="outline-container-unnumbered-14" class="outline-2">
-<h2 id="unnumbered-14">Directives de préprocesseur</h2>
-<div class="outline-text-2" id="text-unnumbered-14">
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Directives de préprocesseur</h2>
+<div class="outline-text-2" id="text-orgheadline14">
 <div class="CBOX">
 <p>
 Directives de préprocesseur
@@ -336,9 +314,9 @@ Directives de préprocesseur
 </div>
 </div>
 
-<div id="outline-container-unnumbered-15" class="outline-3">
-<h3 id="unnumbered-15"><code>dummy.h</code></h3>
-<div class="outline-text-3" id="text-unnumbered-15">
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><code>dummy.h</code></h3>
+<div class="outline-text-3" id="text-orgheadline15">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#if</span><span class="org-preprocessor"><span class="org-negation-char">n</span></span><span class="org-preprocessor">def</span> __dummy_h__
@@ -352,9 +330,9 @@ Directives de préprocesseur
 </div>
 </div>
 
-<div id="outline-container-unnumbered-16" class="outline-3">
-<h3 id="unnumbered-16"><code>dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-16">
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><code>dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline16">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -366,9 +344,9 @@ Directives de préprocesseur
 </div>
 </div>
 
-<div id="outline-container-unnumbered-17" class="outline-3">
-<h3 id="unnumbered-17"><code>test_dummy.cc</code></h3>
-<div class="outline-text-3" id="text-unnumbered-17">
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><code>test_dummy.cc</code></h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="linenr">1: </span><span class="org-preprocessor">#include</span> <span class="org-string">"dummy.h"</span>
@@ -384,10 +362,10 @@ Directives de préprocesseur
 </div>
 </div>
 
-<div id="outline-container-unnumbered-18" class="outline-2">
-<h2 id="unnumbered-18">Compilation</h2>
-<div class="outline-text-2" id="text-unnumbered-18">
-<div class="PROMPT">
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Compilation</h2>
+<div class="outline-text-2" id="text-orgheadline18">
+<div class="prompt">
 <p>
 g++ dummy.cc test_dummy.cc -o test_dummy.exe
 </p>
@@ -403,23 +381,20 @@ g++ dummy.cc test_dummy.cc -o test_dummy.exe
 </div>
 </div>
 
-<div id="outline-container-unnumbered-19" class="outline-2">
-<h2 id="unnumbered-19">Pourquoi tant de fichiers ?</h2>
-<div class="outline-text-2" id="text-unnumbered-19">
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Pourquoi tant de fichiers ?</h2>
+<div class="outline-text-2" id="text-orgheadline19">
 <ol class="org-ol">
 <li><b>Protection du code source :</b> un utilisateur &lambda; n&rsquo;a besoin que de la
 déclaration de la fonction <i>i.e.</i> le fichier <code>dummy.h</code> et du fichier objet
-associé <i>i.e.</i> <code>dummy.o</code>.
-</li>
+associé <i>i.e.</i> <code>dummy.o</code>.</li>
 
 <li><b>Temps de compilation :</b> seuls les fichiers sources <i>i.e.</i> <code>*.cc</code> modifiés,
-doivent être recompilés.
-</li>
+doivent être recompilés.</li>
 
 <li><b>Structure &amp; accès du code :</b> à terme chaque structure/classe nouvellement
 crée se verra associer deux fichiers, sa déclaration et sa définition, ainsi
-qu&rsquo;un programme <code>test</code>.
-</li>
+qu&rsquo;un programme <code>test</code>.</li>
 </ol>
 </div>
 </div>

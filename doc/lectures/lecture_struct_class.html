@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Structures et classes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Structures et classes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -147,16 +128,16 @@ présenterons la version étendue du type structure introduite par le C++. Ce
 nouveau type permettra, dans un premier temps, de nous limiter à la façon de
 mettre en œuvre l&rsquo;association des données et des méthodes et facilitera
 l&rsquo;introduction à la notion même de classe. Ce n&rsquo;est qu&rsquo;au travers du prochain
-chapitre <a href="lecture_encapsulation.html">&ldquo;Encapsulation des données&rdquo;</a> qu&rsquo;apparaîtont les différences
+chapitre <a href="lecture_encapsulation.html">"Encapsulation des données"</a> qu&rsquo;apparaîtont les différences
 conceptuelles entre les types structure et classe.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Les structures en C++</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
-</div><div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">Rappel : les structures en C</h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Les structures en C++</h2>
+<div class="outline-text-2" id="text-orgheadline6">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1">Rappel : les structures en C</h3>
+<div class="outline-text-3" id="text-orgheadline1">
 <p>
 En C, une déclaration telle que
 </p>
@@ -192,25 +173,22 @@ point (<code>.</code>); par exemple, <code>my_point1.y</code> désigne le membre
 </div>
 </div>
 
-<div id="outline-container-ref::declaration" class="outline-3">
-<h3 id="ref::declaration"><a id="unnumbered-3"></a>Déclaration d&rsquo;une structure comportant des méthodes ou  fonctions membres</h3>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="ref::declaration"><a id="orgheadline2"></a>Déclaration d&rsquo;une structure comportant des méthodes ou  fonctions membres</h3>
 <div class="outline-text-3" id="text-ref::declaration">
 <p>
 En C++, il est possible au sein même d&rsquo;une structure, d&rsquo;associer aux données
 <i>i.e.</i> aux membres, <b>des méthodes</b> également appelées &ldquo;fonction
-membres"<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Supposons que nous souhaitions associer à la structure
+membres&rdquo;<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. Supposons que nous souhaitions associer à la structure
 <code>point</code> précédente, trois fonctions:
 </p>
 
 <ul class="org-ul">
-<li><code>initialise</code> pour attribuer des valeurs aux &ldquo;coordonnées&rdquo; d&rsquo;un point,
-</li>
+<li><code>initialise</code> pour attribuer des valeurs aux &ldquo;coordonnées&rdquo; d&rsquo;un point,</li>
 
-<li><code>deplace</code> pour modifier les coordonnées d&rsquo;un point,
-</li>
+<li><code>deplace</code> pour modifier les coordonnées d&rsquo;un point,</li>
 
-<li><code>affiche</code> pour afficher les coordonnées d&rsquo;un point.
-</li>
+<li><code>affiche</code> pour afficher les coordonnées d&rsquo;un point.</li>
 </ul>
 
 <p>
@@ -241,8 +219,8 @@ l&rsquo;usage de ces variables soit à ce stade de la déclaration inconnu.
 </div>
 </div>
 
-<div id="outline-container-ref::definition" class="outline-3">
-<h3 id="ref::definition"><a id="unnumbered-4"></a>Définition des méthodes</h3>
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="ref::definition"><a id="orgheadline3"></a>Définition des méthodes</h3>
 <div class="outline-text-3" id="text-ref::definition">
 <p>
 La définition des méthodes se fait comme une fonction à ceci près que le nom de
@@ -292,9 +270,9 @@ fichier source est alors impérative.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-3">
-<h3 id="unnumbered-5">Utilisation d&rsquo;une structure comportant des méthodes</h3>
-<div class="outline-text-3" id="text-unnumbered-5">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Utilisation d&rsquo;une structure comportant des méthodes</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 Disposant à présent du type <code>point</code> tel que déclaré au paragraphe
 <a href="#ref::declaration">Déclaration d&rsquo;une structure comportant des méthodes ou  fonctions membres</a> et défini au paragraphe <a href="#ref::definition">Définition des méthodes</a>, nous pouvons
@@ -312,7 +290,7 @@ suivante
 déclare deux structures nommées <code>my_point1</code> et <code>my_point2</code>, chacune disposant de
 trois méthodes <code>initialise</code>, <code>deplace</code> et <code>affiche</code>. L&rsquo;accès aux membres <code>m_X</code>
 et <code>m_Y</code> peut se faire comme en C à savoir <code>my_point1.m_X = 5;</code>. Cependant et
-comme nous le verrons au prochain chapitre <a href="lecture_encapsulation.html">&ldquo;Encapsulation des données&rdquo;</a>, nous
+comme nous le verrons au prochain chapitre <a href="lecture_encapsulation.html">"Encapsulation des données"</a>, nous
 briserions alors le principe d&rsquo;encapsulation à savoir que nous accèderions
 directement aux données membres sans passer par l&rsquo;intermédiaire des
 méthodes. Aussi, on priviligiera la manipulation des membres <i>via</i> les méthodes
@@ -335,9 +313,9 @@ méthode quelle est la structure sur laquelle opérer.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-3">
-<h3 id="unnumbered-6">Remarques</h3>
-<div class="outline-text-3" id="text-unnumbered-6">
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Remarques</h3>
+<div class="outline-text-3" id="text-orgheadline5">
 <ul class="org-ul">
 <li><p>
 Une méthode ne peut être appelée comme une fonction ordinaire. Par exemple,
@@ -351,39 +329,33 @@ l&rsquo;instruction suivante
 <p>
 sera rejetée à la compilation (à moins qu&rsquo;il n&rsquo;existe, par ailleurs, une
 fonction ordinaire appelée <code>initialise</code>).
-</p>
-</li>
+</p></li>
 
 <li>Dans la déclaration d&rsquo;une structure, il est permis (mais généralement peu
-conseillé) d&rsquo;introduire les membres et les méthodes dans un ordre quelconque.
-</li>
+conseillé) d&rsquo;introduire les membres et les méthodes dans un ordre quelconque.</li>
 
 <li><p>
 Un exemple de programme complet comprendrait
 </p>
 
 <ul class="org-ul">
-<li>la déclaration du type <code>point</code>,
-</li>
-<li>la définition des méthodes du type <code>point</code>,
-</li>
-<li>un programme principal contenant la fonction <code>main</code> et utilisant le type <code>point</code>.
-</li>
+<li>la déclaration du type <code>point</code>,</li>
+<li>la définition des méthodes du type <code>point</code>,</li>
+<li>un programme principal contenant la fonction <code>main</code> et utilisant le type <code>point</code>.</li>
 </ul>
 <p>
 La compilation séparée prend alors tout son intérêt puisqu&rsquo;il est possible de
 compiler le type <code>point</code> indépendamment de son utilisation faite dans le
 programme principal; c&rsquo;est ainsi que l&rsquo;on pourra &ldquo;réutiliser&rdquo; un composant logiciel.
-</p>
-</li>
+</p></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Notion de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Notion de classe</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <p>
 En C++, la structure est un cas particulier de la classe. Comme nous le verrons
 au prochain chapitre, une classe est une structure dans laquelle seulement
@@ -397,25 +369,25 @@ structure, il convient d&rsquo;ajouter le mot clé <code>public</code> afin que 
 méthodes soient accessibles et manipulables depuis l&rsquo;extérieur de la classe. Par
 défaut, les membres et méthodes d&rsquo;une classe sont privés (mot clé <code>private</code>)
 alors que ceux d&rsquo;une structure sont publics. L&rsquo;ensemble de ces concepts est
-précisé dans le chapitre <a href="lecture_encapsulation.html">&ldquo;Encapsulation des données&rdquo;</a>.
+précisé dans le chapitre <a href="lecture_encapsulation.html">"Encapsulation des données"</a>.
 </p>
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 d&rsquo;un point de vue conceptuel, une telle notion ne prendra tout son
 intérêt qu&rsquo;une fois l&rsquo;encapsulation des données introduite. Cependant, la
 présentation du concept de méthode prépare à la notion de classe.
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 l&rsquo;ajout des noms des variables est facultative. Toutefois, elle facilite
 la lecture et la compréhension du code, <i>a fortiori</i> pour l&rsquo;utilisateur qui n&rsquo;a,
 en théorie, accès qu&rsquo;à la déclaration des méthodes et non à leur définition.
-</p></div>
+</p></div></div>
 
 
 </div>

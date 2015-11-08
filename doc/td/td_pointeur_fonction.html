@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Compilation, pointeur &amp; références</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compilation, pointeur &amp; références</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Compilation, pointeur &amp; références</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Compilation conditionnelle</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Compilation conditionnelle</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Compiler le code suivant, sans puis avec les options de &ldquo;warnings&rdquo;
 </p>
@@ -140,20 +121,17 @@ résultat en précompilant le code source.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Pointeurs &amp; références</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Pointeurs &amp; références</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Créer un programme dans lequel vous déclarerez :
 </p>
 
 <ul class="org-ul">
-<li>un entier,
-</li>
-<li>une référence vers cet entier,
-</li>
-<li>un pointeur vers cet entier.
-</li>
+<li>un entier,</li>
+<li>une référence vers cet entier,</li>
+<li>un pointeur vers cet entier.</li>
 </ul>
 
 <p>
@@ -163,9 +141,9 @@ pointée.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Opérateurs <code>new</code> et <code>delete</code></h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Opérateurs <code>new</code> et <code>delete</code></h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Écrire en C++, en utilisant les outils spécifiques à ce langage, les
 instructions C suivantes :
@@ -184,9 +162,9 @@ free(pt_tabular);
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Fonction &amp; références</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Fonction &amp; références</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 Écrire une fonction permettant d&rsquo;échanger les contenus de 2 variables de type
 <code>int</code> fournies en argument:
@@ -194,10 +172,8 @@ free(pt_tabular);
 
 <ol class="org-ol">
 <li>en transmettant l&rsquo;adresse des variables concernées (seule méthode utilisable
-en C),
-</li>
-<li>en utilisant la transmission par référence
-</li>
+en C),</li>
+<li>en utilisant la transmission par référence</li>
 </ol>
 
 <p>

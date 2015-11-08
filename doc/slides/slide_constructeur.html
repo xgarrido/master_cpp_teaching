@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Constructeur &amp; Destructeur de classe</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Constructeur &amp; Destructeur de classe</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -64,54 +65,46 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Constructeur &amp; Destructeur de classe</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Introduction</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
 <li>Le constructeur et le destructeur sont deux <b>méthodes <i>i.e.</i> fonctions
 membres</b> particulières
 
 <ul class="org-ul">
-<li>le constructeur est appelé à la création d&rsquo;un objet,
-</li>
-<li>le destructeur est appelé à la destruction d&rsquo;un objet.
-</li>
-</ul>
-</li>
+<li>le constructeur est appelé à la création d&rsquo;un objet,</li>
+<li>le destructeur est appelé à la destruction d&rsquo;un objet.</li>
+</ul></li>
 
 <li>constructeur &equiv; <b>initialisation des membres</b> (gestion de l&rsquo;allocation
-dynamique de mémoire)
-</li>
+dynamique de mémoire, par exemple)</li>
 
 <li>destructeur &equiv; <b>ultimes opérations</b> (désallocation de la mémoire
-précédemment allouée)
-</li>
+précédemment allouée)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Constructeur de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Constructeur de classe</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <ul class="org-ul">
 <li>Le constructeur est une méthode à part entière (d&rsquo;où la possibilité de la
 surdéfinir) à ceci près que
 
 <ul class="org-ul">
-<li>le constructeur doit porter <b>le même nom</b> que la classe,
-</li>
+<li>le constructeur doit porter <b>le même nom</b> que la classe,</li>
 
-<li>le constructeur ne doit avoir <b>aucun type</b> de retour.
-</li>
-</ul>
-</li>
+<li>le constructeur ne doit avoir <b>aucun type</b> de retour.</li>
+</ul></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Déclaration de constructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Déclaration de constructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
@@ -133,9 +126,9 @@ surdéfinir) à ceci près que
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Définition de constructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Définition de constructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
@@ -151,40 +144,36 @@ surdéfinir) à ceci près que
 {
 }
 ...
-particule my_particule1; <span class="org-comment-delimiter">// </span><span class="org-comment">Constructeur par d&#233;faut</span>
-<span class="org-type">particule</span> <span class="org-function-name">my_particule2</span>(0.511, 1.6e-19);
+particule my_electron; <span class="org-comment-delimiter">// </span><span class="org-comment">Constructeur par d&#233;faut</span>
+<span class="org-type">particule</span> <span class="org-function-name">my_positron</span>(0.511, 1.6e-19);
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Destructeur de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Destructeur de classe</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <ul class="org-ul">
 <li>Le destructeur est également une méthode à ceci près que
 
 <ul class="org-ul">
 <li>le destructeur doit porter <b>le même nom</b> que la classe <b>préfixé du signe
-<code>~</code></b>,
-</li>
+<code>~</code></b>,</li>
 
-<li>le destructeur <b>ne possède pas d&rsquo;argument</b>; il n&rsquo;est donc pas possible de
-surdéfinir cette méthode.
-</li>
-</ul>
-</li>
+<li>le destructeur <b>ne possède pas d'argument</b>; il n&rsquo;est donc pas possible de
+surdéfinir cette méthode.</li>
+</ul></li>
 
 <li>Lors d&rsquo;allocation dynamique de mémoire, la présence d&rsquo;un destructeur est
-obligatoire<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
-</li>
+obligatoire<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Déclaration de destructeur</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Déclaration de destructeur</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">particule</span>
@@ -205,9 +194,9 @@ obligatoire<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Définition de destructeur</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Définition de destructeur</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-preprocessor">#include</span> <span class="org-string">"particule.h"</span>
@@ -228,12 +217,12 @@ obligatoire<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 c&rsquo;est également le cas pour l&rsquo;héritage
-</p></div>
+</p></div></div>
 
 
 </div>

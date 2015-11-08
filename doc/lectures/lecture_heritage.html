@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Héritage</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Héritage</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -129,9 +110,9 @@ seul niveau : une classe dérivée peut devenir à son tour classe de base. La
 notion d&rsquo;héritage apparaît ainsi comme un outil de spécialisation croissante.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Notion d&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Notion d&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 La relation d&rsquo;héritage entre deux classes s&rsquo;effectue lors de la déclaration de
 la classe fille. À titre d&rsquo;exemple, considérons une classe de base nommée
@@ -207,45 +188,38 @@ façon suivante :
 
 <dl class="org-dl">
 <dt><code>private</code></dt><dd>les membres ne sont accessibles qu&rsquo;aux méthodes et aux fonctions
-amies de la classe;
-</dd>
+amies de la classe;</dd>
 
 <dt><code>protected</code></dt><dd>les membres sont accessibles aux méthodes de la classe de base
 ainsi qu&rsquo;aux classes dérivées. Ils demeurent toutefois
 inaccessibles à l&rsquo;utilisateur de la classe contrairement au
-statut public comme précisé ci-dessous;
-</dd>
+statut public comme précisé ci-dessous;</dd>
 
 <dt><code>public</code></dt><dd>les membres sont accessibles non seulement aux méthodes mais
 également à l&rsquo;utilisateur de la classe soit à n&rsquo;importe quel objet
-du type de la classe.
-</dd>
+du type de la classe.</dd>
 </dl>
 </div>
 
 
-<div id="outline-container-unnumbered-2" class="outline-4">
-<h4 id="unnumbered-2">Remarques importantes</h4>
-<div class="outline-text-4" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Remarques importantes</h4>
+<div class="outline-text-4" id="text-orgheadline2">
 <p>
 De manière générale dans la programmation orientée objet, le développeur procède
 ainsi :
 </p>
 
 <ul class="org-ul">
-<li><b>Répertorier</b> les objets nécessaires à la description du problème,
-</li>
+<li><b>Répertorier</b> les objets nécessaires à la description du problème,</li>
 
 <li><b>Réfléchir</b> aux liens logiques entre ces objets (composition<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>, amitié,
-héritage, &#x2026;)
-</li>
+héritage, &#x2026;)</li>
 
-<li><b>Implémenter</b> ces objets
-</li>
+<li><b>Implémenter</b> ces objets</li>
 
 <li><b>Créer</b> des instances de ces objets et <b>utiliser</b> leurs méthodes pour répondre
-au problème donné.
-</li>
+au problème donné.</li>
 </ul>
 
 <p>
@@ -255,13 +229,11 @@ composition et héritage :
 
 <dl class="org-dl">
 <dt>Composition : Relation de type A_UN</dt><dd>Par exemple, la classe voiture A_UNE
-     roue (un des membres de voiture est une instance de la classe roue)
-</dd>
+     roue (un des membres de voiture est une instance de la classe roue)</dd>
 
 <dt>Héritage : Relation de type EST_UN</dt><dd>Par exemple, la classe voiture EST_UN
 véhicule (la classe voiture hérite du contenu de la classe véhicule et
-l&rsquo;enrichit)
-</dd>
+l'enrichit)</dd>
 </dl>
 
 <p>
@@ -275,9 +247,9 @@ modélisation, 50% à sa maintenance et seulement 10% à son écriture.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Appel des constructeurs et destructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Appel des constructeurs et destructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Les règles de construction et de destruction de classe s&rsquo;appliquent également
 aux classes dérivées en tenant compte toutefois de la structure hiérarchique
@@ -321,9 +293,9 @@ aux constructeurs.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Notion d&rsquo;héritage multiple</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Notion d&rsquo;héritage multiple</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 Le langage C++ dispose de possibilités d&rsquo;héritage multiple. Cette
 généralisation permet notamment de s&rsquo;affranchir de la contrainte hiérarchique
@@ -419,9 +391,9 @@ développeurs.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Liaison dynamique et méthodes virtuelles</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Liaison dynamique et méthodes virtuelles</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Pour illustrer l&rsquo;intérêt de la liaison dynamique<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>, considérons l&rsquo;exemple
 suivant :
@@ -525,14 +497,11 @@ une classe de base et ses classes dérivées. Ainsi, des conversions implicites
 permettent de :
 </p>
 <ul class="org-ul">
-<li>convertir un objet de type <code>rectangle</code> en un objet de type <code>polygone</code>,
-</li>
+<li>convertir un objet de type <code>rectangle</code> en un objet de type <code>polygone</code>,</li>
 <li>convertir un pointeur sur un objet de type <code>rectangle</code> vers un pointeur sur
-un objet de type <code>polygone</code>,
-</li>
+un objet de type <code>polygone</code>,</li>
 <li>convertir une référence sur un objet de type <code>rectangle</code> vers une référence
-sur un objet de type <code>polygone</code>.
-</li>
+sur un objet de type <code>polygone</code>.</li>
 </ul>
 
 <p>
@@ -552,9 +521,9 @@ l&rsquo;inverse n&rsquo;étant pas vrai. L&rsquo;instruction <code>rectangle *pt
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Classe abstraite</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Classe abstraite</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
 Nous venons d&rsquo;introduire dans le paragraphe précédent, la notion de liaison
 dynamique qui permet de redéfinir une méthode au sein de classes filles. C++
@@ -670,48 +639,48 @@ différent mais néanmoins dérivé de la classe <code>filtre</code>.
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 nous préciserons par la suite les limitations liées à un tel accès
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 par membre, nous entendons membres et fonction membres <i>i.e.</i> méthodes
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 par composition, on entend qu&rsquo;une classe possède parmi ses membres une
 instance d&rsquo;une autre classe
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
 généralement et plus particulièrement en Physique, cette phase de
 modélisation est trop souvent délaissée : la maintenance du code devient, dans
 ces conditions, une tâche extrêmement laborieuse
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
 Java dispose de la notion d&rsquo;interface, inconnue du C++, qui permet en
 général de traiter plus élégamment les problèmes.
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
 on parle également de typage dynamique voir de ligature dynamique
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara"><p class="footpara">
 à distinguer de la surdéfinition où un symbole a un sens différent selon
 le contexte. Dans la redéfinition, les deux sens du même symbole ont une partie
 en commun, la méthode redéfinie est seulement plus précise
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara"><p class="footpara">
 on parle de polymorphisme sachant qu&rsquo;en biologie, ce terme reflète la
 caractéristique d&rsquo;un organisme à se présenter sous différentes formes sans
 changer de nature
-</p></div>
+</p></div></div>
 
 
 </div>

@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Notions de patrons de fonctions et de classes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notions de patrons de fonctions et de classes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -117,9 +98,9 @@ au même algorithme. Dans ce cadre, les notions de surdéfinition de fonction et
 de patron de fonctions répondent chacune à un besoin différent.
 </p>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Les patrons de fonction</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Les patrons de fonction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Pour tenter d&rsquo;illustrer l&rsquo;intérêt des patrons de fonctions et leurs différences
 vis-à-vis de la surdéfinition de fonction, considérons le cas scolaire de la
@@ -161,7 +142,7 @@ déclaration suivante
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">T</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">T</span> <span class="org-variable-name">b</span>)
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">typename</span> <span class="org-type">T</span>&gt; <span class="org-type">T</span> <span class="org-function-name">min</span>(<span class="org-keyword">const</span> <span class="org-type">T</span> &amp; <span class="org-variable-name">a</span>, <span class="org-keyword">const</span> <span class="org-type">T</span> &amp; <span class="org-variable-name">b</span>)
 {
   <span class="org-keyword">return</span> a &lt; b ? a : b;
 }
@@ -192,10 +173,10 @@ fonction
   <span class="org-keyword">const</span> <span class="org-type">float</span> <span class="org-variable-name">f1</span> = 3.4, <span class="org-variable-name">f2</span> = 5.6;
   <span class="org-keyword">const</span> <span class="org-type">char</span> <span class="org-variable-name">c1</span> = <span class="org-string">'d'</span>, <span class="org-variable-name">c2</span> = <span class="org-string">'z'</span>;
 
-  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (i1,i2) &lt;&lt; endl;
-  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; f1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; f2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (f1,f2) &lt;&lt; endl;
-  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; c1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; c2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min (c1,c2) &lt;&lt; endl;
-  cout &lt;&lt; <span class="org-string">"min(&amp;c1,&amp;c2) = "</span> &lt;&lt; min (&amp;c1,&amp;c2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min(i1,i2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; f1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; f2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min(f1,f2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; c1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; c2 &lt;&lt; <span class="org-string">") = "</span> &lt;&lt; min(c1,c2) &lt;&lt; endl;
+  cout &lt;&lt; <span class="org-string">"min(&amp;c1,&amp;c2) = "</span> &lt;&lt; min(&amp;c1,&amp;c2) &lt;&lt; endl;
   <span class="org-keyword">return</span> 0;
 }
 </pre>
@@ -255,9 +236,9 @@ s&rsquo;affranchissant des problèmes de type.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-4">
-<h4 id="unnumbered-2">Remarques</h4>
-<div class="outline-text-4" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">Remarques</h4>
+<div class="outline-text-4" id="text-orgheadline2">
 <ul class="org-ul">
 <li>Le mécanisme même des patrons fait que ces instructions sont utilisées par le
 compilateur pour enregistrer chaque fois qu&rsquo;il est nécessaire, les
@@ -265,8 +246,7 @@ instructions correspondant à la fonction requise. La définition de patron ne
 peut donc intervenir dans un module objet (fichiers <code>.cc,.cpp</code>,&#x2026;)
 indépendant de l&rsquo;utilisation qui en sera faite. Dans la pratique, les
 définitions de patrons se situent donc dans un fichier d&rsquo;entête de telle sorte
-à être &ldquo;en ligne"<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
-</li>
+à être &ldquo;en ligne&rdquo;<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
 
 <li><p>
 Un patron de fonctions peut comporter un ou
@@ -275,14 +255,13 @@ plusieurs paramètres de type, chacun devant être précédé du mot clé
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>...&gt; <span class="org-type">void</span> <span class="org-function-name">fct</span>(<span class="org-type">T</span> <span class="org-variable-name">t</span>, <span class="org-type">U</span> <span class="org-variable-name">u</span>, ...)
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">typename</span> <span class="org-type">T</span>, <span class="org-keyword">typename</span> <span class="org-type">U</span>...&gt; <span class="org-type">void</span> <span class="org-function-name">fct</span>(<span class="org-type">T</span> <span class="org-variable-name">t</span>, <span class="org-type">U</span> <span class="org-variable-name">u</span>, ...)
 </pre>
 </div>
 <p>
 Dans tous les cas, il est nécessaire que chaque paramètre de type
 apparaisse au moins une fois dans l&rsquo;entête du patron.
-</p>
-</li>
+</p></li>
 
 <li><p>
 Dans l&rsquo;hypothèse où la fonction <code>min</code> est appelée avec des arguments de type
@@ -312,16 +291,15 @@ cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span 
 cout &lt;&lt; <span class="org-string">"min("</span> &lt;&lt; i1 &lt;&lt; <span class="org-string">","</span> &lt;&lt; i2 &lt;&lt; <span class="org-string">") = "</span>
      &lt;&lt; <span class="org-type">min</span>&lt;<span class="org-type">char</span>&gt;(i1,i2) &lt;&lt; endl;
 </pre>
-</div>
-</li>
+</div></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Les patrons de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Les patrons de classe</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 Le précédent paragraphe a montré comment C++ permettait, grâce à la notion de
 patron de fonction, de définir une famille de fonctions paramétrées par un ou
@@ -344,7 +322,7 @@ portant sur la structure <code>point</code> pour laquelle la précision de repr�
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-keyword">class</span> <span class="org-type">point</span>
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">typename</span> <span class="org-type">T</span>&gt; <span class="org-keyword">class</span> <span class="org-type">point</span>
 {
 <span class="org-keyword">public</span>:
   <span class="org-function-name">point</span>(<span class="org-type">T</span> <span class="org-variable-name">abs</span> = 0, <span class="org-type">T</span> <span class="org-variable-name">ord</span> = 0) : m_x(abs), <span class="org-type">m_y</span>(<span class="org-variable-name">ord</span>) {}
@@ -369,12 +347,10 @@ compilateur :
 
 <ul class="org-ul">
 <li>que, dans la définition de cette fonction, vont apparaître des paramètres de
-type. On fournit donc la liste de paramètre sous la forme <code>template&lt;class T&gt;</code>,
-</li>
+type. On fournit donc la liste de paramètre sous la forme <code>template&lt;class T&gt;</code>,</li>
 
 <li>le nom du patron concerné. Par exemple, si nous définissons la méthode
-<code>affiche</code>, son nom sera <code>point&lt;T&gt;::affiche()</code>.
-</li>
+<code>affiche</code>, son nom sera <code>point&lt;T&gt;::affiche()</code>.</li>
 </ul>
 
 <p>
@@ -382,7 +358,7 @@ Ainsi, la méthode <code>affiche</code> serait définie de la façon suivante
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>&gt; <span class="org-type">void</span> <span class="org-constant">point</span>&lt;<span class="org-type">T</span>&gt;::<span class="org-function-name">affiche</span>()
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">typename</span> <span class="org-type">T</span>&gt; <span class="org-type">void</span> <span class="org-constant">point</span>&lt;<span class="org-type">T</span>&gt;::<span class="org-function-name">affiche</span>()
 {
   cout &lt;&lt; <span class="org-string">"Coordonn&#233;es : "</span> &lt;&lt; m_x &lt;&lt; <span class="org-string">" "</span> &lt;&lt; m_y &lt;&lt; endl;
 }
@@ -419,7 +395,7 @@ expressions. L&rsquo;exemple ci-dessous illustre ces cas
 </p>
 <div class="org-src-container">
 
-<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">class</span> <span class="org-type">T</span>, <span class="org-keyword">class</span> <span class="org-type">U</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n</span>&gt; <span class="org-keyword">class</span> <span class="org-type">tableau</span>
+<pre class="src src-c++"><span class="org-keyword">template</span>&lt;<span class="org-keyword">typename</span> <span class="org-type">T</span>, <span class="org-keyword">typename</span> <span class="org-type">U</span>, <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">n</span>&gt; <span class="org-keyword">class</span> <span class="org-type">tableau</span>
 {
   <span class="org-type">T</span> <span class="org-variable-name">m_tab</span>[n];
   <span class="org-type">U</span> <span class="org-variable-name">m_mean</span>;
@@ -450,24 +426,20 @@ d&rsquo;une classe patron.
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 dans le cadre des patrons de fonctions et de classes, on parle
-communément de paramètres et non d&rsquo;argument. D&rsquo;autre part, le C++ a décidé
-d&rsquo;employer le mot clé <code>class</code> pour préciser que <code>T</code> est un paramètre de
-type. Pour lever cette ambiguïté, les compilateurs récents ont introduit le mot
-clé <code>typename</code> qui peut se substituer au mot clé <code>class</code>. Cependant, son
-utilisation est peu répandue.
-</p></div>
+communément de paramètres et non d&rsquo;argument.
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 les compilateurs récents permettent l&rsquo;usage du mot clé <code>export</code> lors de
 la définition d&rsquo;un patron <code>export template&lt;class T&gt; T min(T a, T b) {...}</code>. On
 peut alors utiliser ce patron depuis un autre fichier source, en se contentant
 de mentionner sa &ldquo;déclaration&rdquo;.
-</p></div>
+</p></div></div>
 
 
 </div>

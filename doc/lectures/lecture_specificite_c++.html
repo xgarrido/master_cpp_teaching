@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,9 +87,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Les spécificités du C++ qui ne relèvent pas de la programmation orientée objet</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Utlisation des librairies standards</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Utlisation des librairies standards</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 La grande majorité des librairies utilisées dans le langage C est présente et
 utilisable en C++. Toutefois, leur définition a été optimisée pour les besoins
@@ -119,9 +100,9 @@ d&rsquo;en-tête issus de la librarie standard abandonnent l&rsquo;extension <co
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Déclaration de variables</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Déclaration de variables</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 En C, il fallait d&rsquo;abord déclarer les variables, puis ensuite les
 instructions. En C++, il est possible de déclarer les variables quelque soit
@@ -138,9 +119,9 @@ est maintenant possible en C++.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Argument par défaut</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Argument par défaut</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <p>
 C++ permet d&rsquo;inclure des valeurs par défauts dans les <b>prototypes</b> de
 fonctions. Le prototype s&rsquo;écrit alors :
@@ -169,7 +150,7 @@ que l&rsquo;on appelera de la façon suivante
 </div>
 
 <p>
-<b>En l&rsquo;absence de second argument</b>, le compilateur assigne la valeur 5.6 à la
+<b>En l'absence de second argument</b>, le compilateur assigne la valeur 5.6 à la
 variable <code>ord</code>.
 </p>
 
@@ -180,9 +161,9 @@ doivent <b>obligatoirement</b> être les <b>derniers</b> dans la liste.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Surdéfinition de fonction</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Surdéfinition de fonction</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <p>
 En C++ deux fonctions peuvent porter le même nom<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> à condition
 qu&rsquo;elles n&rsquo;aient pas les mêmes arguments. Le compilateur se charge d&rsquo;appeler la
@@ -209,9 +190,9 @@ déclarés.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Fonction <code>inline</code></h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Fonction <code>inline</code></h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Généralement en C, l&rsquo;emploi d&rsquo;une fonction &ldquo;courte&rdquo; pour laquelle le temps
 d&rsquo;exécution est primordial, amène à définir une macro (malgré les inconvénients
@@ -248,9 +229,9 @@ Lorsqu&rsquo;une méthode est déclarée dans le corps de la classe elle est, pa
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Les espaces de noms</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Les espaces de noms</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
 Les espaces de noms sont des zones de déclaration qui permettent de délimiter la
 recherche des noms des identificateurs par le compilateur. Leur but est
@@ -311,9 +292,9 @@ de portée <i><code>::</code></i> en remplaçant, par exemple, <i><code>cout</co
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Le type <code>bool</code></h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Le type <code>bool</code></h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <p>
 Ce type est tout naturellement formé de deux valeurs notées <code>true</code> et
 <code>false</code>. Les résultats des comparaisons ou des combinaisons logiques doivent
@@ -321,12 +302,10 @@ Ce type est tout naturellement formé de deux valeurs notées <code>true</code> 
 </p>
 
 <ul class="org-ul">
-<li>de <code>bool</code> en numérique <i>i.e.</i> <code>true</code> devenant 1 et <code>false</code> devenant 0,
-</li>
+<li>de <code>bool</code> en numérique <i>i.e.</i> <code>true</code> devenant 1 et <code>false</code> devenant 0,</li>
 
 <li>de numérique (y compris flottant) vers <code>bool</code> à savoir que toute valeur non
-nulle devient <code>true</code> et zéro est équivalent à <code>false</code>.
-</li>
+nulle devient <code>true</code> et zéro est équivalent à <code>false</code>.</li>
 </ul>
 
 <p>
@@ -337,9 +316,9 @@ C.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-8" class="outline-2">
-<h2 id="unnumbered-8">Les nouveaux opérateurs de cast</h2>
-<div class="outline-text-2" id="text-unnumbered-8">
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Les nouveaux opérateurs de cast</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 <p>
 En C++ comme en C, il est possible de réaliser des conversions explicites à
 l&rsquo;aide d&rsquo;un opérateur de &ldquo;cast&rdquo;. Les conversions acceptées comportent
@@ -357,19 +336,16 @@ le type de conversion:
 
 <ul class="org-ul">
 <li><code>const_cast</code> permet d&rsquo;ajouter ou de supprimer le modificateur <code>const</code>, les
-types de départ et d&rsquo;arrivée devant être identiques,
-</li>
+types de départ et d&rsquo;arrivée devant être identiques,</li>
 
 <li><code>reinterpret_cast</code> permet les conversions dont le résultat dépend de
 l&rsquo;implémentation; typiquement, des conversions d&rsquo;entier vers pointeur et de
-pointeur vers entier,
-</li>
+pointeur vers entier,</li>
 
 <li><code>static_cast</code> permet les conversions indépendantes de l&rsquo;implémentation
 (d&rsquo;entier vers entier mais également de pointeur vers pointeur malgré les
 différences qui peuvent apparaître en raison des contraintes d&rsquo;alignement
-propres à chaque implémentation).
-</li>
+propres à chaque implémentation).</li>
 </ul>
 
 <p>
@@ -393,19 +369,19 @@ p = <span class="org-keyword">static_cast</span>&lt;<span class="org-type">int</
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 de façon générale, on parle de surdéfinition ou surcharge
 lorsqu&rsquo;un même symbole peut avoir deux significations différentes en fonction du
 contexte.
-</p></div>
+</p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
 en réalité, la fonction en ligne est très proche d&rsquo;une macro, elle ne
 fait que &ldquo;recopier&rdquo; le code de la fonction à l&rsquo;endroit de l&rsquo;appel de la fonction.
-</p></div>
+</p></div></div>
 
 
 </div>

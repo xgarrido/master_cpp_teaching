@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Pointeurs, références &amp; allocation dynamique de mémoire</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pointeurs, références &amp; allocation dynamique de mémoire</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -54,48 +55,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
-<script type="text/javascript">
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -106,12 +87,12 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Pointeurs, références &amp; allocation dynamique de mémoire</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Rappels sur les adresses et les pointeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Rappels sur les adresses et les pointeurs</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Une variable prend de l&rsquo;espace en mémoire. Par exemple, un entier <code>i</code> occupe 4
-octets. L&rsquo;endroit où se trouve la variable <code>i</code> en mémoire est <b>l&rsquo;adresse</b> de
+octets. L&rsquo;endroit où se trouve la variable <code>i</code> en mémoire est <b>l'adresse</b> de
 <code>i</code>. Inversement, l&rsquo;adresse en notation héxadécimale <code>0x22ff74A</code> correpond aux 4
 octets soit 32 bits <code>01001001001001010010101010010101010</code> de l&rsquo;entier
 <code>i</code>. L&rsquo;adresse d&rsquo;une variable est donnée par <code>&amp;nom_de_la_variable</code>.
@@ -163,9 +144,9 @@ pt_i = &amp;i;
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Allocation dynamique de mémoire <i>via</i> les opérateurs <code>new</code> et <code>delete</code></h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Allocation dynamique de mémoire <i>via</i> les opérateurs <code>new</code> et <code>delete</code></h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 La dimension d&rsquo;un tableau statique, doit être connue du compilateur au moment
 même de la compilation. Une déclaration telle que <code>int n; double tableau[n];</code>
@@ -175,7 +156,7 @@ mémoire nécessaire à l&rsquo;allocation.
 
 <p>
 Dans l&rsquo;hypothèse où la taille d&rsquo;un objet n&rsquo;est connue que lors de l&rsquo;exécution du
-programme, il est alors inévitable <b>d&rsquo;allouer dynamiquement de la mémoire</b>,
+programme, il est alors inévitable <b>d'allouer dynamiquement de la mémoire</b>,
 c&rsquo;est-à-dire de réserver de la mémoire <b>alors que le programme</b> est en cours
 d&rsquo;exécution.
 </p>
@@ -189,9 +170,9 @@ gérer l&rsquo;allocation dynamique de mémoire.
 </p>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Utilisation de l&rsquo;opérateur <code>new</code></h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Utilisation de l&rsquo;opérateur <code>new</code></h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 De même que <code>malloc</code> le faisait en C, <code>new</code> alloue une certaine quantité de
 mémoire pour notre tableau et renvoie un pointeur sur le début du tableau. La
@@ -215,9 +196,9 @@ pt_tableau = <span class="org-keyword">new</span> <span class="org-type">int</sp
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Utilisation de l&rsquo;opérateur <code>delete[]</code></h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Utilisation de l&rsquo;opérateur <code>delete[]</code></h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 De même que <code>free</code> libérait l&rsquo;espace alloué par <code>malloc</code> en C, <code>delete[]</code> libère
 l&rsquo;espace mémoire alloué par l&rsquo;opérateur <code>new</code>. Ainsi,
@@ -242,9 +223,9 @@ totalement inutilisable.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Référence</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Référence</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Une référence permet de donner deux noms différents pour une seule et même case
 mémoire.
@@ -253,8 +234,8 @@ mémoire.
 <p>
 Les références servent rarement directement. Le principal intérêt de la notion
 de référence est qu&rsquo;elle permet de laisser le compilateur mettre en œuvre les
-instructions adéquates pour le transfert par adresse (<i>cf.</i> <a href="lecture_fonction.html">&ldquo;Rappels sur les
-fonctions&rdquo;</a>).
+instructions adéquates pour le transfert par adresse (<i>cf.</i> <a href="lecture_fonction.html">"Rappels sur les
+fonctions"</a>).
 </p>
 
 <div class="org-src-container">

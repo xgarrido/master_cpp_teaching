@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Héritage (Partie 1)</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Héritage (Partie 1)</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -64,24 +65,22 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Héritage (Partie 1)</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Introduction</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <ul class="org-ul">
 <li>L&rsquo;héritage est un nouveau moyen de faire intéragir les classes entre elles par
-le biais de <b>relations dites hiérarchiques</b>
-</li>
+le biais de <b>relations dites hiérarchiques</b></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-2" class="outline-2">
-<h2 id="unnumbered-2">Introduction</h2>
-<div class="outline-text-2" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <ul class="org-ul">
 <li>Une classe <code>B</code> qui hérite d&rsquo;une classe <code>A</code> a accès à tous les membres et
-méthodes de <code>A</code>
-</li>
+méthodes de <code>A</code></li>
 </ul>
 
 <ul class="org-ul">
@@ -90,21 +89,18 @@ de nouveaux membres ainsi que de nouvelles méthodes propres à sa fonction :
 
 <ul class="org-ul">
 <li>la classe <code>A</code> que l&rsquo;on appellera <b>classe mère ou de base</b> est <b>une
-généralisation</b> de <code>B</code>,
-</li>
+généralisation</b> de <code>B</code>,</li>
 
 <li>la classe <code>B</code> que l&rsquo;on dit <b>dérivée ou classe fille</b> de <code>A</code> est donc
-<b>spécialisation</b> de <code>A</code>.
-</li>
-</ul>
-</li>
+<b>spécialisation</b> de <code>A</code>.</li>
+</ul></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-2">
-<h2 id="unnumbered-3">Notions d&rsquo;héritage simple</h2>
-<div class="outline-text-2" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Notions d&rsquo;héritage simple</h2>
+<div class="outline-text-2" id="text-orgheadline3">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -127,40 +123,35 @@ généralisation</b> de <code>B</code>,
 
 <ul class="org-ul">
 <li>La relation d&rsquo;héritage est matérialisée par l&rsquo;usage de la directive <b><code>public
-  polygone</code></b>
-</li>
+  polygone</code></b></li>
 </ul>
 <ul class="org-ul">
 <li>Le mot-clé <b><code>protected</code></b> autorise la classe dérivée (ici <code>rectangle</code>) à accéder
-aux membres de la classe de base (ici <code>polygone</code>)
-</li>
+aux membres de la classe de base (ici <code>polygone</code>)</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-2">
-<h2 id="unnumbered-4">Statut des membres et méthodes de classe</h2>
-<div class="outline-text-2" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Statut des membres et méthodes de classe</h2>
+<div class="outline-text-2" id="text-orgheadline4">
 <dl class="org-dl">
 <dt><code>private</code></dt><dd>les membres ne sont accessibles qu&rsquo;aux méthodes et aux fonctions
-amies de la classe
-</dd>
+amies de la classe</dd>
 <dt><code>protected</code></dt><dd>les membres sont accessibles aux méthodes de la classe de base
 ainsi qu&rsquo;aux classes dérivées. Ils demeurent toutefois
 inaccessibles à l&rsquo;utilisateur de la classe contrairement au
-statut <code>public</code>
-</dd>
+statut <code>public</code></dd>
 <dt><code>public</code></dt><dd>les membres sont accessibles non seulement aux méthodes mais
 également à l&rsquo;utilisateur de la classe c&rsquo;est-à-dire à n&rsquo;importe
-quel objet/instance du type de la classe
-</dd>
+quel objet/instance du type de la classe</dd>
 </dl>
 </div>
 </div>
 
-<div id="outline-container-unnumbered-5" class="outline-2">
-<h2 id="unnumbered-5">Appels des constructeurs et destructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-5">
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Appels des constructeurs et destructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-keyword">class</span> <span class="org-type">polygone</span>
@@ -184,9 +175,9 @@ quel objet/instance du type de la classe
 </div>
 </div>
 
-<div id="outline-container-unnumbered-6" class="outline-2">
-<h2 id="unnumbered-6">Appels des constructeurs et destructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-6">
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Appels des constructeurs et destructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <div class="org-src-container">
 
 <pre class="src src-c++"><span class="org-constant">polygone</span>::<span class="org-function-name">polygone</span>(<span class="org-keyword">const</span> <span class="org-type">unsigned</span> <span class="org-type">int</span> <span class="org-variable-name">nbr_segment_</span>)
@@ -207,17 +198,15 @@ quel objet/instance du type de la classe
 </div>
 </div>
 
-<div id="outline-container-unnumbered-7" class="outline-2">
-<h2 id="unnumbered-7">Appels des constructeurs et destructeurs</h2>
-<div class="outline-text-2" id="text-unnumbered-7">
+<div id="outline-container-orgheadline7" class="outline-2">
+<h2 id="orgheadline7">Appels des constructeurs et destructeurs</h2>
+<div class="outline-text-2" id="text-orgheadline7">
 <ul class="org-ul">
 <li>À la construction d&rsquo;une classe fille, le constructeur de la classe mère est
-appelé <b><span class="underline">avant</span></b> toutes autres opérations
-</li>
+appelé <b><span class="underline">avant</span></b> toutes autres opérations</li>
 
 <li>Lors de la destruction d&rsquo;une classe fille, le destructeur de la classe de base
-est appelé automatiquement <b><span class="underline">après</span></b> le destructeur de la classe fille
-</li>
+est appelé automatiquement <b><span class="underline">après</span></b> le destructeur de la classe fille</li>
 </ul>
 </div>
 </div>

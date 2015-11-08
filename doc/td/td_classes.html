@@ -3,8 +3,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Classes</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Classes</title>
 <meta  name="generator" content="Org-mode" />
 <link rel="stylesheet" href="../stylesheets/styles.css">
                  <link rel="stylesheet" href="../stylesheets/org-pygments.css">
@@ -64,9 +65,9 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Classes</h1><hr/>
 
-<div id="outline-container-unnumbered-1" class="outline-2">
-<h2 id="unnumbered-1">Déclaration et utilisation de classe en C++</h2>
-<div class="outline-text-2" id="text-unnumbered-1">
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Déclaration et utilisation de classe en C++</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Dans l&rsquo;ensemble des exercices suivants, on privilégiera une déclaration et une
 définition des classes dans des fichiers distincts. En outre, on fournira un
@@ -89,9 +90,9 @@ visibilité publique :
 </div>
 
 
-<div id="outline-container-unnumbered-2" class="outline-3">
-<h3 id="unnumbered-2">Classe <code>Point</code></h3>
-<div class="outline-text-3" id="text-unnumbered-2">
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Classe <code>Point</code></h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 Créer une classe <code>Point</code> composée de deux coordonnées réelles puis déclarer et
 définir une méthode pour initialiser ces valeurs ainsi qu&rsquo;une méthode affichant
@@ -100,9 +101,9 @@ les deux coordonnées.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-3" class="outline-3">
-<h3 id="unnumbered-3">Tableau d&rsquo;objets</h3>
-<div class="outline-text-3" id="text-unnumbered-3">
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Tableau d&rsquo;objets</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 Déclarer un tableau contenant cinq objets de type <code>Point</code>. Initialiser chacune
 des entrées du tableau puis créer une fonction affichant les coordonnées du
@@ -111,20 +112,18 @@ point le plus éloigné de l&rsquo;origine.
 </div>
 </div>
 
-<div id="outline-container-unnumbered-4" class="outline-3">
-<h3 id="unnumbered-4">Classe <code>Polygone</code></h3>
-<div class="outline-text-3" id="text-unnumbered-4">
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Classe <code>Polygone</code></h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 Créer une classe <code>Polygone</code> possédant :
 </p>
 
 <ul class="org-ul">
 <li>un entier non signé correspondant à l&rsquo;ordre du polygone <i>i.e.</i> au nombre de
-sommets,
-</li>
+sommets,</li>
 <li>un tableau de <code>Point</code> contenant les coordonnées de chacun des sommets (10
-sommets maximum soit un décagone)<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
-</li>
+sommets maximum soit un décagone)<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.</li>
 </ul>
 
 <p>
@@ -142,15 +141,15 @@ celui ayant le plus grand périmètre.
 </div>
 </div>
 <div id="footnotes">
-<h2 class="footnotes"> </h2>
+<h2 class="footnotes">Notes : </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
 pour les plus téméraires, substituer au tableau statique un tableau
 dynamique (pointeur de classe <code>Point</code> alloué avec <code>new</code>) dont le nombre
 d&rsquo;entrées sera indexé sur l&rsquo;ordre du polygone. On rajoutera une méthode
 permettant la destruction du tableau en fin de programme.
-</p></div>
+</p></div></div>
 
 
 </div>
