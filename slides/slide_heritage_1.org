@@ -48,8 +48,8 @@
   \end{center}
 #+END_SRC
 
-- Une classe =B= qui hérite d'une classe =A= a accès à tous les membres et
-  méthodes de =A=
+- Une classe =B= qui hérite d'une classe =A= a accès /à tous les membres/ et méthodes
+  de =A=
 
 #+BEAMER: \pause
 
@@ -59,8 +59,8 @@
   - la classe =A= que l'on appellera *classe mère ou de base* est *une
     généralisation* de =B=,
 
-  - la classe =B= que l'on dit *dérivée ou classe fille* de =A= est donc
-    *spécialisation* de =A=.
+  - la classe =B= que l'on dit *dérivée ou classe fille* de =A= est donc *une
+    spécialisation* de =A=.
 
 * Notions d'héritage simple
 

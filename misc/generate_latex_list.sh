@@ -119,10 +119,7 @@ function generate_picture_list ()
     function --table-header()
     {
         echo "\rowcolors{1}{}{}" >> $1
-        echo -n "\begin{longtable}{" >> $1
-        for i in $(seq 1 $modulo); do echo -ne "c" >> $1; done
-        echo -n "}" >> $1
-        echo >> $1
+        echo "\begin{longtable}{*{$modulo}{>{\centering\arraybackslash}p{3cm}}}" >> $1
     }
     function --table-footer()
     {
