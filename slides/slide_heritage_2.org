@@ -123,6 +123,7 @@
   };
 #+END_SRC
 
+#+BEAMER: \pause
 ** <empty>
 :PROPERTIES:
 :BEAMER_ENV: ignoreheading
@@ -269,6 +270,7 @@
     ...
   };
 #+END_SRC
+
 ** Classe =rectangle=
 :PROPERTIES:
 :BEAMER_COL: 0.5
@@ -307,8 +309,8 @@
 :END:
 
 #+BEGIN_CENTER
-*L'utilisation d'une liaison dynamique via le mot-clé =virtual= indique au
-compilateur que le choix de la méthode ne s'effectuera qu'à l'exécution du code*
+*L'utilisation d'une _liaison dynamique_ via le mot-clé =virtual= indique au
+ compilateur que le choix de la méthode ne s'effectuera qu'à l'exécution du code*
 #+END_CENTER
 
 * Liaisons dynamiques & Méthodes virtuelles
