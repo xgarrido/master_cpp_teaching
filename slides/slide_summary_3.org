@@ -27,7 +27,7 @@ composition:
 * Héritage vs. Interface
 
 Si l'héritage est une notion relativement puissante en POO, il faut néanmoins
-éviter les relations hiérarchique inappropriées.
+éviter les relations hiérarchiques inappropriées.
 
 #+BEAMER: \vspace{+0.5cm}
 
@@ -38,7 +38,7 @@ en commun à savoir voler.
 
 #+BEAMER: \vspace{+0.5cm}
 
-*Sont ils toutefois des classes dérivés d'une classe plus générale de type
+*Sont ils toutefois des classes dérivées d'une classe plus générale de type
 =volatile= ?*
 
 #+BEAMER: \pause\vspace{0.5cm}
@@ -71,3 +71,10 @@ De manière générale en POO, le développeur procède de la façon suivante:
 
 4. *Créer* des instance-tests de ces objets et *utiliser* leurs méthodes pour
    répondre au problème posé.
+* Conception d'un programme
+
+|                               | Fraction du temps |
+|-------------------------------+-------------------|
+| 1. *Répertorier* / 2. *Réfléchir* |               40% |
+| 3. *Implémenter*                |               10% |
+| 4. *Tester* & *utiliser/déboguer* |               50% |
