@@ -11,8 +11,12 @@
   fonctions dont le contexte d'appel c'est-à-dire les arguments de la fonction,
   diffère,
 
+#+BEAMER: \pause
+
 - *la redéfinition* intervient entre classes héritées et permet de spécialiser
   une fonction membre suivant les buts de la classe dérivée,
+
+#+BEAMER: \pause
 
 - *les patrons ou =template= de fonction* permettent d'écrire une seule fois la
   définition d'une fonction afin que le compilateur puisse l'adapter au type des
