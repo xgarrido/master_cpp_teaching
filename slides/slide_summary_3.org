@@ -75,6 +75,6 @@ De manière générale en POO, le développeur procède de la façon suivante:
 
 |                               | Fraction du temps |
 |-------------------------------+-------------------|
-| 1. *Répertorier* / 2. *Réfléchir* |               40% |
-| 3. *Implémenter*                |               10% |
-| 4. *Tester* & *utiliser/déboguer* |               50% |
+| *1. Répertorier / 2. Réfléchir* |               40% |
+| *3. Implémenter*                |               10% |
+| *4. Tester & utiliser/déboguer* |               50% |
