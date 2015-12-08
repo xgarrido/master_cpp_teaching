@@ -233,6 +233,25 @@ Interpret figures within table environment as figure side-by-side.
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 #+END_SRC
+
+Add a new tag =correction=
+#+BEGIN_SRC emacs-lisp
+  (setq question-flag nil)
+  (defun cpp-correction-headline (contents backend info)
+    (if (and (org-export-derived-backend-p backend 'latex)
+               (string-match "\\`.*correction.*\n"
+                             (downcase contents)))
+        (progn
+          (setq question-flag t)
+          (replace-match "\\\\begin{correction}" nil nil contents))
+      (if question-flag
+        (setq question-flag nil)
+        (concat "\\end{correction}" contents))
+      )
+    )
+  (add-to-list 'org-export-filter-headline-functions 'cpp-correction-headline)
+#+END_SRC
+
 *** Define dedicated function for export
 #+BEGIN_SRC emacs-lisp
   (defun cpp-export-slides ()
@@ -667,6 +686,45 @@ layout)
         \endlist}
 #+END_SRC
 
+******* Correction
+#+BEGIN_SRC latex
+  \RequirePackage[framemethod=tikz]{mdframed}
+  \newmdenv[%
+    bottomline=false,
+    leftline=false,
+    linecolor=blue,
+    innerrightmargin=25pt,
+    singleextra={
+      \fill[blue] (P) rectangle ([xshift=-15pt]P|-O);
+      \node[overlay,anchor=south east,rotate=90,font=\color{white}] at (P) {\sf\textbf{correction}};
+    },
+    firstextra={
+      \fill[blue] (P) rectangle ([xshift=-15pt]P|-O);
+      \node[overlay,anchor=south east,rotate=90,font=\color{white}] at (P) {\sf\textbf{correction}};
+    },
+    backgroundcolor=blue!5,
+    roundcorner=5pt,
+  %% hidealllines=true,%%leftline=true,
+  skipabove=12,skipbelow=12pt,
+  innertopmargin=0.4em,%
+  innerbottommargin=0.4em,%
+  innerrightmargin=0.7em,%
+  rightmargin=0.7em,%
+  innerleftmargin=1.7em,%
+  leftmargin=0.7em,%
+  %% %%middlelinewidth=.1em,%
+  %% linecolor=blue!90,%
+  %% fontcolor=blue!90,%
+  %% frametitlealignment=\left
+  ]{correction}
+    %% \newmdenv[innerlinewidth=0.5pt,
+    %%   roundcorner=4pt,
+    %%   linecolor=default,
+    %%   innerleftmargin=6pt,
+    %%   innerrightmargin=6pt,
+    %%   innertopmargin=6pt,
+    %%   innerbottommargin=6pt]{question}
+#+END_SRC
 ****** New command
 #+BEGIN_SRC latex
   \newcommand{\Cpp}{\mbox{C\vspace{.5em}\protect\raisebox{.2ex}{\footnotesize++~}}}
