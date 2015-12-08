@@ -489,10 +489,10 @@ up. Practically, everything can be done within this section.
     \ChNameVar{\fontsize{14}{16}\usefont{OT1}{ptm}{b}{n}\selectfont}
     \ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{b}{n}\selectfont}
   }{
-    \RequirePackage[Sonny]{fncychap}
+    \RequirePackage[]{fncychap}
     \ChTitleVar{\Huge\bfseries\sffamily\color{blue}}
-    \ChNameVar{\fontsize{14}{16}\selectfont\sffamily\color{blue}}
-    \ChNumVar{\fontsize{60}{62}\selectfont\sffamily\color{blue}}
+    \ChNameVar{\raggedleft\fontsize{14}{16}\selectfont\sffamily\color{blue}}
+    \ChNumVar{\raggedleft\fontsize{60}{62}\selectfont\sffamily\color{blue}}
     \ifthenelse{\boolean{ls@cpp_teaching_classes}}{
       \ChRuleWidth{0pt}
       \renewcommand{\DOCH}{%
@@ -500,7 +500,7 @@ up. Practically, everything can be done within this section.
         \raggedleft
         \CNV\FmN{\@chapapp}\space \CNoV\thechapter
         \par\nobreak
-        \vspace{-3cm}
+        %% \vspace{-3cm}
       }
     }{}
     \ifthenelse{\boolean{ls@cpp_teaching_lectures}}{
