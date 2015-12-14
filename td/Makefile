@@ -16,9 +16,7 @@ all: $(files_pdf)
 
 %.pdf: %.org
 	@echo "NOTICE: Exporting $< to pdf..."
-	@TEXINPUTS=".:..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-classes
-#> /dev/null 2>&1
-	@rm -f ../*.sty
+	@TEXINPUTS=".:..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-classes > /dev/null 2>&1
 
 clean:
 	@rm -rf	latex.d *.tex *.pdf *.fdb* *~
