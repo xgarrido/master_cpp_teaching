@@ -3,11 +3,13 @@
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{0}
+# #+EXCLUDE_TAGS: correction
 
 * Compilation conditionnelle
+
 Compiler le code suivant, sans puis avec les options de "warnings"
 
-#+BEGIN_SRC c++
+#+BEGIN_SRC C++ -n :tangle /tmp/td1_warnings.cc
   #include <iostream>
   using namespace std;
 
@@ -28,6 +30,109 @@ préprocesseur d'identificateur =DEBUG= permettant l'affichage ou non des
 différentes valeurs d'entier et compiler suivant les deux cas. S'assurer du
 résultat en précompilant le code source.
 
+** Correction                                                   :correction:
+*** Messages de mise en garde
+
+En plaçant le code ci-dessus dans un fichier =td1_warnings.cc= et en le compilant
+avec les options de "mise en garde" de =g++= /i.e./
+#+BEGIN_PROMPT
+g++ -Wall -Wextra td1_warnings.cc -o td1_warnings.exe
+#+END_PROMPT
+on obtient les messages suivants[fn:312a4750] :
+
+#+BEGIN_SRC C++
+  td1_warnings.cc: Dans la fonction ‘int main()’:
+  td1_warnings.cc:11:42: attention : comparaison entre des expressions entières signée et non signée [-Wsign-compare]
+  td1_warnings.cc:7:21: attention : ‘entierNonSigne’ is used uninitialized in this function [-Wuninitialized]
+#+END_SRC
+
+- La première mise en garde =td1_warnings.cc:11:42: attention := indique un
+  potentiel problème à la *ligne 11*, *colonne 42*. Il s'agit de la ligne suivante
+  #+BEGIN_SRC C++
+    for (unsigned int iEntier = 0; iEntier < entierSigne; ++iEntier)
+  #+END_SRC
+  où le compilateur indique la comparaison entre une expression entière signée
+  /i.e./ =entierSigne= et une seconde expression entière non signée à savoir
+  =iEntier=. Comme tout /warning/, ceci ne constitue pas en soi une erreur mais le
+  compilateur met en garde contre un comportement potentiellement
+  inattendu. Dans ce cas de figure, il est parfaitement envisageable que la
+  variable =entierSigne= soit négative si bien que la boucle =for= se déroulerait
+  entre une valeur =iEntier= nulle et une valeur négative : la boucle =for= n'a
+  alors pas de sens. Pour corriger, cette source potentiel d'erreur, il convient
+  soit de s'assurer en amont que =entierSigne= soit du même type que =iEntier= soit
+  de "caster" c'est-à-dire de convertir la variable =entierSigne= en un entier non
+  signé /via/ l'écriture suivante
+  #+BEGIN_SRC C++
+    for (unsigned int iEntier = 0; iEntier < (unsigned int)entierSigne; ++iEntier)
+  #+END_SRC
+
+- La seconde mise en garde tient au fait que la variable =entierNonSigne= est
+  utilisée *ligne 7* alors qu'elle demeure non-initialisée (ligne 6). À défaut de
+  valeur, la variable =entierNonSigne= possède une valeur non-définie assignée par
+  le compilateur. Il convient donc d'initialiser =entierNonSigne= à une valeur
+  judicieusement choisie, ici =0=. De manière générale, on prendra l'habitude de
+  toujours initialiser les variables dans un programme afin d'éviter un
+  comportement non souhaité.
+
+Le code ci-dessus corrigé devient
+#+BEGIN_SRC C++ -n
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+    unsigned int entierNonSigne = 0;
+    int entierSigne = entierNonSigne;
+
+    cout << entierNonSigne << " " << entierSigne << endl;
+
+    for (unsigned int iEntier = 0; iEntier < (unsigned int)entierSigne; ++iEntier)
+      cout << iEntier << endl;
+  }
+#+END_SRC
+
+
+*** Identificateur de préprocesseur
+Toutes directives de préprocesseur est identifée par le préfixe =#=. Ces
+identificateurs et directives sont traités "littéralement" par le préprocesseur
+/i.e./ par la première des trois étapes de compilation (/cf./ cours sur le
+compilateur). On peut en particulier définir des directives de préprocesseur
+pour inclure ou non du code \Cpp. Aussi pour afficher ou non les valeurs
+d'entier dans la boucle =for=, on pourra encapsuler ce code dans des blocs
+=#if/#else/#endif= de la façon suivante
+#+BEGIN_SRC C++ -n
+  #include <iostream>
+  using namespace std;
+
+  #define DEBUG 1
+
+  int main()
+  {
+    unsigned int entierNonSigne = 0;
+    int entierSigne = entierNonSigne;
+
+    cout << entierNonSigne << " " << entierSigne << endl;
+  #if (DEBUG == 1)
+    for (unsigned int iEntier = 0; iEntier < (unsigned int)entierSigne; ++iEntier)
+      cout << iEntier << endl;
+  #endif
+  }
+#+END_SRC
+
+Par défaut, la valeur de l'identificateur =DEBUG= est définie à =1= (ligne 4), le
+code situé entre les lignes 12 et 15 n'étant inclus qu'à la condition où =DEBUG=
+soit égal à =1=. On peut ainsi voir le résultat du /préprocessing/ en usant de la
+commande suivante
+#+BEGIN_PROMPT
+g++ -E td1_warnings.cc
+#+END_PROMPT
+qui affichera à l'écran, le résultat de la précompilation. On peut ainsi choisir
+d'inclure ou pas la boucle =for= en définissant l'identificateur =DEBUG= au moment
+de la compilation /via/ la commande
+#+BEGIN_PROMPT
+g++ -E -DDEBUG=0 td1_warnings.cc
+#+END_PROMPT
+
 * Pointeurs & références
 
 Créer un programme dans lequel vous déclarerez :
@@ -38,6 +143,37 @@ Créer un programme dans lequel vous déclarerez :
 
 Vous afficherez la valeur et l'adresse de cette variable ainsi que la valeur
 pointée.
+
+** Correction                                                   :correction:
+
+Le programme suivant permet de définir une variable de type entier, une
+référence vers cette variable ainsi qu'un pointeur et d'afficher leurs valeurs
+respectives
+
+#+BEGIN_SRC C++ -n :results code
+  #include <iostream>
+  using namespace std;
+  int main()
+  {
+    int i = 666;
+    int & ref_i = i;
+    int * ptr_i = &i;
+
+    cout << "Valeur de i = " << i << endl;
+    cout << "Valeur (via reference) de i = " << ref_i << endl;
+    cout << "Adresse (en mémoire) de i = " << &i << endl;
+    cout << "Valeur pointée de i = " << *ptr_i << endl;
+  }
+#+END_SRC
+
+Soit le résultat à l'écran
+
+#+BEGIN_SRC shell
+Valeur de i = 666
+Valeur (via reference) de i = 666
+Adresse (en mémoire) de i = 0x7ffd0514283c
+Valeur pointée de i = 666
+#+END_SRC
 
 * Opérateurs =new= et =delete=
 
@@ -63,3 +199,10 @@ instructions C suivantes :
 2. en utilisant la transmission par référence
 
 Dans les deux cas, vous écrirez un programme d'essai de la fonction.
+
+* Footnotes
+
+[fn:312a4750] les messages peuvent varier d'une version à l'autre du compilateur
+=g++= : message traduit, coloration et indicateur au niveau de l'endroit précis de
+l'erreur ou mise en garde... Comme tout programme, les versions récentes du
+compilateur \Cpp s'accompagnent de messages toujours plus clairs et précis.
