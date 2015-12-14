@@ -236,18 +236,11 @@ Interpret figures within table environment as figure side-by-side.
 
 Add a new tag =correction=
 #+BEGIN_SRC emacs-lisp
-  (setq question-flag nil)
+  ;; (setq correction-flag nil)
   (defun cpp-correction-headline (contents backend info)
-    (if (and (org-export-derived-backend-p backend 'latex)
-               (string-match "\\`.*correction.*\n"
-                             (downcase contents)))
-        (progn
-          (setq question-flag t)
-          (replace-match "\\\\begin{correction}" nil nil contents))
-      (if question-flag
-        (setq question-flag nil)
-        (concat "\\end{correction}" contents))
-      )
+    (when (and (org-export-derived-backend-p backend 'latex)
+               (string-match "\\`.*correction.*\n" (downcase contents)))
+      (concat "\\begin{correction}" (replace-regexp-in-string "\\`.*correction.*\n" "" contents) "\\end{correction}"))
     )
   (add-to-list 'org-export-filter-headline-functions 'cpp-correction-headline)
 #+END_SRC
