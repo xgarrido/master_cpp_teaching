@@ -3,13 +3,12 @@
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{0}
-# #+EXCLUDE_TAGS: correction
 
 * Compilation conditionnelle
 
 Compiler le code suivant, sans puis avec les options de "warnings"
 
-#+BEGIN_SRC C++ -n :tangle /tmp/td1_warnings.cc
+#+BEGIN_SRC C++ -n
   #include <iostream>
   using namespace std;
 
@@ -146,9 +145,9 @@ pointée.
 
 ** Correction                                                   :correction:
 
-Le programme suivant permet de définir une variable de type entier, une
-référence vers cette variable ainsi qu'un pointeur et d'afficher leurs valeurs
-respectives
+Le programme suivant permet de définir une variable de type entier =i=, une
+référence vers cette variable =ref_i= ainsi qu'un pointeur =ptr_i= et d'afficher
+leurs valeurs respectives
 
 #+BEGIN_SRC C++ -n :results code
   #include <iostream>
@@ -180,7 +179,7 @@ Valeur pointée de i = 666
 Écrire en \Cpp, en utilisant les outils spécifiques à ce langage, les
 instructions C suivantes :
 
-#+BEGIN_SRC c++
+#+BEGIN_SRC C++
   double * pt_tabular;
   int n_value;
   printf("Combien de valeurs souhaitez vous allouer en mémoire ?");
@@ -188,6 +187,24 @@ instructions C suivantes :
   pt_tabular = (double *) malloc (sizeof(double) * n_value);
   free(pt_tabular);
 #+END_SRC
+
+** Correction                                                   :correction:
+
+#+BEGIN_SRC C++
+  int n_value = 0;
+  cout << "Combien de valeurs souhaitez vous allouer en mémoire ? ";
+  cin >> n_value;
+  double * pt_tabular = new double[n_value];
+  delete[] pt_tabular;
+#+END_SRC
+
+Le code ci-dessus en plus d'utiliser les opérateurs =new= et =delete= en lieu et
+place de =malloc= et =free=, exploite la possibilité offerte par le \Cpp de déclarer
+les variables à l'endroit où elles sont pertinentes et non nécessairement au
+début du programme comme l'oblige le langage C. Ainsi, la déclaration de la
+variable =pt_tabular= se fait au moment de son allocation. On notera également
+que la restitution de mémoire dans le cas de l'allocation d'un tableau se fait
+par le biais de l'opérateur =delete[]=.
 
 * Fonction & références
 
@@ -199,6 +216,46 @@ instructions C suivantes :
 2. en utilisant la transmission par référence
 
 Dans les deux cas, vous écrirez un programme d'essai de la fonction.
+
+** Correction                                                   :correction:
+
+Pour réaliser ces deux opérations distinctes, nous allons déclarer deux
+fonctions nommées =echange= comme nous l'y autorise le \Cpp : le contexte d'appel
+permettra au compilateur d'user de la fonction adaptée.
+
+#+BEGIN_SRC C++ -n
+  void echange(int * a_, int * b_)
+  {
+    int tmp = *a_;
+    *a_ = *b_;
+    *b_ = tmp;
+  }
+
+  void echange(int & a_, int & b_)
+  {
+    int tmp = a_;
+    a_ = b_;
+    b_ = tmp;
+  }
+
+  int main()
+  {
+    int i1 = 0, i2 = 1;
+    // Échange par adresses
+    echange(&i1, &i2);
+
+    // Échange par références
+    echange(i1, i2);
+  }
+#+END_SRC
+
+En plus de la définition de la fonction =echange= qui, dans le cas du passage par
+adresse, oblige à utiliser les valeurs pointées /via/ l'écriture =*variable=,
+l'utilisation de cette fonction implique de fournir l'adresse de ces variables
+par le biais de =&variable=. Le passage par référence tel qu'introduit par le \Cpp
+est de ce point de vue plus simple à définir de même qu'à utiliser : la
+généralisation de son utilisation ira de pair avec la notion d'objet comme nous
+le verrons dans les prochains exercices.
 
 * Footnotes
 
