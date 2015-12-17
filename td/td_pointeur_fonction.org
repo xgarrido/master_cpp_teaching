@@ -69,9 +69,9 @@ on obtient les messages suivants[fn:312a4750] :
   utilisée *ligne 7* alors qu'elle demeure non-initialisée (ligne 6). À défaut de
   valeur, la variable =entierNonSigne= possède une valeur non-définie assignée par
   le compilateur. Il convient donc d'initialiser =entierNonSigne= à une valeur
-  judicieusement choisie, ici =0=. De manière générale, on prendra l'habitude de
-  toujours initialiser les variables dans un programme afin d'éviter un
-  comportement non souhaité.
+  judicieusement choisie, ici =0=. *De manière générale, on prendra l'habitude de*
+  *toujours initialiser les variables dans un programme afin d'éviter un*
+  *comportement non souhaité*.
 
 Le code ci-dessus corrigé devient
 #+BEGIN_SRC C++ -n

@@ -68,3 +68,59 @@ somme des couples de lapins lors des deux moins précédents.
   exercice. Chercher à résoudre l'erreur de compilation en utilisant un espace
   de nom =local= et tester le programme en forçant le choix de fonction à
   utiliser /via/ l'opérateur de portée =local::=.
+
+** Correction                                                   :correction:
+*** Surdéfinition de fonctions
+Le code ci-dessous implémente deux fonctions, toutes deux nommées =fibonacci= mais
+dont la déclaration diffère en terme de type d'arguments et de type de valeur
+retournée[fn:e4e20dfe] :
+
+#+BEGIN_SRC C++ -n :exports both
+  #include <iostream>
+  using namespace std;
+
+  unsigned short fibonacci(unsigned short n_ = 10)
+  {
+    if (n_ < 3) return 1;
+    unsigned short fn1 = 1;
+    unsigned short fn2 = 1;
+    unsigned short fn = fn1 + fn2;
+    for (unsigned short i = 2; i < n_; i++) {
+      fn = fn1 + fn2;
+      fn1 = fn2;
+      fn2 = fn;
+    }
+    return fn;
+  }
+  unsigned int fibonacci(unsigned int n_)
+  {
+    if (n_ < 3) return 1;
+    unsigned int fn1 = 1;
+    unsigned int fn2 = 1;
+    unsigned int fn = fn1 + fn2;
+    for (unsigned int i = 2; i < n_; i++) {
+      fn = fn1 + fn2;
+      fn1 = fn2;
+      fn2 = fn;
+    }
+    return fn;
+  }
+
+  int main()
+  {
+    const unsigned short n = 20;
+    cout << "F(" << n << ") = " << fibonacci(n) << endl;
+    cout << "F(" << n << ") = " << fibonacci((unsigned int)n) << endl;
+  }
+#+END_SRC
+
+L'appel à la fonction =fibonacci= à la ligne 36 convertit ou /caste/ la valeur de =n=
+en un entier non signé afin d'explicitement faire appel à la seconde fonction
+=unsigned int fibonacci(unsigned int)= définie à la ligne 18. Par défaut, ces deux
+fonctions calculent la suite de Fibonacci au terme $n$ = 10, cette valeur étant
+précisée dans le prototype des fonctions.
+
+* Footnotes
+
+[fn:e4e20dfe] nous verrons à la fin de ce cours comment la notion de /template/ de
+fonction peut grandement simplifier l'écriture de ces deux fonctions.
