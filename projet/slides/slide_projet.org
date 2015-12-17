@@ -19,7 +19,7 @@
         \begin{tabularx}{\textwidth}{rXr}
           Aujourd'hui     & Présentation des sujets \\[2ex]
           11 -- 15 Janvier & Indication aux enseignants du projet choisi (via formulaire web) \\[2ex]
-          29 -- 4 Mars    & Remise des programmes \textbf{par mail} à \\
+          29 Février -- 4 Mars    & Remise des programmes \textbf{par mail} à \\
           &\href{xavier.garrido@u-psud.fr}{\color{blue}\ding{41}~xavier.garrido@u-psud.fr} ou\\
           &\href{clarisse.hamadache@csnsm.in2p3.fr}{\color{blue}\ding{41}~clarisse.hamadache@csnsm.in2p3.fr} \\
           & Remise des rapports au Secrétariat \\[2ex]
