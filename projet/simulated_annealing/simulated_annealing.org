@@ -194,24 +194,32 @@ particulière[fn:4].
 
 ** Préalable à l'utilisation de la méthode
 
-Dans un premier temps, le projet consistera en l'implémentation de la méthode de
+Dans un premier temps, l'utilisateur génèrera des données arbitraires suivant un
+modèle (droite linéaire $y=ax+b$, polynôme de degré $n$, distribution des
+positions des villes). Cette classe =Data= pourra se voir associer une méthode de
+représentation visuelle /via/ des outils tels que [[http://www.gnuplot.info/][=gnuplot=]] ou [[http://matplotlib.org/][=matplotlib=]]
+(python) qui permettra à l'utilisateur de visualiser données, modèle et résultat
+de la méthode d'optimisation.
+
+Dans un second temps, le projet consistera en l'implémentation de la méthode de
 "recuit simulé". Pour ce faire, on définira une classe abstraite
-=OptimizationMethod= contenant les méthodes virtuelles pures d'initialisation,
+=OptimizationMethod= contenant les méthodes virtuelles pures d'initiali\-sation,
 d'exécution et de finalisation. On définira ensuite une classe
-=SimulatedAnnealing=, héritant des propriétés de la classe =OptimizationMethod=,
-et spécifiant les méthodes et les membres. On fera en sorte que les paramètres
+=SimulatedAnnealing=, héritant des propriétés de la classe =OptimizationMethod=, et
+spécifiant les méthodes et les membres. On fera en sorte que les paramètres
 inhérents à la méthode de "recuit simulé" (amplitude des perturbations,
-températures initial et final, taux de refroidissement) puissent être lus /via/
-un fichier texte indépendant. D'autre part, on définira une classe abstraite
-=CostFunction= dont hériteront les fonctions à minimiser (\chi^{2},...). Les
-définitions des fonctions à minimiser seront donc données /via/ la redéfinition
-des méthodes de =CostFunction=. Le choix de la fonction à minimiser devra
-également se faire à l'aide du fichier texte de paramètres. Le modèle à
-optimiser appartiendra quant à lui à une classe =OptimizationModel= comprenant
-les paramètres du modèle (ex. les coefficients d'une droite) et les méthodes
-permettant de les extraire. On oubliera pas de privilégier l'utilisation
-d'énumérateurs afin de rendre la sélection des méthodes et des modèles
-d'optimisations la plus transparente possible.
+températures initiale et finale, taux de refroidissement) puissent être lus /via/
+un fichier texte indépendant.
+
+D'autre part, on définira une classe abstraite =CostFunction= dont hériteront les
+fonctions à minimiser (\chi^{2},...). Les définitions des fonctions à minimiser
+seront donc données /via/ la redéfinition des méthodes de =CostFunction=. Le choix
+de la fonction à minimiser devra également se faire à l'aide du fichier texte de
+paramètres. Le modèle à optimiser appartiendra quant à lui à une classe =Model=
+comprenant les paramètres du modèle (ex. les coefficients d'une droite) et les
+méthodes permettant de les extraire. On oubliera pas de privilégier
+l'utilisation d'énumérateurs afin de rendre la sélection des méthodes et des
+modèles d'optimisations la plus transparente possible.
 
 ** Première partie du projet : ajustement de fonction multi-paramètres
 :PROPERTIES:
