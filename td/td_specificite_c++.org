@@ -3,6 +3,7 @@
 #+DATE:   18/09/2013
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \setcounter{chapter}{1}
+#+LATEX_HEADER: \usepackage{capt-of}
 
 * Suite de Fibonacci : le calcul numérique appliqué à la procréation des lapins
 
@@ -75,7 +76,7 @@ Le code ci-dessous implémente deux fonctions, toutes deux nommées =fibonacci= 
 dont la déclaration diffère en terme de type d'arguments et de type de valeur
 retournée[fn:e4e20dfe] :
 
-#+BEGIN_SRC C++ -n :exports both
+#+BEGIN_SRC C++ -n :exports code
   #include <iostream>
   using namespace std;
 
@@ -114,11 +115,117 @@ retournée[fn:e4e20dfe] :
   }
 #+END_SRC
 
-L'appel à la fonction =fibonacci= à la ligne 36 convertit ou /caste/ la valeur de =n=
+L'appel à la fonction =fibonacci= à la ligne 35 convertit ou /caste/ la valeur de =n=
 en un entier non signé afin d'explicitement faire appel à la seconde fonction
-=unsigned int fibonacci(unsigned int)= définie à la ligne 18. Par défaut, ces deux
-fonctions calculent la suite de Fibonacci au terme $n$ = 10, cette valeur étant
-précisée dans le prototype des fonctions.
+=unsigned int fibonacci(unsigned int)= définie à la ligne 17. Par défaut, seule la
+première des deux fonctions calculent la suite de Fibonacci au terme $n$ = 10,
+cette valeur étant précisée dans le prototype des fonctions. Il est possible de
+préciser une valeur par défaut pour la seconde fonction mais il y aura alors une
+erreur de compilation lorsque l'utilisateur souhaitera appeler la fonction
+=fibonacci= sans préciser l'ordre: le compilateur indiquera une ambiguïté dans
+l'appel de la fonction car le contexte d'appel ne lui permettra plus de
+distinguer quelle fonction appeler.
+
+La suite de Fibonacci divergeant rapidement, il est important de noter qu'en
+fonction du type retourné le résultat de ces deux fonctions ne sera plus valide
+à partir d'un certain ordre. Ainsi dès le 25^{ème} ordre, la première des deux
+fonctions /i.e./ celle retournant un =unsigned short= donnera un résultat erroné
+(\(\mathcal{F}_{25}=\)75025 tandis que les valeurs du type =unsigned short= sont
+comprises entre -32 768 et +32767 /cf./ table [[tab::c_data_type_size]]). Dans ce cas
+très particulier et bien que le résultat de la suite de Fibonacci soit un nombre
+entier positif, on aura tout intérêt à user du type =double= voir =long double= afin
+de bénéficier du plus grand intervalle de valeur admise.
+
+#+NAME: tab::c_data_type_size
+|----------------+-------------------+----------------------------------------------------|
+| Type           | Taille en mémoire | Intervalle de valeurs                              |
+|----------------+-------------------+----------------------------------------------------|
+| char           | 1 octet           | -128 à 127 ou 0 à 255                              |
+| unsigned char  | 1 octet           | 0 à 255                                            |
+| signed char    | 1 octet           | -128 à 127                                         |
+| int            | 2 or 4 octets     | -32 768 à 32,767 ou -2 147 483 648 à 2 147 483 647 |
+| unsigned int   | 2 or 4 octets     | 0 à 65 535 ou 0 à 4 294 967 295                    |
+| short          | 2 octets          | -32 768 à 32 767                                   |
+| unsigned short | 2 octets          | 0 à 65 535                                         |
+| long           | 4 octets          | -2 147 483 648 à 2 147 483 647                     |
+| unsigned long  | 4 octets          | 0 to 4 294 967 295                                 |
+|----------------+-------------------+----------------------------------------------------|
+| float          | 4 octets          | 1.2 10^{-38} à 3.4 10^{+38}                        |
+| double         | 8 octets          | 2.3 10^{-308} à 1.7 10^{+308}                      |
+| long double    | 10 octets         | 3.4 10^{-4932} à 1.1 10^{+4932}                     |
+|----------------+-------------------+----------------------------------------------------|
+#+LATEX: \captionof{table}{\textbf{Taille en mémoire et intervalle de valeurs des principaux types de base du C/\Cpp}}
+
+*** Estimation du temps d'exécution d'un programme
+
+Afin d'estimer le temps d'exécution de la fonction =fibonacci=, nous modifions le
+programme principal de telle sorte à réaliser un grand nombre de fois le calcul
+de la suite de Fibonacci.
+
+#+BEGIN_SRC C++ -n
+  int main()
+  {
+     const unsigned int n = 1000000;
+     for (unsigned int i = 0; i < n; i++) fibonacci(n);
+   }
+#+END_SRC
+
+On notera la déclaration de la variable =i= au sein de la boucle =for= comme nous y
+autorise le \Cpp.
+
+L'objectif ici est uniquement d'utiliser du temps processeur de l'ordinateur
+et d'obtenir une valeur moyenne du temps d'exécution de la fonction
+=fibonacci=. Pour connaître le temps d'exécution d'une commande Unix, nous
+utilisons le programme [[https://en.wikipedia.org/wiki/Time_(Unix)][=time=]]: ainsi, dans le terminal nous exécutons
+successivement les commandes de compilation
+#+BEGIN_PROMPT
+g++ fibonacci.cc -o fibonacci.exe
+#+END_PROMPT
+puis d'exécution en préfixant le nom du binaire par la commande =time=
+#+BEGIN_PROMPT
+time ./fibonacci.exe\\
+real  0m0.007s\\
+user  0m0.004s\\
+sys   0m0.000s
+#+END_PROMPT
+On obtient ainsi trois temps qui correspondent respectivement à
+
+- =real= :: est le temps réel d'exécution de la commande /i.e./ l'intervalle de
+     temps entre le moment où est lancée la commande et l'instant où le
+     programme s'arrête.
+- =user= :: est le temps pendant lequel la commande utilise le processeur
+     indépendamment d'autre processus (navigateur internet,...) s'exécutant sur
+     la machine.
+- =sys= :: est le temps pris par le système pour gérer la tâche.
+
+Il existe diverses façons d'interpréter le résultat de la commande =time= (voir
+par exemple [[http://www.linux-france.org/article/memo/node18.html][ce calcul]] du facteur d'évaluation qui traduit la charge du
+système). Dans ce TD, nous nous contenterons d'exploiter le temps =real= sachant
+que les machines du magistère sont principalement dédiées à la programmation et
+à l'exécution de codes C/\Cpp. C'est par ailleurs ce temps qui nous permettra de
+comparer la version actuelle de la fonction =fibonacci= à la version "en-ligne".
+
+*** Version "en ligne" de la fonction =fibonacci=
+
+Rendre "en ligne" une fonction consiste à la prefixer du mot clé =inline= (soit
+dans sa déclaration/définition comme dans ce TD soit lors de la déclaration du
+prototype de la fonction). Ainsi, la fonction =fibonacci= "en ligne" s'écrit
+simplement
+
+#+BEGIN_SRC C++
+  inline unsigned int fibonacci(unsigned int n_)
+  {
+    ...
+  }
+#+END_SRC
+
+En terme de temps d'exécution, le résultat doit être quasiment similaire à la
+précédente déclaration. Si théoriquement une fonction "en ligne" a pour objectif
+de minimiser le temps nécessaire à l'appel en mémoire de la fonction, dans le
+cas présent, la simplicité du code (quelques dizaines de lignes) ne permet pas
+de tirer profit de cet apport. Dans un programme plus complexe, l'intérêt
+d'utiliser les fonctions "en ligne" peut alors prendre tout son sens quand bien
+même cette fonctionnalité est finalement assez peu utilisée.
 
 * Footnotes
 
