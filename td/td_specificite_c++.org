@@ -1,7 +1,7 @@
 #+TITLE:  Spécificités du C++
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{1}
 #+LATEX_HEADER: \usepackage{capt-of}
 
@@ -166,7 +166,7 @@ de la suite de Fibonacci.
   int main()
   {
      const unsigned int n = 1000000;
-     for (unsigned int i = 0; i < n; i++) fibonacci(n);
+     for (unsigned int i = 0; i < n; i++) fibonacci(20);
    }
 #+END_SRC
 
@@ -176,7 +176,7 @@ autorise le \Cpp.
 L'objectif ici est uniquement d'utiliser du temps processeur de l'ordinateur
 et d'obtenir une valeur moyenne du temps d'exécution de la fonction
 =fibonacci=. Pour connaître le temps d'exécution d'une commande Unix, nous
-utilisons le programme [[https://en.wikipedia.org/wiki/Time_(Unix)][=time=]]: ainsi, dans le terminal nous exécutons
+utilisons le programme [[https://en.wikipedia.org/wiki/Time_(Unix)][=time=]] : ainsi, dans le terminal nous exécutons
 successivement les commandes de compilation
 #+BEGIN_PROMPT
 g++ fibonacci.cc -o fibonacci.exe
@@ -227,7 +227,241 @@ de tirer profit de cet apport. Dans un programme plus complexe, l'intérêt
 d'utiliser les fonctions "en ligne" peut alors prendre tout son sens quand bien
 même cette fonctionnalité est finalement assez peu utilisée.
 
+*** Fonction récursive =rfibonacci=
+
+Une fonction récursive est par définition une fonction qui s'appelle, le risque
+évident étant l'appel infini si les conditions de sortie de la fonction ne sont
+dûment remplies. Dans le cas de l'implémentation d'une suite récursive comme la
+suite de Fibonacci, une fonction récursive est à la fois élégante et
+relativement facile à écrire. Ainsi, la fonction =rfibonacci= s'écrit
+
+#+BEGIN_SRC C++
+  unsigned int rfibonacci(unsigned int n_)
+  {
+    return n_ <= 2 ? 1 : rfibonacci(n_-2) + rfibonacci(n_-1);
+  }
+#+END_SRC
+
+On note bien que le corps de la fonction =rfibonacci= réalise deux appels à cette
+même fonction et que la condition de sortie se fait dans l'hypothèse où =n_= est
+inférieur à 2 auquel la valeur retournée sera 1. L'écriture ci-dessus est une
+version condensée et autorisée par le \Cpp de la condition =if/else=.
+
+Une macro de préprocesseur équivalente reviendrait à écrire le code suivant
+
+#+BEGIN_SRC C++
+  #define RFIBONACCI(n) (n <= 2 ? 1 : RFIBONACCI(n-2) + RFIBONACCI(n-1))
+#+END_SRC
+que l'on appelera dans le programme principal
+#+BEGIN_SRC C++
+  int main()
+  {
+    const unsigned int f = RFIBONACCI(20);
+  }
+#+END_SRC
+
+À la compilation, =g++= indique toutefois une erreur =‘RFIBONACCI’ was not declared
+in this scope=. S'agissant de macro de préprocesseur, il est alors important
+d'évaluer le résultat de l'étape de /préprocessing/, première des trois étapes de
+compilation, afin de s'assurer que les macros ont toutes bien été remplacées. On
+peut ainsi pré-compiler le fichier =fibonacci.cc= en faisant la commande suivante
+
+#+BEGIN_PROMPT
+g++ -E fibonacci.cc
+#+END_PROMPT
+
+Le résultat de la pré-compilation s'affiche à l'écran, les lignes pertinentes
+étant les suivantes
+#+BEGIN_SRC C++
+...
+# 6 "fibonacci.cc"
+int main()
+{
+  const unsigned int f = (20 <= 2 ? 1 : RFIBONACCI(20 -2) + RFIBONACCI(20 -1));
+}
+#+END_SRC
+
+On constate ainsi que seul le premier appel à la macro a formellement été
+réalisé, les macros suivantes =RFIBONACCI(20 -2)= et =RFIBONACCI(20 -1)= n'ayant pas
+été remplacées. La raison tient au fait que les versions relativement récentes
+du compilateur =g++= interdisent le remplacement récursif de macro de
+préprocesseur: comme le /préprocessing/ consiste à remplacer syntaxiquement des
+expressions indépendamment de leur contenu en terme de code[fn:6f84d9c6], rien
+n'empêche donc la macro =RFIBONACCI= de s'appeller éternellement puisque la
+condition de sortie /i.e./ =n= inférieur ou égal à 2 n'est pas interprétée par le
+pré-processeur. Ainsi, la macro =RFIBONACCI(20 -2)= devrait à son tour appeler
+=RFIBONACCI(18 -2)= et =RFIBONACCI(18 -1)= ... puis poursuivre y compris lorsque =n=
+devient négatif. Le compilateur évite ainsi le remplacement infini de macro et
+il n'est donc pas possible de proposer une macro équivalente à une fonction
+récursive.
+
+En comparant les temps d'exécution de la fonction non récursive =fibonacci= et
+récursive =rfibonacci=, on note que le temps induit par la seconde est
+significativement plus long. Cette différence tient au fait que la fonction
+=rfibonacci= passe le plus clair de son temps à "remonter" en mémoire afin
+d'acceder à la définition de la fonction =rfibonacci=. Dans le cas de la solution
+non récursive, l'ensemble de la fonction est exécuté en un endroit précis de la
+mémoire évitant des pertes liées à l'accès en mémoire. Si la fonction =rfibonacci=
+est en terme d'écriture et d'élégance plus facile à implémenter, elle demeure
+beaucoup moins efficace et moins optimale en terme d'exécution.
+
+*** Fichiers d'en-tête et compilation séparée
+
+Afin d'user de la compilation séparée (déjà présente dans le compilateur C) et
+d'éviter ainsi des pertes de temps induite par la recompilation de code source
+préalablement compilé, il convient de découpler *la déclaration de fonction* (ou
+de classe comme nous le verrons dans la suite de ce cours) de *leur
+définition*. On placera donc les prototypes des fonctions dans des fichiers
+d'en-tête généralement d'extension =.h= ou =.hpp= tandis que les définitions des
+fonctions se trouveront dans un fichier source d'extension =.cc= ou =.cpp=.
+
+Le fichier =fibonacci.h= s'écrit
+#+BEGIN_SRC C++
+  #indef  _fibonacci_h_
+  #define _fibonacci_h_ 1
+  unsigned int fibonacci(unsigned int n_);
+  #endif
+#+END_SRC
+À l'exception de la déclaration de la fonction, les trois autres lignes sont
+toutes des macros de préprocesseur qui réalisent les opérations suivantes
+- =#ifndef _fibonacci_h_= vérifie si l'identificateur =_fibonacci_h_= est défini et
+  si non, inclut les lignes jusqu'à la fin de la condition marquée par =#endif=,
+- =#define _fibonacci_h_ 1= définit l'identificateur =_fibonacci_h_= en lui attribuant
+  la valeur 1.
+Ainsi, le prototype de la fonction =fibonacci= n'est inclu qu'à la condition où
+l'identificateur =_fibonacci_h_= est défini. Ces directives de préprocesseur sont
+particulièrement importantes lorsqu'il s'agit de déclarer des classes en évitant
+l'inclusion multiple de déclaration d'une même classe : on prendra donc le
+réflexe de toujours débuter un fichier d'en-tête avec ces directives.
+
+Le fichier contenant le code source de la fonction =fibonacci= soit le fichier
+=fibonacci.cc= contient les lignes suivantes
+#+BEGIN_SRC C++
+  #include "fibonacci.h"
+  unsigned int rfibonacci(unsigned int n_)
+  {
+    return n_ <= 2 ? 1 : fibonacci(n_-2) + rfibonacci(n_-1);
+  }
+#+END_SRC
+où la première ligne permet d'inclure le prototype de la fonction =fibonacci=.
+
+Pour pouvoir utiliser cette fonction au sein du programme principal, il faut
+donc que le bloc d'appel principal /i.e./ le bloc =main= ait connaissance de la
+fonction et de son prototype pour savoir si son utilisation est correctement
+faite lors de son appel. On doit ainsi inclure de nouveau le fichier =fibonacci.h=
+dans le fichier contenant le bloc =main= que l'on appelera alors =test_fibonacci.cc=
+
+#+BEGIN_SRC C++
+  #include "fibonacci.cc"
+  int main()
+  {
+    const unsigned int f = fibonacci(20);
+  }
+#+END_SRC
+
+Pour pouvoir compiler l'ensemble et lier le programme principal à
+l'implémentation de la fonction =fibonacci= contenu dans le fichier =fibonacci.cc=,
+il faut alors compiler les deux fichiers sources /via/ la commande
+#+BEGIN_PROMPT
+g++ fibonacci.cc test_fibonacci.cc -o test_fibonacci.exe
+#+END_PROMPT
+Lors de la compilation chaque fichier est compilé indépendamment et doit donc
+connaître précisement le contexte soit d'utilisation (programme principal) soit
+d'implémentation (code source) de la fonction =fibonacci= : ceci implique donc
+d'inclure le fichier d'en-tête dans les deux fichiers sources. Par ailleurs, les
+fichiers d'en-tête ne doivent *jamais* figurer en tant que fichier à
+compiler. Cette opération en plus d'être une source éventuelle de
+problème[fn:d6e729ca] est totalement superflue puisque les fichiers d'en-tête
+sont, par inclusion, présents dans les fichiers sources.
+
+Si la définition de la fonction =fibonacci= n'est pas amenée à évoluer et ne
+suppose donc pas de recompilation du fichier =fibonacci.cc=, on peut alors
+créer le fichier objet contenant l'interprétation du code en langage machine et
+ainsi ne réaliser que l'opération d'édition de liens. La création d'un fichier
+objet se fait /via/ la commande
+#+BEGIN_PROMPT
+g++ -c fibonacci.cc
+#+END_PROMPT
+qui créera un fichier =fibonacci.o=. On génère ensuite l'exécutable en utilisant
+la commande
+#+BEGIN_PROMPT
+g++ fibonacci.o test_fibonacci.cc -o test_fibonacci.exe
+#+END_PROMPT
+
+Cette compilation séparée n'a de sens et d'intérêt que lorsque le nombre de
+fichiers et d'instructions à compiler devient important. À l'échelle des
+exercices de ce cours et du projet informatique, la compilation séparée n'a une
+portée que très limitée sachant par ailleurs, qu'en cas de développement d'une
+fonction, classe... elle peut être source d'erreur. Si l'utilisateur oublie de
+créer le fichier objet et que dans le même temps la définition de la fonction,
+classe... évolue, l'étape de création de l'exécutable fera systématiquement
+appel à la version antérieure du code. Le travail de gestion des fichiers à
+recompiler étant par ailleurs assuré par des programmes tels que [[http://www.gnu.org/software/make/][make]], on
+privilégiera donc pour ce cours la compilation de l'ensemble des fichiers
+sources /i.e./
+#+BEGIN_PROMPT
+g++ *.cc -o mon_executable.exe
+#+END_PROMPT
+
+*** Utilisation d'espace de nom
+Si deux fonctions portent le même nom et que leur contexte d'appel ne permet pas
+au compilateur de les différencier, on peut alors user d'un espace de nom pour
+distinguer chacune d'elle. Ainsi, en supposant que nous souhaitions faire
+cohabiter deux fonctions de calcul de suite de Fibonacci -- la version récursive
+et la première version proposée dans ce TD --, il faut alors encapsuler la
+déclaration et la définition de ces fonctions dans des espaces de nom
+distinct. On pourra ainsi écrire le code suivant
+
+#+BEGIN_SRC C++ -n
+  #include "fibonacci.h"
+  #include <iostream>
+  using namespace std;
+
+  namespace local {
+    unsigned int fibonacci(unsigned int n_)
+    {
+      if (n_ < 3) return 1;
+      unsigned int fn1 = 1;
+      unsigned int fn2 = 1;
+      unsigned int fn = fn1 + fn2;
+      for (unsigned int i = 2; i < n_; i++) {
+        fn = fn1 + fn2;
+        fn1 = fn2;
+        fn2 = fn;
+      }
+      return fn;
+    }
+  }
+
+  int main()
+  {
+    const unsigned int n = 20;
+    cout << "version récursive : F(" << n << ") = " << fibonacci(n) << endl;
+    cout << "version local : F(" << n << ") = " << local::fibonacci(n) << endl;
+  }
+#+END_SRC
+
+Par défaut, la fonction =fibonacci= appelée sera la version récursive dont la
+définition est contenue dans le fichier =fibonacci.cc=. En revanche, le second
+appel /i.e./ celui prefixé par l'espace de nom =local= se réferera à la version
+"locale" c'est-à-dire celle encapsulée entre =namespace local{...}=. Cette
+fonctionnalité introduite par le \Cpp a surtout pour vocation d'identifier des
+fonctions, classes d'objet ayant des propriétés communes tels qu'un ensemble de
+fonctions mathématiques qu'on pourra naturellement encapsuler dans un espace
+=math= afin d'éviter d'éventuel conflit de nom.
+
 * Footnotes
 
 [fn:e4e20dfe] nous verrons à la fin de ce cours comment la notion de /template/ de
 fonction peut grandement simplifier l'écriture de ces deux fonctions.
+
+[fn:6f84d9c6] pour rappel, le préprocesseur ne vérifie pas, par exemple, les
+types des variables: on peut ainsi appeler la macro =RFIBONACCI= en lui passant un
+caractère ou un tableur de valeur.
+
+[fn:d6e729ca] la compilation d'un fichier d'en-tête provoque la création d'un
+fichier d'extension =.gch= qui est systématiquement utilisé en lieu et place du
+fichier d'en-tête. Ainsi, l'utilisateur aura beau procéder à toute une série de
+changement dans le fichier d'en-tête, ces dernièrs ne seront jamais effectifs
+car toujours écrantés par le fichier d'extension =.gch=. Si tel était le cas, il
+faut alors supprimer purement et simplement ce fichier =.gch=.
