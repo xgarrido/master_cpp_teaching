@@ -1,7 +1,7 @@
 #+TITLE:  Classes
 #+AUTHOR: Xavier Garrido
 #+DATE:   18/09/2013
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{2}
 
 * Déclaration et utilisation de classe en C++
@@ -13,7 +13,7 @@ programme principal de test.
 En attendant le cours sur l’encapsulation, déclarer tous les membres avec une
 visibilité publique :
 #+BEGIN_SRC c++
-  class Point
+  class point
   {
   public:
     ...
@@ -21,15 +21,15 @@ visibilité publique :
 #+END_SRC
 
 
-** Classe =Point=
+** Classe =point=
 
-Créer une classe =Point= composée de deux coordonnées réelles puis déclarer et
+Créer une classe =point= composée de deux coordonnées réelles puis déclarer et
 définir une méthode pour initialiser ces valeurs ainsi qu'une méthode affichant
 les deux coordonnées.
 
 ** Tableau d'objets
 
-Déclarer un tableau contenant cinq objets de type =Point=. Initialiser chacune
+Déclarer un tableau contenant cinq objets de type =point=. Initialiser chacune
 des entrées du tableau puis créer une fonction affichant les coordonnées du
 point le plus éloigné de l'origine.
 
@@ -39,7 +39,7 @@ Créer une classe =Polygone= possédant :
 
 - un entier non signé correspondant à l'ordre du polygone /i.e./ au nombre de
   sommets,
-- un tableau de =Point= contenant les coordonnées de chacun des sommets (10
+- un tableau de =point= contenant les coordonnées de chacun des sommets (10
   sommets maximum soit un décagone)[fn:1].
 
 En définissant une méthode permettant l'initialisation de la classe =Polygone=,
@@ -51,6 +51,290 @@ chacune des trois instances puis faire une fonction qui renverra l'indice de
 celui ayant le plus grand périmètre.
 
 [fn:1] pour les plus téméraires, substituer au tableau statique un tableau
-dynamique (pointeur de classe =Point= alloué avec =new=) dont le nombre
+dynamique (pointeur de classe =point= alloué avec =new=) dont le nombre
 d'entrées sera indexé sur l'ordre du polygone. On rajoutera une méthode
 permettant la destruction du tableau en fin de programme.
+* Correction                                                     :correction:
+** Classe =point=
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+Comme indiqué dans le sujet, la déclaration de la classe =point= /i.e./ les
+attributs de la classe ainsi que les prototypes des méthodes, se fait dans un
+fichier d'en-tête dédié appellé =point.h=
+
+#+BEGIN_SRC C++ -n
+  #ifndef _point_h_
+  #define _point_h_ 1
+
+  class point {
+  public:
+    // Méthode d'initialisation
+    void initialise(const double x_, const double y_);
+
+    // Méthode d'affichage
+    void affiche() const;
+
+    // Attributs
+    double m_x;
+    double m_y;
+  };
+
+  #endif
+#+END_SRC
+
+On retrouve en préambule de la déclaration, les directives de préprocesseur
+=#ifndef/#define= qui interdisent l'inclusion multiple de ce fichier. Le cours sur
+l'encapsulation n'ayant pas été abordé, les méthodes =initialise= et =affiche= de
+même que les données membres ou attributs ont tous une visibilité publique. Sans
+présager de comment les méthodes d'initialisation et d'affichage seront
+implémentées, toutes deux ne retournent pas de données (type =void=), la fonction
+=initialise= prenant deux arguments =x_= et =y_=. Un point important à noter est la
+présence du =const= à la fin de la déclaration de la méthode =affiche= qui indique
+que cette fonction-membre ne modifiera pas les données membres. En revanche, la
+fonction d'initialisation ne présente pas un tel attribut du fait que, par
+construction, cette méthode assignera des valeurs aux membres =x_= et =y_=.
+
+Le fichier =point.cc= qui contient la définition des méthodes se présente sous la
+forme suivante
+
+#+BEGIN_SRC C++ -n
+  #include "point.h"
+
+  #include <iostream>
+  using namespace std;
+
+  void point::initialise(const double x_, const double y_)
+  {
+    m_x = x_;
+    m_y = y_;
+  }
+
+  void point::affiche() const
+  {
+    cout << "(x,y) = (" << m_x << "," << m_y << ")" << endl;
+  }
+#+END_SRC
+
+Ce fichier devant être indépendamment compilé, la déclaration de la classe doit
+être connue. C'est l'objet de l'inclusion du fichier =point.h= (ligne 1). Les
+définitions des méthodes reprennent les prototypes déclarés dans le fichier
+=point.h= en préfixant néanmoins leurs intitulés du nom de la classe suivi de
+l'opérateur de résolution de portée =::=. Ce préfixe assure au compilateur que les
+fonctions =initialise= et =affiche= sont des fonctions membres de la classe =point= et
+non des fonctions externes à cette classe : la présence de ce préfixe est donc
+primordiale dans l'association entre la déclaration des méthodes et leurs
+définitions.
+
+Comme expliqué lors du cours sur les classes en \Cpp, le principe sur lequel
+repose la programmation orientée objet tient en l'association de données membres
+et de fonctions membres. Ainsi, les fonctions membres ou méthodes de la classe
+=point= que sont =initialise= et =affiche= ont, de par leur statut de méthodes, la
+possibilité de manipuler les membres de la classe =point= que sont =m_x= et =m_y=. La
+méthode =initialise= assigne ainsi des valeurs aux membres =m_x= et =m_y= par le biais
+des arguments =x_= et =y_= tandis que la méthode =affiche= se contente de présenter
+ces valeurs sans les modifier (d'où la présence du mot-clé =const=).
+
+Dernier point, l'inclusion de la librairie =iostream= de gestion des
+flux d'entrée et sortie (=cout/cin=) est nécessaire puisque la méthode =affiche=
+utilise la sortie standard =cout=.
+
+Afin de tester la classe =point= indépendamment de toute développement ou
+utilisation futur, il convient de créer pour chaque classe ce que l'on appelle
+un test unitaire. Ces programmes-tests permettent donc de tester les
+fonctionnalités d'une classe et de s'assurer de son bon fonctionnement en dehors
+de toute utilisation dans un cadre plus large faisant intervenir d'autres
+classes, d'autres programmes... C'est donc une étape indispensable et
+malheureusement, trop souvent négligée. Un programme test de la classe =point=
+peut prendre la forme suivante
+
+#+BEGIN_SRC C++ -n
+  #include "point.h"
+
+  int main()
+  {
+    // Création d'une instance de la classe point
+    point my_point;
+    my_point.initialise(6.5, 8.5);
+    my_point.affiche();
+  }
+#+END_SRC
+
+Ce programme teste successivement la création d'un objet de type =point=, son
+initialisation puis l'affichage des valeurs d'abscisse et d'ordonnée. La
+présence de la directive =#include "point.h"\nbsp{}= en préambule du programme
+permet de s'assurer d'une part, que la classe =point= existe en soi et d'autre
+part, que l'utilisation des méthodes associées à cette classe est correctement
+faite. La liaison entre l'utilisation des méthodes et leurs définitions est
+réalisée par le compilateur lors de l'édition de lien, troisième étape de la
+compilation (/cf./ cours sur la compilation). On compilera donc l'ensemble /via/ la
+commande
+#+BEGIN_PROMPT
+g++ point.cc test_point.cc -o test_point.exe
+#+END_PROMPT
+
+** Tableau d'objets
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+
+La notion de classe n'étant qu'une extension de la notion de type, on peut donc
+stocker des objets dans des tableaux. Le programme ci-dessous propose ainsi de
+sauver 5 instances de type =point= dans un tableau
+#+BEGIN_SRC C++ -n
+  #include "point.h"
+
+  int main()
+  {
+    const unsigned int npoint = 5;
+    point my_points[npoint];
+    // Initialisation arbitraire des 5 objets
+    for (unsigned int i = 0; i < npoint; i++) {
+      my_points[i].initialise(i, 2*i);
+      my_points[i].affiche();
+    }
+  }
+#+END_SRC
+
+La recherche du point le plus éloigné par rapport à l'origine ne peut se faire
+qu'au travers d'une fonction externe. En effet, c'est un non sens que de
+chercher pour un objet de type =point= s'il est plus éloigné que lui-même de
+l'origine. Ce genre de raisonnement permet ainsi de déduire que cette fonction
+ne peut être une méthode à part entière de la classe =point= et est donc
+nécessairement, une fonction externe. On peut en revanche, envisager d'ajouter à
+la classe =point= une méthode permettant de retourner la norme. Ainsi, la classe
+=point= verra sa déclaration modifiée en conséquence
+#+BEGIN_SRC C++
+  class point {
+  public:
+    ...
+    // Calcul de la norme
+    double get_norme() const;
+  };
+#+END_SRC
+dont la définition sera la suivante
+#+BEGIN_SRC C++
+  #include <cmath>
+  ...
+  double point::get_norme() const
+  {
+    return sqrt(m_x*m_x + m_y*m_y);
+  }
+#+END_SRC
+
+Quant à la fonction externe que l'on placera dans le programme principal, on
+pourra l'écrire de la façon suivante
+#+BEGIN_SRC C++ -n
+  unsigned int get_farthest(const point * points_, const unsigned int npoint_)
+  {
+    double max = 0.0;
+    unsigned int idx = 0;
+    for (unsigned int i = 0; i < npoint_; i++) {
+      const double norm = points_[i].get_norme();
+      if (norm > max) {
+        idx = i;
+        max = norm;
+      }
+    }
+    return idx;
+  }
+#+END_SRC
+et l'utiliser ainsi
+#+BEGIN_SRC C++ -n
+  #include "point.h"
+  #include <iostream>
+  using namespace std;
+
+  // Fonction get_farthest
+
+  int main()
+  {
+    const unsigned int npoint = 5;
+    point my_points[npoint];
+    for (unsigned int i = 0; i < npoint; i++) {
+      my_points[i].initialise(i, 2*i);
+    }
+    const unsigned int i = get_farthest(my_points, npoint);
+    cout << "Le point le plus éloigné de l'origine est le point #" << i << " de coordonnées ";
+    my_points[i].affiche();
+  }
+#+END_SRC
+
+** Classe =Polygone=
+:PROPERTIES:
+:UNNUMBERED: t
+:END:
+De nouveau, la notion de classe étant une extension de la notion de type, il est
+possible que des classes soient composées d'autres objets. Ainsi, la classe
+=polygone= est, par construction, composée d'un ensemble de points /i.e./ d'objets
+de type =point=. Le code ci-dessous propose une solution au problème posé en
+usant, par ailleurs, d'un tableau dynamique à même d'héberger un nombre de
+sommet variable.
+*** Déclaration de la classe =polygone= : fichier =polygone.h=
+#+BEGIN_SRC C++ -n
+  #ifndef _polygone_h_
+  #define _polygone_h_ 1
+
+  #include "point.h"
+
+  class polygone {
+  public:
+
+    // Méthode d'initialisation arbitraire des positions des sommets
+    void initialise(const unsigned int ordre_);
+
+    // Méthode d'affichage
+    void affiche() const;
+
+    // Calcul du périmètre
+    double get_perimetre() const;
+
+    // Attributs
+    unsigned int m_ordre;
+    point * m_sommets;
+
+  };
+
+  #endif
+#+END_SRC
+
+*** Définition de la classe =polygone= : fichier =polygone.cc=
+#+BEGIN_SRC C++ -n
+  #include "polygone.h"
+  #include <iostream>
+  using namespace std;
+
+  void polygone::initialise(const unsigned int ordre_)
+  {
+    // Assignation de l'ordre du polygone
+    m_ordre = ordre_;
+
+    // Allocation dynamique du tableau de points
+    m_sommets = new point[ordre_];
+
+    // Initialisation de chacun des sommets via la méthode initialise
+    // de la classe point
+    for (unsigned int i = 0; i < ordre_; i++) {
+      m_sommets[i].initialise(i, 2*i);
+    }
+  }
+
+  void polygone::affiche() const
+  {
+    cout << "Nombre de sommets : " << m_ordre << endl;
+    for (unsigned int i = 0; i < m_ordre; i++) {
+      cout << "Sommet #" << i;
+      m_sommets[i].affiche();
+    }
+  }
+
+  void polygone::get_perimetre() const
+  {
+    double perimetre = 0.0;
+    for (unsigned int i = 0; i < m_ordre; i++) {
+      perimetre += m_sommets[i].get_norme();
+    }
+    return perimetre;
+  }
+#+END_SRC
