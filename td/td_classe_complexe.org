@@ -141,9 +141,103 @@ de la classe =complexe= [fn:b7fc23c6]
   complexe division(const complexe & z1_, const complexe & z2_);
 #+END_SRC
 
-On notera que ces fonctions utilisent des paramètres de type référence d'objets
-de type =complexe=. Nous reviendrons plus en détails sur cet aspect
-d'implémentation au moment de l'utilisation de ces fonctions.
+On notera que ces fonctions utilisent des paramètres de type référence
+constantes vers des objets de type =complexe=. Nous reviendrons plus en détails
+sur cet aspect d'implémentation au moment de l'utilisation de ces fonctions.
+
+La définition des différentes méthodes se réalise dans un fichier source
+=complexe.cc= et se présente sous la forme suivante :
+
+#+BEGIN_SRC C++ -n
+  #include "complexe.h"
+
+  #include <iostream>
+  using namespace std;
+
+  complexe::complexe() : m_real(0.0), m_imag(0.0)
+  {
+  }
+
+  complexe::complexe(const double real_, const double imag_) : m_real(real_), m_imag(imag_)
+  {
+  }
+
+  void complexe::affiche() const
+  {
+    cout << m_real << "+ i*" << m_imag << endl;
+  }
+
+  double complexe::get_real() const
+  {
+    return m_real;
+  }
+
+  double complexe::get_imag() const
+  {
+    return m_imag;
+  }
+
+  double complexe::get_module() const
+  {
+    return sqrt(m_real*m_real+m_imag*m_imag);
+  }
+
+  double complexe::get_argument() const
+  {
+    return m_real == 0.0 ? 0.0 : atan(m_imag/m_real);
+  }
+
+  void complexe::set_real_imag(double real_, double imag_)
+  {
+    m_real = real_;
+    m_imag = imag_;
+  }
+
+  void complexe::set_mod_arg(double mod_, double arg_)
+  {
+    m_real = mod_*cos(arg_);
+    m_imag = mod_*sin(arg_);
+  }
+
+  complexe complexe::conjugue() const
+  {
+    return complexe(m_real, -m_imag);
+  }
+
+  complexe addition(const complexe & z1_, const complexe & z2_)
+  {
+    return complexe(z1_.get_real()+z2_.get_real(), z2_.get_imag()+z2_.get_imag());
+  }
+
+  complexe soustraction(const complexe & z1_, const complexe & z2_)
+  {
+    return complexe(z1_.get_real()-z2_.get_real(), z2_.get_imag()-z2_.get_imag());
+  }
+
+  complexe multiplication(const complexe & z1_, const complexe & z2_)
+  {
+    const double module = z1_.get_module()*z2_.get_module();
+    const double argument = z1_.get_argument()+z2_.get_argument();
+    return complexe(module*cos(argument), module*sin(argument));
+  }
+
+  complexe division(const complexe & z1_, const complexe & z2_)
+  {
+    const double module = z1_.get_module()*z2_.get_module();
+    const double argument = z1_.get_argument()-z2_.get_argument();
+    return complexe(module*cos(argument), module*sin(argument));
+  }
+#+END_SRC
+
+Indépendamment du fait que dans cette implémentation l'argument complexe est
+exprimé en radian, le point important dans cet exemple est la définition de la
+méthode =conjugue= : cette dernière tire parti de la surcharge du constructeur
+définie ligne 10 puisqu'elle retourne un nouvel objet de type =complexe= utilisant
+les membres de l'objet sur laquelle elle porte en changeant bien entendu, le
+signe de la partie imaginaire. Dans le même esprit, les fonctions externes qui
+ne sont donc pas préfixées du nom de la classe comme le sont les méthodes de la
+classe =complexe=, utilisent le même mécanisme en créant chacunes de nouvel objet
+de type =complexe= à l'aide du constructeur surdéfini.
 
 * Évolution de la classe =complexe=
 
