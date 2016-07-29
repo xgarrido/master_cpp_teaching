@@ -9,7 +9,7 @@ BATCH=$(EMACS) --batch --no-init-file						\
 		--eval '(org-babel-load-file "../README.org")'                  \
 		--eval '(org-babel-tangle-file "../README.org")'
 
-ifndef with_correction
+ifndef with-correction
 	BATCH += --eval "(setq org-export-exclude-tags '(\"correction\"))"
 endif
 

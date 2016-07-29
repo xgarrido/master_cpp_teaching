@@ -303,6 +303,7 @@ sommet variable.
 #+BEGIN_SRC C++ -n
   #include "polygone.h"
   #include <iostream>
+  #include <cstdlib>
   using namespace std;
 
   void polygone::initialise(const unsigned int ordre_)
@@ -316,7 +317,7 @@ sommet variable.
     // Initialisation de chacun des sommets via la méthode initialise
     // de la classe point
     for (unsigned int i = 0; i < ordre_; i++) {
-      m_sommets[i].initialise(i, 2*i);
+      m_sommets[i].initialise(rand() % 10, rand() % 10);
     }
   }
 
@@ -324,9 +325,10 @@ sommet variable.
   {
     cout << "Nombre de sommets : " << m_ordre << endl;
     for (unsigned int i = 0; i < m_ordre; i++) {
-      cout << "Sommet #" << i;
+      cout << "Sommet #" << i << " : ";
       m_sommets[i].affiche();
     }
+    cout << "Périmètre : " << get_perimetre() << endl;
   }
 
   void polygone::get_perimetre() const
@@ -338,3 +340,42 @@ sommet variable.
     return perimetre;
   }
 #+END_SRC
+
+*** Programme test =test_polyone.cc=
+#+BEGIN_SRC C++ -n
+  #include "polygone.h"
+  #include <iostream>
+  using namespace std;
+
+  unsigned int get_longest(const polygone * polygones_, const unsigned int npoly_)
+  {
+    double max = 0.0;
+    unsigned int idx = 0;
+    for (unsigned int i = 0; i < npoly_; i++) {
+      const double perimetre = polygones_[i].get_perimetre();
+      if (perimetre > max) {
+        idx = i;
+        max = perimetre;
+      }
+    }
+    return idx;
+  }
+
+  int main()
+  {
+    const unsigned int npoly = 3;
+    polygone my_polygones[npoly];
+    for (unsigned int i = 0; i < npoly; i++) {
+      // Creation d'hexagones
+      my_polygones[i].initialise(8);
+    }
+    const unsigned int i = get_longest(my_polygones, npoly);
+    cout << "Le polygone ayant le plus long périmètre est le polygone #" << i << endl;
+    my_polygones[i].affiche();
+  }
+#+END_SRC
+
+On compilera l'ensemble à l'aide de la commande
+#+BEGIN_PROMPT
+g++ point.cc polygone.cc test_polygone.cc -o test_polygone.exe
+#+END_PROMPT

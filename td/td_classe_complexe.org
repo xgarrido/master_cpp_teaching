@@ -4,9 +4,9 @@
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \setcounter{chapter}{3}
 
-* Classe =Complexe=
+* Classe =complexe=
 
-Écrire une classe =Complexe=, possédant :
+Écrire une classe =complexe=, possédant :
 
 - Deux membres de type =double= :
 
@@ -24,18 +24,130 @@
 
 - Une méthode retournant le conjugué.
 
-
 Écrire ensuite les fonctions d'addition, soustraction, multiplication, et
 division, suivant ce prototype :
 
 #+BEGIN_SRC c++
-  Complexe operation(const Complexe& z1, const Complexe& z2);
+  complexe operation(const complexe & z1_, const complexe & z2_);
 #+END_SRC
 
+* Correction                                                     :correction:
+À la différence du précédent exercice où les membres des classes =point= et
+=polygone= étaient publics, nous allons mettre en pratique l'encapsulation des
+données à savoir le fait que les données membres d'une classe relèvent du
+domaine privée : ces données membres ne seront alors accessible en
+lecture/écriture qu'au travers des méthodes telles que =set_real_imag(double,
+double)=, méthodes qui définissent l'interface publique. Ci-dessous la
+déclaration de la classe =complexe= à écrire dans un fichier d'en-tête dédié,
+=complexe.h= par exemple.
 
-* Évolution de la classe =Complexe=
+#+BEGIN_SRC C++ -n
+  #ifndef _complexe_h_
+  #define _complexe_h_ 1
 
-Faire évoluer la classe =Complexe=, *sans changer son interface publique*, en y
+  class complexe {
+  public:
+    // Constructeur par défaut
+    complexe();
+
+    // Surdéfinition du constructeur
+    complexe(const double real_, const double imag_);
+
+    // Méthode d'affichage des membres
+    void affiche() const;
+
+    // Méthode retournant la partie réelle
+    double get_real() const;
+
+    // Méthode retournant la partie imaginaire
+    double get_imag() const;
+
+    // Méthode retournant le module
+    double get_module() const;
+
+    // Méthode retournant l'argument
+    double get_argument() const;
+
+    // Méthode permettant la modification des membres réel/imaginaire
+    void set_real_imag(double real_, double imag_);
+
+    // Méthode permettant la modification des membres en notation polaire
+    void set_mod_arg(double mod_, double arg_);
+
+    // Méthode retournant le nombre complexe conjugué
+    complexe conjugue() const;
+
+  private:
+    double m_real; // Partie réelle
+    double m_imag; // Partie imaginaire
+  };
+  #endif
+#+END_SRC
+
+Avant d'écrire les déclarations des fonctions (*et non méthodes*) d'addition, de
+soustraction..., arrêtons-nous sur les principales structures de la classe
+=complexe= :
+- le constructeur qui porte *nécessairement* le nom de la classe ici =complexe=, est
+  une méthode à part entière bien qu'elle ne soit pas /typée/ : à ce titre, elle
+  ne retourne aucun paramètre de quelque nature qu'il soit d'où l'absence de
+  type dans le protoype du/des constructeurs. Par ailleurs, en tant que
+  méthode/fonction membre, le constructeur peut être surdéfini/surchargé; c'est
+  ce que réalise la ligne 10 en proposant un constructeur prenant deux arguments
+  correspondant à chacun des membres de la classe.
+- pour rappel, les méthodes d'affichage ainsi que celle retournant les membres
+  de la classe ou le module et l'argument sont toutes constantes vis-à-vis des
+  membres de la classe cest-à-dire qu'elles ne peuvent en aucun cas modifier les
+  données membres de la classe. Ce caractère est précisé par la présence en fin
+  de déclaration des méthodes du mot clé =const=. Les méthodes modifiant les
+  membres à savoir =set_real_imag= et =set_mod_arg= ne sont, en revanche, pas
+  constantes vis-à-vis des membres de la classe. Elles ne retournent en outre
+  aucune donnée d'où le fait qu'elles soient typées =void=.
+- la méthode =conjugue= tout en ne modifiant pas les membres de classe retourne un
+  paramètre de type =complexe=. Il est donc possible dans la déclaration d'une
+  classe de déclarer des méthodes retournant le type de la classe dont elles
+  sont issues. Nous verrons dans la définition de cette méthode comment user du
+  constructeur surdéfini pour retourner un objet de type =complexe=.
+
+Les opérations arithmétique que sont l'addition, la soustraction... sont, comme
+indiqué dans l'énoncé, autant de fonctions extérieures à la classe. En effet, ces
+fonctions ne sont pas des opérations propres à un objet de type =complexe=
+puisqu'elles associent deux nombres complexes pour en retourner un troisième. Il
+s'agit donc d'opérations manipulant certes des objets de type =complexe= mais qui
+sont tout à fait réalisables hors du cadre défini par la classe =complexe=. On
+déclarera donc ces fonctions dans le même fichier d'en-tête que la déclaration
+de la classe =complexe= [fn:b7fc23c6]
+
+#+BEGIN_SRC C++
+  #ifndef _complexe_h_
+  #define _complexe_h_ 1
+  class complexe {
+    ...
+  };
+
+  // Fonction réalisant l'addition de deux nombres complexes z1 et z2 et
+  // retournant le résultat de cette opération
+  complexe addition(const complexe & z1_, const complexe & z2_);
+
+  // Fonction réalisant la soustraction de deux nombres complexes z1 et z2 et
+  // retournant le résultat de cette opération
+  complexe soustraction(const complexe & z1_, const complexe & z2_);
+
+  // Fonction réalisant la multiplication de deux nombres complexes z1 et z2 et
+  // retournant le résultat de cette opération
+  complexe multiplication(const complexe & z1_, const complexe & z2_);
+
+  // Fonction réalisant la division de deux nombres complexes z1 et z2 et
+  // retournant le résultat de cette opération
+  complexe division(const complexe & z1_, const complexe & z2_);
+#+END_SRC
+
+On notera que ces fonctions utilisent des paramètres de type référence d'objets
+de type =complexe=. Nous reviendrons plus en détails sur cet aspect
+d'implémentation au moment de l'utilisation de ces fonctions.
+
+* Évolution de la classe =complexe=
+
+Faire évoluer la classe =complexe=, *sans changer son interface publique*, en y
 ajoutant deux membres de données :
 
   - Module,
@@ -49,9 +161,9 @@ S'assurer que les constructeurs et toutes les méthodes de modification
 préservent la synchronisation entre les quatre valeurs stockées.
 
 
-* Classe =Fraction=
+* Classe =fraction=
 
-Sur le même modèle, écrire une classe =Fraction=, possédant :
+Sur le même modèle, écrire une classe =fraction=, possédant :
 
 - Deux membres entiers :
 
@@ -74,7 +186,7 @@ Sur le même modèle, écrire une classe =Fraction=, possédant :
 - =approx= : qui retourne la valeur approchée de la fraction par un =double=.
 
 
-* Classe =FractionComplexe= :noexport:
+* Classe =FractionComplexe=                                          :noexport:
 
 Utiliser les deux classes précédentes pour afficher les fractions de complexes
 sous la forme
@@ -82,3 +194,9 @@ sous la forme
 \[
 \frac{a_1 + i \times b_1}{a_2 + i \times b_2}
 \]
+
+* Footnotes
+
+[fn:b7fc23c6] ces fonctions retournant des objets de type =complexe= ont donc
+besoin de connaître la déclaration de la classe =complexe=. On placera donc leurs
+déclarations après la déclaration de la classe =complexe=.
