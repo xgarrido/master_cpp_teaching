@@ -239,6 +239,53 @@ ne sont donc pas préfixées du nom de la classe comme le sont les méthodes de 
 classe =complexe=, utilisent le même mécanisme en créant chacunes de nouvel objet
 de type =complexe= à l'aide du constructeur surdéfini.
 
+Afin de s'assurer du bon fonctionnement de la classe indépendamment de son
+utilisation future, il est vivement conseillé d'écrire un programme test : cette
+pratique que l'on appelle /test unitaire/ est relativement courante en
+programmation bien qu'elle soit encore considérée comme une tâche
+secondaire. Ci-dessous, un programme testant les différentes fonctions de la
+classe =complexe= :
+
+#+BEGIN_SRC C++ -n
+  #include "complexe.h"
+
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+    // Création d'un objet de type complexe via le constructeur par défaut
+    complexe z1;
+    z1.set_real_imag(1.0, 2.0);
+    z1.affiche();
+    z1.set_mod_arg(1.0, 3.1415);
+    z1.affiche();
+
+    // Création d'un second objet de type complexe en utilisant le constructeur surdéfini
+    complexe z2(1.5, 3.0);
+    z2.affiche();
+    cout << "Partie réelle     = " << z2.get_real() << endl;
+    cout << "Partie imaginaire = " << z2.get_imag() << endl;
+
+    // z3 = conjugué de z2
+    complexe z3 = z2.conjugue();
+
+    // z4 = z1 + z2
+    complexe z4 = addition(z1, z2);
+    z4.affiche();
+
+    // z5 = z1 - z2
+    complexe z5 = soustraction(z1, z2);
+    z5.affiche();
+
+    // z6 = z2*z3
+    complexe z6 = multiplication(z2, z3);
+
+    // z7 = z2/z2
+    complexe z7 = division(z2, z2);
+  }
+#+END_SRC
+
 * Évolution de la classe =complexe=
 
 Faire évoluer la classe =complexe=, *sans changer son interface publique*, en y
