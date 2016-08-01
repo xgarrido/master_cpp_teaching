@@ -139,6 +139,7 @@ de la classe =complexe= [fn:b7fc23c6]
   // Fonction réalisant la division de deux nombres complexes z1 et z2 et
   // retournant le résultat de cette opération
   complexe division(const complexe & z1_, const complexe & z2_);
+  #endif
 #+END_SRC
 
 On notera que ces fonctions utilisent des paramètres de type référence
@@ -230,14 +231,14 @@ La définition des différentes méthodes se réalise dans un fichier source
 #+END_SRC
 
 Indépendamment du fait que dans cette implémentation l'argument complexe est
-exprimé en radian, le point important dans cet exemple est la définition de la
-méthode =conjugue= : cette dernière tire parti de la surcharge du constructeur
-définie ligne 10 puisqu'elle retourne un nouvel objet de type =complexe= utilisant
-les membres de l'objet sur laquelle elle porte en changeant bien entendu, le
-signe de la partie imaginaire. Dans le même esprit, les fonctions externes qui
-ne sont donc pas préfixées du nom de la classe comme le sont les méthodes de la
-classe =complexe=, utilisent le même mécanisme en créant chacunes de nouvel objet
-de type =complexe= à l'aide du constructeur surdéfini.
+exprimé en radian, le point important est la définition de la méthode =conjugue= :
+cette dernière tire parti de la surcharge du constructeur définie ligne 10
+puisqu'elle retourne un nouvel objet de type =complexe= utilisant les membres de
+l'objet sur laquelle elle porte en changeant, bien entendu, le signe de la partie
+imaginaire. Dans le même esprit, les fonctions externes qui ne sont donc pas
+préfixées du nom de la classe comme le sont les méthodes de la classe =complexe=,
+utilisent le même mécanisme en créant chacune de nouvel objet de type =complexe=
+à l'aide du constructeur surdéfini.
 
 Afin de s'assurer du bon fonctionnement de la classe indépendamment de son
 utilisation future, il est vivement conseillé d'écrire un programme test : cette
@@ -301,6 +302,96 @@ la volée.
 S'assurer que les constructeurs et toutes les méthodes de modification
 préservent la synchronisation entre les quatre valeurs stockées.
 
+* Correction                                                     :correction:
+
+Comme indiqué dans l'énoncé, l'interface publique /i.e./ l'ensemble des méthodes
+relevant du domaine public restent inchangées. En interne, la classe =complexe= se
+munit néanmoins de deux nouveaux membres que sont le module et l'argument d'un
+nombre complexe. L'objectif de cet exercice est de montrer tout l'intérêt pour
+le développeur de la classe =complexe= de bénéficier d'une interface publique
+riche qui lui permet par la suite de modifier les mécanismes internes sans que
+cela n'est d'impact sur le code des éventuels utilisateurs de la classe : ces
+derniers utiliseront toujours les méthodes introduites dans l'exercice précédent
+sans même avoir eu connaissance des modifications profondes réalisées par le
+développeur.
+
+La déclaration de la classe =complexe= devient
+#+BEGIN_SRC C++
+  #ifndef _complexe_h_
+  #define _complexe_h_ 1
+  class complexe {
+  public:
+    ...
+  private:
+    double m_real;     // Partie réelle
+    double m_imag;     // Partie imaginaire
+    double m_module;   // Module du nombre complexe
+    double m_argument; // Argument du nombre complexe
+  };
+  #endif
+#+END_SRC
+et les définitions des fonctions membres et constructeurs s'écrivent
+#+BEGIN_SRC C++
+  #include "complexe.h"
+
+  #include <iostream>
+  using namespace std;
+
+  complexe::complexe() : m_real(0.0), m_imag(0.0), m_module(0.0), m_argument(0.0)
+  {
+  }
+
+  complexe::complexe(const double real_, const double imag_) : m_real(real_), m_imag(imag_)
+  {
+    m_module = sqrt(real_*real_+imag_*imag_);
+    m_argument = (real_ == 0.0 ? 0.0 : atan(imag_/real_));
+  }
+
+  void complexe::affiche() const
+  {
+    cout << m_real << "+ i*" << m_imag << endl;
+    cout << m_module << "*exp(i*" << m_argument << ")" << endl;
+  }
+
+  double complexe::get_real() const
+  {
+    return m_real;
+  }
+
+  double complexe::get_imag() const
+  {
+    return m_imag;
+  }
+
+  double complexe::get_module() const
+  {
+    return m_module;
+  }
+
+  double complexe::get_argument() const
+  {
+    return m_argument;
+  }
+
+  void complexe::set_real_imag(double real_, double imag_)
+  {
+    m_real = real_;
+    m_imag = imag_;
+    m_module = sqrt(real_*real_+imag_*imag_);
+    m_argument = (real_ == 0.0 ? 0.0 : atan(imag_/real_));
+  }
+
+  void complexe::set_mod_arg(double mod_, double arg_)
+  {
+    m_module = mod_;
+    m_argument = arg_;
+    m_real = mod_*cos(arg_);
+    m_imag = mod_*sin(arg_);
+  }
+#+END_SRC
+
+Du point de vue de l'utilisation, rien ne change, l'interface publique
+d'utilisation étant restée inchangée.
 
 * Classe =fraction=
 
