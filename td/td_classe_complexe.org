@@ -557,6 +557,14 @@ Dans le même esprit que le précédent exercice, nous crééons successivement 
   }
 #+END_SRC
 
+Indépendamment des aspects déjà mis en lumière dans le précédent exercice tels
+que la surcharge du constructeur ou la possibilité de retourner un objet du type
+de la classe, ici la méthode =inverse=, on notera juste l'appel à la fonction =pgcd=
+qui bien que demeurant externe à la classe, n'est toutefois utilisable que lors
+de la définition de la classe car non déclarée dans le fichier =fraction.h=. Cette
+dernière est, dans le cas particulier de cet exercice, une fonction récursive
+c'est-à-dire s'appelant elle-même.
+
 * Classe =FractionComplexe=                                          :noexport:
 
 Utiliser les deux classes précédentes pour afficher les fractions de complexes
