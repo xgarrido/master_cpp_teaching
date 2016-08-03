@@ -331,7 +331,7 @@ La déclaration de la classe =complexe= devient
   #endif
 #+END_SRC
 et les définitions des fonctions membres et constructeurs s'écrivent
-#+BEGIN_SRC C++
+#+BEGIN_SRC C++ -n
   #include "complexe.h"
 
   #include <iostream>
@@ -390,8 +390,8 @@ et les définitions des fonctions membres et constructeurs s'écrivent
   }
 #+END_SRC
 
-Du point de vue de l'utilisation, rien ne change, l'interface publique
-d'utilisation étant restée inchangée.
+Du point de vue des opérations arithmétiques comme de l'utilisation, rien ne
+change, l'interface publique d'utilisation étant restée inchangée.
 
 * Classe =fraction=
 
@@ -404,8 +404,8 @@ Sur le même modèle, écrire une classe =fraction=, possédant :
 
 - Un ou plusieurs constructeurs;
 
-- Une méthode =affiche= pour les tests (qui affiche la fraction sous la forme
-  Numérateur/Dénominateur /e.g./ 4/3);
+- Une méthode =affiche= qui présentera la fraction sous la forme
+  Numérateur/Dénominateur /e.g./ 4/3;
 
 - Des méthodes d'accès;
 
@@ -417,6 +417,145 @@ Sur le même modèle, écrire une classe =fraction=, possédant :
 
 - =approx= : qui retourne la valeur approchée de la fraction par un =double=.
 
+* Correction                                                     :correction:
+
+Dans le même esprit que le précédent exercice, nous crééons successivement :
+- un fichier =fraction.h= de *déclaration* de la classe =fraction=,
+- un fichier =fraction.cc= de *définition* de la classe =fraction=,
+- un fichier =test_fraction.cc= permettant le *test des différentes méthodes* de la
+  classe =fraction=.
+
+*** Déclaration de la classe =fraction=
+
+#+BEGIN_SRC C++ -n
+  #ifndef _fraction_h_
+  #define _fraction_h_ 1
+  class fraction {
+  public:
+    // Constructeur par défaut
+    fraction();
+
+    // Constructeur permettant l'initialisation d'un objet de type fraction
+    fraction(const int num_, const int den_);
+
+    // Affichage d'une fraction
+    void affiche() const;
+
+    // Retourne le numérateur
+    int get_numerateur() const;
+
+    // Retourne le dénominateur
+    int get_denominateur() const;
+
+    // Assignation des valeurs du numérateur et dénominateur
+    void set_numerateur_denominateur(const int num_, const int den_);
+
+    // Retourne la fraction inverse
+    fraction inverse() const;
+
+    // Méthode réduisant la fraction via le PGCD
+    void reduire();
+
+    // Méthode retournant le résultat en nombre flottant de la fraction
+    double approx() const;
+
+  private:
+    int m_numerateur;   // Numérateur de la fraction
+    int m_denominateur; // Dénominateur de la fraction
+  };
+  #endif
+#+END_SRC
+
+*** Définition de la classe =fraction=
+
+#+BEGIN_SRC C++ -n
+  #include "fraction.h"
+
+  #include <iostream>
+  using namespace std;
+
+  unsigned int pgcd(unsigned int a, unsigned int b) {
+    return b ? pgcd(b, a%b) : a;
+  }
+
+  fraction::fraction() : m_numerateur(0.0), m_denominateur(0.0)
+  {
+  }
+
+  fraction::fraction(const int num_, const int den_) : m_numerateur(num_), m_denominateur(den_)
+  {
+  }
+
+  void fraction::affiche() const
+  {
+    cout << m_numerateur << "/" << m_denominateur << endl;
+  }
+
+  int fraction::get_numerateur() const
+  {
+    return m_numerateur;
+  }
+
+  int fraction::get_denominateur() const
+  {
+    return m_denominateur;
+  }
+
+  void fraction::set_numerateur_denominateur(const int num_, const int den_)
+  {
+    m_numerateur = num_;
+    m_denominateur = den_;
+  }
+
+  fraction fraction::inverse() const
+  {
+    return fraction(m_denominateur, m_numerateur);
+  }
+
+  void fraction::reduire()
+  {
+    const unsigned int the_pgcd = pgcd(m_numerateur, m_denominateur);
+    m_numerateur /= the_pgcd;
+    m_denominateur /= the_pgcd;
+  }
+
+  double fraction::approx() const
+  {
+    return m_numerateur/(double)m_denominateur;
+  }
+#+END_SRC
+
+*** Programme test de la classe =fraction=
+
+#+BEGIN_SRC C++ -n
+  #include "fraction.h"
+
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+    // Création d'un objet de type fraction via le constructeur par défaut
+    fraction frac1;
+    frac1.set_numerateur_denominateur(2, 3);
+    frac1.affiche();
+
+    // Création d'un objet de type fraction via le constructeur surdéfini
+    fraction frac2(4, 3);
+    frac2.affiche();
+
+    // Inverse de frac2
+    fraction ifrac2 = frac2.inverse();
+    ifrac2.affiche();
+
+    // Réduction d'une fraction
+    fraction frac3(21, 49);
+    frac3.affiche();
+    frac3.reduire();
+    frac3.affiche();
+    cout << "Résultat de frac3 = " << frac3.approx() << endl;
+  }
+#+END_SRC
 
 * Classe =FractionComplexe=                                          :noexport:
 
