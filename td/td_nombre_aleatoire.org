@@ -16,9 +16,9 @@
 
 * Jeux de hasard et loi de probabilité
 
-** Déclaration de la classe =Hasard=
+** Déclaration de la classe =hasard=
 
-- Écrire une classe =Hasard= possédant les membres suivants :
+- Écrire une classe =hasard= possédant les membres suivants :
 
   - deux entiers constants non signés, l'un définissant un nombre maximal de
     valeurs à tirer aléatoirement, l'autre la valeur maximale pouvant être
@@ -37,7 +37,7 @@
 - Surdéfinir une méthode permettant d'afficher soit l'ensemble des tirages
   aléatoires soit le \(i\)^ème tirage.
 
-- Définir une méthode de comparaison de deux instances de =Hasard= retournant un
+- Définir une méthode de comparaison de deux instances de =hasard= retournant un
   booléen dont la valeur sera soit =true= soit =false= selon que les deux
   instances sont identiques ou pas.
 
@@ -45,7 +45,96 @@ Exécuter plusieurs fois le programme en affichant l'ensemble des valeurs
 générées. Proposer une solution visant à générer, pour chaque exécution, une
 nouvelle série de valeurs aléatoires.
 
-** Décompte du nombre d'instanciation de la classe =Hasard=
+** Correction                                                   :correction:
+Ci-dessous la déclaration de la classe =hasard= à placer dans le fichier =hasard.h=
+
+#+BEGIN_SRC C++ -n
+  #ifndef _hasard_h_
+  #define _hasard_h_ 1
+
+  class hasard {
+  public:
+    // Constructeur par défaut
+    hasard();
+
+    // Constructeur surchargé
+    hasard(const unsigned int nbr_max_, const unsigned int val_max_);
+
+    // Destructeur
+    ~hasard();
+
+    // Méthode d'affichage
+    void affiche() const;
+
+    // Méthode affichant uniquement le ième tirage
+    void affiche(const unsigned int i_) const;
+
+    // Comparaison de l'objet courant avec un second objet de type hasard
+    bool compare(const hasard & h_);
+
+  private:
+    const unsigned int m_nbr_max;   // Nombre maximal de valeurs à tirer
+    const unsigned int m_val_max;   // Valeur maximale à tirer
+    unsigned int * m_random_values; // Tableur des valeurs tirées
+  };
+  #endif
+#+END_SRC
+
+Le fichier =fraction.cc= de définition de la classe =hasard= peut se présenter sous
+la forme suivante :
+
+#+BEGIN_SRC C++ -n
+  #include "hasard.h"
+
+  #include <iostream>
+  using namespace std;
+
+  hasard::hasard() : m_nbr_max(0), m_val_max(0), m_random_values(0)
+  {
+  }
+
+  hasard::hasard(const unsigned int nbr_max_, const unsigned int val_max_) :
+    m_nbr_max(nbr_max_), m_val_max(val_max_),
+    m_random_values(new unsigned int[nbr_max_])
+  {
+  }
+
+  hasard::~hasard()
+  {
+    // Only delete if the pointer is allocated
+    if (m_random_values) {
+      delete[] m_random_values;
+    }
+  }
+
+  void hasard::affiche() const
+  {
+    for (unsigned int i = 0; i < m_nbr_max; i++) {
+      cout << "valeur[" << i << "] = " << m_random_values[i] << endl;
+    }
+  }
+
+  void hasard::affiche(const unsigned int i_) const
+  {
+    if (i_ >= m_nbr_max) {
+      cerr << "ERREUR: Indice trop grand : " << i_ << ">" << m_nbr_max << endl;
+      return;
+    }
+    cout << "valeur[" << i_ << "] = " << m_random_values[i_] << endl;
+  }
+
+  bool hasard::compare(const hasard & h_) const
+  {
+    if (m_nbr_max != h_.m_nbr_max) return false;
+
+    for (unsigned int i = 0; i < m_nbr_max; i++) {
+      if (m_random_values[i] != h_.m_random_values[i]) return false;
+    }
+    return true;
+  }
+#+END_SRC
+
+** Décompte du nombre d'instanciation de la classe =hasard=
 
 En utilisant un membre statique (/cf. [[Addendum 2][Addendum 2]]/), déterminer le nombre
 d'objets créés au cours de l'exécution du programme.
