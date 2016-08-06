@@ -70,7 +70,7 @@ Ci-dessous la déclaration de la classe =hasard= à placer dans le fichier =hasa
     void affiche(const unsigned int i_) const;
 
     // Comparaison de l'objet courant avec un second objet de type hasard
-    bool compare(const hasard & h_);
+    bool compare(const hasard & h_) const;
 
   private:
     const unsigned int m_nbr_max;   // Nombre maximal de valeurs à tirer
@@ -87,6 +87,7 @@ la forme suivante :
   #include "hasard.h"
 
   #include <iostream>
+  #include <cstdlib>
   using namespace std;
 
   hasard::hasard() : m_nbr_max(0), m_val_max(0), m_random_values(0)
@@ -97,6 +98,10 @@ la forme suivante :
     m_nbr_max(nbr_max_), m_val_max(val_max_),
     m_random_values(new unsigned int[nbr_max_])
   {
+    // Remplissage du tableau
+    for (unsigned int i = 0; i < m_nbr_max; i++) {
+      m_random_values[i] = rand() % m_val_max;
+    }
   }
 
   hasard::~hasard()
@@ -134,6 +139,173 @@ la forme suivante :
   }
 #+END_SRC
 
+Plusieurs remarques concernant cette nouvelle classe et son implémentation :
+
+1) Le constructeur par défaut, ligne 7, initialise les valeurs des membres
+   entiers non signés à 0 tandis que le pointeur =m_random_values= est non alloué
+   et pointe ainsi vers la valeur =0=. Il est donc possible de savoir si un
+   pointeur a été ou pas alloué en fonction de la valeur vers laquelle ce
+   dernier pointe c'est-à-dire l'adresse en mémoire. C'est cette propriété qui
+   est utilisée dans le destructeur de la classe (ligne 21) puisque l'opérateur
+   =delete= n'est invoqué que si le pointeur a été alloué et est donc différent de
+   zéro (ligne 24). Cette condition d'allocation en mémoire d'un pointeur est
+   importante car en cas de destruction d'un pointeur non alloué, le programme
+   génèrera une erreur en toute fin d'exécution du programme.
+
+2) Le constructeur surdéfini à la ligne 11 initialise les deux membres constants
+   que sont =m_nbr_max= et =m_val_max= /via/ les paramètres fournis en argument de ce
+   constructeur, respectivement =nbr_max_= et =val_max_= et procède à l'allocation
+   dynamique de mémoire du tableau =m_random_values= /via/ l'opérateur =new=
+   spécifique au \Cpp. La fonction =rand()= de la librairie =cstdlib= est utilisée
+   afin de générer des nombres aléatoires entre 0 et =RAND_MAX= et l'opérateur
+   modulo =%= permet alors de générer des nombres aléatoires entre 0 et =m_val_max=.
+
+3) La méthode =affiche(const unsigned int i_)= vérifie en premier lieu que
+   l'indice requis n'est pas supérieur au nombre maximum d'entrée alloué. Le
+   développeur se prémunit ainsi de tout accès mémoire en dehors des limites
+   définies par l'allocation dynamique de mémoire.
+
+4) La méthode =compare= étant une fonction membre de la classe =hasard=, il lui est
+   donc possible de manipuler les membres privées de l'objet =h_= de type
+   =hasard=. Pour rappel, cette opération est inenvisageable en dehors de la
+   classe car les membres relèvent du domaine privé et ne sont donc accessibles
+   qu'aux méthodes de la classe. Au niveau de l'implémentation de cette fonction
+   membre, il est préférable, en terme d'optimisation, de chercher les cas de
+   figure où l'instance courante et l'objet =h_= sont différents : par exemple, si
+   le nombre maximum de valeurs est différents, la méthode retourne
+   immédiatement la valeur =false= sans chercher à tester chacune des valeurs
+   générées. De même, dès qu'une des valeurs générées aléatoirement diffère, la
+   méthode interrompt le processus de comparaison en retournant la valeur =false=
+   (ligne 50).
+
+Un point extrêmement important concernant la méthode =compare= est le fait que
+cette dernière utilise comme argument une référence constante de type =hasard=. Le
+fait que la référence soit constante assure que l'objet passé en argument ne
+sera aucunement modifié; en particulier, les éventuelles méthodes qui seront
+appellées au travers de =h_= devront nécessairement être constantes vis-à-vis des
+membres de la classe sinon le programme ne pourra pas assurer la "constance" de
+l'objet =h_= et le compilateur génèrera une erreur à la compilation.
+
+L'utilisation d'une référence assure par ailleurs que l'objet qui sera passé en
+argument de la méthode =compare= et auquel la méthode se réferera /via/ l'objet =h_=
+seront les mêmes puisque étant issu du même espace mémoire. Contrairement au
+passage par valeur /i.e./ une hypothétique méthode =compare(hasard h_)=, le passage
+par référence permet de manipuler le même objet dans la méthode =compare= que
+celui fournit en argument au moment de l'appel de cette méthode. Dans le cas du
+passage par valeur, l'instance =h_= est une *copie locale et ponctuelle* de l'objet
+fournit en argument. C'est donc un objet à part entière qui doit disparaître dès
+lors que la fonction =compare= se termine. Ainsi, lors d'un passage par valeur,
+l'objet =h_= est détruit /via/ le destructeur mais, sachant que la copie du pointeur
+est de la responsabilité de l'auteur de la classe (le compilateur ne propose pas
+d'opération par défaut pour la (re)copie de membres de type pointeur si ce n'est
+la copie du pointeur et non de l'ensemble des valeurs pointées), l'espace
+mémoire est détruit à la fin de la méthode et lorsque le programme principal
+(celui contenant le bloc =main=) touche à sa fin, l'appel au destructeur génère
+une erreur de segmentation dû au fait que l'espace mémoire n'existe plus. Il est
+donc pleinement justifié d'utiliser ici un passage par référence, le passage par
+valeur ne se faisant que dans de très rare cas.
+
+La classe =hasard= nouvellement créée pourra être testée grâce au programme =test_hasard.cc=
+suivant
+#+BEGIN_SRC C++ -n
+  #include "hasard.h"
+
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+    // Création d'un objet de type hasard via le constructeur par défaut
+    hasard h1;
+
+    // Création d'un objet de type hasard via le constructeur surdéfini
+    hasard h2(10, 5);
+    h2.affiche();
+
+    if (! h1.compare(h2)) {
+      cout << "Les deux instances h1 et h2 sont différentes" << endl;
+    }
+    if (h2.compare(h2)) {
+      cout << "Les deux mêmes instances h2 sont (bien entendu) équivalentes" << endl;
+    }
+  }
+#+END_SRC
+
+En exécutant le code ci-dessus à plusieurs reprises, les valeurs retournées
+par l'instance =h2= de =hasard= seront systématiquement les mêmes quand bien ces
+dernières eurent été générées aléatoirement. Comme indiqué dans l'[[Addendum 1][Addendum 1]],
+cela tient au caractère déterministe d'un ordinateur qui ne laisse donc pas de
+place à l'aléatoire. Afin de générer des séries de valeurs différentes entre
+plusieurs exécutions, il convient alors d'utiliser la fonction =srand(int)= qui permet
+d'initialiser la graine du générateur aléatoire. L'argument de cette fonction
+doit être une valeur entière qui doit nécessairement être différente à chaque
+exécution du code. On prend ainsi pour habitude d'utiliser le temps, en seconde,
+auquel s'exécute le code et on utilise de fait la libraire =time= du C/\Cpp. On
+ajoutera ainsi au précédent code, les quelques lignes suivantes :
+#+BEGIN_SRC C++
+  #include "hasard.h"
+
+  #include <iostream>
+  #include <time>
+  #include <cstdlib>
+  using namespace std;
+
+  int maint()
+  {
+    // Initialisation de la graine du générateur aléatoire rand
+    srand(time(0));
+    ...
+  }
+#+END_SRC
+
+Une fois le cours sur la surcharge d'opérateur vu, la méthode =compare= pourra
+naturellement être remplacée par la surcharge de l'opérateur unaire ====, *le
+corps de la méthode restant inchangé*. Ainsi, le prototype de la méthode =compare=
+devient
+#+BEGIN_SRC C++
+  #ifndef _hasard_h_
+  #define _hasard_h_ 1
+  class hasard {
+  public:
+    bool operator==(const hasard & h_) const;
+  };
+  #endif
+#+END_SRC
+et dans le fichier source
+#+BEGIN_SRC C++
+  bool hasard::operator==(const hasard & h_) const
+  {
+    ...
+  }
+#+END_SRC
+On pourra ainsi remplacer les lignes 15 et 18 du programme test par les
+expressions
+#+BEGIN_SRC C++
+  if (! (h1 == h2)) {
+    cout << "Les deux instances h1 et h2 sont différentes" << endl;
+   }
+  if (h2 == h2) {
+    cout << "Les deux mêmes instances h2 sont (bien entendu) équivalentes" << endl;
+   }
+#+END_SRC
+
+La surcharge d'opérateur n'apporte rien par rapport à la méthode initiale de
+comparaison si ce n'est une commodité d'écriture et une forme
+d'internationalisation, l'opérateur ==== étant plus universel qu'une méthode au
+nom pas toujours explicite. En toute rigueur l'opération ~!(h1 == h2)~ serait
+avantageusement remplacée par l'opérateur =!== ce dernier devant être également
+surchargé
+#+BEGIN_SRC C++
+  bool operator!=(const hasard & h_) const;
+#+END_SRC
+le corps de cette méthode s'écrivant
+#+BEGIN_SRC C++
+  bool hasard::operator!=(const hasard & h_) const
+  {
+    return ! (*this == h_);
+  }
+#+END_SRC
+
 ** Décompte du nombre d'instanciation de la classe =hasard=
 
 En utilisant un membre statique (/cf. [[Addendum 2][Addendum 2]]/), déterminer le nombre
@@ -141,6 +313,90 @@ d'objets créés au cours de l'exécution du programme.
 
 De la même manière, utiliser un membre statique afin d'estimer le nombre total
 d'occurences de la valeur 0.
+
+** Correction                                                   :correction:
+
+Un membre statique est un membre d'une classe commun à plusieurs instances de
+cette classe : les 3 membres privées de la classe =hasard= que sont =m_nbr_max=,
+=m_val_max= et =m_random_values= sont propres et différents pour chaque objet de
+type =hasard= tandis qu'un membre statique sera partagé par plusieurs
+instances. La déclaration de la classe =hasard= devient
+#+BEGIN_SRC C++
+  #ifndef _hasard_h_
+  #define _hasard_h_ 1
+
+  class hasard {
+  public:
+    // Membre statique dénombrant le nombre total d'objet crée
+    static unsigned int nbr_total_objet;
+
+    // Membre statique dénombrant le nombre total de zéro tiré
+    static unsigned int nbr_total_zero;
+
+    ...
+  };
+  #endif
+#+END_SRC
+On initialisera les deux nouveaux membres dans le fichier =hasard.cc= et on
+implémentera leur décompte au sein des méthodes appropriées :
+#+BEGIN_SRC C++
+  #include "hasard.h"
+
+  #include <iostream>
+  #include <cstdlib>
+  using namespace std;
+
+  // Initialisation des membres statiques de la classe hasard
+  unsigned int hasard::nbr_total_objet = 0;
+  unsigned int hasard::nbr_total_zero  = 0;
+
+  hasard::hasard() : m_nbr_max(0), m_val_max(0), m_random_values(0)
+  {
+    nbr_total_objet++;
+  }
+
+  hasard::hasard(const unsigned int nbr_max_, const unsigned int val_max_) :
+    m_nbr_max(nbr_max_), m_val_max(val_max_),
+    m_random_values(new unsigned int[nbr_max_])
+  {
+    nbr_total_objet++;
+    // Remplissage du tableau
+    for (unsigned int i = 0; i < m_nbr_max; i++) {
+      m_random_values[i] = rand() % m_val_max;
+      if (m_random_values[i] == 0) nbr_total_zero++;
+    }
+  }
+
+  ...
+#+END_SRC
+
+On pourra accéder à ces membres au sein du programme test
+#+BEGIN_SRC C++
+  #include "hasard.h"
+
+  #include <iostream>
+  #include <time>
+  #include <cstdlib>
+  using namespace std;
+
+  int maint()
+  {
+    // Initialisation de la graine du générateur aléatoire rand
+    srand(time(0));
+
+    // Création d'un objet de type hasard via le constructeur par défaut
+    hasard h1;
+
+    cout << "Nombre d'instance de type hasard crée = " << hasard::nbr_total_objet << endl;
+
+    // Création d'un objet de type hasard via le constructeur surdéfini
+    hasard h2(10, 5);
+    h2.affiche();
+
+    cout << "Nombre d'instance de type hasard crée = " << hasard::nbr_total_objet << endl;
+    cout << "Nombre total de zéro tiré = " << hasard::nbr_total_zero << endl;
+  }
+#+END_SRC
 
 *** Addendum 1
 
