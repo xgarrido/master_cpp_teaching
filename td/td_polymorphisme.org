@@ -4,11 +4,11 @@
 #+OPTIONS: toc:nil
 #+LATEX_HEADER: \setcounter{chapter}{6}
 
-* Classe =Employe=
+* Classe =employe=
 
-Créer une classe abstraite =Employe= contenant :
+Créer une classe abstraite =employe= contenant :
 
-- un nom de type =string= [fn:1],
+- un nom de type =string= [fn:c65134d1],
 - un prénom de type =string=,
 - un entier correspondant à l'âge.
 
@@ -16,37 +16,452 @@ On définira également les méthodes suivantes :
 
 - un constructeur,
 - un destructeur (virtuel),
-- une méthode purement virtuelle =CalculerSalaire=,
-- une méthode virtuelle =GetNom= qui sera redéfinie dans les classes filles.
+- une méthode purement virtuelle =calculer_salaire=,
+- une méthode virtuelle =get_identite= qui sera redéfinie dans les classes filles.
 
-Dans le programme principal, créer une instance d'=Employe= puis générer un
-tableau de pointeur d'=Employe= appelé =Entreprise=.
+Dans le programme principal, créer une instance d'=employe= puis générer un
+tableau de pointeur d'=employe= appelé =entreprise=.
 
-[fn:1] la classe =string= fait partie de la librairie standard et facilite la
-gestion et la manipulation des chaînes de caractères. Pour pouvoir l'utiliser,
-il conviendra d'inclure le fichier d'en-tête =string=.
+** Correction                                                   :correction:
 
-* Branche =Commercial=
+Dans tout l'exercice, on prendra la peine de bien séparer déclaration et
+définition des classes à créer. Ainsi, dans un fichier =employe.h= on déclarera la
+classe =employe= de la façon suivante :
 
-Créer une classe =Commercial= qui hérite d'=Employe=. Cette classe a un membre
-de plus qu'=Employe= : un entier =ChiffreAffaire=. Dans la mesure où elle
-n'explicite pas la méthode =CalculerSalaire=, la classe =Commercial= est
+#+BEGIN_SRC C++ -n
+  #ifndef _employe_h_
+  #define _employe_h_ 1
+
+  #include <string>
+
+  class employe {
+  public:
+    // Constructeur par défaut
+    employe();
+
+    // Constructeur surdéfini
+    employe(const std::string & nom_, const std::string & prenom, int age_);
+
+    // Destructeur (virtuel)
+    virtual ~employe();
+
+    // Méthode purement virtuelle de calcul du salaire
+    virtual double calculer_salaire() const = 0;
+
+    // Méthode virtuelle retournant l'identité de l'employé
+    virtual void get_identite() const;
+
+  protected:
+    std::string m_nom;    // Nom de l'employe
+    std::string m_prenom; // Prénom de l'employe
+    int m_age;            // Age de l'employe
+  };
+  #endif
+#+END_SRC
+
+La classe =employe= possède donc 3 membres relatifs à l'identité de l'employé
+mais, chose nouvelle, ces données membres relèvent du *domaine protégé* et non
+privé. S'il demeure impossible de l'extérieur de la classe de modifier ces
+membres, il est à présent envisageable pour une *classe fille c'est-à-dire
+dérivant de la classe =employe=*, d'utiliser ces membres comme membre à part
+entière de la classe fille.
+
+La classe =employe= possède en outre deux méthodes virtuelles dont l'une, la
+méthode =calculer_salaire=, est dite *virtuelle pure* /i.e./ égale à 0. Cette notion
+de méthode virtuelle pure signifie que la méthode ne peut en l'état être
+définie : cela se traduit dans le fichier de définition de la classe (/cf./
+ci-dessous) par l'absence de définition de cette méthode. La présence d'une
+méthode virtuelle pure au sein d'une classe implique que la classe soit
+abstraite car l'ensemble de ses fonctionalités ne peuvent être définies. La
+classe abstraite =employe= définit ainsi un cadre d'utilisation soit un ensemble
+de fonctionnalités que chaque classe fille devra définir selon ses besoins (ici
+chaque classe fille devra définir le calcul du salaire des futurs employés en
+fonction de leurs spécificités propres).
+
+La définition de la classe =employe= se limite ainsi aux quelques lignes
+suivantes :
+#+BEGIN_SRC C++ -n
+  #include "employe.h"
+
+  #include <iostream>
+  using namespace std;
+
+  employe::employe() : m_nom(""), m_prenom(""), m_age(0)
+  {
+  }
+
+  employe::employe(const string & nom_, const string & prenom_, int age_) :
+    m_nom(nom_), m_prenom(prenom_), m_age(age_)
+  {
+  }
+
+  employe::~employe()
+  {
+  }
+
+  void employe::get_identite() const
+  {
+    cout << "Nom    : " << m_nom << endl;
+    cout << "Prénom : " << m_prenom << endl;
+    cout << "Age    : " << m_age << endl;
+  }
+#+END_SRC
+
+Une des conséquences de la nature de la classe =employe= et du fait qu'elle soit
+une classe abstraite est l'impossibilité d'instancier d'objet de type
+=employe=. Ainsi, un éventuel programme test
+#+BEGIN_SRC C++
+  #include "employe.h"
+  int main()
+  {
+    employe my_employe;
+  }
+#+END_SRC
+ne pourra être compilé car, la classe =employe= étant abstraite, le compilateur ne
+peut associer une définition aux méthodes virtuelles pures. Il est en revanche
+possible de créer un pointeur de type =employe=
+#+BEGIN_SRC C++
+  #include "employe.h"
+  int main()
+  {
+    employe* my_employe;
+  }
+#+END_SRC
+le programme ci-dessus compilant sans erreur. Comme nous le verrons par la
+suite, l'utilisation d'un pointeur n'implique pas de liaison entre la
+déclaration de la méthode virtuelle pure =calculer_salaire= et sa
+définition. Cette liaison n'interviendra qu'à l'exécution du programme : cette
+technique est ainsi appelée *liaison dynamique* par opposition à la liaison
+statique établie au cours de la compilation du programme.
+
+* Branche =commercial=
+
+Créer une classe =commercial= qui hérite d'=employe=. Cette classe a un membre
+de plus qu'=employe= : un entier =m_chiffre_affaire=. Dans la mesure où elle
+n'explicite pas la méthode =calculer_salaire=, la classe =commercial= est
 abstraite.
 
-Créer une classe =Vendeur= dérivant de =commercial= avec :
+Créer une classe =vendeur= dérivant de =commercial= avec :
 
 - un constructeur,
 - un destructeur,
-- définir le salaire /via/ la méthode virtuelle =CalculerSalaire=. Par
-  exemple, une base fixe à 1000 euros + 20% du =ChiffreAffaire=,
-- redéfinir =GetNom= en mettant en en-tête "Le vendeur :" puis le nom.
+- définir le salaire /via/ la méthode virtuelle =calculer_salaire=. Par
+  exemple, une base fixe à 1000 euros + 20% du =m_chiffre_affaire=,
+- redéfinir =get_identite= en mettant en en-tête "Le vendeur :" puis l'identité.
 
-Créer une classe =Representant= héritant de =Commercial= avec :
+Créer une classe =representant= héritant de =commercial= avec :
 
 - un constructeur,
 - un destructeur,
-- définir le salaire \emph{via} la méthode virtuelle =CalculerSalaire=,
-- redéfinir =GetNom= en mettant en en-tête "Le représentant :" puis le nom.
+- définir le salaire /via/ la méthode virtuelle =calculer_salaire=,
+- redéfinir =get_identite= en mettant en en-tête "Le représentant :" puis l'identité.
 
-Dans le programme principal, remplir le tableau de pointeur d'=Employe= par
-l'adresse d'un =Vendeur= et d'un =Representant=.
+Dans le programme principal, remplir le tableau de pointeur d'=employe= par
+l'adresse d'un =vendeur= et d'un =representant=.
+
+** Correction                                                   :correction:
+Ci-dessous, les déclarations et définitions des différentes classes.
+*** Déclaration de la classe =commercial=
+#+BEGIN_SRC C++ -n
+  #ifndef _commercial_h_
+  #define _commercial_h_ 1
+
+  #include "employe.h"
+
+  class commercial : public employe {
+  public:
+    // Constructeur par défaut
+    commercial();
+
+    // Constructeur surdéfini
+    commercial(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_);
+
+    // Destructeur
+    virtual ~commercial();
+
+  protected:
+    int m_chiffre_affaire; // Chiffre d'affaire du commercial
+  };
+  #endif
+#+END_SRC
+
+*** Définition de la classe =commercial=
+#+BEGIN_SRC C++ -n
+  #include "commercial.h"
+
+  commercial::commercial() : employe()
+  {
+  }
+
+  commercial::commercial(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_) :
+    employe(nom_, prenom_, age_), m_chiffre_affaire(chiffre_)
+  {
+  }
+
+  commercial::~commercial()
+  {
+  }
+#+END_SRC
+
+*** Déclaration de la classe =vendeur=
+#+BEGIN_SRC C++ -n
+  #ifndef _vendeur_h_
+  #define _vendeur_h_ 1
+
+  #include "commercial.h"
+
+  class vendeur : public commercial {
+  public:
+    // Constructeur par défaut
+    vendeur();
+
+    // Constructeur surdéfini
+    vendeur(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_);
+
+    // Destructeur
+    virtual ~vendeur();
+
+    // Calcul du salaire
+    virtual double calculer_salaire() const;
+
+    // Retourne l'identité du vendeur
+    virtual void get_identite() const;
+  };
+  #endif
+#+END_SRC
+
+*** Définition de la classe =vendeur=
+#+BEGIN_SRC C++ -n
+  #include "vendeur.h"
+
+  #include <iostream>
+  using namespace std;
+
+  vendeur::vendeur() : commercial()
+  {
+  }
+
+  vendeur::vendeur(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_) :
+    commercial(nom_, prenom_, age_, chiffre_)
+  {
+  }
+
+  vendeur::~vendeur()
+  {
+  }
+
+  double vendeur::calculer_salaire() const
+  {
+    return 1000 + 0.2*m_chiffre_affaire;
+  }
+
+  void vendeur::get_identite() const
+  {
+    cout << "Le vendeur :" << endl;
+    employe::get_identite();
+    cout << "Salaire : " << calculer_salaire() << endl;
+  }
+#+END_SRC
+
+*** Déclaration de la classe =representant=
+#+BEGIN_SRC C++ -n
+  #ifndef _representant_h_
+  #define _representant_h_ 1
+
+  #include "commercial.h"
+
+  class representant : public commercial {
+  public:
+    // Constructeur par défaut
+    representant();
+
+    // Constructeur surdéfini
+    representant(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_);
+
+    // Destructeur
+    virtual ~representant();
+
+    // Calcul du salaire
+    virtual double calculer_salaire() const;
+
+    // Retourne l'identité du representant
+    virtual void get_identite() const;
+  };
+  #endif
+#+END_SRC
+
+*** Définition de la classe =representant=
+#+BEGIN_SRC C++ -n
+  #include "representant.h"
+
+  #include <iostream>
+  using namespace std;
+
+  representant::representant() : commercial()
+  {
+  }
+
+  representant::representant(const std::string & nom_, const std::string & prenom_, int age_, int chiffre_) :
+    commercial(nom_, prenom_, age_, chiffre_)
+  {
+  }
+
+  representant::~representant()
+  {
+  }
+
+  double representant::calculer_salaire() const
+  {
+    return 1000 + 0.5*m_chiffre_affaire + m_age*100;
+  }
+
+  void representant::get_identite() const
+  {
+    cout << "Le représentant :" << endl;
+    employe::get_identite();
+    cout << "Salaire : " << calculer_salaire() << endl;
+  }
+#+END_SRC
+
+*** Remarques
+
+Les déclarations des classes ci-dessus mettent en pratique la relation
+d'héritage entre classe. Ainsi, un "vendeur" *est*, de façon plus
+générale, un "commercial" lui même étant une spécialisation d'une classe plus
+générale =employe=. Ces relations privilégiées sont matérialiées lors de la
+déclaration des classes où la syntaxe est la suivante
+#+BEGIN_SRC C++
+  class fille : public mere {};
+#+END_SRC
+Les classes dérivées, respectivement =commercial= et =vendeur=, héritent
+publiquement des classes mères ou de base, respectivement =employe= et
+=commercial=. Il s'établit ainsi une relation hiérarchique entre classes, chaque
+classe fille étant une spécialisation d'une classe de base plus générale.
+
+Au niveau de l'exercice en lui-même, la classe =commercial= ne change pas
+véritablement les données du problème puisqu'à son niveau la méthode
+=calculer_salaire= demeure virtuelle pure soit non définie. Les classes dérivées de
+=commercial= que sont respectivement les classes =vendeur= et =representant=
+définissent, en revanche, la méthode de calcul du salaire et ne sont donc plus
+des classes abstraites. Il est donc envisageable d'instancier des objets de type
+=vendeur= ou =representant= car l'ensemble de leurs fonctionnalités sont clairement
+définies. On peut ainsi tester le fonctionnement de ces classes /via/ le programme
+test suivant
+#+BEGIN_SRC C++ -n
+  #include "vendeur.h"
+  #include "representant.h"
+
+  int main()
+  {
+    vendeur my_vendeur("Dirac", "Paul", 31, 666);
+    my_vendeur.get_identite();
+
+    representant my_representant("Majorana", "Ettore", 32, 999);
+    my_representant.get_identite();
+  }
+#+END_SRC
+
+Toutefois, tout l'intérêt de cet exercice réside non pas dans l'utilisation
+d'objet de type =vendeur= ou =representant= (le programme ci-dessus pourrait tout à
+fait être écrit indépendamment de la notion d'héritage et de liaison dynamique)
+sinon dans la capacité du \Cpp a dynamiquement généré et lié des objets issus
+d'un objet/interface commune. On tire alors profit du fait que les classes
+=vendeur= et =representant= ont toutes les deux un socle commun, à savoir la classe
+=employe=, cette dernière définissant une interface publique que les classes
+dérivées doivent définir selon leur besoin. Un vendeur ou un représentant étant
+avant tout un employé, on peut ainsi écrire le programme suivant :
+#+BEGIN_SRC C++ -n
+  #include "vendeur.h"
+  #include "representant.h"
+
+  int main()
+  {
+    // Déclaration du nombre d'employé dans l'entreprise
+    const unsigned int nbr_employe = 2;
+
+    // Déclaration d'un tableau de pointeur d'employe
+    employe* my_entreprise[nbr_employe];
+
+    // Instanciation dynamique des membres de l'entreprise
+    my_entreprise[0] = new vendeur("Dirac", "Paul", 31, 666);
+    my_entreprise[1] = new representant("Majorana", "Ettore", 32, 999);
+
+    // Opérations sur les membres de l'entreprise indépendamment du type d'employés
+    for (unsigned int i = 0; i < nbr_employe; i++) {
+      my_entreprise[i]->get_identite();
+    }
+  }
+#+END_SRC
+Une fois passée l'instanciation des objets =vendeur= et =representant= (lignes 13 et
+14), l'ensemble des opérations réalisées sur les membres de l'entreprise se fait
+indépendamment de la nature de l'objet : on affiche, par exemple, l'identité de
+l'employé sans même se soucier de sa nature. Le lien entre l'appel de la méthode
+=get_identite= et sa définition ne se fait qu'à l'exécution du code car la nature
+des objets n'est connue qu'à cet instant précis. Au moment de la compilation,
+seul le fait que l'entreprise soit constituée de pointeur d'=employe= est
+connu. L'allocation dynamique matérialisée par l'utilisation de l'opérateur =new=,
+permet de spécialiser le type des employés tandis que la liaison dynamique
+assure le lien correct entre l'appel à une méthode et sa définition. On peut
+ainsi modifier le type /i.e./ la nature des objets constituant l'entreprise sans
+modifier les opérations se référant à ces objets.
+
+Afin de (mieux) illustrer le dynamisme du code ci-dessus, on peut modifier
+l'instanciation en faisant intervenir une saisie par l'utilisateur :
+#+BEGIN_SRC C++ -n
+  #include "vendeur.h"
+  #include "representant.h"
+
+  #include <iostream>
+  #include <string>
+  using namespace std;
+
+  int main()
+  {
+    // Déclaration du nombre d'employé dans l'entreprise
+    const unsigned int nbr_employe = 2;
+
+    // Déclaration d'un tableau de pointeur d'employe
+    employe* my_entreprise[nbr_employe];
+
+    // Instanciation dynamique des membres de l'entreprise
+    for (unsigned int i = 0; i < nbr_employe; i++) {
+      cout << "Employé #" << i << endl;
+      int type = 0;
+      cout << "Quelle est la nature de l'employé ? Vendeur (taper 0) ou Représentant (taper 1) ? ";
+      cin >> type;
+      string nom, prenom;
+      cout << "Quel est le nom de l'employé ? "; cin >> nom;
+      cout << "Quel est le prénom de l'employé ? "; cin >> prenom;
+      int age = 0, chiffre = 0;
+      cout << "Quel est l'age de l'employé ? "; cin >> age;
+      cout << "Quel est le chiffre d'affaire de l'employé ? "; cin >> chiffre;
+      cout << endl;
+      if (type == 0) {
+        my_entreprise[i] = new vendeur(nom, prenom, age, chiffre);
+      } else if (type == 1) {
+        my_entreprise[i] = new representant(nom, prenom, age, chiffre);
+      } else {
+        cerr << "ERROR: Le type de l'employé est inconnu !" << endl;
+        return 1;
+      }
+    }
+
+    // Opérations sur les membres de l'entreprise indépendamment du type d'employés
+    for (unsigned int i = 0; i < nbr_employe; i++) {
+      my_entreprise[i]->get_identite();
+    }
+  }
+#+END_SRC
+On réalise alors que si l'instanciation des membres de l'entreprise est de toute
+évidence dynamique car sujette aux choix de l'utilisateur du code, la partie du
+programme relative aux opérations sur ces membres est elle inchangée (lignes 40
+à 42). Ces opérations resteraient en outre inchangées quand bien même un
+troisième type d'employé apparaissait : le respect de l'interface définie par la
+classe =employe= imposerait à ce nouveau type d'avoir défini la méthode
+=calculer_salaire= et/ou la méthode =get_identite=.
+
+* Footnotes
+
+[fn:c65134d1] la classe =string= fait partie de la librairie standard et facilite
+la gestion et la manipulation des chaînes de caractères. Pour pouvoir
+l'utiliser, il conviendra d'inclure le fichier d'en-tête =string=.
