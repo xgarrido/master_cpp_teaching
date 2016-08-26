@@ -23,4 +23,4 @@ all: $(files_pdf)
 	@TEXINPUTS=".:..:$$TEXINPUTS" $(BATCH) --visit "$<" --funcall cpp-export-classes > /dev/null 2>&1
 
 clean:
-	@rm -rf	latex.d *.tex *.pdf *.fdb* *~
+	@rm -rf	latex.d *.tex *.aux *.pdf *.fdb* *~
