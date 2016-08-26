@@ -80,7 +80,6 @@ fichier d'en-tête dédié appellé =point.h=
     double m_x;
     double m_y;
   };
-
   #endif
 #+END_SRC
 

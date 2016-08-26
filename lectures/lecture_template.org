@@ -56,12 +56,12 @@ déclaration suivante
   }
 #+END_SRC
 
-Seul l'entête a changé, le corps de la fonction étant nécessairement indépendant
-du type de paramètres fournis[fn:1]. Ainsi la précédente déclaration précise que
-l'on est en présence d'un patron (=template=) dans lequel apparaît un
+Seule l'entête a changé, le corps de la fonction étant nécessairement
+indépendant du type de paramètres fournis[fn:1]. Ainsi la précédente déclaration
+précise que l'on est en présence d'un patron (=template=) dans lequel apparaît un
 "paramètre" de type désigné par la lettre =T=. En d'autres termes, dans la
-définition de la fonction =min=, =T= représente un type quelconque à la fois
-type de retour de la fonction mais également argument de cette dernière.
+définition de la fonction =min=, =T= représente un type quelconque à la fois type de
+retour de la fonction mais également argument de cette dernière.
 
 Pour utiliser le patron =min= précédemment crée, il suffit d'utiliser la
 fonction =min= dans des conditions appropriées (dans notre cas, en fournissant

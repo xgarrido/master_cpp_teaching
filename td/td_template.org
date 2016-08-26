@@ -1,7 +1,7 @@
 #+TITLE:  Classes
 #+AUTHOR: Xavier Garrido
 #+DATE:   03/12/2014
-#+OPTIONS: toc:nil
+#+OPTIONS: toc:nil ^:{}
 #+LATEX_HEADER: \setcounter{chapter}{7}
 
 * Utilisation de patron de fonction
@@ -13,9 +13,74 @@ d'entiers, de nombres flottants ainsi qu'un tableau de chaîne de caractères en
 utilisant la classe =string= de la librairie standard. Sous quelles conditions,
 l'utilisation d'objet de type =string= peut fonctionner ?
 
-* Classe =Point= générique
+** Correction                                                   :correction:
+#+BEGIN_SRC C++ -n
+  #include <iostream>
+  #include <string>
+  using namespace std;
 
-- Reprendre la classe =Point= de l'exercice [[file:td_classes.org][3]] et modifier sa déclaration afin de
+  template<typename T> T sum(const T* source_, const unsigned int n_)
+  {
+    T result = source_[0];
+    for (unsigned int i = 1; i < n_; i++) {
+      result += source_[i];
+    }
+    return result;
+  }
+
+  int main()
+  {
+    int tab1[3] = {2, 4, 10};
+    cout << "sum(tab1) = " << sum(tab1, 3) << endl;
+
+    double tab2[3] = {2.0, 4.5, 10.10};
+    cout << "sum(tab2) = " << sum(tab2, 3) << endl;
+
+    string tab3[5] = {"Ceci ", "est ", "la ", "dernière ", "correction"};
+    cout << "sum(tab3) = " << sum(tab3, 5) << endl;
+  }
+#+END_SRC
+
+La fonction =sum= est donc une fonction patron ou /template/ comprenant un paramètre
+de type =T=. Ce paramètre définit le type retourné par la fonction ainsi que le
+type du premier des deux arguments de la fonction /i.e./ =source_=. On note
+également que ce paramètre peut également être utilisé dans le corps de la
+fonction puisque la variable =result= est de type =T=. Cette fonction fournit donc
+un patron au compilateur afin que ce dernier enregistre les fonctions associées
+aux types requis. En d'autres termes, dans l'exemple ci-dessus, l'appel à la
+fonction =sum= est réalisé trois fois avec les types de paramètres suivants : =int=,
+=double= et =string=. À chacun des appels de la fonction =sum=, le compilateur
+enregistre donc la fonction associée en usant du patron de fonction fourni. Le
+compilateur crée et compile ainsi trois fonctions où le paramètre =T= est
+successivement remplacé par les type =int=, =double= et =string=. La ligne 17, par
+exemple, provoque l'enregistrement et la compilation du code suivant
+#+BEGIN_SRC C++
+  int sum(const int* source_, const unsigned int n_)
+  {
+    int result = source_[0];
+    for (unsigned int i = 1; i < n_; i++) {
+      result += source_[i];
+    }
+    return result;
+  }
+#+END_SRC
+
+Il est donc impératif que le patron de fonction (ou de classe comme nous le
+verrons dans l'exercice suivant) soit connu du compilateur afin de procéder à
+l'enregistrement des fonctions selon les types de variables requis. En ce sens,
+l'enregistrement d'un patron de fonction ou de classe est *une opération
+particulièrement statique* ne pouvant être réalisée qu'à la compilation du
+programme.
+
+La fonction =sum= est /a priori/ utilisable par tout objet ayant défini l'opération
+unaire =+== de sommation et l'opération de redirection de flux =<<=. C'est le cas
+pour des objets de type =std::string=, l'opérateur =+== se référant à la
+concaténation de chaine de caractères tandis que l'opération =<<= consiste à
+afficher la chaine de caractères.
+
+* Classe =point= générique
+
+- Reprendre la classe =point= de l'exercice [[file:td_classes.org][3]] et modifier sa déclaration afin de
   "choisir" le type de coordonnées.
 
 - Ajouter un constructeur qui initialisera l'abscisse et l'ordonnée selon le
@@ -23,14 +88,125 @@ l'utilisation d'objet de type =string= peut fonctionner ?
 
 - Ajouter ou conserver la méthode d'affichage des coordonnées.
 
-- Tester la nouvelle implémentation de la classe =Point= pour des coordonnées
+- Tester la nouvelle implémentation de la classe =point= pour des coordonnées
   entières et des nombres flottants. Utiliser également cette classe avec des
-  coordonnées de type complexe (vous aurez besoin de la classe =Complexe=
+  coordonnées de type complexe (vous aurez besoin de la classe =complexe=
   développée lors de l'exercice [[file:td_classe_complexe.org][4]]). Faire en sorte que la méthode =affiche= de
-  =Point= fonctionne également pour des objets de type =Complexe= en
-  surchargeant l'opérateur =<<= pour cette classe =Complexe=. Pour se faire, on
+  =Point= fonctionne également pour des objets de type =complexe= en
+  surchargeant l'opérateur =<<= pour cette classe =complexe=. Pour se faire, on
   déclarera le prototype de fonction externe suivant
 
-  #+BEGIN_SRC c++
-    friend std::ostream & operator<<(std::ostream & out_, const Complexe & z_);
+  #+BEGIN_SRC C++
+    std::ostream & operator<<(std::ostream & out_, const complexe & z_);
   #+END_SRC
+
+** Correction                                                   :correction:
+*** Déclaration de la classe patron =point=
+#+BEGIN_SRC C++ -n
+  #ifndef _point_h_
+  #define _point_h_ 1
+
+  #include <iostream>
+
+  template<typename T> class point {
+  public:
+    // Constructeur
+    point(const T x_, const T y_) : m_x(x_), m_y(y_) {}
+
+    // Méthode d'affichage
+    void affiche() const {
+      std::cout << "(x,y) = (" << m_x << "," << m_y << ")" << std::endl;
+    }
+
+  private:
+    T m_x;
+    T m_y;
+  };
+  #endif
+#+END_SRC
+
+On retrouve une déclaration similaire à l'exercice précédent puisque la classe
+=point= est à présent un patron de classe ayant un paramètre de type =T=. Ce
+paramètre définit le type des deux membres de la classe =m_x= et =m_y= de même que
+le type des arguments du constructeur. Un point très important à noter est que
+les définitions du constructeur et de la méthode =affiche= sont réalisées dans le
+fichier de déclaration de la classe =point= : il est en effet impératif que ces
+définitions soient connues en tout point du code faisant intervenir
+l'enregistrement de la classe patron =point=. Comme toujours, il faudra donc
+inclure le fichier d'en-tête =point.h= contenant la déclaration de la classe et *la
+définition des méthodes patrons* afin que ces dernières puissent être
+enregistrées en fonction du contexte d'appel /i.e./ du type de classe =point= à
+instancier. On aura donc pas de fichier source indépendant tel que =point.cc=,
+l'implémentation des méthodes se faisant dans l'unique fichier d'en-tête
+=point.h=.
+
+On pourra tester la nouvelle classe =point= dans le programme ci-dessous en
+précisant le type d'objet de type =point= à instancier /via/ la syntaxe =point<type>
+mon_point(var1, var2);=
+#+BEGIN_SRC C++ -n
+  #include "point.h"
+
+  int main()
+  {
+    point<int> my_point1(2,3);
+    my_point1.affiche();
+
+    point<double> my_point2(3.5, 6.66);
+    my_point2.affiche();
+  }
+#+END_SRC
+
+De la même manière que pour la fonction =sum= précédente, deux classes point
+seront enregistrées et implémentées au moment de la compilation du programme
+ci-dessus, l'une faisant intervenir des coordonnées de type =int=, la seconde des
+coordonnées de type =double=.
+
+Comme suggéré dans l'exercice, il est possible d'enregistrer une classe =point=
+dont les membres seront de type =complexe=. Il faut néanmoins que l'opérateur de
+redirection de flux =<<= soit défini et donc surchargé pour la classe =complexe=
+afin que la méthode =affiche= de la classe =point= puisse correctement
+fonctionner. En reprenant l'exercice [[file:td_classe_complexe.org][4]], on ajoutera à la déclaration de la
+classe =complexe= la fonction suivante
+#+BEGIN_SRC C++
+  #ifndef _complexe_h_
+  #define _complexe_h_ 1
+
+  class complexe {
+    ...
+  };
+
+  // Surcharge de l'opérateur <<
+  #include <ostream>
+  std::ostream & operator<<(std::ostream & out_, const complexe & z_);
+  #endif
+#+END_SRC
+que l'on définira dans le fichier =complexe.cc= de la façon suivante
+#+BEGIN_SRC C++
+  #include "complexe.h"
+  ...
+
+  std::ostream & operator<<(std::ostream & out_, const complexe & z_)
+  {
+    out_ << z_.get_real() << "+ i*" << z_.get_imag();
+  }
+#+END_SRC
+
+On pourra ainsi ajouter au programme test l'instanciation d'objet de type =point=
+de =complexe=
+#+BEGIN_SRC C++
+  #include "point.h"
+  #include "complexe.h"
+
+  int main()
+  {
+    complexe z1(2,3), z2(3,4):
+    point<complexe> my_point_complexe(z1, z2);
+    my_point_complexe.affiche();
+  }
+#+END_SRC
+dont le résultat sera le suivant
+#+BEGIN_PROMPT
+./test_point_complexe.exe
+
+(x,y) = (2+i*3,3+i*4)
+#+END_PROMPT
