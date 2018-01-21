@@ -23,7 +23,7 @@ to detangle this file since emacs will do it when you will use the Makefile in
 the corresponding directories. So, next step will be to do =make= within the
 different directories.
 
-* Orgmode settings
+* COMMENT Orgmode settings
 :PROPERTIES:
 :TANGLE: README.el
 :END:
